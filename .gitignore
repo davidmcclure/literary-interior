@@ -1,11 +1,14 @@
 
 *.pyc
 *.egg-info
+*.tar.gz
 
 /env
-/corpus
 /build
 /static
 /dist
 /.cache
 /.env
+
+/harvest
+/corpus

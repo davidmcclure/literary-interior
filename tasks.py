@@ -2,7 +2,9 @@
 
 import os
 
+from zipfile import ZipFile
 from invoke import task
+from clint.textui import progress
 
 from lint.corpus import Corpus
 
@@ -26,4 +28,8 @@ def unzip():
     Unzip the text files.
     """
 
-    pass
+    paths = list(Corpus().paths('.zip'))
+
+    for path in progress.bar(paths):
+        with ZipFile(path, 'r') as fh:
+            fh.extractall(path=os.path.dirname(path))

@@ -3,10 +3,10 @@
 import os
 
 
-class Corpus:
+class Harvest:
 
 
-    def __init__(self, path='corpus'):
+    def __init__(self, path='harvest'):
 
         """
         Set the corpus path.
@@ -15,7 +15,8 @@ class Corpus:
         self.path = os.path.abspath(path)
 
 
-    def paths(self, ext):
+    @property
+    def zip_paths(self):
 
         """
         Get paths with a given extension.
@@ -28,5 +29,5 @@ class Corpus:
 
         for root, dirs, files in os.walk(self.path):
             for f in files:
-                if f.endswith(ext):
+                if f.endswith('.zip') and not f.endswith('-8.zip'):
                     yield os.path.join(root, f)
