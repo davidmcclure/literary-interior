@@ -4,6 +4,8 @@ import os
 
 from invoke import task
 
+from lint.corpus import Corpus
+
 
 @task
 def count():
@@ -12,12 +14,16 @@ def count():
     How many zip files are in the corpus?
     """
 
-    count = 0
+    paths = Corpus().paths('.zip')
 
-    for root, dirs, files in os.walk('corpus'):
+    print(len(list(paths)))
 
-        for f in files:
-            base, ext = os.path.splitext(f)
-            if ext == '.zip': count += 1
 
-    print(count)
+@task
+def unzip():
+
+    """
+    Unzip the text files.
+    """
+
+    pass
