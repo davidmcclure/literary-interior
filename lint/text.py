@@ -56,3 +56,20 @@ class Text:
             # Store integer offset.
             offsets = self.offsets.setdefault(token, [])
             offsets.append(offset)
+
+
+    @property
+    def ratios(self):
+
+        """
+        Get type -> [ratios]
+
+        Returns: dict
+        """
+
+        ratios = {}
+
+        for token, offsets in self.offsets.items():
+            ratios[token] = [i / (len(self.tokens)-1) for i in offsets]
+
+        return ratios

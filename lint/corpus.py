@@ -2,6 +2,8 @@
 
 import os
 
+from .text import Text
+
 
 class Corpus:
 
@@ -28,3 +30,16 @@ class Corpus:
             for f in files:
                 if f.endswith('.txt'):
                     yield os.path.join(root, f)
+
+
+    @property
+    def texts(self):
+
+        """
+        Get Text instances.
+
+        Yields: Text
+        """
+
+        for path in self.paths:
+            yield Text.from_file(path)
