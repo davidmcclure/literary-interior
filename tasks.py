@@ -6,19 +6,7 @@ from zipfile import ZipFile
 from invoke import task
 from clint.textui import progress
 
-from lint.corpus import Corpus
-
-
-@task
-def count():
-
-    """
-    How many zip files are in the corpus?
-    """
-
-    paths = Corpus().paths('.zip')
-
-    print(len(list(paths)))
+from lint.harvest import Harvest
 
 
 @task
@@ -28,8 +16,12 @@ def unzip():
     Unzip the text files.
     """
 
-    paths = list(Corpus().paths('.zip'))
+    paths = list(Harvest().zip_paths)
 
     for path in progress.bar(paths):
-        with ZipFile(path, 'r') as fh:
-            fh.extractall(path=os.path.dirname(path))
+
+        try:
+            with ZipFile(path, 'r') as fh:
+                fh.extractall(path='corpus')
+
+        except: pass
