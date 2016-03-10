@@ -4,3 +4,7 @@ clint
 invoke
 redis
 cached-property
+numpy
+scipy
+scikit-learn
+matplotlib

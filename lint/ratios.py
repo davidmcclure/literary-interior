@@ -2,6 +2,10 @@
 
 import redis
 import sys
+import matplotlib.pyplot as plt
+import numpy as np
+
+from sklearn.neighbors import KernelDensity
 
 from .corpus import Corpus
 
@@ -36,3 +40,47 @@ class Ratios:
                 # Initialize new term.
                 else:
                     self.ratios[term] = ratios
+
+
+    def kde(self, term, bandwidth=2000, samples=1000, kernel='gaussian'):
+
+        """
+        Estimate a density function for a term.
+
+        Args:
+            term (str): A stemmed term.
+            bandwidth (int): The kernel bandwidth.
+            samples (int): The number of sample points.
+            kernel (str): The kernel function.
+
+        Returns:
+            np.array: The density estimate.
+        """
+
+        # Get the offsets of the term instances.
+        terms = np.array(self.ratios[term])[:, np.newaxis]
+
+        # Fit the density estimator on the terms.
+        kde = KernelDensity(kernel=kernel, bandwidth=bandwidth).fit(terms)
+
+        # Score an evely-spaced array of samples.
+        x_axis = np.linspace(0, 1, samples)[:, np.newaxis]
+        scores = kde.score_samples(x_axis)
+
+        return np.exp(scores)
+
+
+    def plot_kdes(self, terms, **kwargs):
+
+        """
+        Plot density estimates for set of terms.
+
+        Args:
+            terms (list): A list of terms.
+        """
+
+        for term in terms:
+            kde = self.kde(term, **kwargs)
+            plt.plot(kde)
+
+        plt.show()
