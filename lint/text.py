@@ -41,9 +41,18 @@ class Text:
         Tokenize the text.
         """
 
-        self.tokens = []
+        self.tokens  = []
+        self.offsets = {}
 
         pattern = re.finditer('[a-z]+', self.text.lower())
 
         for offset, match in enumerate(pattern):
-            self.tokens.append(match.group(0))
+
+            token = match.group(0)
+
+            # Store token.
+            self.tokens.append(token)
+
+            # Store integer offset.
+            offsets = self.offsets.setdefault(token, [])
+            offsets.append(offset)
