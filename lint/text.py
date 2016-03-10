@@ -3,6 +3,8 @@
 import os
 import re
 
+from cached_property import cached_property
+
 
 class Text:
 
@@ -58,11 +60,11 @@ class Text:
             offsets.append(offset)
 
 
-    @property
+    @cached_property
     def ratios(self):
 
         """
-        Get type -> [ratios]
+        Get term -> [0-1 ratios]
 
         Returns: dict
         """

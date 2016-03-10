@@ -30,10 +30,13 @@ class Ratios:
 
             pipe = self.redis.pipeline()
 
-            for term, ratios in text.ratios.items():
+            # Register the terms.
+            pipe.sadd(
+                'lint:terms',
+                *list(text.ratios.keys()),
+            )
 
-                # Register the term.
-                pipe.sadd('lint:terms', term)
+            for term, ratios in text.ratios.items():
 
                 # Append the ratios.
                 pipe.rpush(
