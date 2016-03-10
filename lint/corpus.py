@@ -2,6 +2,8 @@
 
 import os
 
+from clint.textui import progress
+
 from .text import Text
 
 
@@ -41,5 +43,5 @@ class Corpus:
         Yields: Text
         """
 
-        for path in self.paths:
+        for path in progress.bar(list(self.paths)):
             yield Text.from_file(path)

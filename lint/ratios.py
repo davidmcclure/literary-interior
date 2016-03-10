@@ -1,6 +1,7 @@
 
 
 import redis
+import sys
 
 from .corpus import Corpus
 
@@ -27,35 +28,50 @@ class Ratios:
 
         for text in corpus.texts:
 
-            for token, ratios in text.ratios.items():
-                self.add_ratios(token, ratios)
+            pipe = self.redis.pipeline()
+
+            for term, ratios in text.ratios.items():
+
+                # Register the term.
+                pipe.sadd('lint:terms', term)
+
+                # Append the ratios.
+                pipe.rpush(
+                    'lint:ratios:{0}'.format(term),
+                    *ratios,
+                )
+
+            # Batch update all words.
+            pipe.execute()
 
 
-    def add_ratios(self, token, ratios):
+    def ratios(self, term):
 
         """
-        Push on a new set of ratios for a word type.
+        Get all ratios for a term.
 
         Args:
-            token (str)
-            ratios (list<float>)
-        """
-
-        self.redis.rpush(
-            'ratios:{0}'.format(token),
-            *ratios,
-        )
-
-
-    def get_ratios(self, token):
-
-        """
-        Get all ratios for a token.
+            term (str)
 
         Returns: list<float>
         """
 
-        ratios = self.redis.lrange('ratios:{0}'.format(token), 0, -1)
+        ratios = self.redis.lrange(
+            'lint:ratios:{0}'.format(term),
+            0, -1,
+        )
 
-        # Cast back to floats.
-        return [float(r) for r in ratios]
+        # Cast back to floats, sort.
+        return sorted([float(r) for r in ratios])
+
+
+    @property
+    def terms(self):
+
+        """
+        Get all terms.
+
+        Returns: list
+        """
+
+        return self.redis.smembers('lint:terms')
