@@ -1,2 +1,6 @@
 
 ipython
+anyconfig
+PyYAML
+sqlalchemy
+wordfreq
