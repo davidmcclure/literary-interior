@@ -9,6 +9,3 @@
 /dist
 /.cache
 /.env
-
-/harvest
-/corpus
