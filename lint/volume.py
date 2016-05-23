@@ -81,3 +81,15 @@ class Volume:
         """
 
         return self.language == 'eng'
+
+
+    def pages(self):
+
+        """
+        Generate page instances.
+
+        Yields: Page
+        """
+
+        for data in self.data['features']['pages']:
+            yield Page(data)
