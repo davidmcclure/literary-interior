@@ -3,6 +3,8 @@
 import json
 import bz2
 
+from lint.page import Page
+
 
 class Volume:
 
