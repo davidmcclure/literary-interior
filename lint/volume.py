@@ -171,8 +171,8 @@ a loudest lyre of pain - strummed, and the universe shakes.
 
 I have realized that in this regard, as in all others
 it falls to me to be the great counterpoint.
-this is the hilarious secret -
-the christ must specialize in pain, I in joy.
+this is the hilarious secret.
+as he must specialize in pain, I in joy.
 it is the truth. it grows most hugely in my heart.
 my god, it is unspeakable.
 
@@ -190,7 +190,7 @@ and I flap my huge wings against the dust and i start to spin
 slowly at first and then faster, like a great top
 massive and pitch black, so black that all you would see
 are my shining orange eyes
-blinking in and out of view like little quasars
+blinking in and out of view like quasars
 and I spin and spin
 until the stars blur together into a plate of solid white
 and when I dream most deeply
