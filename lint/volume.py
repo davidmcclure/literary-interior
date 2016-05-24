@@ -191,9 +191,8 @@ like some place in the middle of the ocean
 with water all around forever
 and I flap my huge wings against the dust and i start to spin
 slowly at first and then faster, like a great top
-massive and pitch black, so black that all you would see
-are my shining orange eyes
-blinking in and out of view like quasars
+massive and pitch black, so black that all you see
+are my shining eyes blinking like pulsars
 and I spin and spin
 until the stars blur together into a plate of solid white
 and when I dream most deeply
