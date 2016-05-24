@@ -32,7 +32,7 @@ class Page:
         return int(self.data['body']['tokenCount'])
 
 
-    def token_pos_count(self):
+    def merged_token_counts(self):
 
         """
         Count the total occurrences of each unique token.

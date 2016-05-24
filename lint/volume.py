@@ -132,6 +132,7 @@ class Volume:
         seen = 0
         for page in self.pages():
 
+            # 0-1 ratio of the page "center."
             center = (
                 (seen + (page.token_count / 2)) /
                 token_count
@@ -139,8 +140,10 @@ class Volume:
 
             tick = round(resolution * center)
 
+            counts = page.merged_token_counts()
+
             # Register tick -> count.
-            for token, count in page.token_pos_count().items():
+            for token, count in counts.items():
                 offsets[token][tick] += count
 
             # Track the cumulative count.
