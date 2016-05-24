@@ -15,4 +15,4 @@ def test_token_count():
         make_page(token_count=3),
     ])
 
-    assert v.token_count == 1+2+3
+    assert v.token_count() == 1+2+3

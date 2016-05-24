@@ -85,7 +85,6 @@ class Volume:
         return self.language == 'eng'
 
 
-    @property
     def token_count(self):
 
         """
