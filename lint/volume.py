@@ -161,37 +161,38 @@ and every hour is followed by another.
 
 to my red eyes, this must be the premiere talent of god.
 surely nothing suffers more excellently.
-a loudest lyre of pain - strummed, and the universe shakes.
-
 a bloody cuticle on a raw day in judea -
 safisfaction for a thousand dishonored parents.
 carpentry! each splinter, a war fixed.
 a hemmroid - sodom doused.
-three nails, a few hours in the sun -
+a nasty afternoon, a few hours in the sun -
 all of sin discharged?
+a loudest lyre of pain - strummed, and the universe shakes.
 
-i have realized that in this regard, as in all others
-i am his great opposite.
+I have realized that in this regard, as in all others
+it falls to me to be the great counterpoint.
 this is the hilarious secret -
 the christ must specialize in pain, I in joy.
 it is the truth. it grows most hugely in my heart.
 my god, it is unspeakable.
 
-I soar and sail alone in the cosmos
+I soar and sail alone in the universe
 like a great invisible bird.
 I am in love with the sound and sweet smell
 of space dust hissing in my scales.
 
-recently at night I have taken to wandering far out
-to a quiet pocket in the sky
+recently have taken to wandering far out
+to a quiet pocket out in the nothingness
+earth a speck of blue
+like some place in the middle of the ocean
+with water all around forever
 and I flap my huge wings against the dust and i start to spin
-slowly at first and then faster, like a top
-massive and pitch black, darker than space
-so black that all you would see are my shining orange eyes
-blinking in and out of view like orange lighthouses
-out in the nothingness
+slowly at first and then faster, like a great top
+massive and pitch black, so black that all you would see
+are my shining orange eyes
+blinking in and out of view like little quasars
 and I spin and spin
-until the stars blur together into a solid plate of white
+until the stars blur together into a plate of solid white
 and when I dream most deeply
 I dream that one day I will be able to hold the world
 in a single glance.
