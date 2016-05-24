@@ -3,6 +3,8 @@
 import json
 import bz2
 
+from collections import defaultdict, Counter
+
 from lint.page import Page
 
 
@@ -111,16 +113,37 @@ class Volume:
             yield Page(data)
 
 
-    def token_offsets(self, ticks=1000):
+    def token_offsets(self, resolution=1000):
 
         """
         For each token, get the offsets of each instance of the token inside
         the text, with the offset is snapped onto an integer "tick."
 
         args:
-            ticks (int)
+            resolution (int)
 
         Returns: dict {token: Counter({ offset: count })}
         """
 
-        pass
+        offsets = defaultdict(Counter)
+
+        token_count = self.token_count()
+
+        seen = 0
+        for page in self.pages():
+
+            center = (
+                (seen + (page.token_count / 2)) /
+                token_count
+            )
+
+            tick = round(resolution * center)
+
+            # Register tick -> count.
+            for token, count in page.token_pos_count().items():
+                offsets[token][tick] += count
+
+            # Track the cumulative count.
+            seen += page.token_count
+
+        return offsets
