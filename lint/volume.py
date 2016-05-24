@@ -109,3 +109,18 @@ class Volume:
 
         for data in self.data['features']['pages']:
             yield Page(data)
+
+
+    def token_offsets(self, ticks=1000):
+
+        """
+        For each token, get the offsets of each instance of the token inside
+        the text, with the offset is snapped onto an integer "tick."
+
+        args:
+            ticks (int)
+
+        Returns: dict {token: Counter({ offset: count })}
+        """
+
+        pass
