@@ -168,3 +168,49 @@ def test_merge_offsets_for_token():
         },
 
     }
+
+
+def test_add_counts_when_offsets_round_together():
+
+    """
+    If a token appears on two pages, and the offsets for the two pages round to
+    the same "tick" value, the counts should be added.
+    """
+
+    v = make_vol(pages=[
+
+        make_page(token_count=100, counts={
+            'a': {
+                'POS': 1,
+            },
+        }),
+
+        make_page(token_count=100, counts={
+            'a': {
+                'POS': 2,
+            },
+        }),
+
+        make_page(token_count=100, counts={
+            'a': {
+                'POS': 3,
+            },
+        }),
+
+        make_page(token_count=100, counts={
+            'a': {
+                'POS': 4,
+            },
+        }),
+
+    ])
+
+    offsets = v.token_offsets(4)
+
+    assert offsets['a'][round(( 50/400) * 4)] == 1
+
+    # Pages 2 and 3 both snap to offset 2.
+    assert offsets['a'][round((150/400) * 4)] == 2+3
+    assert offsets['a'][round((250/400) * 4)] == 2+3
+
+    assert offsets['a'][round((350/400) * 4)] == 4
