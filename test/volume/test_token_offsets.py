@@ -1,11 +1,19 @@
 
 
+import pytest
+
 from lint.volume import Volume
 
 from test.helpers import make_page, make_vol
 
 
-def test_index_by_offset():
+@pytest.mark.parametrize('r', [
+    2,
+    10,
+    100,
+    1000,
+])
+def test_index_by_offset(r):
 
     """
     Each token should be mapped to a counter that maps offset -> count, where
@@ -52,36 +60,36 @@ def test_index_by_offset():
 
     ])
 
-    assert v.token_offsets() == {
+    assert v.token_offsets(resolution=r) == {
 
         'a': {
-            round((50/300) * 1000): 1
+            round((50/300) * r): 1
         },
         'b': {
-            round((50/300) * 1000): 2
+            round((50/300) * r): 2
         },
         'c': {
-            round((50/300) * 1000): 3
+            round((50/300) * r): 3
         },
 
         'd': {
-            round((150/300) * 1000): 4
+            round((150/300) * r): 4
         },
         'e': {
-            round((150/300) * 1000): 5
+            round((150/300) * r): 5
         },
         'f': {
-            round((150/300) * 1000): 6
+            round((150/300) * r): 6
         },
 
         'g': {
-            round((250/300) * 1000): 7
+            round((250/300) * r): 7
         },
         'h': {
-            round((250/300) * 1000): 8
+            round((250/300) * r): 8
         },
         'i': {
-            round((250/300) * 1000): 9
+            round((250/300) * r): 9
         },
 
     }
