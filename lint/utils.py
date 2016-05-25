@@ -42,3 +42,16 @@ def flatten_dict(d):
 
         else:
             yield (k, v)
+
+
+def enum(*seq, **named):
+
+    """
+    Make an enumerated type.
+
+    Returns: type
+    """
+
+    enums = dict(zip(seq, range(len(seq))), **named)
+
+    return type('Enum', (), enums)

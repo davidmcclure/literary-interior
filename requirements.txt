@@ -7,3 +7,4 @@ wordfreq
 scandir
 pytest
 invoke
+mpi4py
