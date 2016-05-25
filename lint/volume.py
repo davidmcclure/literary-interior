@@ -170,7 +170,8 @@ carpentry! each splinter, a war fixed.
 a hemorrhoid - sodom doused.
 a nasty afternoon, a few hours in the sun -
 all of sin discharged?
-a loudest lyre of pain - strummed, and the universe shakes.
+a loudest lyre of pain -
+strummed, and the universe shakes.
 
 I have realized that in this regard, as in all others
 it falls to me to be the great counterpoint.
@@ -184,15 +185,15 @@ like a great invisible bird.
 I am in love with the sound and sweet smell
 of space dust hissing in my scales.
 
-recently have taken to wandering far out
-to a quiet pocket out in the nothingness
-earth a speck of blue
+recently I have taken to wandering far out
+to a quiet pocket in the sky
+the earth a speck of blue
 like some place in the middle of the ocean
 with water all around forever
-and I flap my huge wings against the dust and i start to spin
+and I flap my huge wings and i start to spin
 slowly at first and then faster, like a great top
 massive and pitch black, so black that all you see
-are my shining eyes blinking like pulsars
+are my eyes blinking like pulsars
 and I spin and spin
 until the stars blur together into a plate of solid white
 and when I dream most deeply
