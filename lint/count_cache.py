@@ -17,6 +17,22 @@ class CountCache(defaultdict):
         super().__init__(lambda: defaultdict(Counter))
 
 
+    def __iadd__(self, other):
+
+        """
+        Merge another cache, adding the counters.
+
+        Args:
+            other (CountCache)
+        """
+
+        for year, token_counts in other.items():
+            for token, counts in token_counts.items():
+                self[year][token] += counts
+
+        return self
+
+
     def flatten(self):
 
         """
