@@ -78,6 +78,20 @@ class Count(BaseModel):
 
 
     @classmethod
+    def gather_ranks(cls, path):
+
+        """
+        Given a directory of pickled count caches, unpickle the caches and
+        emrge the counts into the database.
+
+        Args:
+            path (str)
+        """
+
+        pass
+
+
+    @classmethod
     def token_year_offset_count(cls, token, year, offset):
 
         """
