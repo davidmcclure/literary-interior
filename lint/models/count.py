@@ -1,6 +1,7 @@
 
 
 from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
+from sqlalchemy.sql import text
 
 from lint import config
 from lint.models import BaseModel
@@ -34,7 +35,46 @@ class Count(BaseModel):
             cache (CountCache)
         """
 
-        pass
+        session = config.Session()
+
+        # SQLite "upsert."
+        query = text("""
+
+            INSERT OR REPLACE INTO {table!s} (
+                token,
+                year,
+                offset,
+                count
+            )
+
+            VALUES (
+                :token,
+                :year,
+                :offset,
+                :count + COALESCE(
+                    (
+                        SELECT count FROM {table!s} WHERE (
+                            token = :token AND
+                            year = :year AND
+                            offset = :offset
+                        )
+                    ),
+                    0
+                )
+            )
+
+        """.format(table=cls.__tablename__))
+
+        for year, token, offset, count in cache.flatten():
+
+            session.execute(query, dict(
+                token=token,
+                year=year,
+                offset=offset,
+                count=count,
+            ))
+
+        session.commit()
 
 
     @classmethod
