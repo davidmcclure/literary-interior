@@ -78,7 +78,7 @@ class Count(BaseModel):
 
 
     @classmethod
-    def gather_ranks(cls, path):
+    def gather_results(cls, path):
 
         """
         Given a directory of pickled count caches, unpickle the caches and

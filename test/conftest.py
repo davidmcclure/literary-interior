@@ -5,6 +5,8 @@ import pytest
 from lint import config as _config
 from lint.models import BaseModel
 
+from test.mock_results import MockResults
+
 
 @pytest.fixture(scope='session', autouse=True)
 def test_env():
@@ -43,3 +45,19 @@ def db(config):
     # Clear and recreate all tables.
     BaseModel.metadata.drop_all(engine)
     BaseModel.metadata.create_all(engine)
+
+
+@pytest.yield_fixture
+def mock_results():
+
+    """
+    Provide a MockResults instance.
+
+    Yields: MockResults
+    """
+
+    results = MockResults()
+
+    yield results
+
+    results.teardown()
