@@ -167,7 +167,7 @@ surely nothing suffers more excellently.
 a bloody cuticle on a raw day in judea -
 safisfaction for a thousand dishonored parents.
 carpentry! each splinter, a war fixed.
-a hemmroid - sodom doused.
+a hemorrhoid - sodom doused.
 a nasty afternoon, a few hours in the sun -
 all of sin discharged?
 a loudest lyre of pain - strummed, and the universe shakes.

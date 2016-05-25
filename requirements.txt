@@ -6,3 +6,4 @@ sqlalchemy
 wordfreq
 scandir
 pytest
+invoke
