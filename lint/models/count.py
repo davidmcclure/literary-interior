@@ -21,3 +21,16 @@ class Count(BaseModel):
     offset = Column(Integer, nullable=False)
 
     count = Column(Integer, nullable=False)
+
+
+    @classmethod
+    def increment(cls, cache):
+
+        """
+        Given a count cache, increment the counters in the database.
+
+        Args:
+            cache (CountCache)
+        """
+
+        pass
