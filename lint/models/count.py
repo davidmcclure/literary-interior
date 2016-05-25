@@ -1,5 +1,8 @@
 
 
+import scandir
+import pickle
+
 from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
 from sqlalchemy.sql import text
 
@@ -88,7 +91,10 @@ class Count(BaseModel):
             path (str)
         """
 
-        pass
+        for d in scandir.scandir(path):
+            if d.is_file():
+                with open(d.path, 'rb') as fh:
+                    cls.increment(pickle.load(fh))
 
 
     @classmethod
