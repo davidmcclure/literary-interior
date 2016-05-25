@@ -2,8 +2,10 @@
 
 from collections import defaultdict, Counter
 
+from lint.utils import flatten_dict
 
-class CountCache:
+
+class CountCache(defaultdict):
 
 
     def __init__(self):
@@ -12,16 +14,15 @@ class CountCache:
         Initialize the {year -> token -> offset -> count} map.
         """
 
-        self.data = defaultdict(lambda: defaultdict(Counter))
+        super().__init__(lambda: defaultdict(Counter))
 
 
-    def __getitem__(self, key):
+    def flatten(self):
 
         """
-        Alias the count data.
+        Flatten the cache into tuples.
 
-        Args:
-            key (str)
+        Yields: tuple (year, token, offset, count)
         """
 
-        return self.data[key]
+        return flatten_dict(self)
