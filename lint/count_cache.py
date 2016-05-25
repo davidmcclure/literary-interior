@@ -49,7 +49,7 @@ class CountCache(defaultdict):
         return flatten_dict(self)
 
 
-    def pickle(self, root):
+    def flush(self, root):
 
         """
         Pickle the cache to a directory.

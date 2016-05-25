@@ -15,4 +15,4 @@ class MockResults(TempDir):
             cache (CountCache)
         """
 
-        cache.pickle(self.path)
+        cache.flush(self.path)
