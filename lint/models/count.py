@@ -2,6 +2,7 @@
 
 from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
 
+from lint import config
 from lint.models import BaseModel
 
 
@@ -34,3 +35,32 @@ class Count(BaseModel):
         """
 
         pass
+
+
+    @classmethod
+    def token_year_offset_count(cls, token, year, offset):
+
+        """
+        How many times did token X appear in year Y as offset Z?
+
+        Args:
+            token (str)
+            year (int)
+            offset (int)
+
+        Returns: int
+        """
+
+        with config.get_session() as session:
+
+            res = (
+                session
+                .query(cls.count)
+                .filter(
+                    cls.token==token,
+                    cls.year==year,
+                    cls.offset==offset,
+                )
+            )
+
+            return res.scalar() or 0
