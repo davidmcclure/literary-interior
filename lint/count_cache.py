@@ -1,6 +1,11 @@
 
 
+import os
+import pickle
+import uuid
+
 from collections import defaultdict, Counter
+from functools import partial
 
 from lint.utils import flatten_dict
 
@@ -8,13 +13,13 @@ from lint.utils import flatten_dict
 class CountCache(defaultdict):
 
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
 
         """
         Initialize the {year -> token -> offset -> count} map.
         """
 
-        super().__init__(lambda: defaultdict(Counter))
+        super().__init__(partial(defaultdict, Counter))
 
 
     def __iadd__(self, other):
@@ -42,3 +47,18 @@ class CountCache(defaultdict):
         """
 
         return flatten_dict(self)
+
+
+    def pickle(self, root):
+
+        """
+        Pickle the cache to a directory.
+
+        Args:
+            root (str)
+        """
+
+        path = os.path.join(root, str(uuid.uuid4()))
+
+        with open(path, 'wb') as fh:
+            pickle.dump(self, fh)
