@@ -56,9 +56,15 @@ class CountCache(defaultdict):
 
         Args:
             root (str)
+
+        Returns: str
         """
 
         path = os.path.join(root, str(uuid.uuid4()))
 
         with open(path, 'wb') as fh:
             pickle.dump(self, fh)
+
+        self.clear()
+
+        return path
