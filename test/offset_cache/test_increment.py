@@ -3,7 +3,7 @@
 from lint.offset_cache import OffsetCache
 
 
-def test_merge_years():
+def test_register_years():
 
     c = OffsetCache()
 
@@ -23,7 +23,7 @@ def test_merge_years():
     assert c[1902]['token2'][2] == 2
 
 
-def test_merge_tokens():
+def test_register_tokens():
 
     c = OffsetCache()
 
@@ -43,7 +43,7 @@ def test_merge_tokens():
     assert c[1900]['token2'][2] == 2
 
 
-def test_merge_offsets():
+def test_add_offsets():
 
     c = OffsetCache()
 
