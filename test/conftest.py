@@ -49,7 +49,7 @@ def db(config):
 
 
 @pytest.yield_fixture
-def mock_results():
+def mock_results(config):
 
     """
     Provide a MockResults instance.
@@ -58,6 +58,10 @@ def mock_results():
     """
 
     results = MockResults()
+
+    config.config.update({
+        'results': results.path
+    })
 
     yield results
 
@@ -75,7 +79,6 @@ def mock_corpus(config):
 
     corpus = MockCorpus()
 
-    # Point config -> mock.
     config.config.update({
         'corpus': corpus.path
     })

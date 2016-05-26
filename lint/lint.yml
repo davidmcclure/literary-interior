@@ -5,3 +5,5 @@ corpus: /path/to/corpus
 database: sqlite:////path/to/db
 
 token_depth: 10000
+
+results: /path/to/pickles
