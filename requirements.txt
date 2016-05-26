@@ -8,3 +8,4 @@ scandir
 pytest
 invoke
 mpi4py
+psutil

@@ -55,3 +55,16 @@ def enum(*seq, **named):
     enums = dict(zip(seq, range(len(seq))), **named)
 
     return type('Enum', (), enums)
+
+
+def mem_pct():
+
+    """
+    Get the percentage of available memory used by the process.
+
+    Returns: float
+    """
+
+    mem = psutil.virtual_memory()
+
+    return mem.percent

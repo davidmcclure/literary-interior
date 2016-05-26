@@ -5,6 +5,7 @@ from mpi4py import MPI
 from lint.offset_cache import OffsetCache
 from lint.corpus import Corpus
 from lint.volume import Volume
+from lint.utils import mem_pct
 
 
 Tags = enum('READY', 'WORK', 'EXIT')
@@ -102,8 +103,7 @@ class IndexCount:
                 # WORK
                 # ----
                 if tag == Tags.WORK:
-                    # TODO: extract offsets, flush when over N% memory
-                    pass
+                    self.process(paths)
 
                 # ----
                 # EXIT
@@ -111,13 +111,14 @@ class IndexCount:
                 elif tag == Tags.EXIT:
                     break
 
-            # TODO: flush remaining counts
+            # Flush remaining counts.
+            self.flush()
 
             # Notify exit.
             comm.send(None, dest=0, tag=Tags.EXIT)
 
 
-    def process_paths(self, paths):
+    def process(self, paths):
 
         """
         Accumulate offset counts for a groups of paths
@@ -132,7 +133,25 @@ class IndexCount:
 
                 vol = Volume.from_path()
 
-                # TODO: merge offsets
+                # Ignore non-English vols.
+                if not vol.is_english:
+                    continue
+
+                # Merge the offset counts.
+                self.cache.increment(vol.year, vol.token_offsets())
+
+                # Flush the cache to disk.
+                if mem_pct() > 80:
+                    self.flush()
 
             except Exception as e:
                 print(e)
+
+
+    def flush(self):
+
+        """
+        Flush the offset cache to disk.
+        """
+
+        self.cache.flush(self.out_path)
