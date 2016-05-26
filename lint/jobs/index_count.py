@@ -4,6 +4,7 @@ from mpi4py import MPI
 
 from lint.count_cache import CountCache
 from lint.corpus import Corpus
+from lint.volume import Volume
 
 
 Tags = enum('READY', 'WORK', 'EXIT')
@@ -114,3 +115,24 @@ class IndexCount:
 
             # Notify exit.
             comm.send(None, dest=0, tag=Tags.EXIT)
+
+
+    def process_paths(self, paths):
+
+        """
+        Accumulate offset counts for a groups of paths
+
+        Args:
+            paths (list)
+        """
+
+        for path in paths:
+
+            try:
+
+                vol = Volume.from_path()
+
+                # TODO: merge offsets
+
+            except Exception as e:
+                print(e)
