@@ -11,7 +11,7 @@ from lint.utils import mem_pct
 Tags = enum('READY', 'WORK', 'EXIT')
 
 
-class IndexCount:
+class IndexOffset:
 
 
     def __init__(self, out_path, group_size=1000):
@@ -140,6 +140,7 @@ class IndexCount:
                 # Merge the offset counts.
                 self.cache.increment(vol.year, vol.token_offsets())
 
+                # TODO: ENV-ify
                 # Flush the cache to disk.
                 if mem_pct() > 80:
                     self.flush()
