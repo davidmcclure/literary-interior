@@ -96,8 +96,8 @@ def mpi(mock_corpus, mock_results, config):
     Write the current configuration into the /tmp/.lint.yml file.
     """
 
-    config.sync_tmp()
+    config.write_tmp()
 
     yield
 
-    os.remove('/tmp/.lint.yml')
+    config.clear_tmp()

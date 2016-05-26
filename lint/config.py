@@ -13,6 +13,9 @@ from contextlib import contextmanager
 class Config:
 
 
+    TMP_YAML = '/tmp/.lint.yml'
+
+
     @classmethod
     def from_env(cls):
 
@@ -23,7 +26,7 @@ class Config:
         return cls([
             os.path.join(os.path.dirname(__file__), 'lint.yml'),
             '~/.lint.yml',
-            '/tmp/.lint.yml',
+            cls.TMP_YAML,
         ])
 
 
@@ -130,11 +133,20 @@ class Config:
             session.close()
 
 
-    def sync_tmp(self):
+    def write_tmp(self):
 
         """
-        Bake the current configuration into the /tmp file.
+        Write the config into the /tmp file.
         """
 
-        with open('/tmp/.lint.yml', 'w') as fh:
+        with open(self.TMP_YAML, 'w') as fh:
             fh.write(yaml.dump(self.config))
+
+
+    def clear_tmp(self):
+
+        """
+        Clear the /tmp file.
+        """
+
+        os.remove(self.TMP_YAML)
