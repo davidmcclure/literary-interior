@@ -6,6 +6,8 @@ import pickle
 from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
 from sqlalchemy.sql import text
 
+from clint.textui import progress
+
 from lint import config
 from lint.models import BaseModel
 
@@ -81,20 +83,25 @@ class Offset(BaseModel):
 
 
     @classmethod
-    def gather_results(cls, path):
+    def gather_results(cls, root):
 
         """
         Given a directory of pickled count caches, unpickle the caches and
         emrge the counts into the database.
 
         Args:
-            path (str)
+            root (str)
         """
 
-        for d in scandir.scandir(path):
-            if d.is_file():
-                with open(d.path, 'rb') as fh:
-                    cls.increment(pickle.load(fh))
+        paths = [
+            d.path
+            for d in scandir.scandir(root)
+            if d.is_file()
+        ]
+
+        for path in progress.bar(paths):
+            with open(path, 'rb') as fh:
+                cls.increment(pickle.load(fh))
 
 
     @classmethod

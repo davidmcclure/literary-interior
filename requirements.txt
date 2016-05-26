@@ -9,3 +9,4 @@ pytest
 invoke
 mpi4py
 psutil
+clint
