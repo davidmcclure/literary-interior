@@ -1,6 +1,7 @@
 
 
 import pytest
+import os
 
 from lint import config as _config
 from lint.models import BaseModel
@@ -86,3 +87,17 @@ def mock_corpus(config):
     yield corpus
 
     corpus.teardown()
+
+
+@pytest.yield_fixture()
+def mpi(mock_corpus, mock_results, config):
+
+    """
+    Write the current configuration into the /tmp/.lint.yml file.
+    """
+
+    config.sync_tmp()
+
+    yield
+
+    os.remove('/tmp/.lint.yml')
