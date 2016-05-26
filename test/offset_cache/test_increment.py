@@ -43,7 +43,7 @@ def test_register_tokens():
     assert c[1900]['token2'][2] == 2
 
 
-def test_add_offsets():
+def test_merge_offsets():
 
     c = OffsetCache()
 
