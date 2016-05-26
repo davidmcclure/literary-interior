@@ -1,15 +1,15 @@
 
 
-import scandir
 import pickle
 
 from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
 from sqlalchemy.sql import text
 
+from scandir import scandir
 from clint.textui import progress
 
-from lint import config
 from lint.models import BaseModel
+from lint import config
 
 
 class Offset(BaseModel):
@@ -83,19 +83,15 @@ class Offset(BaseModel):
 
 
     @classmethod
-    def gather_results(cls, root):
+    def gather_results(cls):
 
         """
-        Given a directory of pickled count caches, unpickle the caches and
-        emrge the counts into the database.
-
-        Args:
-            root (str)
+        Unpickle the offset caches and merge the counts.
         """
 
         paths = [
             d.path
-            for d in scandir.scandir(root)
+            for d in scandir(config['results'])
             if d.is_file()
         ]
 
