@@ -11,7 +11,7 @@ from lint.utils import mem_pct
 Tags = enum('READY', 'WORK', 'EXIT')
 
 
-class IndexOffset:
+class DumpOffsets:
 
 
     def __init__(self, out_path, group_size=1000):
