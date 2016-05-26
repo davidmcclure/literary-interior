@@ -15,19 +15,19 @@ Tags = enum('READY', 'WORK', 'EXIT')
 class DumpOffsets:
 
 
-    def __init__(self, out_path, group_size=1000):
+    def __init__(self, group_size=1000, max_mem_pct=80):
 
         """
         Set options, initialize the cache.
 
         Args:
-            out_path (str)
             group_size (int)
+            max_mem_pct (int)
         """
 
-        self.out_path = out_path
-
         self.group_size = group_size
+
+        self.max_mem_pct = max_mem_pct
 
         self.cache = OffsetCache()
 
@@ -141,9 +141,8 @@ class DumpOffsets:
                 # Merge the offset counts.
                 self.cache.increment(vol.year, vol.token_offsets())
 
-                # TODO: ENV-ify
                 # Flush the cache to disk.
-                if mem_pct() > 80:
+                if mem_pct() > self.max_mem_pct:
                     self.flush()
 
             except Exception as e:
