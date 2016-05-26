@@ -2,16 +2,16 @@
 
 import pickle
 
-from lint.count_cache import CountCache
+from lint.offset_cache import OffsetCache
 
 
 def test_write_pickle(mock_results):
 
     """
-    CountCache#flush() should pickle the data to disk.
+    OffsetCache#flush() should pickle the data to disk.
     """
 
-    c1 = CountCache()
+    c1 = OffsetCache()
     c1[1900]['token'][1] = 1
 
     path = c1.flush(mock_results.path)
@@ -34,7 +34,7 @@ def test_clear_data(mock_results):
     After a flush, the cache should be cleared.
     """
 
-    c = CountCache()
+    c = OffsetCache()
     c[1900]['token'][1] = 1
 
     path = c.flush(mock_results.path)

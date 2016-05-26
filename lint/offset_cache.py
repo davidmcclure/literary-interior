@@ -10,7 +10,7 @@ from functools import partial
 from lint.utils import flatten_dict
 
 
-class CountCache(defaultdict):
+class OffsetCache(defaultdict):
 
 
     def __init__(self, *args, **kwargs):
@@ -28,7 +28,7 @@ class CountCache(defaultdict):
         Merge another cache, adding the counters.
 
         Args:
-            other (CountCache)
+            other (OffsetCache)
         """
 
         for year, token_counts in other.items():

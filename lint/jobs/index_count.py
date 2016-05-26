@@ -2,7 +2,7 @@
 
 from mpi4py import MPI
 
-from lint.count_cache import CountCache
+from lint.offset_cache import OffsetCache
 from lint.corpus import Corpus
 from lint.volume import Volume
 
@@ -27,7 +27,7 @@ class IndexCount:
 
         self.group_size = group_size
 
-        self.cache = CountCache()
+        self.cache = OffsetCache()
 
 
     def run(self):

@@ -12,7 +12,7 @@ class MockResults(TempDir):
         Pickle a cache into the directory.
 
         Args:
-            cache (CountCache)
+            cache (OffsetCache)
         """
 
         cache.flush(self.path)

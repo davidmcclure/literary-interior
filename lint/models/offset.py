@@ -35,7 +35,7 @@ class Offset(BaseModel):
         Given a count cache, increment the counters in the database.
 
         Args:
-            cache (CountCache)
+            cache (OffsetCache)
         """
 
         session = config.Session()

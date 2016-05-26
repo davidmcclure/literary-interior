@@ -3,7 +3,7 @@
 import pytest
 
 from lint import config
-from lint.count_cache import CountCache
+from lint.offset_cache import OffsetCache
 from lint.models import Offset
 
 
@@ -16,7 +16,7 @@ def test_set_initial_value():
     If a year/token/offset triple hasn't been seen before, insert a new row.
     """
 
-    cache = CountCache()
+    cache = OffsetCache()
 
     cache[1901]['token1'][1] = 1
     cache[1902]['token2'][2] = 2
@@ -36,7 +36,7 @@ def test_increment_existing_value():
     count for the existing row.
     """
 
-    cache = CountCache()
+    cache = OffsetCache()
 
     cache[1901]['token1'][1] = 1
     cache[1902]['token2'][2] = 2
