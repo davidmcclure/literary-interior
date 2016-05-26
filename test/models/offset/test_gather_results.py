@@ -9,7 +9,7 @@ from lint.models import Offset
 pytestmark = pytest.mark.usefixtures('db')
 
 
-def test_test(mock_results):
+def test_gather_results(mock_results):
 
     c1 = OffsetCache()
     c1[1901]['token1'][1] = 1

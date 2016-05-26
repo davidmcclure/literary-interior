@@ -19,13 +19,7 @@ def test_write_pickle(mock_results):
     with open(path, 'rb') as fh:
         c2 = pickle.load(fh)
 
-    assert c2 == {
-        1900: {
-            'token': {
-                1: 1
-            }
-        }
-    }
+    assert c2.data == {1900: { 'token': { 1: 1 }}}
 
 
 def test_clear_data(mock_results):
@@ -39,4 +33,4 @@ def test_clear_data(mock_results):
 
     path = c.flush(mock_results.path)
 
-    assert len(c) == 0
+    assert len(c.data) == 0
