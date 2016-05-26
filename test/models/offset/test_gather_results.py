@@ -3,7 +3,7 @@
 import pytest
 
 from lint.count_cache import CountCache
-from lint.models import Count
+from lint.models import Offset
 
 
 pytestmark = pytest.mark.usefixtures('db')
@@ -30,10 +30,10 @@ def test_test(mock_results):
     mock_results.add_cache(c2)
     mock_results.add_cache(c3)
 
-    Count.gather_results(mock_results.path)
+    Offset.gather_results(mock_results.path)
 
-    assert Count.token_year_offset_count('token1', 1901, 1) == 1
-    assert Count.token_year_offset_count('token2', 1902, 1) == 2+4
-    assert Count.token_year_offset_count('token3', 1903, 1) == 3+5+7
-    assert Count.token_year_offset_count('token4', 1904, 1) == 6+8
-    assert Count.token_year_offset_count('token5', 1905, 1) == 9
+    assert Offset.token_year_offset_count('token1', 1901, 1) == 1
+    assert Offset.token_year_offset_count('token2', 1902, 1) == 2+4
+    assert Offset.token_year_offset_count('token3', 1903, 1) == 3+5+7
+    assert Offset.token_year_offset_count('token4', 1904, 1) == 6+8
+    assert Offset.token_year_offset_count('token5', 1905, 1) == 9

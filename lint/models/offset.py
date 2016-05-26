@@ -10,7 +10,7 @@ from lint import config
 from lint.models import BaseModel
 
 
-class Count(BaseModel):
+class Offset(BaseModel):
 
 
     __tablename__ = 'count'
