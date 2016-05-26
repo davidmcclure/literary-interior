@@ -6,6 +6,7 @@ from lint import config as _config
 from lint.models import BaseModel
 
 from test.mock_results import MockResults
+from test.mock_corpus import MockCorpus
 
 
 @pytest.fixture(scope='session', autouse=True)
@@ -61,3 +62,24 @@ def mock_results():
     yield results
 
     results.teardown()
+
+
+@pytest.yield_fixture
+def mock_corpus(config):
+
+    """
+    Provide a MockCorpus instance.
+
+    Yields: MockCorpus
+    """
+
+    corpus = MockCorpus()
+
+    # Point config -> mock.
+    config.config.update({
+        'corpus': corpus.path
+    })
+
+    yield corpus
+
+    corpus.teardown()
