@@ -25,72 +25,32 @@ def test_index_by_offset(r):
             'a': {
                 'POS': 1,
             },
+        }),
+
+        make_page(token_count=100, counts={
             'b': {
                 'POS': 2,
             },
+        }),
+
+        make_page(token_count=100, counts={
             'c': {
                 'POS': 3,
-            },
-        }),
-
-        make_page(token_count=100, counts={
-            'd': {
-                'POS': 4,
-            },
-            'e': {
-                'POS': 5,
-            },
-            'f': {
-                'POS': 6,
-            },
-        }),
-
-        make_page(token_count=100, counts={
-            'g': {
-                'POS': 7,
-            },
-            'h': {
-                'POS': 8,
-            },
-            'i': {
-                'POS': 9,
             },
         }),
 
     ])
 
     assert v.token_offsets(resolution=r) == {
-
         'a': {
-            round((50/300) * r): 1
+            round(( 50/300) * r): 1
         },
         'b': {
-            round((50/300) * r): 2
+            round((150/300) * r): 2
         },
         'c': {
-            round((50/300) * r): 3
+            round((250/300) * r): 3
         },
-
-        'd': {
-            round((150/300) * r): 4
-        },
-        'e': {
-            round((150/300) * r): 5
-        },
-        'f': {
-            round((150/300) * r): 6
-        },
-
-        'g': {
-            round((250/300) * r): 7
-        },
-        'h': {
-            round((250/300) * r): 8
-        },
-        'i': {
-            round((250/300) * r): 9
-        },
-
     }
 
 
