@@ -15,7 +15,7 @@ from lint import config
 class Offset(BaseModel):
 
 
-    __tablename__ = 'count'
+    __tablename__ = 'offset'
 
     __table_args__ = (
         PrimaryKeyConstraint('token', 'year', 'offset'),
