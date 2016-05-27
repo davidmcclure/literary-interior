@@ -3,7 +3,7 @@
 from mpi4py import MPI
 
 from lint import config
-from lint.utils import mem_pct
+from lint.utils import mem_pct, enum
 from lint.offset_cache import OffsetCache
 from lint.corpus import Corpus
 from lint.volume import Volume

@@ -10,3 +10,4 @@ invoke
 mpi4py
 psutil
 clint
+click
