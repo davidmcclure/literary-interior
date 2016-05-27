@@ -14,6 +14,10 @@ pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 def test_dump_offsets(mock_corpus):
 
+    """
+    DumpOffsets should index {token -> year -> offset -> count} data.
+    """
+
     v1 = make_vol(year=1901, pages=[
         make_page(token_count=100, counts={'a': { 'POS': 1 }}),
         make_page(token_count=100, counts={'b': { 'POS': 2 }}),
@@ -86,6 +90,7 @@ def test_ignore_non_english_volumes(mock_corpus):
     o2 = round((150/300)*1000)
     o3 = round((250/300)*1000)
 
+    # Skip the German volume.
     assert Offset.token_year_offset_count('a', 1900, o1) == 1
     assert Offset.token_year_offset_count('b', 1900, o2) == 2
     assert Offset.token_year_offset_count('c', 1900, o3) == 3
