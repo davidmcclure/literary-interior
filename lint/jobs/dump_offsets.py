@@ -155,4 +155,4 @@ class DumpOffsets:
         Flush the offset cache to disk.
         """
 
-        self.cache.flush(config['results'])
+        self.cache.flush(config['results_dir'])

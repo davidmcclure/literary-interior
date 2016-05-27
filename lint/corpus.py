@@ -21,7 +21,7 @@ class Corpus:
         Returns: cls
         """
 
-        return cls(config['corpus'])
+        return cls(config['corpus_dir'])
 
 
     def __init__(self, path):

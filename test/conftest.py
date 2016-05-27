@@ -61,7 +61,7 @@ def mock_results(config):
     results = MockResults()
 
     config.config.update({
-        'results': results.path
+        'results_dir': results.path
     })
 
     yield results
@@ -81,7 +81,7 @@ def mock_corpus(config):
     corpus = MockCorpus()
 
     config.config.update({
-        'corpus': corpus.path
+        'corpus_dir': corpus.path
     })
 
     yield corpus
