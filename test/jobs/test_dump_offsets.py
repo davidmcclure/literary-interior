@@ -38,7 +38,7 @@ def test_dump_offsets(mock_corpus):
 
     mock_corpus.add_vol(v1)
 
-    call(['mpirun', 'bin/dump_offsets'])
+    call(['mpirun', 'bin/dump-offsets'])
 
     Offset.gather_results()
 
