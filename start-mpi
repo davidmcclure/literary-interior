@@ -1,0 +1,5 @@
+#!/bin/sh
+
+ipython profile create --parallel --profile=mpi
+
+ipcluster start -n 4 --engines=MPIEngineSetLauncher --profile=mpi
