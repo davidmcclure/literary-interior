@@ -7,6 +7,42 @@ from lint.volume import Volume
 from test.helpers import make_page, make_vol
 
 
+def test_map_page_center_offset_to_count():
+
+    """
+    For a token on a given page - get the offset of the "center" of the page,
+    snap the offset onto a 1-N scale, and index the offset -> token count.
+    """
+
+    v = make_vol(pages=[
+
+        make_page(token_count=100, counts={
+            'a': {
+                'POS': 1,
+            }
+        }),
+
+        make_page(token_count=200, counts={
+            'b': {
+                'POS': 2,
+            }
+        }),
+
+        make_page(token_count=300, counts={
+            'c': {
+                'POS': 3,
+            }
+        }),
+
+    ])
+
+    offsets = v.token_offsets(1000)
+
+    assert offsets['a'][round(( 50/600)*1000)] == 1
+    assert offsets['b'][round((200/600)*1000)] == 2
+    assert offsets['c'][round((450/600)*1000)] == 3
+
+
 @pytest.mark.parametrize('r', [
     10,
     100,
