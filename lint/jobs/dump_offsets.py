@@ -132,7 +132,7 @@ class DumpOffsets:
 
             try:
 
-                vol = Volume.from_path()
+                vol = Volume.from_path(path)
 
                 # Ignore non-English vols.
                 if not vol.is_english:

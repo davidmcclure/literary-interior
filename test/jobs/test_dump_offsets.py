@@ -12,7 +12,7 @@ from test.helpers import make_page, make_vol
 pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
-def test_dump_offsets():
+def test_dump_offsets(mock_corpus):
 
     v1 = make_vol(year=1900, pages=[
 
@@ -36,8 +36,16 @@ def test_dump_offsets():
 
     ])
 
+    mock_corpus.add_vol(v1)
+
     call(['mpirun', 'bin/dump_offsets'])
 
     Offset.gather_results()
 
-    assert Offset.token_year_offset_count('a', 1900, round((50/300)*1000)) == 1
+    o1 = round(( 50/300)*1000)
+    o2 = round((150/300)*1000)
+    o3 = round((250/300)*1000)
+
+    assert Offset.token_year_offset_count('a', 1900, o1) == 1
+    assert Offset.token_year_offset_count('b', 1900, o2) == 2
+    assert Offset.token_year_offset_count('c', 1900, o3) == 3
