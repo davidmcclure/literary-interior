@@ -5,3 +5,9 @@ corpus_dir: /path/to/corpus
 result_dir: /path/to/result
 
 database_uri: sqlite:////path/to/db
+
+group_size: 1000
+
+offset_resolution: 1000
+
+max_mem_pct: 80

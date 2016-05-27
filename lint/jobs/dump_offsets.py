@@ -15,22 +15,11 @@ Tags = enum('READY', 'WORK', 'EXIT')
 class DumpOffsets:
 
 
-    def __init__(self, resolution=1000, group_size=1000, max_mem_pct=80):
+    def __init__(self):
 
         """
-        Set options, initialize the cache.
-
-        Args:
-            resolution (int)
-            max_mem_pct (int)
-            group_size (int)
+        Initialize the offset cache.
         """
-
-        self.resolution = resolution
-
-        self.group_size = group_size
-
-        self.max_mem_pct = max_mem_pct
 
         self.cache = OffsetCache()
 
@@ -52,7 +41,7 @@ class DumpOffsets:
 
             corpus = Corpus.from_env()
 
-            path_groups = corpus.path_groups(self.group_size)
+            path_groups = corpus.path_groups(config['group_size'])
 
             closed = 0
             while closed < size-1:
@@ -142,13 +131,13 @@ class DumpOffsets:
                     continue
 
                 # Get the token offset counts.
-                offsets = vol.token_offsets(self.resolution)
+                offsets = vol.token_offsets(config['offset_resolution'])
 
                 # Merge counts into the cache.
                 self.cache.increment(vol.year, offsets)
 
                 # Flush the cache to disk.
-                if mem_pct() > self.max_mem_pct:
+                if mem_pct() > config['max_mem_pct']:
                     self.flush()
 
             except Exception as e:
