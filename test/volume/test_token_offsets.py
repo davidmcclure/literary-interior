@@ -7,7 +7,12 @@ from lint.volume import Volume
 from test.helpers import make_page, make_vol
 
 
-def test_map_page_center_offset_to_count():
+@pytest.mark.parametrize('r', [
+    10,
+    100,
+    1000,
+])
+def test_map_page_center_offset_to_count(r):
 
     """
     For a token on a given page - get the offset of the "center" of the page,
@@ -36,58 +41,11 @@ def test_map_page_center_offset_to_count():
 
     ])
 
-    offsets = v.token_offsets(1000)
+    offsets = v.token_offsets(r)
 
-    assert offsets['a'][round(( 50/600)*1000)] == 1
-    assert offsets['b'][round((200/600)*1000)] == 2
-    assert offsets['c'][round((450/600)*1000)] == 3
-
-
-@pytest.mark.parametrize('r', [
-    10,
-    100,
-    1000,
-])
-def test_index_by_offset(r):
-
-    """
-    Each token should be mapped to a counter that maps offset -> count, where
-    the offset is an integer between 0 (start) and N (end).
-    """
-
-    v = make_vol(pages=[
-
-        make_page(token_count=100, counts={
-            'a': {
-                'POS': 1,
-            },
-        }),
-
-        make_page(token_count=100, counts={
-            'b': {
-                'POS': 2,
-            },
-        }),
-
-        make_page(token_count=100, counts={
-            'c': {
-                'POS': 3,
-            },
-        }),
-
-    ])
-
-    assert v.token_offsets(resolution=r) == {
-        'a': {
-            round(( 50/300) * r): 1
-        },
-        'b': {
-            round((150/300) * r): 2
-        },
-        'c': {
-            round((250/300) * r): 3
-        },
-    }
+    assert offsets['a'][round(( 50/600)*r)] == 1
+    assert offsets['b'][round((200/600)*r)] == 2
+    assert offsets['c'][round((450/600)*r)] == 3
 
 
 def test_merge_offsets_for_token():
@@ -137,33 +95,19 @@ def test_merge_offsets_for_token():
 
     ])
 
-    assert v.token_offsets(1000) == {
+    offsets = v.token_offsets(1000)
 
-        'a': {
-            round(( 50/300) * 1000): 1,
-        },
+    assert offsets['a'][round(( 50/300) * 1000)] == 1
+    assert offsets['b'][round(( 50/300) * 1000)] == 2
+    assert offsets['c'][round(( 50/300) * 1000)] == 3
 
-        'b': {
-            round(( 50/300) * 1000): 2,
-            round((150/300) * 1000): 4,
-        },
+    assert offsets['b'][round((150/300) * 1000)] == 4
+    assert offsets['c'][round((150/300) * 1000)] == 5
+    assert offsets['d'][round((150/300) * 1000)] == 6
 
-        'c': {
-            round(( 50/300) * 1000): 3,
-            round((150/300) * 1000): 5,
-            round((250/300) * 1000): 7,
-        },
-
-        'd': {
-            round((150/300) * 1000): 6,
-            round((250/300) * 1000): 8,
-        },
-
-        'e': {
-            round((250/300) * 1000): 9,
-        },
-
-    }
+    assert offsets['c'][round((250/300) * 1000)] == 7
+    assert offsets['d'][round((250/300) * 1000)] == 8
+    assert offsets['e'][round((250/300) * 1000)] == 9
 
 
 def test_add_counts_when_offsets_round_together():
