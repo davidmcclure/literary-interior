@@ -55,3 +55,37 @@ def test_dump_offsets(mock_corpus):
     assert Offset.token_year_offset_count('c', 1903, o1) == 7
     assert Offset.token_year_offset_count('d', 1903, o2) == 8
     assert Offset.token_year_offset_count('e', 1903, o3) == 9
+
+
+def test_ignore_non_english_volumes(mock_corpus):
+
+    """
+    Non-English volumes should be skipped.
+    """
+
+    v1 = make_vol(year=1900, pages=[
+        make_page(token_count=100, counts={'a': { 'POS': 1 }}),
+        make_page(token_count=100, counts={'b': { 'POS': 2 }}),
+        make_page(token_count=100, counts={'c': { 'POS': 3 }}),
+    ])
+
+    v2 = make_vol(year=1900, language='ger', pages=[
+        make_page(token_count=100, counts={'a': { 'POS': 11 }}),
+        make_page(token_count=100, counts={'b': { 'POS': 12 }}),
+        make_page(token_count=100, counts={'c': { 'POS': 13 }}),
+    ])
+
+    mock_corpus.add_vol(v1)
+    mock_corpus.add_vol(v2)
+
+    call(['mpirun', 'bin/dump-offsets'])
+
+    Offset.gather_results()
+
+    o1 = round(( 50/300)*1000)
+    o2 = round((150/300)*1000)
+    o3 = round((250/300)*1000)
+
+    assert Offset.token_year_offset_count('a', 1900, o1) == 1
+    assert Offset.token_year_offset_count('b', 1900, o2) == 2
+    assert Offset.token_year_offset_count('c', 1900, o3) == 3
