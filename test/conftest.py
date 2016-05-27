@@ -61,7 +61,7 @@ def mock_results(config):
     results = MockResults()
 
     config.config.update({
-        'results_dir': results.path
+        'result_dir': results.path
     })
 
     yield results

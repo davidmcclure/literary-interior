@@ -15,7 +15,7 @@ Tags = enum('READY', 'WORK', 'EXIT')
 class DumpOffsets:
 
 
-    def __init__(self, resolution=1000, max_mem_pct=80, group_size=1000):
+    def __init__(self, resolution=1000, group_size=1000, max_mem_pct=80):
 
         """
         Set options, initialize the cache.
@@ -28,9 +28,9 @@ class DumpOffsets:
 
         self.resolution = resolution
 
-        self.max_mem_pct = max_mem_pct
-
         self.group_size = group_size
+
+        self.max_mem_pct = max_mem_pct
 
         self.cache = OffsetCache()
 
@@ -161,4 +161,4 @@ class DumpOffsets:
         Flush the offset cache to disk.
         """
 
-        self.cache.flush(config['results_dir'])
+        self.cache.flush(config['result_dir'])

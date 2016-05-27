@@ -91,7 +91,7 @@ class Offset(BaseModel):
 
         paths = [
             d.path
-            for d in scandir(config['results_dir'])
+            for d in scandir(config['result_dir'])
             if d.is_file()
         ]
 
