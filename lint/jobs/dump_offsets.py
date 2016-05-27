@@ -45,6 +45,8 @@ class DumpOffsets:
 
             closed_ranks = 0
 
+            processed_groups = 0
+
             while closed_ranks < size-1:
 
                 # Get a work request from a rank.
@@ -66,10 +68,22 @@ class DumpOffsets:
                     try:
                         paths = next(path_groups)
                         comm.send(list(paths), dest=source, tag=Tags.WORK)
+                        print(rank, 'work', source)
 
                     # If finished, close the rank.
                     except StopIteration:
                         comm.send(None, dest=source, tag=Tags.EXIT)
+                        print(rank, 'exit', source)
+
+                # ------
+                # RESULT
+                # ------
+                elif tag == Tags.RESULT:
+
+                    # Log total paths processed.
+                    processed_groups += 1
+                    total = processed_groups * config['group_size']
+                    print(total, 'paths')
 
                 # ----
                 # EXIT
@@ -98,6 +112,8 @@ class DumpOffsets:
                 # ----
                 if tag == Tags.WORK:
                     self.process(paths)
+                    comm.send(None, dest=0, tag=Tags.RESULT)
+                    print(rank, 'result', mem_pct())
 
                 # ----
                 # EXIT
