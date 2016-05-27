@@ -96,7 +96,7 @@ class Config:
         Returns: Engine
         """
 
-        return create_engine(self['database'])
+        return create_engine(self['database_uri'])
 
 
     def build_sessionmaker(self):
