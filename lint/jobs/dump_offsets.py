@@ -15,19 +15,22 @@ Tags = enum('READY', 'WORK', 'EXIT')
 class DumpOffsets:
 
 
-    def __init__(self, group_size=1000, max_mem_pct=80):
+    def __init__(self, resolution=1000, max_mem_pct=80, group_size=1000):
 
         """
         Set options, initialize the cache.
 
         Args:
-            group_size (int)
+            resolution (int)
             max_mem_pct (int)
+            group_size (int)
         """
 
-        self.group_size = group_size
+        self.resolution = resolution
 
         self.max_mem_pct = max_mem_pct
+
+        self.group_size = group_size
 
         self.cache = OffsetCache()
 
@@ -138,8 +141,11 @@ class DumpOffsets:
                 if not vol.is_english:
                     continue
 
-                # Merge the offset counts.
-                self.cache.increment(vol.year, vol.token_offsets())
+                # Get the token offset counts.
+                offsets = vol.token_offsets(self.resolution)
+
+                # Merge counts into the cache.
+                self.cache.increment(vol.year, offsets)
 
                 # Flush the cache to disk.
                 if mem_pct() > self.max_mem_pct:

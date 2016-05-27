@@ -5,5 +5,3 @@ corpus_dir: /path/to/corpus
 results_dir: /path/to/results
 
 database_uri: sqlite:////path/to/db
-
-token_depth: 10000

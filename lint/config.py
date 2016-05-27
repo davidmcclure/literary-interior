@@ -68,24 +68,8 @@ class Config:
         # Parse the configuration.
         self.config = anyconfig.load(self.paths, ignore_missing=True)
 
-        # Canonical set of tokens.
-        self.tokens = self.build_tokens()
-
         # SQLAlchemy session maker.
         self.Session = self.build_sessionmaker()
-
-
-    def build_tokens(self):
-
-        """
-        Get a set of whitelisted tokens.
-
-        Returns: set
-        """
-
-        tokens = top_n_list('en', self['token_depth'], ascii_only=True)
-
-        return set(tokens)
 
 
     def build_engine(self):
