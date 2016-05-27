@@ -17,6 +17,5 @@ def dump_offsets():
     job.run()
 
 
-
 if __name__ == '__main__':
     dump_offsets()

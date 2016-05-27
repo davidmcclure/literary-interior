@@ -9,7 +9,7 @@ from lint.corpus import Corpus
 from lint.volume import Volume
 
 
-Tags = enum('READY', 'WORK', 'EXIT')
+Tags = enum('READY', 'WORK', 'RESULT', 'EXIT')
 
 
 class DumpOffsets:
@@ -43,8 +43,11 @@ class DumpOffsets:
 
             path_groups = corpus.path_groups(config['group_size'])
 
-            closed = 0
-            while closed < size-1:
+            closed_ranks = 0
+
+            processed_groups = 0
+
+            while closed_ranks < size-1:
 
                 # Get a work request from a rank.
                 data = comm.recv(
@@ -70,11 +73,18 @@ class DumpOffsets:
                     except StopIteration:
                         comm.send(None, dest=source, tag=Tags.EXIT)
 
+                # ------
+                # RESULT
+                # ------
+                elif tag == Tags.RESULT:
+                    processed_groups += 1
+                    print(processed_groups * config['group_size'], 'paths')
+
                 # ----
                 # EXIT
                 # ----
                 elif tag == Tags.EXIT:
-                    closed += 1
+                    closed_ranks += 1
 
         else:
 
@@ -97,6 +107,7 @@ class DumpOffsets:
                 # ----
                 if tag == Tags.WORK:
                     self.process(paths)
+                    comm.send(None, dest=0, tag=Tags.RESULT)
 
                 # ----
                 # EXIT
