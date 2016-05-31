@@ -11,3 +11,5 @@ group_size: 1000
 offset_resolution: 1000
 
 max_mem_pct: 80
+
+token_depth: 10000

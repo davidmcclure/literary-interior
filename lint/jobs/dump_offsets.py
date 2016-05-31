@@ -153,12 +153,12 @@ class DumpOffsets:
                 # Merge counts into the cache.
                 self.cache.increment(vol.year, offsets)
 
-                # Flush the cache to disk.
-                if mem_pct() > config['max_mem_pct']:
-                    self.flush()
-
             except Exception as e:
                 print(e)
+
+        # Flush the cache to disk.
+        if mem_pct() > config['max_mem_pct']:
+            self.flush()
 
 
     def flush(self):

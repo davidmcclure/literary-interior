@@ -4,6 +4,8 @@ import re
 
 from collections import Counter
 
+from lint import config
+
 
 class Page:
 
@@ -50,6 +52,10 @@ class Page:
 
             # Ignore irregular tokens.
             if not letters.match(token):
+                continue
+
+            # Apply token whitelist.
+            if token not in config.tokens:
                 continue
 
             counts[token] += sum(pc.values())
