@@ -121,9 +121,6 @@ class DumpOffsets:
                 elif tag == Tags.EXIT:
                     break
 
-            # Flush remaining counts.
-            self.flush()
-
             # Notify exit.
             comm.send(None, dest=0, tag=Tags.EXIT)
 
@@ -156,9 +153,8 @@ class DumpOffsets:
             except Exception as e:
                 print(e)
 
-        # Flush the cache to disk.
-        if mem_pct() > config['max_mem_pct']:
-            self.flush()
+        # Flush to disk.
+        self.flush()
 
 
     def flush(self):
