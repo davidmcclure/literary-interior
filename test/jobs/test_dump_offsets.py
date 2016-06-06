@@ -44,9 +44,9 @@ def test_dump_offsets(mock_corpus):
 
     Offset.gather_results()
 
-    o1 = round(( 50/300)*1000)
-    o2 = round((150/300)*1000)
-    o3 = round((250/300)*1000)
+    o1 = round(( 50/300)*100)
+    o2 = round((150/300)*100)
+    o3 = round((250/300)*100)
 
     assert Offset.token_year_offset_count('a', 1910, o1) == 1
     assert Offset.token_year_offset_count('b', 1910, o2) == 2
@@ -86,9 +86,9 @@ def test_ignore_non_english_volumes(mock_corpus):
 
     Offset.gather_results()
 
-    o1 = round(( 50/300)*1000)
-    o2 = round((150/300)*1000)
-    o3 = round((250/300)*1000)
+    o1 = round(( 50/300)*100)
+    o2 = round((150/300)*100)
+    o3 = round((250/300)*100)
 
     # Skip the German volume.
     assert Offset.token_year_offset_count('a', 1900, o1) == 1
@@ -128,9 +128,9 @@ def test_round_up_years_to_decade(mock_corpus):
 
     Offset.gather_results()
 
-    o1 = round(( 50/300)*1000)
-    o2 = round((150/300)*1000)
-    o3 = round((250/300)*1000)
+    o1 = round(( 50/300)*100)
+    o2 = round((150/300)*100)
+    o3 = round((250/300)*100)
 
     # Snap to decade.
     assert Offset.token_year_offset_count('a', 1910, o1) == 2+16

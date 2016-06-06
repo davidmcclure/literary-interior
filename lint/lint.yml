@@ -8,8 +8,6 @@ database_uri: sqlite:////path/to/db
 
 group_size: 1000
 
-offset_resolution: 1000
-
-max_mem_pct: 80
+offset_resolution: 100
 
 token_depth: 10000
