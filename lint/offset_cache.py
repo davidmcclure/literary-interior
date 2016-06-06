@@ -36,6 +36,22 @@ class OffsetCache:
         return self.data[year]
 
 
+    def __iadd__(self, other):
+
+        """
+        Merge another cache, adding the counters.
+
+        Args:
+            other (OffsetCache)
+        """
+
+        for year, token_counts in other.data.items():
+            for token, counts in token_counts.items():
+                self[year][token] += counts
+
+        return self
+
+
     def increment(self, year, token_offsets):
 
         """
