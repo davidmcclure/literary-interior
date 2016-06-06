@@ -152,7 +152,7 @@ class DumpOffsets:
                 # Get the token offset counts.
                 offsets = vol.token_offsets(config['offset_resolution'])
 
-                # Round to the nearest decade.
+                # Round up by decade.
                 year = math.ceil(vol.year/10) * 10
 
                 # Merge counts into the cache.
