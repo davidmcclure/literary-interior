@@ -1,5 +1,7 @@
 
 
+import math
+
 from mpi4py import MPI
 
 from lint import config
@@ -121,6 +123,9 @@ class DumpOffsets:
                 elif tag == Tags.EXIT:
                     break
 
+            # Pickle the result to disk.
+            self.flush()
+
             # Notify exit.
             comm.send(None, dest=0, tag=Tags.EXIT)
 
@@ -147,14 +152,14 @@ class DumpOffsets:
                 # Get the token offset counts.
                 offsets = vol.token_offsets(config['offset_resolution'])
 
+                # Round to the nearest decade.
+                year = math.ceil(vol.year/10) * 10
+
                 # Merge counts into the cache.
-                self.cache.increment(vol.year, offsets)
+                self.cache.increment(year, offsets)
 
             except Exception as e:
                 print(e)
-
-        # Flush to disk.
-        self.flush()
 
 
     def flush(self):
