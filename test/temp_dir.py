@@ -6,7 +6,6 @@ import shutil
 
 class TempDir:
 
-
     def __init__(self):
 
         """
@@ -14,7 +13,6 @@ class TempDir:
         """
 
         self.path = tempfile.mkdtemp()
-
 
     def teardown(self):
 

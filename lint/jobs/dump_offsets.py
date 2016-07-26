@@ -16,7 +16,6 @@ Tags = enum('READY', 'WORK', 'RESULT', 'EXIT')
 
 class DumpOffsets:
 
-
     def __init__(self):
 
         """
@@ -24,7 +23,6 @@ class DumpOffsets:
         """
 
         self.cache = OffsetCache()
-
 
     def run(self):
 
@@ -129,7 +127,6 @@ class DumpOffsets:
             # Notify exit.
             comm.send(None, dest=0, tag=Tags.EXIT)
 
-
     def process(self, paths):
 
         """
@@ -160,7 +157,6 @@ class DumpOffsets:
 
             except Exception as e:
                 print(e)
-
 
     def flush(self):
 

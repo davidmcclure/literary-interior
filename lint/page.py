@@ -9,7 +9,6 @@ from lint import config
 
 class Page:
 
-
     def __init__(self, data):
 
         """
@@ -21,7 +20,6 @@ class Page:
 
         self.data = data
 
-
     @property
     def token_count(self):
 
@@ -32,7 +30,6 @@ class Page:
         """
 
         return int(self.data['body']['tokenCount'])
-
 
     def merged_token_counts(self):
 

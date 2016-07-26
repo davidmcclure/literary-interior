@@ -10,7 +10,6 @@ from lint.page import Page
 
 class Volume:
 
-
     @classmethod
     def from_path(cls, path):
 
@@ -26,7 +25,6 @@ class Volume:
         with bz2.open(path, 'rt') as fh:
             return cls(json.loads(fh.read()))
 
-
     def __init__(self, data):
 
         """
@@ -37,7 +35,6 @@ class Volume:
         """
 
         self.data = data
-
 
     @property
     def id(self):
@@ -50,7 +47,6 @@ class Volume:
 
         return self.data['id']
 
-
     @property
     def year(self):
 
@@ -61,7 +57,6 @@ class Volume:
         """
 
         return int(self.data['metadata']['pubDate'])
-
 
     @property
     def language(self):
@@ -74,7 +69,6 @@ class Volume:
 
         return self.data['metadata']['language']
 
-
     @property
     def is_english(self):
 
@@ -85,7 +79,6 @@ class Volume:
         """
 
         return self.language == 'eng'
-
 
     def token_count(self):
 
@@ -100,7 +93,6 @@ class Volume:
             for p in self.pages()
         ])
 
-
     def pages(self):
 
         """
@@ -111,7 +103,6 @@ class Volume:
 
         for data in self.data['features']['pages']:
             yield Page(data)
-
 
     def token_offsets(self, resolution=1000):
 

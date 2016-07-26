@@ -8,9 +8,7 @@ from lint.volume import Volume
 from lint.utils import grouper
 
 
-
 class Corpus:
-
 
     @classmethod
     def from_env(cls):
@@ -23,7 +21,6 @@ class Corpus:
 
         return cls(config['corpus_dir'])
 
-
     def __init__(self, path):
 
         """
@@ -35,7 +32,6 @@ class Corpus:
 
         self.path = os.path.abspath(path)
 
-
     def __len__(self):
 
         """
@@ -45,7 +41,6 @@ class Corpus:
         """
 
         return len(list(self.paths()))
-
 
     def paths(self):
 
@@ -59,7 +54,6 @@ class Corpus:
             for name in files:
                 yield os.path.join(root, name)
 
-
     def path_groups(self, n=1000):
 
         """
@@ -70,7 +64,6 @@ class Corpus:
 
         for group in grouper(self.paths(), n):
             yield group
-
 
     def volumes(self):
 

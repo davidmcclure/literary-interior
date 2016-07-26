@@ -12,7 +12,6 @@ from lint.utils import flatten_dict
 
 class OffsetCache:
 
-
     def __init__(self):
 
         """
@@ -20,7 +19,6 @@ class OffsetCache:
         """
 
         self.data = defaultdict(partial(defaultdict, Counter))
-
 
     def __getitem__(self, year):
 
@@ -35,7 +33,6 @@ class OffsetCache:
 
         return self.data[year]
 
-
     def increment(self, year, token_offsets):
 
         """
@@ -49,7 +46,6 @@ class OffsetCache:
         for token, offsets in token_offsets.items():
             self.data[year][token] += offsets
 
-
     def flatten(self):
 
         """
@@ -59,7 +55,6 @@ class OffsetCache:
         """
 
         return flatten_dict(self.data)
-
 
     def flush(self, root):
 

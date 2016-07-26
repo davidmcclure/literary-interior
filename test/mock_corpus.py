@@ -10,7 +10,6 @@ from test.temp_dir import TempDir
 
 class MockCorpus(TempDir):
 
-
     def add_vol(self, vol):
 
         """

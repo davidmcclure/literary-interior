@@ -5,7 +5,6 @@ from test.temp_dir import TempDir
 
 class MockResults(TempDir):
 
-
     def add_cache(self, cache):
 
         """

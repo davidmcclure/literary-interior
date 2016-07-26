@@ -81,7 +81,6 @@ class Offset(BaseModel):
 
         session.commit()
 
-
     @classmethod
     def gather_results(cls):
 
@@ -98,7 +97,6 @@ class Offset(BaseModel):
         for path in progress.bar(paths):
             with open(path, 'rb') as fh:
                 cls.increment(pickle.load(fh))
-
 
     @classmethod
     def token_year_offset_count(cls, token, year, offset):

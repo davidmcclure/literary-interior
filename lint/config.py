@@ -12,9 +12,7 @@ from contextlib import contextmanager
 
 class Config:
 
-
     TMP_YAML = '/tmp/.lint.yml'
-
 
     @classmethod
     def from_env(cls):
@@ -29,7 +27,6 @@ class Config:
             cls.TMP_YAML,
         ])
 
-
     def __init__(self, paths):
 
         """
@@ -42,7 +39,6 @@ class Config:
         self.paths = paths
 
         self.read()
-
 
     def __getitem__(self, key):
 
@@ -57,7 +53,6 @@ class Config:
         """
 
         return self.config.get(key)
-
 
     def read(self):
 
@@ -74,7 +69,6 @@ class Config:
         # SQLAlchemy session maker.
         self.Session = self.build_sessionmaker()
 
-
     def build_tokens(self):
 
         """
@@ -87,7 +81,6 @@ class Config:
 
         return set(tokens)
 
-
     def build_engine(self):
 
         """
@@ -98,7 +91,6 @@ class Config:
 
         return create_engine(self['database_uri'])
 
-
     def build_sessionmaker(self):
 
         """
@@ -108,7 +100,6 @@ class Config:
         """
 
         return sessionmaker(bind=self.build_engine())
-
 
     @contextmanager
     def get_session(self):
@@ -132,7 +123,6 @@ class Config:
         finally:
             session.close()
 
-
     def write_tmp(self):
 
         """
@@ -141,7 +131,6 @@ class Config:
 
         with open(self.TMP_YAML, 'w') as fh:
             fh.write(yaml.dump(self.config))
-
 
     def clear_tmp(self):
 
