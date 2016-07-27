@@ -3,9 +3,9 @@
 import scandir
 import os
 
-from lint import config
-from lint.volume import Volume
+from lint.singletons import config
 from lint.utils import grouper
+from lint.volume import Volume
 
 
 # TODO: Use manifest.

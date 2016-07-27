@@ -29,13 +29,15 @@ class Config:
         # Default paths.
         paths = [
             os.path.join(os.path.dirname(__file__), 'lint.yml'),
-            '~/lint.yml',
-            cls.TMP_YAML,
+            '~/.lint.yml',
         ]
 
-        # Patch in the testing config.
+        # Base testing config.
         if os.environ.get('LINT_ENV') == 'test':
-            paths.append('~/lint.test.yml')
+            paths.append('~/.lint.test.yml')
+
+        # Per-test overrides.
+        paths.append(cls.TMP_YAML)
 
         return cls(paths)
 

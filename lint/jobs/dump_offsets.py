@@ -4,7 +4,7 @@ import math
 
 from mpi4py import MPI
 
-from lint import config
+from lint.singletons import config
 from lint.utils import mem_pct, enum
 from lint.offset_cache import OffsetCache
 from lint.corpus import Corpus

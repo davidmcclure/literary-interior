@@ -19,7 +19,7 @@ def init_testing_db():
 
     engine = _config.build_sqla_engine()
 
-    # Base.metadata.drop_all(engine)
+    Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
 
@@ -29,6 +29,8 @@ def db():
     """
     Reset the testing database.
     """
+
+    # TODO: Fix for SQLite?
 
     session.begin_nested()
 
