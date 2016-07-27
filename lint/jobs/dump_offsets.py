@@ -11,6 +11,9 @@ from lint.corpus import Corpus
 from lint.volume import Volume
 
 
+# TODO: Use manifest + scatter/gather.
+
+
 Tags = enum('READY', 'WORK', 'RESULT', 'EXIT')
 
 

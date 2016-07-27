@@ -4,7 +4,9 @@ corpus_dir: /path/to/corpus
 
 result_dir: /path/to/result
 
-database_uri: sqlite:////path/to/db
+database:
+  drivername: sqlite
+  database: /path/to/file
 
 group_size: 1000
 

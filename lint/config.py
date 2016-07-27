@@ -5,9 +5,14 @@ import anyconfig
 import yaml
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.engine.url import URL
+
 from wordfreq import top_n_list
 from contextlib import contextmanager
+
+
+# TODO: Use singletons module, scoped session.
 
 
 class Config:
@@ -21,11 +26,18 @@ class Config:
         Get a config instance with the default files.
         """
 
-        return cls([
+        # Default paths.
+        paths = [
             os.path.join(os.path.dirname(__file__), 'lint.yml'),
-            '~/.lint.yml',
+            '~/lint.yml',
             cls.TMP_YAML,
-        ])
+        ]
+
+        # Patch in the testing config.
+        if os.environ.get('LINT_ENV') == 'test':
+            paths.append('~/lint.test.yml')
+
+        return cls(paths)
 
     def __init__(self, paths):
 
@@ -36,9 +48,7 @@ class Config:
             paths (list): YAML paths, from most to least specific.
         """
 
-        self.paths = paths
-
-        self.read()
+        self.config = anyconfig.load(paths, ignore_missing=True)
 
     def __getitem__(self, key):
 
@@ -54,20 +64,47 @@ class Config:
 
         return self.config.get(key)
 
-    def read(self):
+    def build_sqla_url(self):
 
         """
-        Load the configuration files, set globals.
+        Build a SQLAlchemy connection string.
+
+        Returns: Engine
         """
 
-        # Parse the configuration.
-        self.config = anyconfig.load(self.paths, ignore_missing=True)
+        return URL(**self['database'])
 
-        # Canonical set of tokens.
-        self.tokens = self.build_tokens()
+    def build_sqla_engine(self):
 
-        # SQLAlchemy session maker.
-        self.Session = self.build_sessionmaker()
+        """
+        Build a SQLAlchemy engine.
+
+        Returns: Engine
+        """
+
+        url = self.build_sqla_url()
+
+        return create_engine(url)
+
+    def build_sqla_sessionmaker(self):
+
+        """
+        Build a SQLAlchemy session class.
+
+        Returns: Session
+        """
+
+        return sessionmaker(bind=self.build_sqla_engine())
+
+    def build_sqla_session(self):
+
+        """
+        Build a scoped session manager.
+
+        Returns: Session
+        """
+
+        return scoped_session(self.build_sqla_sessionmaker())
 
     def build_tokens(self):
 
@@ -80,48 +117,6 @@ class Config:
         tokens = top_n_list('en', self['token_depth'], ascii_only=True)
 
         return set(tokens)
-
-    def build_engine(self):
-
-        """
-        Build a SQLAlchemy engine.
-
-        Returns: Engine
-        """
-
-        return create_engine(self['database_uri'])
-
-    def build_sessionmaker(self):
-
-        """
-        Build a SQLAlchemy session class.
-
-        Returns: Session
-        """
-
-        return sessionmaker(bind=self.build_engine())
-
-    @contextmanager
-    def get_session(self):
-
-        """
-        Provide a transactional scope around a query.
-
-        Yields: Session
-        """
-
-        session = self.Session()
-
-        try:
-            yield session
-            session.commit()
-
-        except:
-            session.rollback()
-            raise
-
-        finally:
-            session.close()
 
     def write_tmp(self):
 

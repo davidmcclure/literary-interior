@@ -8,11 +8,11 @@ from sqlalchemy.sql import text
 from scandir import scandir
 from clint.textui import progress
 
-from lint.models import BaseModel
-from lint import config
+from lint.singletons import config, session
+from lint.models import Base
 
 
-class Offset(BaseModel):
+class Offset(Base):
 
 
     __tablename__ = 'offset'
@@ -39,8 +39,6 @@ class Offset(BaseModel):
         Args:
             cache (OffsetCache)
         """
-
-        session = config.Session()
 
         # SQLite "upsert."
         query = text("""
@@ -88,6 +86,8 @@ class Offset(BaseModel):
         Unpickle the offset caches and merge the counts.
         """
 
+        # TODO: Merge all in memory, flush once.
+
         paths = [
             d.path
             for d in scandir(config['result_dir'])
@@ -112,16 +112,14 @@ class Offset(BaseModel):
         Returns: int
         """
 
-        with config.get_session() as session:
-
-            res = (
-                session
-                .query(cls.count)
-                .filter(
-                    cls.token==token,
-                    cls.year==year,
-                    cls.offset==offset,
-                )
+        res = (
+            session
+            .query(cls.count)
+            .filter(
+                cls.token==token,
+                cls.year==year,
+                cls.offset==offset,
             )
+        )
 
-            return res.scalar() or 0
+        return res.scalar() or 0

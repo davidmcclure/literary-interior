@@ -7,8 +7,9 @@ sqlalchemy
 wordfreq
 scandir
 pytest
+pytest-env
 invoke
 mpi4py
-psutil
 clint
 click
+psutil

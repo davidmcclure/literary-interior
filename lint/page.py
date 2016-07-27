@@ -4,7 +4,7 @@ import re
 
 from collections import Counter
 
-from lint import config
+from lint.singletons import tokens
 
 
 class Page:
@@ -52,7 +52,7 @@ class Page:
                 continue
 
             # Apply token whitelist.
-            if token not in config.tokens:
+            if token not in tokens:
                 continue
 
             counts[token] += sum(pc.values())

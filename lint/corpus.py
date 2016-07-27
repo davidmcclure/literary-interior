@@ -8,6 +8,9 @@ from lint.volume import Volume
 from lint.utils import grouper
 
 
+# TODO: Use manifest.
+
+
 class Corpus:
 
     @classmethod
