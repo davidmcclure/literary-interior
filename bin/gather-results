@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 
 
-import click
-
 from lint.singletons import config
 from lint.models import Offset
 
 
-@click.command()
 def gather_results():
 
     """

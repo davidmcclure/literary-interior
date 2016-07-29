@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 
 
-import click
-
 from lint.jobs import DumpOffsets
 
 
-@click.command()
 def dump_offsets():
 
     """
