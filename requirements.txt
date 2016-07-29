@@ -13,3 +13,4 @@ mpi4py
 clint
 click
 psutil
+numpy
