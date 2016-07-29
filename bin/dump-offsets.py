@@ -9,6 +9,7 @@ from lint.singletons import config
 from lint.volume import Volume
 from lint.offset_cache import OffsetCache
 from lint.manifest import Manifest
+from lint.utils import mem_pct
 
 
 def dump_offsets():
@@ -62,7 +63,7 @@ def dump_offsets():
             print(e)
 
         if i%1000 == 0:
-            print(rank, i)
+            print(rank, i, mem_pct())
 
     # Pickle to disk.
     cache.flush(config['result_dir'])

@@ -74,16 +74,3 @@ def mem_pct():
     mem = psutil.virtual_memory()
 
     return mem.percent
-
-
-def enum(*seq, **named):
-
-    """
-    Make an enumerated type.
-
-    Returns: type
-    """
-
-    enums = dict(zip(seq, range(len(seq))), **named)
-
-    return type('Enum', (), enums)
