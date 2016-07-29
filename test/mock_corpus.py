@@ -35,5 +35,11 @@ class MockCorpus(TempDir):
 
         data = compress(json.dumps(vol.data).encode('utf8'))
 
+        # Write the volume JSON.
         with open_makedirs(path, 'wb') as fh:
             fh.write(data)
+
+        # Update the manifest.
+        with open_makedirs(self.manifest_path, 'a') as fh:
+            relpath = os.path.relpath(path, self.features_path)
+            print(relpath, file=fh)
