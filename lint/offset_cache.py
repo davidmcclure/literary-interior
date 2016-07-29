@@ -46,16 +46,6 @@ class OffsetCache(dict):
         for token, offsets in token_offsets.items():
             self[year][token] += offsets
 
-    def flatten(self):
-
-        """
-        Flatten the cache into tuples.
-
-        Yields: tuple (year, token, offset, count)
-        """
-
-        return flatten_dict(self)
-
     def flush(self, data_dir):
 
         """

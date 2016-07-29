@@ -11,6 +11,7 @@ from clint.textui import progress
 from lint.singletons import config, session
 from lint.models import Base
 from lint.offset_cache import OffsetCache
+from lint.utils import flatten_dict
 
 
 class Offset(Base):
@@ -69,7 +70,7 @@ class Offset(Base):
 
         """.format(table=cls.__tablename__))
 
-        for year, token, offset, count in cache.flatten():
+        for year, token, offset, count in flatten_dict(cache):
 
             session.execute(query, dict(
                 token=token,
