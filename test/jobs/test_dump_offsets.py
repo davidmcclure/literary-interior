@@ -12,7 +12,7 @@ from test.helpers import make_page, make_vol
 pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
-def test_dump_offsets(mock_corpus):
+def test_dump_offsets(mock_corpus, mock_results):
 
     """
     DumpOffsets should index {token -> year -> offset -> count} data.
@@ -42,7 +42,7 @@ def test_dump_offsets(mock_corpus):
 
     call(['mpirun', 'bin/dump-offsets'])
 
-    Offset.gather_results()
+    Offset.gather_results(mock_results.path)
 
     o1 = round(( 50/300)*100)
     o2 = round((150/300)*100)
@@ -61,7 +61,7 @@ def test_dump_offsets(mock_corpus):
     assert Offset.token_year_offset_count('e', 1930, o3) == 9
 
 
-def test_ignore_non_english_volumes(mock_corpus):
+def test_ignore_non_english_volumes(mock_corpus, mock_results):
 
     """
     Non-English volumes should be skipped.
@@ -84,7 +84,7 @@ def test_ignore_non_english_volumes(mock_corpus):
 
     call(['mpirun', 'bin/dump-offsets'])
 
-    Offset.gather_results()
+    Offset.gather_results(mock_results.path)
 
     o1 = round(( 50/300)*100)
     o2 = round((150/300)*100)

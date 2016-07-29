@@ -30,7 +30,8 @@ def db():
     Reset the testing database.
     """
 
-    # TODO: Fix for SQLite?
+    # TODO: Do this in mpi?
+    init_testing_db()
 
     session.begin_nested()
 

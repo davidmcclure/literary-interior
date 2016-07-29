@@ -30,7 +30,7 @@ def test_gather_results(mock_results):
     mock_results.add_cache(c2)
     mock_results.add_cache(c3)
 
-    Offset.gather_results()
+    Offset.gather_results(mock_results.path)
 
     assert Offset.token_year_offset_count('token1', 1901, 1) == 1
     assert Offset.token_year_offset_count('token2', 1902, 1) == 2+4

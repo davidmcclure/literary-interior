@@ -36,7 +36,7 @@ class Config:
         if os.environ.get('LINT_ENV') == 'test':
             paths.append('~/.lint.test.yml')
 
-        # Per-test overrides.
+        # MPI overrides.
         paths.append(cls.TMP_YAML)
 
         return cls(paths)

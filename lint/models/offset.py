@@ -77,20 +77,21 @@ class Offset(Base):
                 count=count,
             ))
 
-        session.commit()
-
     @classmethod
-    def gather_results(cls):
+    def gather_results(cls, result_dir):
 
         """
         Unpickle the offset caches and merge the counts.
+
+        Args:
+            result_dir (str)
         """
 
         # TODO: Merge all in memory, flush once.
 
         paths = [
             d.path
-            for d in scandir(config['result_dir'])
+            for d in scandir(result_dir)
             if d.is_file()
         ]
 

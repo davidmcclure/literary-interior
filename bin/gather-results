@@ -4,6 +4,7 @@
 import click
 
 from lint.models import Offset
+from lint.singletons import config
 
 
 @click.command()
@@ -13,7 +14,7 @@ def gather_results():
     Insert the offsets into the database.
     """
 
-    Offset.gather_results()
+    Offset.gather_results(config['result_dir'])
 
 
 if __name__ == '__main__':
