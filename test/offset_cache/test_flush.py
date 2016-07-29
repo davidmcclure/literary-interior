@@ -20,17 +20,3 @@ def test_write_pickle(mock_results):
         c2 = pickle.load(fh)
 
     assert c2[1900]['token'][1] == 1
-
-
-def test_clear_data(mock_results):
-
-    """
-    After a flush, the cache should be cleared.
-    """
-
-    c = OffsetCache()
-    c[1900]['token'][1] = 1
-
-    path = c.flush(mock_results.path)
-
-    assert len(c.data) == 0

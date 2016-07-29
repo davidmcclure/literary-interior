@@ -12,9 +12,6 @@ from wordfreq import top_n_list
 from contextlib import contextmanager
 
 
-# TODO: Use singletons module, scoped session.
-
-
 class Config:
 
     TMP_YAML = '/tmp/.lint.yml'

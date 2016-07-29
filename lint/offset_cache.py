@@ -56,22 +56,20 @@ class OffsetCache:
 
         return flatten_dict(self.data)
 
-    def flush(self, root):
+    def flush(self, data_dir):
 
         """
         Pickle the cache to a directory.
 
         Args:
-            root (str)
+            data_dir (str)
 
         Returns: str
         """
 
-        path = os.path.join(root, str(uuid.uuid4()))
+        path = os.path.join(data_dir, str(uuid.uuid4()))
 
         with open(path, 'wb') as fh:
             pickle.dump(self, fh)
-
-        self.data.clear()
 
         return path
