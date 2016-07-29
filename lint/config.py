@@ -4,7 +4,7 @@ import os
 import anyconfig
 import yaml
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.engine.url import URL
 
@@ -86,7 +86,20 @@ class Config:
 
         url = self.build_sqla_url()
 
-        return create_engine(url)
+        engine = create_engine(url)
+
+        # Fix transaction bugs in pysqlite.
+        # http://docs.sqlalchemy.org/en/rel_1_0/dialects/sqlite.html#pysqlite-serializable
+
+        @event.listens_for(engine, 'connect')
+        def connect(conn, record):
+            conn.isolation_level = None
+
+        @event.listens_for(engine, 'begin')
+        def begin(conn):
+            conn.execute('BEGIN')
+
+        return engine
 
     def build_sqla_sessionmaker(self):
 
