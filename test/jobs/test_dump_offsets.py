@@ -40,7 +40,7 @@ def test_dump_offsets(mock_corpus, mock_results):
     mock_corpus.add_vol(v2)
     mock_corpus.add_vol(v3)
 
-    call(['mpirun', 'bin/dump-offsets'])
+    call(['mpirun', 'bin/dump-offsets.py'])
 
     Offset.gather_results(mock_results.path)
 
@@ -82,7 +82,7 @@ def test_ignore_non_english_volumes(mock_corpus, mock_results):
     mock_corpus.add_vol(v1)
     mock_corpus.add_vol(v2)
 
-    call(['mpirun', 'bin/dump-offsets'])
+    call(['mpirun', 'bin/dump-offsets.py'])
 
     Offset.gather_results(mock_results.path)
 

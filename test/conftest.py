@@ -52,6 +52,23 @@ def config():
 
 
 @pytest.yield_fixture
+def mock_corpus(config):
+
+    """
+    Yields: MockCorpus
+    """
+
+    corpus = MockCorpus()
+
+    config.config['htrc']['features'] = corpus.features_path
+    config.config['htrc']['manifest'] = corpus.manifest_path
+
+    yield corpus
+
+    corpus.teardown()
+
+
+@pytest.yield_fixture
 def mock_results(config):
 
     """
@@ -65,22 +82,6 @@ def mock_results(config):
     yield results
 
     results.teardown()
-
-
-@pytest.yield_fixture
-def mock_corpus(config):
-
-    """
-    Yields: MockCorpus
-    """
-
-    corpus = MockCorpus()
-
-    config.config['htrc']['features'] = corpus.features_path
-
-    yield corpus
-
-    corpus.teardown()
 
 
 @pytest.yield_fixture
