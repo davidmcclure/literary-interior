@@ -99,6 +99,8 @@ class Offset(Base):
             with open(path, 'rb') as fh:
                 cls.increment(pickle.load(fh))
 
+        session.commit()
+
     @classmethod
     def token_year_offset_count(cls, token, year, offset):
 

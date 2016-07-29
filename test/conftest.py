@@ -23,15 +23,12 @@ def init_testing_db():
     Base.metadata.create_all(engine)
 
 
-@pytest.yield_fixture()
+@pytest.yield_fixture
 def db():
 
     """
     Reset the testing database.
     """
-
-    # TODO: Do this in mpi?
-    init_testing_db()
 
     session.begin_nested()
 
@@ -40,7 +37,7 @@ def db():
     session.remove()
 
 
-@pytest.yield_fixture()
+@pytest.yield_fixture
 def config():
 
     """
@@ -86,7 +83,7 @@ def mock_corpus(config):
     corpus.teardown()
 
 
-@pytest.yield_fixture()
+@pytest.yield_fixture
 def mpi(mock_corpus, mock_results, config):
 
     """

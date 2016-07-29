@@ -2,17 +2,17 @@
 
 from invoke import task
 
-from lint.models import BaseModel
-from lint import config
+from lint.singletons import config
+from lint.models import Base
 
 
 @task
-def init_db():
+def init_db(ctx):
 
     """
     Create database tables.
     """
 
-    engine = config.build_engine()
+    engine = config.build_sqla_engine()
 
-    BaseModel.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
