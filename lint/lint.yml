@@ -1,6 +1,8 @@
 ---
 
-corpus_dir: /path/to/corpus
+htrc:
+  features: /path/to/features
+  manifest: /path/to/manifest
 
 result_dir: /path/to/result
 

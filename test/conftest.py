@@ -76,7 +76,7 @@ def mock_corpus(config):
 
     corpus = MockCorpus()
 
-    config.config['corpus_dir'] = corpus.path
+    config.config['htrc']['features'] = corpus.path
 
     yield corpus
 

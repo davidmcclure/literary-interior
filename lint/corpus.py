@@ -22,7 +22,7 @@ class Corpus:
         Returns: cls
         """
 
-        return cls(config['corpus_dir'])
+        return cls(config['htrc']['features'])
 
     def __init__(self, path):
 
