@@ -2,6 +2,7 @@
 
 
 import json
+import math
 
 from mpi4py import MPI
 
@@ -56,8 +57,11 @@ def dump_offsets():
             # Get the token offset counts.
             offsets = vol.token_offsets(config['offset_resolution'])
 
-            # Merge counts into the cache.
-            cache.increment(vol.year, offsets)
+            # Round to nearest decade.
+            year = math.ceil(vol.year/10) * 10
+
+            # Merge counts into cache.
+            cache.increment(year, offsets)
 
         except Exception as e:
             print(e)
