@@ -10,6 +10,7 @@ from clint.textui import progress
 
 from lint.singletons import config, session
 from lint.models import Base
+from lint.offset_cache import OffsetCache
 
 
 class Offset(Base):
@@ -87,17 +88,22 @@ class Offset(Base):
             result_dir (str)
         """
 
-        # TODO: Merge all in memory, flush once.
+        offsets = OffsetCache()
 
+        # Gather pickled offset paths.
         paths = [
             d.path
             for d in scandir(result_dir)
             if d.is_file()
         ]
 
-        for path in progress.bar(paths):
+        # Merge into a single cache.
+        for path in paths:
             with open(path, 'rb') as fh:
-                cls.increment(pickle.load(fh))
+                offsets += pickle.load(fh)
+
+        # Flush to disk.
+        cls.increment(offsets)
 
         session.commit()
 

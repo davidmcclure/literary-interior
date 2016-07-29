@@ -22,6 +22,17 @@ class OffsetCache(dict):
 
         return self[key]
 
+    def __iadd__(self, other):
+
+        """
+        Merge in another offset cache.
+        """
+
+        for year, token, offset, count in flatten_dict(other):
+            self[year][token][offset] += count
+
+        return self
+
     def increment(self, year, token_offsets):
 
         """
