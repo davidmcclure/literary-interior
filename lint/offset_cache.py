@@ -10,28 +10,17 @@ from functools import partial
 from lint.utils import flatten_dict
 
 
-class OffsetCache:
+class OffsetCache(dict):
 
-    def __init__(self):
+    def __missing__(self, key):
 
         """
         Initialize the {year -> token -> offset -> count} map.
         """
 
-        self.data = defaultdict(partial(defaultdict, Counter))
+        self[key] = defaultdict(Counter)
 
-    def __getitem__(self, year):
-
-        """
-        Alias indexing to the data dict.
-
-        Args:
-            year (int)
-
-        Returns: dict
-        """
-
-        return self.data[year]
+        return self[key]
 
     def increment(self, year, token_offsets):
 
@@ -44,7 +33,7 @@ class OffsetCache:
         """
 
         for token, offsets in token_offsets.items():
-            self.data[year][token] += offsets
+            self[year][token] += offsets
 
     def flatten(self):
 
@@ -54,7 +43,7 @@ class OffsetCache:
         Yields: tuple (year, token, offset, count)
         """
 
-        return flatten_dict(self.data)
+        return flatten_dict(self)
 
     def flush(self, data_dir):
 
