@@ -1,8 +1,10 @@
 
 
 import psutil
+import os
 
 from itertools import islice, chain
+from contextlib import contextmanager
 
 
 def grouper(iterable, size):
@@ -46,17 +48,19 @@ def flatten_dict(d):
             yield (k, v)
 
 
-def enum(*seq, **named):
+@contextmanager
+def open_makedirs(fpath, *args, **kwargs):
 
     """
-    Make an enumerated type.
-
-    Returns: type
+    Create the directory for a file, open it.
     """
 
-    enums = dict(zip(seq, range(len(seq))), **named)
+    path = os.path.dirname(fpath)
 
-    return type('Enum', (), enums)
+    os.makedirs(path, exist_ok=True)
+
+    with open(fpath, *args, **kwargs) as fh:
+        yield fh
 
 
 def mem_pct():
@@ -70,3 +74,16 @@ def mem_pct():
     mem = psutil.virtual_memory()
 
     return mem.percent
+
+
+def enum(*seq, **named):
+
+    """
+    Make an enumerated type.
+
+    Returns: type
+    """
+
+    enums = dict(zip(seq, range(len(seq))), **named)
+
+    return type('Enum', (), enums)

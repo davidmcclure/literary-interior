@@ -23,20 +23,20 @@ class Manifest:
             config['htrc']['manifest'],
         )
 
-    def __init__(self, features_dir, manifest_path):
+    def __init__(self, features_path, manifest_path):
 
         """
         Read and normalize the paths.
 
         Args:
-            features_dir (str)
+            features_path (str)
             manifest_path (str)
         """
 
         with open(manifest_path, 'r') as fh:
 
             self.paths = [
-                os.path.join(features_dir, path)
+                os.path.join(features_path, path)
                 for path in fh.read().splitlines()
             ]
 
