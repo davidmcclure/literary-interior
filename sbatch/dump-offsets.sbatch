@@ -13,13 +13,13 @@
 #################
 #time you think you need; default is one hour
 #in minutes in this case, hh:mm:ss
-#SBATCH --time=00:10:00
+#SBATCH --time=24:00:00
 #################
 #quality of service; think of it as job priority
 #SBATCH --qos=normal
 #################
 #number of nodes you are requesting
-#SBATCH --nodes=1
+#SBATCH --nodes=32
 #################
 #memory per node; default is 4000 MB per CPU
 #SBATCH --mem=64000
