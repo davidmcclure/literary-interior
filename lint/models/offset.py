@@ -10,8 +10,8 @@ from clint.textui import progress
 
 from lint.singletons import config, session
 from lint.models import Base
+from lint.utils import flatten_dict, mem_pct
 from lint.offset_cache import OffsetCache
-from lint.utils import flatten_dict
 
 
 class Offset(Base):
@@ -88,10 +88,13 @@ class Offset(Base):
             if d.is_file()
         ]
 
-        # Merge into a single cache.
-        for path in paths:
+        # Walk paths.
+        for i, path in enumerate(paths):
             with open(path, 'rb') as fh:
+
+                # Merge offsets.
                 offsets += pickle.load(fh)
+                print(i, mem_pct())
 
         # Write to disk.
         cls.flush(offsets)
