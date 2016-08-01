@@ -33,19 +33,18 @@ class Offset(Base):
 
 
     @classmethod
-    def increment(cls, cache):
+    def flush(cls, cache):
 
         """
-        Given a count cache, increment the counters in the database.
+        Flush an offset cache to disk.
 
         Args:
             cache (OffsetCache)
         """
 
-        # SQLite "upsert."
         query = text("""
 
-            INSERT OR REPLACE INTO {table!s} (
+            INSERT INTO {table!s} (
                 token,
                 year,
                 offset,
@@ -56,16 +55,7 @@ class Offset(Base):
                 :token,
                 :year,
                 :offset,
-                :count + COALESCE(
-                    (
-                        SELECT count FROM {table!s} WHERE (
-                            token = :token AND
-                            year = :year AND
-                            offset = :offset
-                        )
-                    ),
-                    0
-                )
+                :count
             )
 
         """.format(table=cls.__tablename__))
@@ -103,8 +93,8 @@ class Offset(Base):
             with open(path, 'rb') as fh:
                 offsets += pickle.load(fh)
 
-        # Flush to disk.
-        cls.increment(offsets)
+        # Write to disk.
+        cls.flush(offsets)
 
         session.commit()
 
