@@ -35,5 +35,4 @@ module load python/3.3.2
 
 export PYTHONPATH=/home/dclure/literary-interior
 
-mpirun -x PYTHONPATH $PYTHONPATH/env/bin/python \
-    $PYTHONPATH/bin/gather-results.py
+$PYTHONPATH/env/bin/python $PYTHONPATH/bin/gather-results.py

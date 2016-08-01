@@ -1,5 +1,0 @@
-#!/bin/sh
-
-module load python/3.3.2
-
-. env/bin/activate
