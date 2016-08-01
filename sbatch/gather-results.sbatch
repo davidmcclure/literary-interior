@@ -30,7 +30,6 @@
 #SBATCH --ntasks-per-node=16
 #################
 
-module load openmpi/1.10.2/gcc
 module load python/3.3.2
 
 export PYTHONPATH=/home/dclure/literary-interior
