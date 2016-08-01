@@ -96,3 +96,7 @@ def mpi(mock_corpus, mock_results, config):
     yield
 
     config.clear_tmp()
+
+    session.remove()
+
+    init_testing_db()
