@@ -10,7 +10,7 @@ from clint.textui import progress
 
 from lint.singletons import config, session
 from lint.models import Base
-from lint.utils import flatten_dict, mem_pct
+from lint.utils import flatten_dict, mem_pct, grouper
 from lint.offset_cache import OffsetCache
 
 
@@ -42,32 +42,19 @@ class Offset(Base):
             cache (OffsetCache)
         """
 
-        query = text("""
+        for group in grouper(flatten_dict(cache), 1000):
 
-            INSERT INTO {table!s} (
-                token,
-                year,
-                offset,
-                count
-            )
+            mappings = [
+                dict(
+                    token=token,
+                    year=year,
+                    offset=offset,
+                    count=count,
+                )
+                for year, token, offset, count in group
+            ]
 
-            VALUES (
-                :token,
-                :year,
-                :offset,
-                :count
-            )
-
-        """.format(table=cls.__tablename__))
-
-        for year, token, offset, count in flatten_dict(cache):
-
-            session.execute(query, dict(
-                token=token,
-                year=year,
-                offset=offset,
-                count=count,
-            ))
+            session.bulk_insert_mappings(cls, mappings)
 
     @classmethod
     def gather_results(cls, result_dir):
