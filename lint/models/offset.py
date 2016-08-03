@@ -56,6 +56,8 @@ class Offset(Base):
 
             session.bulk_insert_mappings(cls, mappings)
 
+        session.commit()
+
     @classmethod
     def gather_results(cls, result_dir):
 
@@ -83,10 +85,7 @@ class Offset(Base):
                 offsets += pickle.load(fh)
                 print(i, mem_pct())
 
-        # Write to disk.
         cls.flush(offsets)
-
-        session.commit()
 
     @classmethod
     def token_year_offset_count(cls, token, year, offset):
