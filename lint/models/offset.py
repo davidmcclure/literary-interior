@@ -104,10 +104,10 @@ class Offset(Base):
         res = (
             session
             .query(cls.count)
-            .filter(
-                cls.token==token,
-                cls.year==year,
-                cls.offset==offset,
+            .filter_by(
+                token=token,
+                year=year,
+                offset=offset,
             )
         )
 
