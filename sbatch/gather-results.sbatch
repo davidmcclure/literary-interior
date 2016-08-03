@@ -22,12 +22,12 @@
 #SBATCH --nodes=1
 #################
 #memory per node; default is 4000 MB per CPU
-#SBATCH --mem=16000
+#SBATCH --mem=64000
 #you could use --mem-per-cpu; they mean what we are calling cores
 #################
 #tasks to run per node; a "task" is usually mapped to a MPI processes.
 # for local parallelism (OpenMP or threads), use "--ntasks-per-node=1 --cpus-per-task=16" instead
-#SBATCH --ntasks-per-node=4
+#SBATCH --ntasks-per-node=16
 #################
 
 module load python/3.3.2
