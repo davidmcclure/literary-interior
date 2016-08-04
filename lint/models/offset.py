@@ -2,11 +2,11 @@
 
 import pickle
 
-from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
-from sqlalchemy.sql import text
-
+from collections import OrderedDict
 from scandir import scandir
-from clint.textui import progress
+
+from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
+from sqlalchemy.sql import text, func
 
 from lint.singletons import config, session
 from lint.models import Base
@@ -112,3 +112,33 @@ class Offset(Base):
         )
 
         return res.scalar() or 0
+
+    @classmethod
+    def token_series(cls, token, year1=None, year2=None):
+
+        """
+        Get an offset -> count series for a word over a range of years.
+
+        Args:
+            token (str)
+            year1 (int)
+            year1 (int)
+
+        Returns: OrderedDict
+        """
+
+        query = (
+            session
+            .query(cls.offset, func.sum(cls.count))
+            .filter(cls.token==token)
+            .group_by(cls.offset)
+            .order_by(cls.offset)
+        )
+
+        if year1:
+            query = query.filter(cls.year >= year1)
+
+        if year2:
+            query = query.filter(cls.year <= year2)
+
+        return OrderedDict(query.all())
