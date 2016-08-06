@@ -15,4 +15,5 @@ click
 psutil
 numpy
 jupyter
+matplotlib
 scipy
