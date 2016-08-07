@@ -170,3 +170,31 @@ class Offset(Base):
             query = query.filter(cls.year <= year2)
 
         return OrderedDict(query.all())
+
+    @classmethod
+    def token_counts(cls, year1=None, year2=None):
+
+        """
+        Get total token counts for all words over a range of years.
+
+        Args:
+            year1 (int)
+            year1 (int)
+
+        Returns: OrderedDict
+        """
+
+        query = (
+            session
+            .query(cls.token, func.sum(cls.count).label('count'))
+            .group_by(cls.token)
+            .order_by('count DESC')
+        )
+
+        if year1:
+            query = query.filter(cls.year >= year1)
+
+        if year2:
+            query = query.filter(cls.year <= year2)
+
+        return OrderedDict(query.all())
