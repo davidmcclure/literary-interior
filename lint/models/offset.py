@@ -114,6 +114,34 @@ class Offset(Base):
         return res.scalar() or 0
 
     @classmethod
+    def baseline_series(cls, year1=None, year2=None):
+
+        """
+        Get an offset -> count series for a all words over a range of years.
+
+        Args:
+            year1 (int)
+            year1 (int)
+
+        Returns: OrderedDict
+        """
+
+        query = (
+            session
+            .query(cls.offset, func.sum(cls.count))
+            .group_by(cls.offset)
+            .order_by(cls.offset)
+        )
+
+        if year1:
+            query = query.filter(cls.year >= year1)
+
+        if year2:
+            query = query.filter(cls.year <= year2)
+
+        return OrderedDict(query.all())
+
+    @classmethod
     def token_series(cls, token, year1=None, year2=None):
 
         """
