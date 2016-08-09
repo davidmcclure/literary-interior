@@ -17,3 +17,4 @@ numpy
 jupyter
 matplotlib
 scipy
+sklearn
