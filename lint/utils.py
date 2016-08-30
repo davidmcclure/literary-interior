@@ -2,6 +2,7 @@
 
 import psutil
 import os
+import decimal
 
 from itertools import islice, chain
 from contextlib import contextmanager
@@ -74,3 +75,24 @@ def mem_pct():
     mem = psutil.virtual_memory()
 
     return mem.percent
+
+
+def round_to_decade(year):
+
+    """
+    Round a year to the nearest decade.
+
+    Args:
+        year (int)
+
+    Returns: int
+    """
+
+    decades = decimal.Decimal(year/10)
+
+    rounded = decades.quantize(
+        decimal.Decimal(1),
+        rounding=decimal.ROUND_HALF_UP,
+    )
+
+    return int(rounded) * 10
