@@ -12,15 +12,15 @@ from lint.utils import flatten_dict
 
 class OffsetCache(dict):
 
-    def __missing__(self, key):
+    def __missing__(self, year):
 
         """
         Initialize the {year -> token -> offset -> count} map.
         """
 
-        self[key] = defaultdict(Counter)
+        self[year] = defaultdict(Counter)
 
-        return self[key]
+        return self[year]
 
     def __iadd__(self, other):
 
