@@ -10,7 +10,7 @@ from lint.singletons import config
 from lint.volume import Volume
 from lint.offset_cache import OffsetCache
 from lint.manifest import Manifest
-from lint.utils import mem_pct
+from lint.utils import mem_pct, round_to_decade
 
 
 def dump_offsets():
@@ -58,7 +58,7 @@ def dump_offsets():
             offsets = vol.token_offsets(config['offset_resolution'])
 
             # Round to nearest decade.
-            year = math.ceil(vol.year/10) * 10
+            year = round_to_decade(vol.year)
 
             # Merge counts into cache.
             cache.increment(year, offsets)

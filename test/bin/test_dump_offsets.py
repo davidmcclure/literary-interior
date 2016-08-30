@@ -103,19 +103,22 @@ def test_round_up_years_to_decade(mock_corpus, mock_results):
     Volume years should be rounded up to the nearest decade.
     """
 
-    v1 = make_vol(year=1901, pages=[
+    # <- 1900
+    v1 = make_vol(year=1904, pages=[
         make_page(token_count=100, counts={'a': { 'POS': 2 }}),
         make_page(token_count=100, counts={'b': { 'POS': 4 }}),
         make_page(token_count=100, counts={'c': { 'POS': 8 }}),
     ])
 
-    v2 = make_vol(year=1909, pages=[
+    # -> 1910
+    v2 = make_vol(year=1905, pages=[
         make_page(token_count=100, counts={'a': { 'POS': 16 }}),
         make_page(token_count=100, counts={'b': { 'POS': 32 }}),
         make_page(token_count=100, counts={'c': { 'POS': 64 }}),
     ])
 
-    v3 = make_vol(year=1911, pages=[
+    # -> 1910
+    v3 = make_vol(year=1906, pages=[
         make_page(token_count=100, counts={'a': { 'POS': 128 }}),
         make_page(token_count=100, counts={'b': { 'POS': 256 }}),
         make_page(token_count=100, counts={'c': { 'POS': 512 }}),
@@ -133,10 +136,10 @@ def test_round_up_years_to_decade(mock_corpus, mock_results):
     o3 = round((250/300)*100)
 
     # Snap to decade.
-    assert Offset.token_year_offset_count('a', 1910, o1) == 2+16
-    assert Offset.token_year_offset_count('b', 1910, o2) == 4+32
-    assert Offset.token_year_offset_count('c', 1910, o3) == 8+64
+    assert Offset.token_year_offset_count('a', 1900, o1) == 2
+    assert Offset.token_year_offset_count('b', 1900, o2) == 4
+    assert Offset.token_year_offset_count('c', 1900, o3) == 8
 
-    assert Offset.token_year_offset_count('a', 1920, o1) == 128
-    assert Offset.token_year_offset_count('b', 1920, o2) == 256
-    assert Offset.token_year_offset_count('c', 1920, o3) == 512
+    assert Offset.token_year_offset_count('a', 1910, o1) == 16+128
+    assert Offset.token_year_offset_count('b', 1910, o2) == 32+256
+    assert Offset.token_year_offset_count('c', 1910, o3) == 64+512
