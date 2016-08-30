@@ -4,8 +4,6 @@
 import json
 import math
 
-from mpi4py import MPI
-
 from lint.singletons import config
 from lint.volume import Volume
 from lint.offset_cache import OffsetCache
@@ -18,6 +16,8 @@ def dump_offsets():
     """
     Index year -> token -> offset -> count.
     """
+
+    from mpi4py import MPI
 
     comm = MPI.COMM_WORLD
 
