@@ -26,12 +26,11 @@ def dump_offsets():
 
     # ** Scatter JSON-encoded segments.
 
+    segments = None
+
     if rank == 0:
         manifest = Manifest.from_env()
         segments = manifest.json_segments(size)
-
-    else:
-        segments = None
 
 
     segment = comm.scatter(segments, root=0)
