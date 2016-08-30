@@ -129,13 +129,13 @@ class Volume:
                 token_count
             )
 
-            tick = round(resolution * center)
+            offset = round(resolution * center)
 
             counts = page.merged_token_counts()
 
-            # Register tick -> count.
+            # Register offset -> count.
             for token, count in counts.items():
-                offsets[token][tick] += count
+                offsets[token][offset] += count
 
             # Track the cumulative count.
             seen += page.token_count
