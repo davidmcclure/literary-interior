@@ -2,8 +2,8 @@
 
 import uuid
 
-from lint.page import Page
-from lint.volume import Volume
+from lint.htrc.page import Page
+from lint.htrc.volume import Volume
 
 
 def make_page(counts={}, token_count=100):

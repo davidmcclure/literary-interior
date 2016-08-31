@@ -5,9 +5,9 @@ import json
 import math
 
 from lint.singletons import config
-from lint.volume import Volume
+from lint.htrc.volume import Volume
 from lint.offset_cache import OffsetCache
-from lint.manifest import Manifest
+from lint.htrc.manifest  import Manifest
 from lint.utils import mem_pct, round_to_decade
 
 

@@ -5,7 +5,7 @@ import bz2
 
 from collections import defaultdict, Counter
 
-from lint.page import Page
+from lint.htrc.page import Page
 
 
 class Volume:
@@ -108,7 +108,7 @@ class Volume:
 
         """
         For each token, get the offsets of each instance of the token inside
-        the text, with the offset is snapped onto an integer "tick."
+        the text, with the offset is rounded to an integer.
 
         args:
             resolution (int)

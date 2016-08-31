@@ -2,7 +2,7 @@
 
 import pytest
 
-from lint.volume import Volume
+from lint.htrc.volume import Volume
 
 from test.helpers import make_page, make_vol
 

@@ -1,6 +1,6 @@
 
 
-from lint.page import Page
+from lint.htrc.page import Page
 
 from test.helpers import make_page
 
