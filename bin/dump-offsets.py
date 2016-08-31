@@ -1,76 +1,54 @@
 #!/usr/bin/env python
 
 
-import json
-import math
-
+from lint.utils import round_to_decade
 from lint.singletons import config
+from lint.jobs.dump_offsets import DumpOffsets
 from lint.htrc.volume import Volume
-from lint.offset_cache import OffsetCache
 from lint.htrc.manifest  import Manifest
-from lint.utils import mem_pct, round_to_decade
 
 
-def dump_offsets():
+class DumpHTRCOffsets(DumpOffsets):
 
-    """
-    Index year -> token -> offset -> count.
-    """
+    def segments(self, size):
 
-    from mpi4py import MPI
+        """
+        Generate path segments.
 
-    comm = MPI.COMM_WORLD
+        Args:
+            size (int)
 
-    size = comm.Get_size()
-    rank = comm.Get_rank()
+        Returns: list
+        """
 
-    # ** Scatter JSON-encoded segments.
-
-    segments = None
-
-    if rank == 0:
         manifest = Manifest.from_env()
-        segments = manifest.json_segments(size)
 
+        return manifest.json_segments(size)
 
-    segment = comm.scatter(segments, root=0)
+    def increment(self, path):
 
-    # ** Gather offsets in segment.
+        """
+        Increment offsets from a volume.
 
-    paths = json.loads(segment)
+        Args:
+            path (str)
+        """
 
-    print(rank, len(paths))
+        vol = Volume.from_path(path)
 
-    cache = OffsetCache()
+        # Ignore non-English vols.
+        if not vol.is_english:
+            return
 
-    for i, path in enumerate(paths):
+        # Get token offset counts.
+        offsets = vol.token_offsets(config['offset_resolution'])
 
-        try:
+        # Round to nearest decade.
+        year = round_to_decade(vol.year)
 
-            vol = Volume.from_path(path)
-
-            # Ignore non-English vols.
-            if not vol.is_english:
-                continue
-
-            # Get the token offset counts.
-            offsets = vol.token_offsets(config['offset_resolution'])
-
-            # Round to nearest decade.
-            year = round_to_decade(vol.year)
-
-            # Merge counts into cache.
-            cache.increment(year, offsets)
-
-        except Exception as e:
-            print(e)
-
-        if i%1000 == 0:
-            print(rank, i, mem_pct())
-
-    # Pickle to disk.
-    cache.flush(config['result_dir'])
+        # Merge counts into cache.
+        self.cache.increment(year, offsets)
 
 
 if __name__ == '__main__':
-    dump_offsets()
+    DumpHTRCOffsets()()
