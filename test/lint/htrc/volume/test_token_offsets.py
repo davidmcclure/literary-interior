@@ -4,7 +4,7 @@ import pytest
 
 from lint.htrc.volume import Volume
 
-from test.helpers import make_page, make_vol
+from test.utils import make_page, make_vol
 
 
 @pytest.mark.parametrize('r', [

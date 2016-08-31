@@ -6,7 +6,7 @@ from subprocess import call
 
 from lint.models import Offset
 
-from test.helpers import make_page, make_vol
+from test.utils import make_page, make_vol
 
 
 pytestmark = pytest.mark.usefixtures('db', 'mpi')

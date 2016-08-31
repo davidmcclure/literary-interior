@@ -2,7 +2,7 @@
 
 from lint.htrc.page import Page
 
-from test.helpers import make_page
+from test.utils import make_page
 
 
 def test_add_pos_counts():

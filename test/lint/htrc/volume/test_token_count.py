@@ -1,6 +1,6 @@
 
 
-from test.helpers import make_page, make_vol
+from test.utils import make_page, make_vol
 
 
 def test_token_count():
