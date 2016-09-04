@@ -2,7 +2,7 @@
 
 from lint.htrc.page import Page
 
-from test.utils import make_page
+from test.utils import make_htrc_page
 
 
 def test_add_pos_counts():
@@ -12,7 +12,7 @@ def test_add_pos_counts():
     each token.
     """
 
-    p = make_page({
+    p = make_htrc_page({
         'a': {
             'POS1': 1,
             'POS2': 2,
@@ -40,7 +40,7 @@ def test_combine_casing_variants():
     The same tokens with different casing should be combined.
     """
 
-    p = make_page({
+    p = make_htrc_page({
         'word': {
             'POS': 1,
         },
@@ -60,7 +60,7 @@ def test_ignore_irregular_tokens():
     Tokens that aren't [a-zA-Z] should be skipped.
     """
 
-    p = make_page({
+    p = make_htrc_page({
 
         'word': {
             'POS': 1,

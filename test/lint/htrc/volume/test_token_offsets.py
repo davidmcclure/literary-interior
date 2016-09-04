@@ -4,7 +4,7 @@ import pytest
 
 from lint.htrc.volume import Volume
 
-from test.utils import make_page, make_vol
+from test.utils import make_htrc_page, make_htrc_vol
 
 
 @pytest.mark.parametrize('r', [
@@ -19,21 +19,21 @@ def test_map_page_center_offset_to_count(r):
     snap the offset onto a 1-N scale, and index the offset -> token count.
     """
 
-    v = make_vol(pages=[
+    v = make_htrc_vol(pages=[
 
-        make_page(token_count=100, counts={
+        make_htrc_page(token_count=100, counts={
             'a': {
                 'POS': 1,
             }
         }),
 
-        make_page(token_count=200, counts={
+        make_htrc_page(token_count=200, counts={
             'b': {
                 'POS': 2,
             }
         }),
 
-        make_page(token_count=300, counts={
+        make_htrc_page(token_count=300, counts={
             'c': {
                 'POS': 3,
             }
@@ -55,9 +55,9 @@ def test_merge_offsets_for_token():
     key for the token.
     """
 
-    v = make_vol(pages=[
+    v = make_htrc_vol(pages=[
 
-        make_page(token_count=100, counts={
+        make_htrc_page(token_count=100, counts={
             'a': {
                 'POS': 1,
             },
@@ -69,7 +69,7 @@ def test_merge_offsets_for_token():
             },
         }),
 
-        make_page(token_count=100, counts={
+        make_htrc_page(token_count=100, counts={
             'b': {
                 'POS': 4,
             },
@@ -81,7 +81,7 @@ def test_merge_offsets_for_token():
             },
         }),
 
-        make_page(token_count=100, counts={
+        make_htrc_page(token_count=100, counts={
             'c': {
                 'POS': 7,
             },
@@ -117,27 +117,27 @@ def test_add_counts_when_offsets_round_together():
     the same "tick" value, the counts should be added.
     """
 
-    v = make_vol(pages=[
+    v = make_htrc_vol(pages=[
 
-        make_page(token_count=100, counts={
+        make_htrc_page(token_count=100, counts={
             'a': {
                 'POS': 1,
             },
         }),
 
-        make_page(token_count=100, counts={
+        make_htrc_page(token_count=100, counts={
             'a': {
                 'POS': 2,
             },
         }),
 
-        make_page(token_count=100, counts={
+        make_htrc_page(token_count=100, counts={
             'a': {
                 'POS': 3,
             },
         }),
 
-        make_page(token_count=100, counts={
+        make_htrc_page(token_count=100, counts={
             'a': {
                 'POS': 4,
             },

@@ -6,7 +6,7 @@ from subprocess import call
 
 from lint.models import Offset
 
-from test.utils import make_page, make_vol
+from test.utils import make_htrc_page, make_htrc_vol
 
 
 pytestmark = pytest.mark.usefixtures('db', 'mpi')
@@ -18,22 +18,22 @@ def test_dump_offsets(mock_corpus, mock_results):
     DumpOffsets should index {token -> year -> offset -> count} data.
     """
 
-    v1 = make_vol(year=1910, pages=[
-        make_page(token_count=100, counts={'a': { 'POS': 1 }}),
-        make_page(token_count=100, counts={'b': { 'POS': 2 }}),
-        make_page(token_count=100, counts={'c': { 'POS': 3 }}),
+    v1 = make_htrc_vol(year=1910, pages=[
+        make_htrc_page(token_count=100, counts={'a': { 'POS': 1 }}),
+        make_htrc_page(token_count=100, counts={'b': { 'POS': 2 }}),
+        make_htrc_page(token_count=100, counts={'c': { 'POS': 3 }}),
     ])
 
-    v2 = make_vol(year=1920, pages=[
-        make_page(token_count=100, counts={'b': { 'POS': 4 }}),
-        make_page(token_count=100, counts={'c': { 'POS': 5 }}),
-        make_page(token_count=100, counts={'d': { 'POS': 6 }}),
+    v2 = make_htrc_vol(year=1920, pages=[
+        make_htrc_page(token_count=100, counts={'b': { 'POS': 4 }}),
+        make_htrc_page(token_count=100, counts={'c': { 'POS': 5 }}),
+        make_htrc_page(token_count=100, counts={'d': { 'POS': 6 }}),
     ])
 
-    v3 = make_vol(year=1930, pages=[
-        make_page(token_count=100, counts={'c': { 'POS': 7 }}),
-        make_page(token_count=100, counts={'d': { 'POS': 8 }}),
-        make_page(token_count=100, counts={'e': { 'POS': 9 }}),
+    v3 = make_htrc_vol(year=1930, pages=[
+        make_htrc_page(token_count=100, counts={'c': { 'POS': 7 }}),
+        make_htrc_page(token_count=100, counts={'d': { 'POS': 8 }}),
+        make_htrc_page(token_count=100, counts={'e': { 'POS': 9 }}),
     ])
 
     mock_corpus.add_vol(v1)
@@ -66,16 +66,16 @@ def test_ignore_non_english_volumes(mock_corpus, mock_results):
     Non-English volumes should be skipped.
     """
 
-    v1 = make_vol(year=1900, pages=[
-        make_page(token_count=100, counts={'a': { 'POS': 1 }}),
-        make_page(token_count=100, counts={'b': { 'POS': 2 }}),
-        make_page(token_count=100, counts={'c': { 'POS': 3 }}),
+    v1 = make_htrc_vol(year=1900, pages=[
+        make_htrc_page(token_count=100, counts={'a': { 'POS': 1 }}),
+        make_htrc_page(token_count=100, counts={'b': { 'POS': 2 }}),
+        make_htrc_page(token_count=100, counts={'c': { 'POS': 3 }}),
     ])
 
-    v2 = make_vol(year=1900, language='ger', pages=[
-        make_page(token_count=100, counts={'a': { 'POS': 4 }}),
-        make_page(token_count=100, counts={'b': { 'POS': 5 }}),
-        make_page(token_count=100, counts={'c': { 'POS': 6 }}),
+    v2 = make_htrc_vol(year=1900, language='ger', pages=[
+        make_htrc_page(token_count=100, counts={'a': { 'POS': 4 }}),
+        make_htrc_page(token_count=100, counts={'b': { 'POS': 5 }}),
+        make_htrc_page(token_count=100, counts={'c': { 'POS': 6 }}),
     ])
 
     mock_corpus.add_vol(v1)
@@ -101,24 +101,24 @@ def test_round_up_years_to_decade(mock_corpus, mock_results):
     """
 
     # <- 1900
-    v1 = make_vol(year=1904, pages=[
-        make_page(token_count=100, counts={'a': { 'POS': 2 }}),
-        make_page(token_count=100, counts={'b': { 'POS': 4 }}),
-        make_page(token_count=100, counts={'c': { 'POS': 8 }}),
+    v1 = make_htrc_vol(year=1904, pages=[
+        make_htrc_page(token_count=100, counts={'a': { 'POS': 2 }}),
+        make_htrc_page(token_count=100, counts={'b': { 'POS': 4 }}),
+        make_htrc_page(token_count=100, counts={'c': { 'POS': 8 }}),
     ])
 
     # -> 1910
-    v2 = make_vol(year=1905, pages=[
-        make_page(token_count=100, counts={'a': { 'POS': 16 }}),
-        make_page(token_count=100, counts={'b': { 'POS': 32 }}),
-        make_page(token_count=100, counts={'c': { 'POS': 64 }}),
+    v2 = make_htrc_vol(year=1905, pages=[
+        make_htrc_page(token_count=100, counts={'a': { 'POS': 16 }}),
+        make_htrc_page(token_count=100, counts={'b': { 'POS': 32 }}),
+        make_htrc_page(token_count=100, counts={'c': { 'POS': 64 }}),
     ])
 
     # -> 1910
-    v3 = make_vol(year=1906, pages=[
-        make_page(token_count=100, counts={'a': { 'POS': 128 }}),
-        make_page(token_count=100, counts={'b': { 'POS': 256 }}),
-        make_page(token_count=100, counts={'c': { 'POS': 512 }}),
+    v3 = make_htrc_vol(year=1906, pages=[
+        make_htrc_page(token_count=100, counts={'a': { 'POS': 128 }}),
+        make_htrc_page(token_count=100, counts={'b': { 'POS': 256 }}),
+        make_htrc_page(token_count=100, counts={'c': { 'POS': 512 }}),
     ])
 
     mock_corpus.add_vol(v1)
