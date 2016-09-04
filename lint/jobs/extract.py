@@ -6,7 +6,7 @@ from lint.offset_cache import OffsetCache
 from lint.utils import mem_pct
 
 
-class DumpOffsets:
+class Extract:
 
     def segments(self, size):
         raise NotImplementedError
