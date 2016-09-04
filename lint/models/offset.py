@@ -23,6 +23,8 @@ class Offset(Base):
         PrimaryKeyConstraint('token', 'year', 'offset'),
     )
 
+    # TODO: corpus, pos
+
     token = Column(String, nullable=False)
 
     year = Column(Integer, nullable=False)
@@ -67,6 +69,8 @@ class Offset(Base):
         Args:
             offset_dir (str)
         """
+
+        # TODO: 'corpus' arg, clear existing rows for corpus.
 
         offsets = OffsetCache()
 
