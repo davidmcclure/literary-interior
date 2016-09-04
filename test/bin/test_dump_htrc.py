@@ -12,9 +12,6 @@ from test.utils import make_page, make_vol
 pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
-# TODO: Test gather-results separately?
-
-
 def test_dump_offsets(mock_corpus, mock_results):
 
     """
@@ -43,8 +40,8 @@ def test_dump_offsets(mock_corpus, mock_results):
     mock_corpus.add_vol(v2)
     mock_corpus.add_vol(v3)
 
-    call(['mpirun', 'bin/dump-htrc.py'])
-    call(['bin/load-htrc.py'])
+    call(['mpirun', 'bin/extract-htrc.py'])
+    call(['bin/gather-htrc.py'])
 
     o1 = round(( 50/300)*100)
     o2 = round((150/300)*100)
@@ -84,8 +81,8 @@ def test_ignore_non_english_volumes(mock_corpus, mock_results):
     mock_corpus.add_vol(v1)
     mock_corpus.add_vol(v2)
 
-    call(['mpirun', 'bin/dump-htrc.py'])
-    call(['bin/load-htrc.py'])
+    call(['mpirun', 'bin/extract-htrc.py'])
+    call(['bin/gather-htrc.py'])
 
     o1 = round(( 50/300)*100)
     o2 = round((150/300)*100)
@@ -128,8 +125,8 @@ def test_round_up_years_to_decade(mock_corpus, mock_results):
     mock_corpus.add_vol(v2)
     mock_corpus.add_vol(v3)
 
-    call(['mpirun', 'bin/dump-htrc.py'])
-    call(['bin/load-htrc.py'])
+    call(['mpirun', 'bin/extract-htrc.py'])
+    call(['bin/gather-htrc.py'])
 
     o1 = round(( 50/300)*100)
     o2 = round((150/300)*100)
