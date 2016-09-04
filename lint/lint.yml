@@ -4,11 +4,9 @@ htrc:
   features: /path/to/features
   manifest: /path/to/manifest
 
-result_dir: /path/to/result
+database: /path/to/file.db
 
-database:
-  drivername: sqlite
-  database: /path/to/file
+result_dir: /path/to/result
 
 token_depth: 10000
 

@@ -71,7 +71,10 @@ class Config:
         Returns: Engine
         """
 
-        return URL(**self['database'])
+        return URL(**dict(
+            drivername='sqlite',
+            database=self['database'],
+        ))
 
     def build_sqla_engine(self):
 
