@@ -2,7 +2,6 @@
 
 import json
 
-from lint.singletons import config
 from lint.offset_cache import OffsetCache
 from lint.utils import mem_pct
 
@@ -13,6 +12,9 @@ class DumpOffsets:
         raise NotImplementedError
 
     def increment(self, arg):
+        raise NotImplementedError
+
+    def flush(self, arg):
         raise NotImplementedError
 
     def __call__(self):
@@ -56,5 +58,4 @@ class DumpOffsets:
             if i%1000 == 0:
                 print(rank, i, mem_pct())
 
-        # TODO: Parametrize.
-        self.cache.flush(config['result_dir'])
+        self.flush()

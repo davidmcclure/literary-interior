@@ -49,6 +49,14 @@ class DumpHTRCOffsets(DumpOffsets):
         # Merge counts into cache.
         self.cache.increment(year, offsets)
 
+    def flush(self):
+
+        """
+        Dump the offsets to disk.
+        """
+
+        self.cache.flush(config['result_dir'])
+
 
 if __name__ == '__main__':
     DumpHTRCOffsets()()
