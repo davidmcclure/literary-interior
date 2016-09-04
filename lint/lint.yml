@@ -4,9 +4,10 @@ htrc:
   features: /path/to/features
   manifest: /path/to/manifest
 
-database: /path/to/file.db
+offsets:
+  htrc: /path/to/offsets
 
-result_dir: /path/to/result
+database: /path/to/file.db
 
 token_depth: 10000
 

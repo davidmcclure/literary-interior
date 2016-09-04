@@ -55,7 +55,7 @@ class DumpHTRCOffsets(DumpOffsets):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['result_dir'])
+        self.cache.flush(config['offsets']['htrc'])
 
 
 if __name__ == '__main__':

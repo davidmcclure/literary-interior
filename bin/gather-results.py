@@ -11,7 +11,7 @@ def gather_results():
     Insert the offsets into the database.
     """
 
-    Offset.gather_results(config['result_dir'])
+    Offset.gather_results(config['offsets']['htrc'])
 
 
 if __name__ == '__main__':

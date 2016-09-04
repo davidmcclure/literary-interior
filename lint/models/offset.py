@@ -59,13 +59,13 @@ class Offset(Base):
         session.commit()
 
     @classmethod
-    def gather_results(cls, result_dir):
+    def gather_results(cls, offset_dir):
 
         """
         Unpickle the offset caches and merge the counts.
 
         Args:
-            result_dir (str)
+            offset_dir (str)
         """
 
         offsets = OffsetCache()
@@ -73,7 +73,7 @@ class Offset(Base):
         # Gather pickled offset paths.
         paths = [
             d.path
-            for d in scandir(result_dir)
+            for d in scandir(offset_dir)
             if d.is_file()
         ]
 
