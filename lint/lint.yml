@@ -10,8 +10,6 @@ database:
   drivername: sqlite
   database: /path/to/file
 
-group_size: 1000
+token_depth: 10000
 
 offset_resolution: 100
-
-token_depth: 10000
