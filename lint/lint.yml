@@ -4,7 +4,7 @@ htrc:
   features: /path/to/features
   manifest: /path/to/manifest
 
-offsets:
+results:
   htrc: /path/to/offsets
 
 database: /path/to/file.db

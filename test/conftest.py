@@ -77,7 +77,7 @@ def mock_results(config):
 
     results = MockResults()
 
-    config.config['offsets']['htrc'] = results.path
+    config.config['results']['htrc'] = results.path
 
     yield results
 

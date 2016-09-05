@@ -55,4 +55,4 @@ class ExtractHTRC(Extract):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['offsets']['htrc'])
+        self.cache.flush(config['results']['htrc'])

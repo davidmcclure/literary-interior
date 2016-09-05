@@ -6,4 +6,4 @@ from lint.models import Offset
 
 
 if __name__ == '__main__':
-    Offset.gather_results(config['offsets']['htrc'])
+    Offset.gather_results(config['results']['htrc'])
