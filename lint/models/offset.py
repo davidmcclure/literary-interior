@@ -37,6 +37,26 @@ class Offset(Base):
 
 
     @classmethod
+    def gather_results(cls, corpus, result_dir):
+
+        """
+        Merge and insert pickled count caches.
+
+        Args:
+            corpus (str)
+            result_dir (str)
+        """
+
+        # Merge result pickles.
+        results = OffsetCache.from_results(result_dir)
+
+        # Clear and insert the counts.
+        cls.delete_corpus(corpus)
+        cls.insert_corpus(corpus, results)
+
+        session.commit()
+
+    @classmethod
     def insert_corpus(cls, corpus, offsets):
 
         """
@@ -73,26 +93,6 @@ class Offset(Base):
         """
 
         cls.query.filter_by(corpus=corpus).delete()
-
-    @classmethod
-    def gather_results(cls, corpus, result_dir):
-
-        """
-        Merge and insert pickled count caches.
-
-        Args:
-            corpus (str)
-            result_dir (str)
-        """
-
-        # Merge result pickles.
-        results = OffsetCache.from_results(result_dir)
-
-        # Clear and insert the counts.
-        cls.delete_corpus(corpus)
-        cls.insert_corpus(corpus, results)
-
-        session.commit()
 
     @classmethod
     def get(cls, corpus, token, year, offset):
