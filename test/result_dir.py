@@ -3,7 +3,7 @@
 from test.temp_dir import TempDir
 
 
-class MockResults(TempDir):
+class ResultDir(TempDir):
 
     def add_cache(self, cache):
 

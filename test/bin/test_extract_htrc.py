@@ -12,7 +12,7 @@ from test.utils import make_htrc_page, make_htrc_vol
 pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
-def test_dump_offsets(mock_corpus, mock_results):
+def test_dump_offsets(mock_corpus, htrc_results):
 
     """
     DumpOffsets should index {token -> year -> offset -> count} data.
@@ -60,7 +60,7 @@ def test_dump_offsets(mock_corpus, mock_results):
     assert Offset.token_year_offset_count('e', 1930, o3) == 9
 
 
-def test_ignore_non_english_volumes(mock_corpus, mock_results):
+def test_ignore_non_english_volumes(mock_corpus, htrc_results):
 
     """
     Non-English volumes should be skipped.
@@ -94,7 +94,7 @@ def test_ignore_non_english_volumes(mock_corpus, mock_results):
     assert Offset.token_year_offset_count('c', 1900, o3) == 3
 
 
-def test_round_up_years_to_decade(mock_corpus, mock_results):
+def test_round_up_years_to_decade(mock_corpus, htrc_results):
 
     """
     Volume years should be rounded up to the nearest decade.

@@ -6,7 +6,7 @@ import os
 from lint.singletons import config as _config, session
 from lint.models import Base
 
-from test.mock_results import MockResults
+from test.result_dir import ResultDir
 from test.mock_corpus import MockCorpus
 
 
@@ -69,13 +69,13 @@ def mock_corpus(config):
 
 
 @pytest.yield_fixture
-def mock_results(config):
+def htrc_results(config):
 
     """
-    Yields: MockResults
+    Yields: ResultDir
     """
 
-    results = MockResults()
+    results = ResultDir()
 
     config.config['results']['htrc'] = results.path
 
@@ -85,7 +85,7 @@ def mock_results(config):
 
 
 @pytest.yield_fixture
-def mpi(mock_corpus, mock_results, config):
+def mpi(mock_corpus, htrc_results, config):
 
     """
     Write the current configuration into the /tmp/.lint.yml file.

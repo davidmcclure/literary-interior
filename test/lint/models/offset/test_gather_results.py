@@ -9,7 +9,7 @@ from lint.models import Offset
 pytestmark = pytest.mark.usefixtures('db')
 
 
-def test_gather_results(mock_results):
+def test_gather_results(htrc_results):
 
     c1 = OffsetCache()
     c1[1901]['token1'][1] = 1
@@ -26,11 +26,11 @@ def test_gather_results(mock_results):
     c3[1904]['token4'][1] = 8
     c3[1905]['token5'][1] = 9
 
-    mock_results.add_cache(c1)
-    mock_results.add_cache(c2)
-    mock_results.add_cache(c3)
+    htrc_results.add_cache(c1)
+    htrc_results.add_cache(c2)
+    htrc_results.add_cache(c3)
 
-    Offset.gather_results(mock_results.path)
+    Offset.gather_results(htrc_results.path)
 
     assert Offset.token_year_offset_count('token1', 1901, 1) == 1
     assert Offset.token_year_offset_count('token2', 1902, 1) == 2+4
