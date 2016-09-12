@@ -42,15 +42,15 @@ class OffsetCache(dict):
 
         return offsets
 
-    def __missing__(self, year):
+    def __missing__(self, token):
 
         """
-        Initialize the {year -> token -> offset -> count} map.
+        Initialize the {token -> year -> offset -> count} map.
         """
 
-        self[year] = defaultdict(Counter)
+        self[token] = defaultdict(Counter)
 
-        return self[year]
+        return self[token]
 
     def __iadd__(self, other):
 
@@ -58,15 +58,15 @@ class OffsetCache(dict):
         Merge in another offset cache.
         """
 
-        for year, token, offset, count in flatten_dict(other):
-            self[year][token][offset] += count
+        for token, year, offset, count in flatten_dict(other):
+            self[token][year][offset] += count
 
         return self
 
     def increment(self, year, token_offsets):
 
         """
-        Increment token offsets for a year
+        Increment token offsets for a year.
 
         Args:
             year (int)
@@ -74,7 +74,7 @@ class OffsetCache(dict):
         """
 
         for token, offsets in token_offsets.items():
-            self[year][token] += offsets
+            self[token][year] += offsets
 
     def flush(self, data_dir):
 

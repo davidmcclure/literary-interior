@@ -12,11 +12,11 @@ def test_write_pickle(htrc_results):
     """
 
     c1 = OffsetCache()
-    c1[1900]['token'][1] = 1
+    c1['token'][1900][1] = 1
 
     path = c1.flush(htrc_results.path)
 
     with open(path, 'rb') as fh:
         c2 = pickle.load(fh)
 
-    assert c2[1900]['token'][1] == 1
+    assert c2['token'][1900][1] == 1
