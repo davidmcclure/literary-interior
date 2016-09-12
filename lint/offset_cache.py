@@ -4,13 +4,43 @@ import os
 import pickle
 import uuid
 
+from scandir import scandir
 from collections import defaultdict, Counter
 from functools import partial
 
-from lint.utils import flatten_dict
+from lint.utils import flatten_dict, mem_pct
 
 
 class OffsetCache(dict):
+
+    @classmethod
+    def from_results(cls, result_dir):
+
+        """
+        Merge together a set of pickled instances.
+
+        Args:
+            result_dir (str)
+        """
+
+        offsets = cls()
+
+        # Gather pickle paths.
+        paths = [
+            d.path
+            for d in scandir(result_dir)
+            if d.is_file()
+        ]
+
+        # Walk paths.
+        for i, path in enumerate(paths):
+            with open(path, 'rb') as fh:
+
+                # Merge offsets.
+                offsets += pickle.load(fh)
+                print(i, mem_pct())
+
+        return offsets
 
     def __missing__(self, year):
 

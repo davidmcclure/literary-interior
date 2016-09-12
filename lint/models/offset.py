@@ -74,6 +74,7 @@ class Offset(Base):
         """
 
         # TODO: Clear existing rows for corpus.
+        # TODO: OffsetCache.from_results()?
 
         offsets = OffsetCache()
 
