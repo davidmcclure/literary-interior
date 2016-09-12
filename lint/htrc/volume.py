@@ -104,7 +104,7 @@ class Volume:
         for data in self.data['features']['pages']:
             yield Page(data)
 
-    def token_offsets(self, resolution=1000):
+    def token_offsets(self, resolution):
 
         """
         For each token, get the offsets of each instance of the token inside
