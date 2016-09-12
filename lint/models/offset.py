@@ -63,39 +63,6 @@ class Offset(Base):
             session.bulk_insert_mappings(cls, mappings)
 
     @classmethod
-    def gather_results(cls, corpus, result_dir):
-
-        """
-        Unpickle the offset caches and merge the counts.
-
-        Args:
-            corpus (str)
-            result_dir (str)
-        """
-
-        # TODO: Clear existing rows for corpus.
-        # TODO: OffsetCache.from_results()?
-
-        offsets = OffsetCache()
-
-        # Gather pickled offset paths.
-        paths = [
-            d.path
-            for d in scandir(result_dir)
-            if d.is_file()
-        ]
-
-        # Walk paths.
-        for i, path in enumerate(paths):
-            with open(path, 'rb') as fh:
-
-                # Merge offsets.
-                offsets += pickle.load(fh)
-                print(i, mem_pct())
-
-        cls.flush(corpus, offsets)
-
-    @classmethod
     def get(cls, corpus, token, year, offset):
 
         """
