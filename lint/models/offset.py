@@ -20,7 +20,7 @@ class Offset(Base):
     __tablename__ = 'offset'
 
     __table_args__ = (
-        PrimaryKeyConstraint('token', 'year', 'offset'),
+        PrimaryKeyConstraint('corpus', 'token', 'year', 'offset'),
     )
 
     # TODO: POS
@@ -96,10 +96,10 @@ class Offset(Base):
         cls.flush(offsets)
 
     @classmethod
-    def token_year_offset_count(cls, corpus, token, year, offset):
+    def get(cls, corpus, token, year, offset):
 
         """
-        Get a token count by corpus, year, and offset.
+        Get a token count by the composite primary key.
 
         Args:
             corpus (str)
