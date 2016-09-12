@@ -27,6 +27,5 @@ def test_delete_corpus():
 
     Offset.delete_corpus('c2')
 
-    # Delete "c1" rows.
     assert Offset.query.filter_by(corpus='c1').count() == 2
     assert Offset.query.filter_by(corpus='c2').count() == 0
