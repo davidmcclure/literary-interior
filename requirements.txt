@@ -9,6 +9,7 @@ scandir
 pytest
 pytest-env
 invoke
+factory_boy
 mpi4py
 clint
 click

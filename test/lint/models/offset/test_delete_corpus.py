@@ -6,6 +6,8 @@ from lint.singletons import session
 from lint.offset_cache import OffsetCache
 from lint.models import Offset
 
+from test.factories import OffsetFactory
+
 
 pytestmark = pytest.mark.usefixtures('db')
 
@@ -17,10 +19,10 @@ def test_delete_corpus():
     """
 
     session.bulk_save_objects([
-        Offset(corpus='c1', token='token1', year=1900, offset=1, count=1),
-        Offset(corpus='c1', token='token2', year=1900, offset=1, count=1),
-        Offset(corpus='c2', token='token3', year=1900, offset=1, count=1),
-        Offset(corpus='c2', token='token4', year=1900, offset=1, count=1),
+        OffsetFactory(corpus='c1'),
+        OffsetFactory(corpus='c1'),
+        OffsetFactory(corpus='c2'),
+        OffsetFactory(corpus='c2'),
     ])
 
     Offset.delete_corpus('c2')
