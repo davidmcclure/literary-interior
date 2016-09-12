@@ -23,7 +23,7 @@ class Offset(Base):
         PrimaryKeyConstraint('corpus', 'token', 'year', 'offset'),
     )
 
-    # TODO: POS
+    # TODO: pos
 
     corpus = Column(String, nullable=False)
 
@@ -37,7 +37,7 @@ class Offset(Base):
 
 
     @classmethod
-    def flush(cls, corpus, offsets):
+    def insert_corpus(cls, corpus, offsets):
 
         """
         Flush an offset cache to disk.

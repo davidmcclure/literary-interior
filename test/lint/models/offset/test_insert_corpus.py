@@ -22,7 +22,7 @@ def test_flush():
     cache['token2'][1902][2] = 2
     cache['token3'][1903][3] = 3
 
-    Offset.flush('corpus', cache)
+    Offset.insert_corpus('corpus', cache)
 
     assert Offset.get('corpus', 'token1', 1901, 1) == 1
     assert Offset.get('corpus', 'token2', 1902, 2) == 2

@@ -12,6 +12,6 @@ if __name__ == '__main__':
     results = OffsetCache.from_results(config['results']['htrc'])
 
     # Flush to SQLite.
-    Offset.flush('htrc', results)
+    Offset.insert_corpus('htrc', results)
 
     session.commit()
