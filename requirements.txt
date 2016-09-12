@@ -13,9 +13,9 @@ mpi4py
 clint
 click
 psutil
+textblob
 numpy
 jupyter
 matplotlib
 scipy
 sklearn
-textblob

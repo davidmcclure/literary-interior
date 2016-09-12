@@ -22,8 +22,8 @@ def test_flush():
     cache[1902]['token2'][2] = 2
     cache[1903]['token3'][3] = 3
 
-    Offset.flush(cache)
+    Offset.flush('corpus', cache)
 
-    assert Offset.token_year_offset_count('token1', 1901, 1) == 1
-    assert Offset.token_year_offset_count('token2', 1902, 2) == 2
-    assert Offset.token_year_offset_count('token3', 1903, 3) == 3
+    assert Offset.token_year_offset_count('corpus', 'token1', 1901, 1) == 1
+    assert Offset.token_year_offset_count('corpus', 'token2', 1902, 2) == 2
+    assert Offset.token_year_offset_count('corpus', 'token3', 1903, 3) == 3

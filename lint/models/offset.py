@@ -23,7 +23,9 @@ class Offset(Base):
         PrimaryKeyConstraint('token', 'year', 'offset'),
     )
 
-    # TODO: corpus, pos
+    # TODO: POS
+
+    corpus = Column(String, nullable=False)
 
     token = Column(String, nullable=False)
 
@@ -35,12 +37,13 @@ class Offset(Base):
 
 
     @classmethod
-    def flush(cls, cache):
+    def flush(cls, corpus, cache):
 
         """
         Flush an offset cache to disk.
 
         Args:
+            corpus (str)
             cache (OffsetCache)
         """
 
@@ -48,6 +51,7 @@ class Offset(Base):
 
             mappings = [
                 dict(
+                    corpus=corpus,
                     token=token,
                     year=year,
                     offset=offset,
@@ -92,12 +96,13 @@ class Offset(Base):
         cls.flush(offsets)
 
     @classmethod
-    def token_year_offset_count(cls, token, year, offset):
+    def token_year_offset_count(cls, corpus, token, year, offset):
 
         """
-        How many times did token X appear in year Y as offset Z?
+        Get a token count by corpus, year, and offset.
 
         Args:
+            corpus (str)
             token (str)
             year (int)
             offset (int)
@@ -109,6 +114,7 @@ class Offset(Base):
             session
             .query(cls.count)
             .filter_by(
+                corpus=corpus,
                 token=token,
                 year=year,
                 offset=offset,
@@ -116,89 +122,3 @@ class Offset(Base):
         )
 
         return res.scalar() or 0
-
-    @classmethod
-    def baseline_series(cls, year1=None, year2=None):
-
-        """
-        Get an offset -> count series for a all words over a range of years.
-
-        Args:
-            year1 (int)
-            year1 (int)
-
-        Returns: OrderedDict
-        """
-
-        query = (
-            session
-            .query(cls.offset, func.sum(cls.count))
-            .group_by(cls.offset)
-            .order_by(cls.offset)
-        )
-
-        if year1:
-            query = query.filter(cls.year >= year1)
-
-        if year2:
-            query = query.filter(cls.year <= year2)
-
-        return OrderedDict(query.all())
-
-    @classmethod
-    def token_series(cls, token, year1=None, year2=None):
-
-        """
-        Get an offset -> count series for a word over a range of years.
-
-        Args:
-            token (str)
-            year1 (int)
-            year1 (int)
-
-        Returns: OrderedDict
-        """
-
-        query = (
-            session
-            .query(cls.offset, func.sum(cls.count))
-            .filter(cls.token==token)
-            .group_by(cls.offset)
-            .order_by(cls.offset)
-        )
-
-        if year1:
-            query = query.filter(cls.year >= year1)
-
-        if year2:
-            query = query.filter(cls.year <= year2)
-
-        return OrderedDict(query.all())
-
-    @classmethod
-    def token_counts(cls, year1=None, year2=None):
-
-        """
-        Get total token counts for all words over a range of years.
-
-        Args:
-            year1 (int)
-            year1 (int)
-
-        Returns: OrderedDict
-        """
-
-        query = (
-            session
-            .query(cls.token, func.sum(cls.count).label('count'))
-            .group_by(cls.token)
-            .order_by('count DESC')
-        )
-
-        if year1:
-            query = query.filter(cls.year >= year1)
-
-        if year2:
-            query = query.filter(cls.year <= year2)
-
-        return OrderedDict(query.all())
