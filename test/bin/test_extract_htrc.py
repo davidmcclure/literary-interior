@@ -12,7 +12,7 @@ from test.utils import make_htrc_page, make_htrc_vol
 pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
-def test_dump_offsets(mock_corpus, htrc_results):
+def test_dump_offsets(htrc_data, htrc_results):
 
     """
     DumpOffsets should index {token -> year -> offset -> count} data.
@@ -36,9 +36,9 @@ def test_dump_offsets(mock_corpus, htrc_results):
         make_htrc_page(token_count=100, counts={'e': { 'POS': 9 }}),
     ])
 
-    mock_corpus.add_vol(v1)
-    mock_corpus.add_vol(v2)
-    mock_corpus.add_vol(v3)
+    htrc_data.add_vol(v1)
+    htrc_data.add_vol(v2)
+    htrc_data.add_vol(v3)
 
     call(['mpirun', 'bin/extract-htrc.py'])
     call(['bin/gather-htrc.py'])
@@ -60,7 +60,7 @@ def test_dump_offsets(mock_corpus, htrc_results):
     assert Offset.token_year_offset_count('e', 1930, o3) == 9
 
 
-def test_ignore_non_english_volumes(mock_corpus, htrc_results):
+def test_ignore_non_english_volumes(htrc_data, htrc_results):
 
     """
     Non-English volumes should be skipped.
@@ -78,8 +78,8 @@ def test_ignore_non_english_volumes(mock_corpus, htrc_results):
         make_htrc_page(token_count=100, counts={'c': { 'POS': 6 }}),
     ])
 
-    mock_corpus.add_vol(v1)
-    mock_corpus.add_vol(v2)
+    htrc_data.add_vol(v1)
+    htrc_data.add_vol(v2)
 
     call(['mpirun', 'bin/extract-htrc.py'])
     call(['bin/gather-htrc.py'])
@@ -94,7 +94,7 @@ def test_ignore_non_english_volumes(mock_corpus, htrc_results):
     assert Offset.token_year_offset_count('c', 1900, o3) == 3
 
 
-def test_round_up_years_to_decade(mock_corpus, htrc_results):
+def test_round_up_years_to_decade(htrc_data, htrc_results):
 
     """
     Volume years should be rounded up to the nearest decade.
@@ -121,9 +121,9 @@ def test_round_up_years_to_decade(mock_corpus, htrc_results):
         make_htrc_page(token_count=100, counts={'c': { 'POS': 512 }}),
     ])
 
-    mock_corpus.add_vol(v1)
-    mock_corpus.add_vol(v2)
-    mock_corpus.add_vol(v3)
+    htrc_data.add_vol(v1)
+    htrc_data.add_vol(v2)
+    htrc_data.add_vol(v3)
 
     call(['mpirun', 'bin/extract-htrc.py'])
     call(['bin/gather-htrc.py'])

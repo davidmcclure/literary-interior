@@ -7,7 +7,7 @@ from lint.singletons import config as _config, session
 from lint.models import Base
 
 from test.result_dir import ResultDir
-from test.mock_corpus import MockCorpus
+from test.htrc_data import HTRCData
 
 
 @pytest.fixture(scope='session', autouse=True)
@@ -52,13 +52,13 @@ def config():
 
 
 @pytest.yield_fixture
-def mock_corpus(config):
+def htrc_data(config):
 
     """
-    Yields: MockCorpus
+    Yields: HTRCData
     """
 
-    corpus = MockCorpus()
+    corpus = HTRCData()
 
     config.config['htrc']['features'] = corpus.features_path
     config.config['htrc']['manifest'] = corpus.manifest_path
@@ -85,7 +85,7 @@ def htrc_results(config):
 
 
 @pytest.yield_fixture
-def mpi(mock_corpus, htrc_results, config):
+def mpi(htrc_data, htrc_results, config):
 
     """
     Write the current configuration into the /tmp/.lint.yml file.

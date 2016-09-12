@@ -9,7 +9,7 @@ from lint.utils import open_makedirs
 from test.temp_dir import TempDir
 
 
-class MockCorpus(TempDir):
+class HTRCData(TempDir):
 
     @property
     def features_path(self):
