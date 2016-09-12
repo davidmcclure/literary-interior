@@ -75,7 +75,7 @@ class Offset(Base):
             result_dir (str)
         """
 
-        # TODO: 'corpus' arg, clear existing rows for corpus.
+        # TODO: Clear existing rows for corpus.
 
         offsets = OffsetCache()
 
