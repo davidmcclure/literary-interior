@@ -2,7 +2,6 @@
 
 import pytest
 
-from lint import config
 from lint.offset_cache import OffsetCache
 from lint.models import Offset
 

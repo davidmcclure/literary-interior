@@ -63,6 +63,18 @@ class Offset(Base):
             session.bulk_insert_mappings(cls, mappings)
 
     @classmethod
+    def delete_corpus(cls, corpus):
+
+        """
+        Clear all counts for a corpus.
+
+        Args:
+            corpus (str)
+        """
+
+        cls.query.filter_by(corpus=corpus).delete()
+
+    @classmethod
     def get(cls, corpus, token, year, offset):
 
         """
