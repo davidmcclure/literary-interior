@@ -37,17 +37,17 @@ class Offset(Base):
 
 
     @classmethod
-    def flush(cls, corpus, cache):
+    def flush(cls, corpus, offsets):
 
         """
         Flush an offset cache to disk.
 
         Args:
             corpus (str)
-            cache (OffsetCache)
+            offsets (OffsetCache)
         """
 
-        for group in grouper(flatten_dict(cache), 1000):
+        for group in grouper(flatten_dict(offsets), 1000):
 
             mappings = [
                 dict(
