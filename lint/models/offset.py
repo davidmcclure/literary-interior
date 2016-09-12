@@ -62,8 +62,6 @@ class Offset(Base):
 
             session.bulk_insert_mappings(cls, mappings)
 
-        session.commit()
-
     @classmethod
     def gather_results(cls, corpus, result_dir):
 
