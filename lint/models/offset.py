@@ -65,12 +65,13 @@ class Offset(Base):
         session.commit()
 
     @classmethod
-    def gather_results(cls, result_dir):
+    def gather_results(cls, corpus, result_dir):
 
         """
         Unpickle the offset caches and merge the counts.
 
         Args:
+            corpus (str)
             result_dir (str)
         """
 
@@ -93,7 +94,7 @@ class Offset(Base):
                 offsets += pickle.load(fh)
                 print(i, mem_pct())
 
-        cls.flush(offsets)
+        cls.flush(corpus, offsets)
 
     @classmethod
     def get(cls, corpus, token, year, offset):

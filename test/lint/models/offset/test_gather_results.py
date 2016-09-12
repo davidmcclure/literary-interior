@@ -30,10 +30,10 @@ def test_gather_results(htrc_results):
     htrc_results.add_cache(c2)
     htrc_results.add_cache(c3)
 
-    Offset.gather_results(htrc_results.path)
+    Offset.gather_results('htrc', htrc_results.path)
 
-    assert Offset.token_year_offset_count('token1', 1901, 1) == 1
-    assert Offset.token_year_offset_count('token2', 1902, 1) == 2+4
-    assert Offset.token_year_offset_count('token3', 1903, 1) == 3+5+7
-    assert Offset.token_year_offset_count('token4', 1904, 1) == 6+8
-    assert Offset.token_year_offset_count('token5', 1905, 1) == 9
+    assert Offset.get('htrc', 'token1', 1901, 1) == 1
+    assert Offset.get('htrc', 'token2', 1902, 1) == 2+4
+    assert Offset.get('htrc', 'token3', 1903, 1) == 3+5+7
+    assert Offset.get('htrc', 'token4', 1904, 1) == 6+8
+    assert Offset.get('htrc', 'token5', 1905, 1) == 9
