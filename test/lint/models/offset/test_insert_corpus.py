@@ -10,7 +10,7 @@ from lint.models import Offset
 pytestmark = pytest.mark.usefixtures('db')
 
 
-def test_flush():
+def test_insert_corpus():
 
     """
     Insert a row for each year / token / offset / count.
