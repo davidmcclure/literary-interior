@@ -37,14 +37,14 @@ class ExtractHTRC(Extract):
         vol = Volume.from_path(path)
 
         # Ignore non-English vols.
-        if not vol.is_english:
+        if not vol.is_english():
             return
 
         # Get token offset counts.
         offsets = vol.token_offsets(config['offset_resolution'])
 
         # Round to nearest decade.
-        year = round_to_decade(vol.year)
+        year = round_to_decade(vol.year())
 
         # Merge counts into cache.
         self.cache.increment(year, offsets)

@@ -36,7 +36,6 @@ class Volume:
 
         self.data = data
 
-    @property
     def id(self):
 
         """
@@ -47,7 +46,6 @@ class Volume:
 
         return self.data['id']
 
-    @property
     def year(self):
 
         """
@@ -58,7 +56,6 @@ class Volume:
 
         return int(self.data['metadata']['pubDate'])
 
-    @property
     def language(self):
 
         """
@@ -69,7 +66,6 @@ class Volume:
 
         return self.data['metadata']['language']
 
-    @property
     def is_english(self):
 
         """
@@ -78,7 +74,7 @@ class Volume:
         Returns: bool
         """
 
-        return self.language == 'eng'
+        return self.language() == 'eng'
 
     def token_count(self):
 
