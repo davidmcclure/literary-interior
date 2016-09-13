@@ -20,7 +20,6 @@ class Page:
 
         self.data = data
 
-    @property
     def token_count(self):
 
         """

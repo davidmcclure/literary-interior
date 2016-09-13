@@ -89,7 +89,7 @@ class Volume:
         """
 
         return sum([
-            p.token_count
+            p.token_count()
             for p in self.pages()
         ])
 
@@ -125,7 +125,7 @@ class Volume:
 
             # 0-1 ratio of the page "center."
             center = (
-                (seen + (page.token_count / 2)) /
+                (seen + (page.token_count() / 2)) /
                 token_count
             )
 
@@ -138,6 +138,6 @@ class Volume:
                 offsets[token][offset] += count
 
             # Track the cumulative count.
-            seen += page.token_count
+            seen += page.token_count()
 
         return offsets
