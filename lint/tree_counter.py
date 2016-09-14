@@ -57,3 +57,9 @@ class TreeCounter:
                 return val if type(val) is dict else dict()
 
         return reduce(vivify, enumerate(path), self.tree)
+
+    def __add__(self, other):
+        pass
+
+    def __iadd__(self, other):
+        pass
