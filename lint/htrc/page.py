@@ -42,7 +42,7 @@ class Page:
         letters = re.compile('^[a-z]+$')
 
         counts = Counter()
-        for token, pc in self.data['body']['tokenPosCount'].items():
+        for token, pos_count in self.data['body']['tokenPosCount'].items():
 
             token = token.lower()
 
@@ -54,6 +54,6 @@ class Page:
             if token not in tokens:
                 continue
 
-            counts[token] += sum(pc.values())
+            counts[token] += sum(pos_count.values())
 
         return counts
