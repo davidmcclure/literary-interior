@@ -36,9 +36,9 @@ class TreeCounter:
         if not isinstance(path, tuple):
             path = (path,)
 
-        def vivify(tree, key):
+        def vivify(tree, level):
 
-            i, key = key
+            i, key = level
 
             # If we're at the end of the path, set the value.
             if i == len(path)-1:
@@ -63,9 +63,9 @@ class TreeCounter:
         if not isinstance(path, tuple):
             path = (path,)
 
-        def vivify(tree, key):
+        def vivify(tree, level):
 
-            i, key = key
+            i, key = level
 
             if i == len(path)-1:
                 val = tree.get(key)
