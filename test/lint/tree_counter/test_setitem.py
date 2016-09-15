@@ -5,26 +5,62 @@ import pytest
 from lint.tree_counter import TreeCounter
 
 
-@pytest.mark.parametrize('path,count', [
+@pytest.mark.parametrize('path,count,tree', [
 
     # Single key
-    (1, 2),
+    (1, 2, {
+        1: 2
+    }),
 
     # Integer parts
-    ((1, 2), 3),
-    ((1, 2, 3), 4),
+
+    ((1, 2), 3, {
+        1: {
+            2: 3
+        }
+    }),
+
+    ((1, 2, 3), 4, {
+        1: {
+            2: {
+                3: 4
+            }
+        }
+    }),
 
     # String parts
-    (('a', 'b'), 3),
-    (('a', 'b', 'c'), 4),
+
+    (('a', 'b'), 3, {
+        'a': {
+            'b': 3
+        }
+    }),
+
+    (('a', 'b', 'c'), 4, {
+        'a': {
+            'b': {
+                'c': 4
+            }
+        }
+    }),
+
+    # Mixed parts
+
+    ((1, 'b', 3), 4, {
+        1: {
+            'b': {
+                3: 4
+            }
+        }
+    }),
 
 ])
-def test_setitem(path, count):
+def test_setitem(path, count, tree):
 
     c = TreeCounter()
 
     c[path] = count
-    assert c[path] == count
+    assert c.tree == tree
 
 
 def test_merge_shared_prefixes():
@@ -74,7 +110,15 @@ def test_override_subpath():
     c[1,2,3] = 4
     c[1,2,3,4] = 5
 
-    assert c[1,2,3,4] == 5
+    assert c.tree == {
+        1: {
+            2: {
+                3: {
+                    4: 5
+                }
+            }
+        }
+    }
 
 
 def test_override_superpath():
@@ -84,4 +128,10 @@ def test_override_superpath():
     c[1,2,3,4] = 5
     c[1,2,3] = 4
 
-    assert c[1,2,3] == 4
+    assert c.tree == {
+        1: {
+            2: {
+                3: 4
+            }
+        }
+    }
