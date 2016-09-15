@@ -1,6 +1,6 @@
 
 
-import json
+import pprint
 
 from functools import reduce
 
@@ -25,7 +25,7 @@ class TreeCounter:
         Returns: str
         """
 
-        return json.dumps(self.tree, indent=2)
+        return pprint.pformat(self.tree, indent=2)
 
     def __setitem__(self, path, val):
 
@@ -34,6 +34,9 @@ class TreeCounter:
         """
 
         # TODO - test that sets with super/subsets of the path override.
+
+        if not isinstance(path, tuple):
+            path = (path,)
 
         def vivify(tree, key):
 
@@ -58,6 +61,9 @@ class TreeCounter:
         """
 
         # TODO - test get a superset path of existing path.
+
+        if not isinstance(path, tuple):
+            path = (path,)
 
         def vivify(tree, key):
 
