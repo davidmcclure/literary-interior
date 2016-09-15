@@ -1,5 +1,7 @@
 
 
+import json
+
 from functools import reduce
 
 from lint.utils import flatten_dict
@@ -14,6 +16,16 @@ class TreeCounter:
         """
 
         self.tree = {}
+
+    def __repr__(self):
+
+        """
+        Print the tree.
+
+        Returns: str
+        """
+
+        return json.dumps(self.tree, indent=2)
 
     def __setitem__(self, path, val):
 
