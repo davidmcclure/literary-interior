@@ -31,6 +31,10 @@ class TreeCounter:
 
         """
         Set the count for a path.
+
+        Args:
+            path (tuple)
+            val (int)
         """
 
         if not isinstance(path, tuple):
@@ -44,7 +48,7 @@ class TreeCounter:
             if i == len(path)-1:
                 tree[key] = val
 
-            # If we're mid-path.
+            # Otherwise, if no existing subtree, add one.
             elif type(tree.get(key)) is not dict:
                 tree[key] = dict()
 
@@ -56,9 +60,10 @@ class TreeCounter:
 
         """
         Get the count for a path.
-        """
 
-        # TODO - test get a subset / superset path of existing path.
+        Args:
+            path (tuple)
+        """
 
         if not isinstance(path, tuple):
             path = (path,)
@@ -67,12 +72,14 @@ class TreeCounter:
 
             i, key = level
 
+            val = tree.get(key)
+
+            # If we're at the end of the path, return the value.
             if i == len(path)-1:
-                val = tree.get(key)
                 return val if type(val) is int else 0
 
+            # Otherwise return the next sub-tree.
             else:
-                val = tree.get(key)
                 return val if type(val) is dict else dict()
 
         return reduce(vivify, enumerate(path), self.tree)
