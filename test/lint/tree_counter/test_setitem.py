@@ -25,3 +25,23 @@ def test_setitem(path, count):
 
     c[path] = count
     assert c[path] == count
+
+
+def test_override_subpath():
+
+    c = TreeCounter()
+
+    c[1,2,3] = 4
+    c[1,2,3,4] = 5
+
+    assert c[1,2,3,4] == 5
+
+
+def test_override_superpath():
+
+    c = TreeCounter()
+
+    c[1,2,3,4] = 5
+    c[1,2,3] = 4
+
+    assert c[1,2,3] == 4

@@ -60,7 +60,7 @@ class TreeCounter:
         Get the count for a path.
         """
 
-        # TODO - test get a superset path of existing path.
+        # TODO - test get a subset / superset path of existing path.
 
         if not isinstance(path, tuple):
             path = (path,)
