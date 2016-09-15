@@ -95,4 +95,17 @@ class TreeCounter:
         yield from flatten_dict(self.tree)
 
     def __iadd__(self, other):
-        pass
+
+        """
+        Add another counter to this instance.
+
+        Args:
+            other (TreeCounter)
+        """
+
+        # TODO: Have flatten yield (path, count) tuples.
+
+        for flat in other.flatten():
+            self[flat[:-1]] += flat[-1]
+
+        return self
