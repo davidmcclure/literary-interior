@@ -27,6 +27,46 @@ def test_setitem(path, count):
     assert c[path] == count
 
 
+def test_merge_shared_prefixes():
+
+    c = TreeCounter()
+
+    c[1,1,1] = 1
+    c[1,1,2] = 2
+
+    c[1,2,1] = 3
+    c[1,2,2] = 4
+
+    c[2,1,1] = 5
+    c[2,1,2] = 6
+
+    c[2,2,1] = 7
+    c[2,2,2] = 8
+
+    assert c.tree == {
+        1: {
+            1: {
+                1: 1,
+                2: 2,
+            },
+            2: {
+                1: 3,
+                2: 4,
+            },
+        },
+        2: {
+            1: {
+                1: 5,
+                2: 6,
+            },
+            2: {
+                1: 7,
+                2: 8,
+            },
+        },
+    }
+
+
 def test_override_subpath():
 
     c = TreeCounter()

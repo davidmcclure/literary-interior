@@ -33,8 +33,6 @@ class TreeCounter:
         Set the count for a path.
         """
 
-        # TODO - test that sets with super/subsets of the path override.
-
         if not isinstance(path, tuple):
             path = (path,)
 
