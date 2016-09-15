@@ -16,5 +16,5 @@ from lint.utils import round_to_decade
     (1916, 1920),
 
 ])
-def test_flatten_dict(year, decade):
+def test_round_to_decade(year, decade):
     assert round_to_decade(year) == decade

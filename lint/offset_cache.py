@@ -58,7 +58,7 @@ class OffsetCache(dict):
         Merge in another offset cache.
         """
 
-        for token, year, offset, count in flatten_dict(other):
+        for (token, year, offset), count in flatten_dict(other):
             self[token][year][offset] += count
 
         return self

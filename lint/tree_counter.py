@@ -105,7 +105,7 @@ class TreeCounter:
 
         # TODO: Have flatten yield (path, count) tuples.
 
-        for flat in other.flatten():
-            self[flat[:-1]] += flat[-1]
+        for path, count in other.flatten():
+            self[path] += count
 
         return self
