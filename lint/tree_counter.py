@@ -2,6 +2,8 @@
 
 from functools import reduce
 
+from lint.utils import flatten_dict
+
 
 class TreeCounter:
 
@@ -58,8 +60,12 @@ class TreeCounter:
 
         return reduce(vivify, enumerate(path), self.tree)
 
-    def __add__(self, other):
-        pass
+    def flatten(self):
 
-    def __iadd__(self, other):
-        pass
+        """
+        Generate flattened tuples of for all branches.
+
+        Yields: (path1, path2, ..., count)
+        """
+
+        yield from flatten_dict(self.tree)
