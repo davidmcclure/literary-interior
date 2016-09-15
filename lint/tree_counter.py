@@ -68,7 +68,8 @@ class TreeCounter:
             i, key = key
 
             if i == len(path)-1:
-                return tree.get(key, 0)
+                val = tree.get(key)
+                return val if type(val) is int else 0
 
             else:
                 val = tree.get(key)

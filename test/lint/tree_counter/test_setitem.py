@@ -8,6 +8,7 @@ from lint.tree_counter import TreeCounter
 @pytest.mark.parametrize('path,count,tree', [
 
     # Single key
+
     (1, 2, {
         1: 2
     }),
