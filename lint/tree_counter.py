@@ -9,13 +9,13 @@ from lint.utils import flatten_dict
 
 class TreeCounter:
 
-    def __init__(self):
+    def __init__(self, tree=None):
 
         """
         Initialize the count tree.
         """
 
-        self.tree = {}
+        self.tree = tree or {}
 
     def __repr__(self):
 
