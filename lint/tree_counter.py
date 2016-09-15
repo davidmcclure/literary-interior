@@ -93,3 +93,6 @@ class TreeCounter:
         """
 
         yield from flatten_dict(self.tree)
+
+    def __iadd__(self, other):
+        pass
