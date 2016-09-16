@@ -84,16 +84,6 @@ class TreeCounter:
 
         return reduce(vivify, enumerate(path), self.tree)
 
-    def flatten(self):
-
-        """
-        Generate flattened tuples of for all branches.
-
-        Yields: (path1, path2, ..., count)
-        """
-
-        yield from flatten_dict(self.tree)
-
     def __iadd__(self, other):
 
         """
@@ -107,3 +97,28 @@ class TreeCounter:
             self[path] += count
 
         return self
+
+    def __eq__(self, other):
+
+        """
+        Compare other counter instances and raw dicts.
+
+        Args:
+            other (TreeCounter|dict)
+        """
+
+        if isinstance(other, self.__class__):
+            return self.tree == other.tree
+
+        elif type(other) is dict:
+            return self.tree == other
+
+    def flatten(self):
+
+        """
+        Generate flattened tuples of for all branches.
+
+        Yields: (path1, path2, ..., count)
+        """
+
+        yield from flatten_dict(self.tree)
