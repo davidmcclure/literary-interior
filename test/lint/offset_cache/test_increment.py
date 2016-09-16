@@ -24,8 +24,8 @@ def test_register_years():
         },
     }))
 
-    assert c['token1'][1901][1] == 1
-    assert c['token2'][1902][2] == 2
+    assert c['token1', 1901, 1] == 1
+    assert c['token2', 1902, 2] == 2
 
 
 def test_register_tokens():
@@ -48,8 +48,8 @@ def test_register_tokens():
         },
     }))
 
-    assert c['token1'][1900][1] == 1
-    assert c['token2'][1900][2] == 2
+    assert c['token1', 1900, 1] == 1
+    assert c['token2', 1900, 2] == 2
 
 
 def test_merge_offsets():
@@ -76,7 +76,7 @@ def test_merge_offsets():
         },
     }))
 
-    assert c['token'][1900][1] == 1
-    assert c['token'][1900][2] == 2+4
-    assert c['token'][1900][3] == 3+5
-    assert c['token'][1900][4] == 6
+    assert c['token', 1900, 1] == 1
+    assert c['token', 1900, 2] == 2+4
+    assert c['token', 1900, 3] == 3+5
+    assert c['token', 1900, 4] == 6

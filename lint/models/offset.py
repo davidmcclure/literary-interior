@@ -67,7 +67,7 @@ class Offset(Base):
             offsets (OffsetCache)
         """
 
-        for group in grouper(flatten_dict(offsets), 1000):
+        for group in grouper(offsets.flatten(), 1000):
 
             mappings = [
                 dict(

@@ -8,12 +8,13 @@ from scandir import scandir
 from collections import defaultdict, Counter
 from functools import partial
 
+from lint.tree_counter import TreeCounter
 from lint.utils import flatten_dict, mem_pct
 
 
 # TODO: Subclass TreeCounter?
 
-class OffsetCache(dict):
+class OffsetCache(TreeCounter):
 
     @classmethod
     def from_results(cls, result_dir):
@@ -44,27 +45,6 @@ class OffsetCache(dict):
 
         return offsets
 
-    def __missing__(self, token):
-
-        """
-        Initialize the {token -> year -> offset -> count} map.
-        """
-
-        self[token] = defaultdict(Counter)
-
-        return self[token]
-
-    def __iadd__(self, other):
-
-        """
-        Merge in another offset cache.
-        """
-
-        for (token, year, offset), count in flatten_dict(other):
-            self[token][year][offset] += count
-
-        return self
-
     def increment(self, year, token_offsets):
 
         """
@@ -76,7 +56,7 @@ class OffsetCache(dict):
         """
 
         for (token, pos, offset), count in token_offsets.flatten():
-            self[token][year][offset] += count
+            self[token, year, offset] += count
 
     def flush(self, data_dir):
 
