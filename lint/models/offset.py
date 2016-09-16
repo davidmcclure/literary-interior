@@ -20,7 +20,13 @@ class Offset(Base):
     __tablename__ = 'offset'
 
     __table_args__ = (
-        PrimaryKeyConstraint('corpus', 'year', 'token', 'offset'),
+        PrimaryKeyConstraint(
+            'corpus',
+            'year',
+            'token',
+            'pos',
+            'offset',
+        ),
     )
 
     # TODO: pos
@@ -30,6 +36,8 @@ class Offset(Base):
     year = Column(Integer, nullable=False)
 
     token = Column(String, nullable=False)
+
+    pos = Column(String, nullable=False)
 
     offset = Column(Integer, nullable=False)
 
@@ -72,8 +80,9 @@ class Offset(Base):
             mappings = [
                 dict(
                     corpus=corpus,
-                    token=token,
                     year=year,
+                    token=token,
+                    pos=pos,
                     offset=offset,
                     count=count,
                 )

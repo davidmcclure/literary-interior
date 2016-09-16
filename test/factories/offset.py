@@ -12,9 +12,11 @@ class OffsetFactory(factory.Factory):
 
     corpus = 'corpus'
 
+    year = 1900
+
     token = 'token'
 
-    year = 1900
+    pos = 'POS'
 
     offset = factory.Sequence(lambda n: n)
 
