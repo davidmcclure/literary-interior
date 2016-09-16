@@ -8,7 +8,7 @@ def test_add_new_paths():
 
     c = CountCache()
 
-    c.increment(1901, TreeCounter({
+    c.add_volume(1901, TreeCounter({
         'token1': {
             'POS1': {
                 1:1,
@@ -16,7 +16,7 @@ def test_add_new_paths():
         },
     }))
 
-    c.increment(1902, TreeCounter({
+    c.add_volume(1902, TreeCounter({
         'token2': {
             'POS2': {
                 2:2,
@@ -32,7 +32,7 @@ def test_update_existing_paths():
 
     c = CountCache()
 
-    c.increment(1900, TreeCounter({
+    c.add_volume(1900, TreeCounter({
         'token': {
             'POS': {
                 1:1,
@@ -40,7 +40,7 @@ def test_update_existing_paths():
         },
     }))
 
-    c.increment(1900, TreeCounter({
+    c.add_volume(1900, TreeCounter({
         'token': {
             'POS': {
                 1:1,

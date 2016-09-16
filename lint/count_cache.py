@@ -41,10 +41,10 @@ class CountCache(TreeCounter):
 
         return offsets
 
-    def increment(self, year, counts):
+    def add_volume(self, year, counts):
 
         """
-        Increment (token, pos, offset) counts for a year.
+        Increment counts from a volume.
 
         Args:
             year (int)

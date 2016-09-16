@@ -25,7 +25,7 @@ class ExtractHTRC(Extract):
 
         return manifest.json_segments(size)
 
-    def increment(self, path):
+    def add_volume(self, path):
 
         """
         Increment offsets from a volume.
@@ -47,7 +47,7 @@ class ExtractHTRC(Extract):
         year = round_to_decade(vol.year())
 
         # Merge counts into cache.
-        self.cache.increment(year, offsets)
+        self.cache.add_volume(year, offsets)
 
     def flush(self):
 

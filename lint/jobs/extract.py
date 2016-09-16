@@ -11,7 +11,7 @@ class Extract:
     def segments(self, size):
         raise NotImplementedError
 
-    def increment(self, arg):
+    def add_volume(self, arg):
         raise NotImplementedError
 
     def flush(self, arg):
@@ -50,7 +50,7 @@ class Extract:
         for i, arg in enumerate(args):
 
             try:
-                self.increment(arg)
+                self.add_volume(arg)
 
             except Exception as e:
                 print(e)
