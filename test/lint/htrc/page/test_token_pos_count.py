@@ -17,28 +17,22 @@ def test_register_token_pos_counts():
             'POS2': 2,
         },
         'b': {
-            'POS1': 3,
-            'POS2': 4,
+            'POS3': 3,
+            'POS4': 4,
         },
         'c': {
-            'POS1': 5,
-            'POS2': 6,
+            'POS5': 5,
+            'POS6': 6,
         },
     })
 
     assert p.token_pos_count() == {
-        'a': {
-            'POS1': 1,
-            'POS2': 2,
-        },
-        'b': {
-            'POS1': 3,
-            'POS2': 4,
-        },
-        'c': {
-            'POS1': 5,
-            'POS2': 6,
-        },
+        ('a', 'POS1'): 1,
+        ('a', 'POS2'): 2,
+        ('b', 'POS3'): 3,
+        ('b', 'POS4'): 4,
+        ('c', 'POS5'): 5,
+        ('c', 'POS6'): 6,
     }
 
 
@@ -58,9 +52,7 @@ def test_combine_casing_variants():
     })
 
     assert p.token_pos_count() == {
-        'word': {
-            'POS': 1+2
-        }
+        ('word', 'POS'): 1+2,
     }
 
 
@@ -89,7 +81,5 @@ def test_ignore_irregular_tokens():
     })
 
     assert p.token_pos_count() == {
-        'word': {
-            'POS': 1
-        }
+        ('word', 'POS'): 1,
     }

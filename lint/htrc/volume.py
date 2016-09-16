@@ -3,7 +3,8 @@
 import json
 import bz2
 
-from lint.tree_counter import TreeCounter
+from collections import Counter
+
 from lint.htrc.page import Page
 
 
@@ -110,7 +111,7 @@ class Volume:
         Returns: TreeCounter (token, pos, offset) -> count
         """
 
-        offsets = TreeCounter()
+        counts = Counter()
 
         token_count = self.token_count()
 
@@ -125,13 +126,13 @@ class Volume:
 
             offset = round(resolution * center)
 
-            counts = page.token_pos_count()
+            page_counts = page.token_pos_count()
 
             # Register offset -> count.
-            for (token, pos), count in counts.flatten():
-                offsets[token, pos, offset] += count
+            for (token, pos), count in page_counts.items():
+                counts[token, pos, offset] += count
 
             # Track the cumulative count.
             seen += page.token_count()
 
-        return offsets
+        return counts

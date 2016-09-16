@@ -48,10 +48,10 @@ class CountCache(TreeCounter):
 
         Args:
             year (int)
-            counts (TreeCounter)
+            counts (Counter)
         """
 
-        for (token, pos, offset), count in counts.flatten():
+        for (token, pos, offset), count in counts.items():
             self[year, token, pos, offset] += count
 
     def flush(self, data_dir):
