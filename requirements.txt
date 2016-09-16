@@ -20,3 +20,5 @@ jupyter
 matplotlib
 scipy
 sklearn
+bs4
+lxml
