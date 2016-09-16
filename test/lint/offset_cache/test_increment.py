@@ -4,6 +4,9 @@ from lint.tree_counter import TreeCounter
 from lint.offset_cache import OffsetCache
 
 
+# TODO: Is this re-testing TreeCounter iadd?
+
+
 def test_register_years():
 
     c = OffsetCache()

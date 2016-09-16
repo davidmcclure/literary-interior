@@ -5,14 +5,10 @@ import pickle
 import uuid
 
 from scandir import scandir
-from collections import defaultdict, Counter
-from functools import partial
 
-from lint.tree_counter import TreeCounter
 from lint.utils import flatten_dict, mem_pct
+from lint.tree_counter import TreeCounter
 
-
-# TODO: Subclass TreeCounter?
 
 class OffsetCache(TreeCounter):
 
@@ -45,17 +41,17 @@ class OffsetCache(TreeCounter):
 
         return offsets
 
-    def increment(self, year, token_offsets):
+    def increment(self, year, counts):
 
         """
-        Increment token offsets for a year.
+        Increment (token, pos, offset) counts for a year.
 
         Args:
             year (int)
-            token_offsets (TreeCounter)
+            counts (TreeCounter)
         """
 
-        for (token, pos, offset), count in token_offsets.flatten():
+        for (token, pos, offset), count in counts.flatten():
             self[token, year, offset] += count
 
     def flush(self, data_dir):
