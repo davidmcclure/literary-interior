@@ -4,8 +4,11 @@ import psutil
 import os
 import decimal
 
-from itertools import islice, chain
+from collections import Counter
 from contextlib import contextmanager
+from itertools import islice, chain
+
+from textblob import TextBlob
 
 
 def grouper(iterable, size):
@@ -103,3 +106,30 @@ def round_to_decade(year):
     )
 
     return int(rounded) * 10
+
+
+def offset_counts(text, resolution):
+
+    """
+    Given a string of text, map (token, POS, offset) -> count.
+
+    Args:
+        text (str)
+        resolution (int)
+
+    Returns: Counter
+    """
+
+    blob = TextBlob(text)
+
+    counts = Counter()
+
+    for i, (token, pos) in enumerate(blob.tags):
+
+        ratio = i / (len(blob.tags)-1)
+
+        offset = round(ratio * resolution)
+
+        counts[token, pos, offset] += 1
+
+    return counts
