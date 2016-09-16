@@ -4,10 +4,7 @@ from lint.tree_counter import TreeCounter
 from lint.offset_cache import OffsetCache
 
 
-# TODO: Is this re-testing TreeCounter iadd?
-
-
-def test_register_years():
+def test_add_new_paths():
 
     c = OffsetCache()
 
@@ -31,31 +28,7 @@ def test_register_years():
     assert c[1902, 'token2', 'POS2', 2] == 2
 
 
-def test_register_tokens():
-
-    c = OffsetCache()
-
-    c.increment(1900, TreeCounter({
-        'token1': {
-            'POS1': {
-                1:1,
-            },
-        },
-    }))
-
-    c.increment(1900, TreeCounter({
-        'token2': {
-            'POS2': {
-                2:2,
-            },
-        },
-    }))
-
-    assert c[1900, 'token1', 'POS1', 1] == 1
-    assert c[1900, 'token2', 'POS2', 2] == 2
-
-
-def test_merge_offsets():
+def test_update_existing_paths():
 
     c = OffsetCache()
 
@@ -63,8 +36,6 @@ def test_merge_offsets():
         'token': {
             'POS': {
                 1:1,
-                2:2,
-                3:3,
             },
         },
     }))
@@ -72,14 +43,9 @@ def test_merge_offsets():
     c.increment(1900, TreeCounter({
         'token': {
             'POS': {
-                2:4,
-                3:5,
-                4:6,
+                1:1,
             },
         },
     }))
 
-    assert c[1900, 'token', 'POS', 1] == 1
-    assert c[1900, 'token', 'POS', 2] == 2+4
-    assert c[1900, 'token', 'POS', 3] == 3+5
-    assert c[1900, 'token', 'POS', 4] == 6
+    assert c[1900, 'token', 'POS', 1] == 2
