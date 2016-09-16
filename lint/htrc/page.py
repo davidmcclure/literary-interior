@@ -2,8 +2,7 @@
 
 import re
 
-from collections import Counter
-
+from lint.tree_counter import TreeCounter
 from lint.singletons import tokens
 
 
@@ -41,7 +40,8 @@ class Page:
         # Match letters.
         letters = re.compile('^[a-z]+$')
 
-        counts = Counter()
+        counts = TreeCounter()
+
         for token, pos_count in self.data['body']['tokenPosCount'].items():
 
             token = token.lower()
@@ -54,6 +54,7 @@ class Page:
             if token not in tokens:
                 continue
 
-            counts[token] += sum(pos_count.values())
+            for pos, count in pos_count.items():
+                counts[token, pos] += count
 
         return counts

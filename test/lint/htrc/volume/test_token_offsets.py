@@ -43,9 +43,9 @@ def test_map_page_center_offset_to_count(r):
 
     offsets = v.token_offsets(r)
 
-    assert offsets['a'][round(( 50/600)*r)] == 1
-    assert offsets['b'][round((200/600)*r)] == 2
-    assert offsets['c'][round((450/600)*r)] == 3
+    assert offsets['a', round(( 50/600)*r)] == 1
+    assert offsets['b', round((200/600)*r)] == 2
+    assert offsets['c', round((450/600)*r)] == 3
 
 
 def test_merge_offsets_for_token():
@@ -97,17 +97,17 @@ def test_merge_offsets_for_token():
 
     offsets = v.token_offsets(1000)
 
-    assert offsets['a'][round(( 50/300) * 1000)] == 1
-    assert offsets['b'][round(( 50/300) * 1000)] == 2
-    assert offsets['c'][round(( 50/300) * 1000)] == 3
+    assert offsets['a', round(( 50/300) * 1000)] == 1
+    assert offsets['b', round(( 50/300) * 1000)] == 2
+    assert offsets['c', round(( 50/300) * 1000)] == 3
 
-    assert offsets['b'][round((150/300) * 1000)] == 4
-    assert offsets['c'][round((150/300) * 1000)] == 5
-    assert offsets['d'][round((150/300) * 1000)] == 6
+    assert offsets['b', round((150/300) * 1000)] == 4
+    assert offsets['c', round((150/300) * 1000)] == 5
+    assert offsets['d', round((150/300) * 1000)] == 6
 
-    assert offsets['c'][round((250/300) * 1000)] == 7
-    assert offsets['d'][round((250/300) * 1000)] == 8
-    assert offsets['e'][round((250/300) * 1000)] == 9
+    assert offsets['c', round((250/300) * 1000)] == 7
+    assert offsets['d', round((250/300) * 1000)] == 8
+    assert offsets['e', round((250/300) * 1000)] == 9
 
 
 def test_add_counts_when_offsets_round_together():
@@ -147,10 +147,10 @@ def test_add_counts_when_offsets_round_together():
 
     offsets = v.token_offsets(4)
 
-    assert offsets['a'][round(( 50/400) * 4)] == 1
+    assert offsets['a', round(( 50/400) * 4)] == 1
 
     # Pages 2 and 3 both snap to offset 2.
-    assert offsets['a'][round((150/400) * 4)] == 2+3
-    assert offsets['a'][round((250/400) * 4)] == 2+3
+    assert offsets['a', round((150/400) * 4)] == 2+3
+    assert offsets['a', round((250/400) * 4)] == 2+3
 
-    assert offsets['a'][round((350/400) * 4)] == 4
+    assert offsets['a', round((350/400) * 4)] == 4

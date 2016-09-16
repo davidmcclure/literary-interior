@@ -70,11 +70,11 @@ class OffsetCache(dict):
 
         Args:
             year (int)
-            token_offsets (dict)
+            token_offsets (TreeCounter)
         """
 
-        for token, offsets in token_offsets.items():
-            self[token][year] += offsets
+        for (token, offset), count in token_offsets.flatten():
+            self[token][year][offset] += count
 
     def flush(self, data_dir):
 
