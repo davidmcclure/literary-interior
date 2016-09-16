@@ -20,16 +20,16 @@ class Offset(Base):
     __tablename__ = 'offset'
 
     __table_args__ = (
-        PrimaryKeyConstraint('corpus', 'token', 'year', 'offset'),
+        PrimaryKeyConstraint('corpus', 'year', 'token', 'offset'),
     )
 
     # TODO: pos
 
     corpus = Column(String, nullable=False)
 
-    token = Column(String, nullable=False)
-
     year = Column(Integer, nullable=False)
+
+    token = Column(String, nullable=False)
 
     offset = Column(Integer, nullable=False)
 
@@ -77,7 +77,7 @@ class Offset(Base):
                     offset=offset,
                     count=count,
                 )
-                for (token, year, offset), count in group
+                for (year, token, offset), count in group
             ]
 
             session.bulk_insert_mappings(cls, mappings)
