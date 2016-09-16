@@ -17,12 +17,12 @@ def test_insert_corpus():
 
     cache = OffsetCache()
 
-    cache[1901, 'token1', 'POS', 1] = 1
-    cache[1902, 'token2', 'POS', 2] = 2
-    cache[1903, 'token3', 'POS', 3] = 3
+    cache[1901, 'token1', 'POS1', 1] = 1
+    cache[1902, 'token2', 'POS2', 2] = 2
+    cache[1903, 'token3', 'POS3', 3] = 3
 
     Offset.insert_corpus('corpus', cache)
 
-    assert Offset.get('corpus', 1901, 'token1', 'POS', 1) == 1
-    assert Offset.get('corpus', 1902, 'token2', 'POS', 2) == 2
-    assert Offset.get('corpus', 1903, 'token3', 'POS', 3) == 3
+    assert Offset.get('corpus', 1901, 'token1', 'POS1', 1) == 1
+    assert Offset.get('corpus', 1902, 'token2', 'POS2', 2) == 2
+    assert Offset.get('corpus', 1903, 'token3', 'POS3', 3) == 3

@@ -13,7 +13,7 @@ def test_register_years():
 
     c.increment(1901, TreeCounter({
         'token1': {
-            'POS': {
+            'POS1': {
                 1:1,
             },
         },
@@ -21,14 +21,14 @@ def test_register_years():
 
     c.increment(1902, TreeCounter({
         'token2': {
-            'POS': {
+            'POS2': {
                 2:2,
             },
         },
     }))
 
-    assert c[1901, 'token1', 'POS', 1] == 1
-    assert c[1902, 'token2', 'POS', 2] == 2
+    assert c[1901, 'token1', 'POS1', 1] == 1
+    assert c[1902, 'token2', 'POS2', 2] == 2
 
 
 def test_register_tokens():
@@ -37,7 +37,7 @@ def test_register_tokens():
 
     c.increment(1900, TreeCounter({
         'token1': {
-            'POS': {
+            'POS1': {
                 1:1,
             },
         },
@@ -45,14 +45,14 @@ def test_register_tokens():
 
     c.increment(1900, TreeCounter({
         'token2': {
-            'POS': {
+            'POS2': {
                 2:2,
             },
         },
     }))
 
-    assert c[1900, 'token1', 'POS', 1] == 1
-    assert c[1900, 'token2', 'POS', 2] == 2
+    assert c[1900, 'token1', 'POS1', 1] == 1
+    assert c[1900, 'token2', 'POS2', 2] == 2
 
 
 def test_merge_offsets():

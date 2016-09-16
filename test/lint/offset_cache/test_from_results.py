@@ -10,19 +10,19 @@ def test_from_results(htrc_results):
     """
 
     c1 = OffsetCache()
-    c1['token1', 1901, 1] = 1
-    c1['token2', 1902, 1] = 2
-    c1['token3', 1903, 1] = 3
+    c1[1901, 'token1', 'POS1', 1] = 1
+    c1[1902, 'token2', 'POS2', 1] = 2
+    c1[1903, 'token3', 'POS3', 1] = 3
 
     c2 = OffsetCache()
-    c2['token2', 1902, 1] = 4
-    c2['token3', 1903, 1] = 5
-    c2['token4', 1904, 1] = 6
+    c2[1902, 'token2', 'POS2', 1] = 4
+    c2[1903, 'token3', 'POS3', 1] = 5
+    c2[1904, 'token4', 'POS4', 1] = 6
 
     c3 = OffsetCache()
-    c3['token3', 1903, 1] = 7
-    c3['token4', 1904, 1] = 8
-    c3['token5', 1905, 1] = 9
+    c3[1903, 'token3', 'POS3', 1] = 7
+    c3[1904, 'token4', 'POS4', 1] = 8
+    c3[1905, 'token5', 'POS5', 1] = 9
 
     htrc_results.add_cache(c1)
     htrc_results.add_cache(c2)
@@ -30,8 +30,8 @@ def test_from_results(htrc_results):
 
     cache = OffsetCache.from_results(htrc_results.path)
 
-    assert cache['token1', 1901, 1] == 1
-    assert cache['token2', 1902, 1] == 2+4
-    assert cache['token3', 1903, 1] == 3+5+7
-    assert cache['token4', 1904, 1] == 6+8
-    assert cache['token5', 1905, 1] == 9
+    assert cache[1901, 'token1', 'POS1', 1] == 1
+    assert cache[1902, 'token2', 'POS2', 1] == 2+4
+    assert cache[1903, 'token3', 'POS3', 1] == 3+5+7
+    assert cache[1904, 'token4', 'POS4', 1] == 6+8
+    assert cache[1905, 'token5', 'POS5', 1] == 9

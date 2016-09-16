@@ -15,25 +15,26 @@ pytestmark = pytest.mark.usefixtures('db', 'mpi')
 def test_dump_offsets(htrc_data, htrc_results):
 
     """
-    DumpOffsets should index {token -> year -> offset -> count} data.
+    ExtractHTRC should index:
+    (corpus, year, token, pos, offset) -> count
     """
 
     v1 = make_htrc_vol(year=1910, pages=[
-        make_htrc_page(token_count=100, counts={'a': { 'POS': 1 }}),
-        make_htrc_page(token_count=100, counts={'b': { 'POS': 2 }}),
-        make_htrc_page(token_count=100, counts={'c': { 'POS': 3 }}),
+        make_htrc_page(token_count=100, counts={'a': { 'POS1': 1 }}),
+        make_htrc_page(token_count=100, counts={'b': { 'POS2': 2 }}),
+        make_htrc_page(token_count=100, counts={'c': { 'POS3': 3 }}),
     ])
 
     v2 = make_htrc_vol(year=1920, pages=[
-        make_htrc_page(token_count=100, counts={'b': { 'POS': 4 }}),
-        make_htrc_page(token_count=100, counts={'c': { 'POS': 5 }}),
-        make_htrc_page(token_count=100, counts={'d': { 'POS': 6 }}),
+        make_htrc_page(token_count=100, counts={'b': { 'POS4': 4 }}),
+        make_htrc_page(token_count=100, counts={'c': { 'POS5': 5 }}),
+        make_htrc_page(token_count=100, counts={'d': { 'POS6': 6 }}),
     ])
 
     v3 = make_htrc_vol(year=1930, pages=[
-        make_htrc_page(token_count=100, counts={'c': { 'POS': 7 }}),
-        make_htrc_page(token_count=100, counts={'d': { 'POS': 8 }}),
-        make_htrc_page(token_count=100, counts={'e': { 'POS': 9 }}),
+        make_htrc_page(token_count=100, counts={'c': { 'POS7': 7 }}),
+        make_htrc_page(token_count=100, counts={'d': { 'POS8': 8 }}),
+        make_htrc_page(token_count=100, counts={'e': { 'POS9': 9 }}),
     ])
 
     htrc_data.add_vol(v1)
@@ -47,17 +48,17 @@ def test_dump_offsets(htrc_data, htrc_results):
     o2 = round((150/300)*100)
     o3 = round((250/300)*100)
 
-    assert Offset.get('htrc', 1910, 'a', 'POS', o1) == 1
-    assert Offset.get('htrc', 1910, 'b', 'POS', o2) == 2
-    assert Offset.get('htrc', 1910, 'c', 'POS', o3) == 3
+    assert Offset.get('htrc', 1910, 'a', 'POS1', o1) == 1
+    assert Offset.get('htrc', 1910, 'b', 'POS2', o2) == 2
+    assert Offset.get('htrc', 1910, 'c', 'POS3', o3) == 3
 
-    assert Offset.get('htrc', 1920, 'b', 'POS', o1) == 4
-    assert Offset.get('htrc', 1920, 'c', 'POS', o2) == 5
-    assert Offset.get('htrc', 1920, 'd', 'POS', o3) == 6
+    assert Offset.get('htrc', 1920, 'b', 'POS4', o1) == 4
+    assert Offset.get('htrc', 1920, 'c', 'POS5', o2) == 5
+    assert Offset.get('htrc', 1920, 'd', 'POS6', o3) == 6
 
-    assert Offset.get('htrc', 1930, 'c', 'POS', o1) == 7
-    assert Offset.get('htrc', 1930, 'd', 'POS', o2) == 8
-    assert Offset.get('htrc', 1930, 'e', 'POS', o3) == 9
+    assert Offset.get('htrc', 1930, 'c', 'POS7', o1) == 7
+    assert Offset.get('htrc', 1930, 'd', 'POS8', o2) == 8
+    assert Offset.get('htrc', 1930, 'e', 'POS9', o3) == 9
 
 
 def test_ignore_non_english_volumes(htrc_data, htrc_results):
