@@ -3,6 +3,8 @@
 import psutil
 import os
 import decimal
+import re
+import scandir
 
 from collections import Counter
 from contextlib import contextmanager
@@ -106,6 +108,28 @@ def round_to_decade(year):
     )
 
     return int(rounded) * 10
+
+
+def scan_paths(root, pattern):
+
+    """
+    Walk a directory and yield file paths that match a pattern.
+
+    Args:
+        root (str)
+        pattern (str)
+
+    Yields: str
+    """
+
+    pattern = re.compile(pattern)
+
+    for root, dirs, files in scandir.walk(root, followlinks=True):
+        for name in files:
+
+            # Match the extension.
+            if pattern.search(name):
+                yield os.path.join(root, name)
 
 
 def offset_counts(text, resolution):
