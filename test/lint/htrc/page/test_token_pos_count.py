@@ -26,7 +26,7 @@ def test_register_token_pos_counts():
         },
     })
 
-    assert p.merged_token_counts() == {
+    assert p.token_pos_count() == {
         'a': {
             'POS1': 1,
             'POS2': 2,
@@ -57,7 +57,7 @@ def test_combine_casing_variants():
         },
     })
 
-    assert p.merged_token_counts() == {
+    assert p.token_pos_count() == {
         'word': {
             'POS': 1+2
         }
@@ -88,7 +88,7 @@ def test_ignore_irregular_tokens():
 
     })
 
-    assert p.merged_token_counts() == {
+    assert p.token_pos_count() == {
         'word': {
             'POS': 1
         }

@@ -126,7 +126,7 @@ class Volume:
 
             offset = round(resolution * center)
 
-            counts = page.merged_token_counts()
+            counts = page.token_pos_count()
 
             # Register offset -> count.
             for (token, pos), count in counts.flatten():
