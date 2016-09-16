@@ -126,7 +126,7 @@ def offset_counts(text, resolution):
 
     for i, (token, pos) in enumerate(blob.tags):
 
-        ratio = i / (len(blob.tags)-1)
+        ratio = i / len(blob.tags)
 
         offset = round(ratio * resolution)
 
