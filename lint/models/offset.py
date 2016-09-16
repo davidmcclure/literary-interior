@@ -29,8 +29,6 @@ class Offset(Base):
         ),
     )
 
-    # TODO: pos
-
     corpus = Column(String, nullable=False)
 
     year = Column(Integer, nullable=False)

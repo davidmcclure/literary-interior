@@ -26,19 +26,19 @@ def test_map_page_center_offset_to_count(r):
 
         make_htrc_page(token_count=100, counts={
             'a': {
-                'POS': 1,
+                'POS1': 1,
             }
         }),
 
         make_htrc_page(token_count=200, counts={
             'b': {
-                'POS': 2,
+                'POS2': 2,
             }
         }),
 
         make_htrc_page(token_count=300, counts={
             'c': {
-                'POS': 3,
+                'POS3': 3,
             }
         }),
 
@@ -46,12 +46,14 @@ def test_map_page_center_offset_to_count(r):
 
     offsets = v.token_offsets(r)
 
-    assert offsets['a', 'POS', round(( 50/600)*r)] == 1
-    assert offsets['b', 'POS', round((200/600)*r)] == 2
-    assert offsets['c', 'POS', round((450/600)*r)] == 3
+    assert offsets['a', 'POS1', round(( 50/600)*r)] == 1
+    assert offsets['b', 'POS2', round((200/600)*r)] == 2
+    assert offsets['c', 'POS3', round((450/600)*r)] == 3
 
 
 def test_merge_offsets_for_token():
+
+    # TODO: What is this testing?
 
     """
     Counts for different offsets for the same token should be merged under the
@@ -62,37 +64,37 @@ def test_merge_offsets_for_token():
 
         make_htrc_page(token_count=100, counts={
             'a': {
-                'POS': 1,
+                'POS1': 1,
             },
             'b': {
-                'POS': 2,
+                'POS2': 2,
             },
             'c': {
-                'POS': 3,
+                'POS3': 3,
             },
         }),
 
         make_htrc_page(token_count=100, counts={
             'b': {
-                'POS': 4,
+                'POS4': 4,
             },
             'c': {
-                'POS': 5,
+                'POS5': 5,
             },
             'd': {
-                'POS': 6,
+                'POS6': 6,
             },
         }),
 
         make_htrc_page(token_count=100, counts={
             'c': {
-                'POS': 7,
+                'POS7': 7,
             },
             'd': {
-                'POS': 8,
+                'POS8': 8,
             },
             'e': {
-                'POS': 9,
+                'POS9': 9,
             },
         }),
 
@@ -100,17 +102,17 @@ def test_merge_offsets_for_token():
 
     offsets = v.token_offsets(1000)
 
-    assert offsets['a', 'POS', round(( 50/300) * 1000)] == 1
-    assert offsets['b', 'POS', round(( 50/300) * 1000)] == 2
-    assert offsets['c', 'POS', round(( 50/300) * 1000)] == 3
+    assert offsets['a', 'POS1', round(( 50/300) * 1000)] == 1
+    assert offsets['b', 'POS2', round(( 50/300) * 1000)] == 2
+    assert offsets['c', 'POS3', round(( 50/300) * 1000)] == 3
 
-    assert offsets['b', 'POS', round((150/300) * 1000)] == 4
-    assert offsets['c', 'POS', round((150/300) * 1000)] == 5
-    assert offsets['d', 'POS', round((150/300) * 1000)] == 6
+    assert offsets['b', 'POS4', round((150/300) * 1000)] == 4
+    assert offsets['c', 'POS5', round((150/300) * 1000)] == 5
+    assert offsets['d', 'POS6', round((150/300) * 1000)] == 6
 
-    assert offsets['c', 'POS', round((250/300) * 1000)] == 7
-    assert offsets['d', 'POS', round((250/300) * 1000)] == 8
-    assert offsets['e', 'POS', round((250/300) * 1000)] == 9
+    assert offsets['c', 'POS7', round((250/300) * 1000)] == 7
+    assert offsets['d', 'POS8', round((250/300) * 1000)] == 8
+    assert offsets['e', 'POS9', round((250/300) * 1000)] == 9
 
 
 def test_add_counts_when_offsets_round_together():
