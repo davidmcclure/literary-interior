@@ -41,7 +41,7 @@ class ExtractHTRC(Extract):
             return
 
         # Get token offset counts.
-        offsets = vol.token_offsets(config['offset_resolution'])
+        offsets = vol.offset_counts(config['offset_resolution'])
 
         # Round to nearest decade.
         year = round_to_decade(vol.year())

@@ -59,7 +59,7 @@ def test_use_page_center_as_offset(r):
 
     ])
 
-    offsets = v.token_offsets(r)
+    offsets = v.offset_counts(r)
 
     o1 = round(( 50/600)*r)
     o2 = round((200/600)*r)
@@ -113,7 +113,7 @@ def test_add_counts_when_offsets_round_together():
 
     ])
 
-    offsets = v.token_offsets(4)
+    offsets = v.offset_counts(4)
 
     o1 = round(( 50/400)*4)
     o2 = round((150/400)*4)

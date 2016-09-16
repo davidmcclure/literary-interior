@@ -99,16 +99,15 @@ class Volume:
         for data in self.data['features']['pages']:
             yield Page(data)
 
-    def token_offsets(self, resolution):
+    def offset_counts(self, resolution):
 
         """
-        For each token, get the offsets of each instance of the token inside
-        the text, with the offset is rounded to an integer.
+        Add up token counts, broken out by 1-N offset "buckets."
 
         args:
             resolution (int)
 
-        Returns: dict {token: Counter({ offset: count })}
+        Returns: TreeCounter (token, pos, offset) -> count
         """
 
         offsets = TreeCounter()
