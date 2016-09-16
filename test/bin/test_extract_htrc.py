@@ -47,17 +47,17 @@ def test_dump_offsets(htrc_data, htrc_results):
     o2 = round((150/300)*100)
     o3 = round((250/300)*100)
 
-    assert Offset.get('htrc', 'a', 1910, o1) == 1
-    assert Offset.get('htrc', 'b', 1910, o2) == 2
-    assert Offset.get('htrc', 'c', 1910, o3) == 3
+    assert Offset.get('htrc', 1910, 'a', 'POS', o1) == 1
+    assert Offset.get('htrc', 1910, 'b', 'POS', o2) == 2
+    assert Offset.get('htrc', 1910, 'c', 'POS', o3) == 3
 
-    assert Offset.get('htrc', 'b', 1920, o1) == 4
-    assert Offset.get('htrc', 'c', 1920, o2) == 5
-    assert Offset.get('htrc', 'd', 1920, o3) == 6
+    assert Offset.get('htrc', 1920, 'b', 'POS', o1) == 4
+    assert Offset.get('htrc', 1920, 'c', 'POS', o2) == 5
+    assert Offset.get('htrc', 1920, 'd', 'POS', o3) == 6
 
-    assert Offset.get('htrc', 'c', 1930, o1) == 7
-    assert Offset.get('htrc', 'd', 1930, o2) == 8
-    assert Offset.get('htrc', 'e', 1930, o3) == 9
+    assert Offset.get('htrc', 1930, 'c', 'POS', o1) == 7
+    assert Offset.get('htrc', 1930, 'd', 'POS', o2) == 8
+    assert Offset.get('htrc', 1930, 'e', 'POS', o3) == 9
 
 
 def test_ignore_non_english_volumes(htrc_data, htrc_results):
@@ -89,9 +89,9 @@ def test_ignore_non_english_volumes(htrc_data, htrc_results):
     o3 = round((250/300)*100)
 
     # Skip the German volume.
-    assert Offset.get('htrc', 'a', 1900, o1) == 1
-    assert Offset.get('htrc', 'b', 1900, o2) == 2
-    assert Offset.get('htrc', 'c', 1900, o3) == 3
+    assert Offset.get('htrc', 1900, 'a', 'POS', o1) == 1
+    assert Offset.get('htrc', 1900, 'b', 'POS', o2) == 2
+    assert Offset.get('htrc', 1900, 'c', 'POS', o3) == 3
 
 
 def test_round_up_years_to_decade(htrc_data, htrc_results):
@@ -133,10 +133,10 @@ def test_round_up_years_to_decade(htrc_data, htrc_results):
     o3 = round((250/300)*100)
 
     # Snap to decade.
-    assert Offset.get('htrc', 'a', 1900, o1) == 2
-    assert Offset.get('htrc', 'b', 1900, o2) == 4
-    assert Offset.get('htrc', 'c', 1900, o3) == 8
+    assert Offset.get('htrc', 1900, 'a', 'POS', o1) == 2
+    assert Offset.get('htrc', 1900, 'b', 'POS', o2) == 4
+    assert Offset.get('htrc', 1900, 'c', 'POS', o3) == 8
 
-    assert Offset.get('htrc', 'a', 1910, o1) == 16+128
-    assert Offset.get('htrc', 'b', 1910, o2) == 32+256
-    assert Offset.get('htrc', 'c', 1910, o3) == 64+512
+    assert Offset.get('htrc', 1910, 'a', 'POS', o1) == 16+128
+    assert Offset.get('htrc', 1910, 'b', 'POS', o2) == 32+256
+    assert Offset.get('htrc', 1910, 'c', 'POS', o3) == 64+512

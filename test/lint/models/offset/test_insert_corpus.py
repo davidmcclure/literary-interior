@@ -23,6 +23,6 @@ def test_insert_corpus():
 
     Offset.insert_corpus('corpus', cache)
 
-    assert Offset.get('corpus', 'token1', 1901, 1) == 1
-    assert Offset.get('corpus', 'token2', 1902, 2) == 2
-    assert Offset.get('corpus', 'token3', 1903, 3) == 3
+    assert Offset.get('corpus', 1901, 'token1', 'POS', 1) == 1
+    assert Offset.get('corpus', 1902, 'token2', 'POS', 2) == 2
+    assert Offset.get('corpus', 1903, 'token3', 'POS', 3) == 3

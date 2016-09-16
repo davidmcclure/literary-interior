@@ -104,15 +104,16 @@ class Offset(Base):
         cls.query.filter_by(corpus=corpus).delete()
 
     @classmethod
-    def get(cls, corpus, token, year, offset):
+    def get(cls, corpus, year, token, pos, offset):
 
         """
         Get a token count by the composite primary key.
 
         Args:
             corpus (str)
-            token (str)
             year (int)
+            token (str)
+            pos (str)
             offset (int)
 
         Returns: int
@@ -123,8 +124,9 @@ class Offset(Base):
             .query(cls.count)
             .filter_by(
                 corpus=corpus,
-                token=token,
                 year=year,
+                token=token,
+                pos=pos,
                 offset=offset,
             )
         )
