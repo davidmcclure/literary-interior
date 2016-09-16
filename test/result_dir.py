@@ -11,7 +11,7 @@ class ResultDir(TempDir):
         Pickle a cache into the directory.
 
         Args:
-            cache (OffsetCache)
+            cache (CountCache)
         """
 
         cache.flush(self.path)

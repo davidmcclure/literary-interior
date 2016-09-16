@@ -11,7 +11,7 @@ from sqlalchemy.sql import text, func
 from lint.singletons import config, session
 from lint.models import Base
 from lint.utils import flatten_dict, mem_pct, grouper
-from lint.offset_cache import OffsetCache
+from lint.count_cache import CountCache
 
 
 class Offset(Base):
@@ -54,7 +54,7 @@ class Offset(Base):
         """
 
         # Merge result pickles.
-        results = OffsetCache.from_results(result_dir)
+        results = CountCache.from_results(result_dir)
 
         # Clear and insert the counts.
         cls.delete_corpus(corpus)
@@ -70,7 +70,7 @@ class Offset(Base):
 
         Args:
             corpus (str)
-            offsets (OffsetCache)
+            offsets (CountCache)
         """
 
         for group in grouper(offsets.flatten(), 1000):

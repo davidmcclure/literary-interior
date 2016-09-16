@@ -3,7 +3,7 @@
 
 from lint.singletons import config, session
 from lint.models import Offset
-from lint.offset_cache import OffsetCache
+from lint.count_cache import CountCache
 
 
 if __name__ == '__main__':

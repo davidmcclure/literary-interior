@@ -2,7 +2,7 @@
 
 import pytest
 
-from lint.offset_cache import OffsetCache
+from lint.count_cache import CountCache
 from lint.models import Offset
 
 
@@ -15,7 +15,7 @@ def test_insert_corpus():
     Insert a row for each year / token / offset / count.
     """
 
-    cache = OffsetCache()
+    cache = CountCache()
 
     cache[1901, 'token1', 'POS1', 1] = 1
     cache[1902, 'token2', 'POS2', 2] = 2

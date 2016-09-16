@@ -2,7 +2,7 @@
 
 import json
 
-from lint.offset_cache import OffsetCache
+from lint.count_cache import CountCache
 from lint.utils import mem_pct
 
 
@@ -45,7 +45,7 @@ class Extract:
 
         ## ** Gather offsets, flush.
 
-        self.cache = OffsetCache()
+        self.cache = CountCache()
 
         for i, arg in enumerate(args):
 

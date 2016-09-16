@@ -2,16 +2,16 @@
 
 import pickle
 
-from lint.offset_cache import OffsetCache
+from lint.count_cache import CountCache
 
 
 def test_write_pickle(htrc_results):
 
     """
-    OffsetCache#flush() should pickle the data to disk.
+    CountCache#flush() should pickle the data to disk.
     """
 
-    c1 = OffsetCache()
+    c1 = CountCache()
     c1[1900, 'token', 'POS', 1] = 1
 
     path = c1.flush(htrc_results.path)

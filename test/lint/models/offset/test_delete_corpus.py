@@ -3,7 +3,7 @@
 import pytest
 
 from lint.singletons import session
-from lint.offset_cache import OffsetCache
+from lint.count_cache import CountCache
 from lint.models import Offset
 
 from test.factories import OffsetFactory

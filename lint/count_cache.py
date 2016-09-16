@@ -10,7 +10,7 @@ from lint.utils import flatten_dict, mem_pct
 from lint.tree_counter import TreeCounter
 
 
-class OffsetCache(TreeCounter):
+class CountCache(TreeCounter):
 
     @classmethod
     def from_results(cls, result_dir):

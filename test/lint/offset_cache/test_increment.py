@@ -1,12 +1,12 @@
 
 
 from lint.tree_counter import TreeCounter
-from lint.offset_cache import OffsetCache
+from lint.count_cache import CountCache
 
 
 def test_add_new_paths():
 
-    c = OffsetCache()
+    c = CountCache()
 
     c.increment(1901, TreeCounter({
         'token1': {
@@ -30,7 +30,7 @@ def test_add_new_paths():
 
 def test_update_existing_paths():
 
-    c = OffsetCache()
+    c = CountCache()
 
     c.increment(1900, TreeCounter({
         'token': {
