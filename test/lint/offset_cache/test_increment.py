@@ -27,8 +27,8 @@ def test_register_years():
         },
     }))
 
-    assert c[1901, 'token1', 1] == 1
-    assert c[1902, 'token2', 2] == 2
+    assert c[1901, 'token1', 'POS', 1] == 1
+    assert c[1902, 'token2', 'POS', 2] == 2
 
 
 def test_register_tokens():
@@ -51,8 +51,8 @@ def test_register_tokens():
         },
     }))
 
-    assert c[1900, 'token1', 1] == 1
-    assert c[1900, 'token2', 2] == 2
+    assert c[1900, 'token1', 'POS', 1] == 1
+    assert c[1900, 'token2', 'POS', 2] == 2
 
 
 def test_merge_offsets():
@@ -79,7 +79,7 @@ def test_merge_offsets():
         },
     }))
 
-    assert c[1900, 'token', 1] == 1
-    assert c[1900, 'token', 2] == 2+4
-    assert c[1900, 'token', 3] == 3+5
-    assert c[1900, 'token', 4] == 6
+    assert c[1900, 'token', 'POS', 1] == 1
+    assert c[1900, 'token', 'POS', 2] == 2+4
+    assert c[1900, 'token', 'POS', 3] == 3+5
+    assert c[1900, 'token', 'POS', 4] == 6

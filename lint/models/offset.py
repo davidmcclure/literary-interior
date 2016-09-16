@@ -77,7 +77,7 @@ class Offset(Base):
                     offset=offset,
                     count=count,
                 )
-                for (year, token, offset), count in group
+                for (year, token, pos, offset), count in group
             ]
 
             session.bulk_insert_mappings(cls, mappings)

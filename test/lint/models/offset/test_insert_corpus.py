@@ -17,9 +17,9 @@ def test_insert_corpus():
 
     cache = OffsetCache()
 
-    cache[1901, 'token1', 1] = 1
-    cache[1902, 'token2', 2] = 2
-    cache[1903, 'token3', 3] = 3
+    cache[1901, 'token1', 'POS', 1] = 1
+    cache[1902, 'token2', 'POS', 2] = 2
+    cache[1903, 'token3', 'POS', 3] = 3
 
     Offset.insert_corpus('corpus', cache)
 
