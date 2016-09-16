@@ -130,7 +130,7 @@ class Volume:
 
             # Register offset -> count.
             for (token, pos), count in counts.flatten():
-                offsets[token, offset] += count
+                offsets[token, pos, offset] += count
 
             # Track the cumulative count.
             seen += page.token_count()

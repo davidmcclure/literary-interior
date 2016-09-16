@@ -11,6 +11,8 @@ from functools import partial
 from lint.utils import flatten_dict, mem_pct
 
 
+# TODO: Subclass TreeCounter?
+
 class OffsetCache(dict):
 
     @classmethod
@@ -73,7 +75,7 @@ class OffsetCache(dict):
             token_offsets (TreeCounter)
         """
 
-        for (token, offset), count in token_offsets.flatten():
+        for (token, pos, offset), count in token_offsets.flatten():
             self[token][year][offset] += count
 
     def flush(self, data_dir):

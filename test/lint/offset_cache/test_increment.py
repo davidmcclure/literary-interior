@@ -10,13 +10,17 @@ def test_register_years():
 
     c.increment(1901, TreeCounter({
         'token1': {
-            1:1,
+            'POS': {
+                1:1,
+            },
         },
     }))
 
     c.increment(1902, TreeCounter({
         'token2': {
-            2:2,
+            'POS': {
+                2:2,
+            },
         },
     }))
 
@@ -30,13 +34,17 @@ def test_register_tokens():
 
     c.increment(1900, TreeCounter({
         'token1': {
-            1:1,
+            'POS': {
+                1:1,
+            },
         },
     }))
 
     c.increment(1900, TreeCounter({
         'token2': {
-            2:2,
+            'POS': {
+                2:2,
+            },
         },
     }))
 
@@ -50,18 +58,22 @@ def test_merge_offsets():
 
     c.increment(1900, TreeCounter({
         'token': {
-            1:1,
-            2:2,
-            3:3,
-        }
+            'POS': {
+                1:1,
+                2:2,
+                3:3,
+            },
+        },
     }))
 
     c.increment(1900, TreeCounter({
         'token': {
-            2:4,
-            3:5,
-            4:6,
-        }
+            'POS': {
+                2:4,
+                3:5,
+                4:6,
+            },
+        },
     }))
 
     assert c['token'][1900][1] == 1
