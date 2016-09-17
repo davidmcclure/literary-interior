@@ -6,6 +6,9 @@ import os
 from lint.singletons import config as _config, session
 from lint.models import Base
 
+from lint.chicago.corpus import Corpus as ChicagoCorpus
+from lint.chicago.novel import Novel as ChicagoNovel
+
 from test.result_dir import ResultDir
 from test.htrc_data import HTRCData
 
@@ -136,5 +139,33 @@ def gail_fixture_path(fixture_path):
         )
 
         return fixture_path(rel_path)
+
+    return func
+
+
+@pytest.fixture
+def chicago_fixture_path():
+
+    """
+    Provide the Chicago root path.
+    """
+
+    return os.path.join(os.path.dirname(__file__), 'fixtures/chicago')
+
+
+@pytest.fixture
+def chicago_novel(chicago_fixture_path):
+
+    """
+    Given a book id, provide a Novel instance.
+    """
+
+    def func(id):
+
+        corpus = ChicagoCorpus(chicago_fixture_path)
+
+        for row in corpus.novels_metadata():
+            if int(row['BOOK_ID']) == id:
+                return ChicagoNovel(chicago_fixture_path, row)
 
     return func
