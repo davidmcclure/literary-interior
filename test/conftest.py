@@ -100,3 +100,17 @@ def mpi(htrc_data, htrc_results, config):
     session.remove()
 
     init_testing_db()
+
+
+@pytest.fixture
+def fixture_path():
+
+    """
+    Provide a helper function that provides an absolute fixture path.
+    """
+
+    def func(rel_path):
+        dir_path = os.path.join(os.path.dirname(__file__), 'fixtures')
+        return os.path.join(dir_path, rel_path)
+
+    return func
