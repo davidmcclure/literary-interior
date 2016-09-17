@@ -2,9 +2,11 @@
 
 import pytest
 
+from lint.gail.text import Text
+
 
 @pytest.fixture
-def gail_fixture_path(fixture_path):
+def gail_text(fixture_path):
 
     """
     Given a Gail id, provide a fixture path.
@@ -19,6 +21,6 @@ def gail_fixture_path(fixture_path):
             parts[0], parts[1], slug
         )
 
-        return fixture_path(rel_path)
+        return Text(fixture_path(rel_path))
 
     return func

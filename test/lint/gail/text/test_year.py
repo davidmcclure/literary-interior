@@ -11,8 +11,8 @@ from lint.gail.text import Text
     ('AMFCF0003-C00000-B0000100', 1913),
     ('AMFCF0003-C00000-B0000200', 1915),
 ])
-def test_year(gail_fixture_path, path, year):
+def test_year(gail_text, path, year):
 
-    text = Text(gail_fixture_path(path))
+    text = gail_text(path)
 
     assert text.year() == year

@@ -16,11 +16,13 @@ def chicago_novel(fixture_path):
 
     def func(id):
 
-        corpus = Corpus(fixture_path('chicago'))
+        corpus_path = fixture_path('chicago')
+
+        corpus = Corpus(corpus_path)
 
         # Probe for the metadata row.
         for row in corpus.novels_metadata():
             if int(row['BOOK_ID']) == id:
-                return Novel(corpus.path, row)
+                return Novel(corpus_path, row)
 
     return func

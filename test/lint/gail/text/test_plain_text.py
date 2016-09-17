@@ -32,9 +32,9 @@ from lint.gail.text import Text
     ),
 
 ])
-def test_year(gail_fixture_path, path, head, tail):
+def test_year(gail_text, path, head, tail):
 
-    text = Text(gail_fixture_path(path))
+    text = gail_text(path)
 
     plain_text = text.plain_text()
 
