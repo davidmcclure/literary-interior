@@ -53,7 +53,7 @@ class Text:
         Returns: str
         """
 
-        words = self.xml.select('wd')
+        words = self.xml.select('page[type="bodyPage"] wd')
 
         strings = [
             w.string
