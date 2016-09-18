@@ -95,7 +95,7 @@ def test_ignore_non_english_volumes(htrc_data, htrc_results):
     assert Offset.get('htrc', 1900, 'c', 'POS', o3) == 3
 
 
-def test_round_up_years_to_decade(htrc_data, htrc_results):
+def test_round_years_to_decade(htrc_data, htrc_results):
 
     """
     Volume years should be rounded up to the nearest decade.
