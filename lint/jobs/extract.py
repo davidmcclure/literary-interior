@@ -1,5 +1,6 @@
 
 
+import numpy as np
 import json
 
 from lint.count_cache import CountCache
@@ -8,7 +9,7 @@ from lint.utils import mem_pct
 
 class Extract:
 
-    def segments(self, size):
+    def args(self):
         raise NotImplementedError
 
     def add_volume(self, arg):
@@ -35,7 +36,12 @@ class Extract:
         segments = None
 
         if rank == 0:
-            segments = self.segments(size)
+
+            # JSON-encode segments.
+            segments = [
+                json.dumps(list(s))
+                for s in np.array_split(self.args(), size)
+            ]
 
         segment = comm.scatter(segments, root=0)
 

@@ -1,0 +1,56 @@
+
+
+from lint.singletons import config
+from lint.utils import round_to_decade
+
+from .extract import Extract
+
+
+class ExtractChicago(Extract):
+
+    def segments(self, size):
+
+        """
+        Generate path segments.
+
+        Args:
+            size (int)
+
+        Returns: list
+        """
+
+        manifest = Manifest.from_env()
+
+        return manifest.json_segments(size)
+
+    # def add_volume(self, path):
+
+        # """
+        # Increment offsets from a volume.
+
+        # Args:
+            # path (str)
+        # """
+
+        # vol = Volume.from_path(path)
+
+        # # Ignore non-English vols.
+        # if not vol.is_english():
+            # return
+
+        # # Get token offset counts.
+        # offsets = vol.offset_counts(config['offset_resolution'])
+
+        # # Round to nearest decade.
+        # year = round_to_decade(vol.year())
+
+        # # Merge counts into cache.
+        # self.cache.add_volume(year, offsets)
+
+    # def flush(self):
+
+        # """
+        # Dump the offsets to disk.
+        # """
+
+        # self.cache.flush(config['results']['htrc'])

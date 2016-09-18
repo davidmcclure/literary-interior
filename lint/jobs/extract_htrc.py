@@ -10,20 +10,17 @@ from .extract import Extract
 
 class ExtractHTRC(Extract):
 
-    def segments(self, size):
+    def args(self):
 
         """
         Generate path segments.
-
-        Args:
-            size (int)
 
         Returns: list
         """
 
         manifest = Manifest.from_env()
 
-        return manifest.json_segments(size)
+        return manifest.paths
 
     def add_volume(self, path):
 
