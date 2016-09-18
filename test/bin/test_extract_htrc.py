@@ -9,10 +9,10 @@ from lint.models import Offset
 from test.utils import make_htrc_page, make_htrc_vol
 
 
-pytestmark = pytest.mark.usefixtures('db', 'mpi')
+pytestmark = pytest.mark.usefixtures('db', 'htrc_mpi')
 
 
-def test_dump_offsets(htrc_data, htrc_results):
+def test_dump_offsets(htrc_data):
 
     """
     ExtractHTRC should index:
@@ -61,7 +61,7 @@ def test_dump_offsets(htrc_data, htrc_results):
     assert Offset.get('htrc', 1930, 'e', 'POS9', o3) == 9
 
 
-def test_ignore_non_english_volumes(htrc_data, htrc_results):
+def test_ignore_non_english_volumes(htrc_data):
 
     """
     Non-English volumes should be skipped.
@@ -95,7 +95,7 @@ def test_ignore_non_english_volumes(htrc_data, htrc_results):
     assert Offset.get('htrc', 1900, 'c', 'POS', o3) == 3
 
 
-def test_round_years_to_decade(htrc_data, htrc_results):
+def test_round_years_to_decade(htrc_data):
 
     """
     Volume years should be rounded up to the nearest decade.

@@ -118,9 +118,7 @@ def chicago_results(config):
 
 
 @pytest.yield_fixture
-def mpi(htrc_data, chicago_data, htrc_results, chicago_results, config):
-
-    # TODO: Use htrc_mpi, chicago_mpi, etc?
+def mpi(config):
 
     """
     Write the current configuration into the /tmp/.lint.yml file.
@@ -135,6 +133,16 @@ def mpi(htrc_data, chicago_data, htrc_results, chicago_results, config):
     session.remove()
 
     init_testing_db()
+
+
+@pytest.yield_fixture
+def htrc_mpi(htrc_data, htrc_results, mpi):
+    yield
+
+
+@pytest.yield_fixture
+def chicago_mpi(chicago_data, chicago_results, mpi):
+    yield
 
 
 @pytest.fixture
