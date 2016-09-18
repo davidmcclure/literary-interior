@@ -15,12 +15,12 @@ class ExtractHTRC(Extract):
         """
         Generate path segments.
 
-        Returns: list
+        Yields: str
         """
 
         manifest = Manifest.from_env()
 
-        return manifest.absolute_paths()
+        yield from manifest.absolute_paths()
 
     def add_volume(self, path):
 
