@@ -5,6 +5,8 @@ import factory
 from schematics.models import Model
 from schematics.types import IntType, StringType
 
+from .schematics import SchematicsFactory
+
 
 class ChicagoNovel(Model):
 
@@ -16,31 +18,30 @@ class ChicagoNovel(Model):
 
     text = StringType(required=True)
 
+    def filename(self):
+
+        """
+        Build the source text file name.
+
+        Returns: str
+        """
+
+        return '{0}.txt'.format(str(self.book_id).zfill(8))
+
     def csv_row(self):
 
         """
         Build a metadata CSV row.
+
+        Returns: dict
         """
 
         return dict(
             BOOK_ID=self.book_id,
-            TITLE=self.title,
             PUBL_DATE=self.publ_date,
+            TITLE=self.title,
+            FILENAME=self.filename(),
         )
-
-
-class SchematicsFactory(factory.Factory):
-
-    @classmethod
-    def _create(cls, model_class, *args, **kwargs):
-
-        """
-        Pass the kwargs straight into the Schematics class.
-
-        Returns: model_class
-        """
-
-        return model_class(kwargs)
 
 
 class ChicagoNovelFactory(SchematicsFactory):
