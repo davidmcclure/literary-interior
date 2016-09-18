@@ -135,14 +135,14 @@ def mpi(config):
     init_testing_db()
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def htrc_mpi(htrc_data, htrc_results, mpi):
-    yield
+    pass
 
 
-@pytest.yield_fixture
+@pytest.fixture
 def chicago_mpi(chicago_data, chicago_results, mpi):
-    yield
+    pass
 
 
 @pytest.fixture
