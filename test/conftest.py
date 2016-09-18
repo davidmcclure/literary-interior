@@ -102,7 +102,25 @@ def htrc_results(config):
 
 
 @pytest.yield_fixture
-def mpi(htrc_data, htrc_results, config):
+def chicago_results(config):
+
+    """
+    Yields: ResultDir
+    """
+
+    results = ResultDir()
+
+    config.config['results']['chicago'] = results.path
+
+    yield results
+
+    results.teardown()
+
+
+@pytest.yield_fixture
+def mpi(htrc_data, chicago_data, htrc_results, chicago_results, config):
+
+    # TODO: Use htrc_mpi, chicago_mpi, etc?
 
     """
     Write the current configuration into the /tmp/.lint.yml file.

@@ -12,8 +12,7 @@ from test.factories.chicago import ChicagoNovelFactory
 pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
-@pytest.mark.skip
-def test_dump_offsets(chicago_data, htrc_results):
+def test_dump_offsets(chicago_data):
 
     """
     ExtractChicago should index:

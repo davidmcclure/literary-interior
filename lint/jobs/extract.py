@@ -55,7 +55,12 @@ class Extract:
         for i, arg in enumerate(args):
 
             try:
-                self.add_volume(arg)
+
+                if type(arg) is dict:
+                    self.add_volume(**arg)
+
+                else:
+                    self.add_volume(arg)
 
             except Exception as e:
                 print(e)

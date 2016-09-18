@@ -13,7 +13,7 @@ class ExtractHTRC(Extract):
     def args(self):
 
         """
-        Generate path segments.
+        Generate volume paths.
 
         Yields: str
         """

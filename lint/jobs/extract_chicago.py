@@ -1,56 +1,55 @@
 
 
 from lint.singletons import config
-from lint.utils import round_to_decade
+from lint.utils import round_to_decade, offset_counts
+
+from lint.chicago.corpus import Corpus
+from lint.chicago.novel import Novel
 
 from .extract import Extract
 
 
 class ExtractChicago(Extract):
 
-    def segments(self, size):
+    def args(self):
 
         """
-        Generate path segments.
+        Generate text args.
+
+        Yields: dict {corpus_path, metadata}
+        """
+
+        corpus = Corpus.from_env()
+
+        for row in corpus.novels_metadata():
+            yield dict(corpus_path=corpus.path, metadata=row)
+
+    def add_volume(self, corpus_path, metadata):
+
+        """
+        Increment offsets from a volume.
 
         Args:
-            size (int)
-
-        Returns: list
+            path (str)
         """
 
-        manifest = Manifest.from_env()
+        novel = Novel(corpus_path, metadata)
 
-        return manifest.json_segments(size)
+        counts = offset_counts(
+            novel.source_text(),
+            config['offset_resolution'],
+        )
 
-    # def add_volume(self, path):
+        # Round to nearest decade.
+        year = round_to_decade(novel.year())
 
-        # """
-        # Increment offsets from a volume.
+        # Merge counts into cache.
+        self.cache.add_volume(year, counts)
 
-        # Args:
-            # path (str)
-        # """
+    def flush(self):
 
-        # vol = Volume.from_path(path)
+        """
+        Dump the offsets to disk.
+        """
 
-        # # Ignore non-English vols.
-        # if not vol.is_english():
-            # return
-
-        # # Get token offset counts.
-        # offsets = vol.offset_counts(config['offset_resolution'])
-
-        # # Round to nearest decade.
-        # year = round_to_decade(vol.year())
-
-        # # Merge counts into cache.
-        # self.cache.add_volume(year, offsets)
-
-    # def flush(self):
-
-        # """
-        # Dump the offsets to disk.
-        # """
-
-        # self.cache.flush(config['results']['htrc'])
+        self.cache.flush(config['results']['chicago'])
