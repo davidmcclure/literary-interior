@@ -43,4 +43,9 @@ class ChicagoData(TempDir):
 
         writer.writerow(row)
 
-        # TODO: Write text file
+        # Write text file.
+
+        text_path = os.path.join(self.texts_path(), novel.filename())
+
+        with open_makedirs(text_path, 'w') as fh:
+            print(novel.text, file=fh)

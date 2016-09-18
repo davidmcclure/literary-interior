@@ -49,7 +49,7 @@ class ChicagoNovelFactory(SchematicsFactory):
     class Meta:
         model = ChicagoNovel
 
-    book_id = factory.Sequence(lambda n: n)
+    book_id = factory.Sequence(lambda n: n+1)
 
     title = 'Moby Dick'
 
