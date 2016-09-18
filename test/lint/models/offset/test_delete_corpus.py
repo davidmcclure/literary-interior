@@ -6,7 +6,7 @@ from lint.singletons import session
 from lint.count_cache import CountCache
 from lint.models import Offset
 
-from test.factories import OffsetFactory
+from test.factories.models import OffsetFactory
 
 
 pytestmark = pytest.mark.usefixtures('db')
