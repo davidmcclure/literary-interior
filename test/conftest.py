@@ -8,6 +8,7 @@ from lint.models import Base
 
 from test.result_dir import ResultDir
 from test.htrc_data import HTRCData
+from test.chicago_data import ChicagoData
 
 
 @pytest.fixture(scope='session', autouse=True)
@@ -62,6 +63,22 @@ def htrc_data(config):
 
     config.config['htrc']['features'] = corpus.features_path
     config.config['htrc']['manifest'] = corpus.manifest_path
+
+    yield corpus
+
+    corpus.teardown()
+
+
+@pytest.yield_fixture
+def chicago_data(config):
+
+    """
+    Yields: ChicagoData
+    """
+
+    corpus = ChicagoData()
+
+    config.config['chicago'] = corpus.path
 
     yield corpus
 
