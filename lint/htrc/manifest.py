@@ -33,23 +33,19 @@ class Manifest:
             manifest_path (str)
         """
 
-        with open(manifest_path, 'r') as fh:
+        # TODO: Use attrs module.
 
-            self.paths = [
-                os.path.join(features_path, path)
-                for path in fh.read().splitlines()
-            ]
+        self.features_path = features_path
+        self.manifest_path = manifest_path
 
-    def json_segments(self, size):
+    def absolute_paths(self):
 
         """
-        Split the paths into a list of JSON-encoded segments.
+        Generate absolute paths to volume files.
 
-        Args:
-            size (int)
+        Yields: str
         """
 
-        return [
-            json.dumps(list(s))
-            for s in np.array_split(self.paths, size)
-        ]
+        with open(self.manifest_path) as fh:
+            for path in fh.read().splitlines():
+                yield os.path.join(self.features_path, path)

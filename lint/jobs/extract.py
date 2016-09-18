@@ -37,10 +37,9 @@ class Extract:
 
         if rank == 0:
 
-            # JSON-encode segments.
             segments = [
                 json.dumps(list(s))
-                for s in np.array_split(self.args(), size)
+                for s in np.array_split(list(self.args()), size)
             ]
 
         segment = comm.scatter(segments, root=0)

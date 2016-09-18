@@ -20,7 +20,7 @@ class ExtractHTRC(Extract):
 
         manifest = Manifest.from_env()
 
-        return manifest.paths
+        return manifest.absolute_paths()
 
     def add_volume(self, path):
 
