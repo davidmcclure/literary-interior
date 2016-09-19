@@ -11,7 +11,7 @@ def test_register_token_pos_counts():
     Map token+POS -> count.
     """
 
-    p = HTRCPageFactory(token_pos_count={
+    p = HTRCPageFactory(counts={
         'a': {
             'POS1': 1,
             'POS2': 2,
@@ -42,7 +42,7 @@ def test_combine_casing_variants():
     The same tokens with different casing should be combined.
     """
 
-    p = HTRCPageFactory(token_pos_count={
+    p = HTRCPageFactory(counts={
         'word': {
             'POS': 1,
         },
@@ -62,7 +62,7 @@ def test_ignore_irregular_tokens():
     Tokens that aren't [a-zA-Z] should be skipped.
     """
 
-    p = HTRCPageFactory(token_pos_count={
+    p = HTRCPageFactory(counts={
 
         'word': {
             'POS': 1,

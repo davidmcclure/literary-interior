@@ -22,7 +22,7 @@ def test_use_page_center_as_offset(r):
 
     v = make_htrc_vol(pages=[
 
-        HTRCPageFactory(token_count=100, token_pos_count={
+        HTRCPageFactory(token_count=100, counts={
             'a': {
                 'POS1': 1,
             },
@@ -34,7 +34,7 @@ def test_use_page_center_as_offset(r):
             },
         }),
 
-        HTRCPageFactory(token_count=200, token_pos_count={
+        HTRCPageFactory(token_count=200, counts={
             'b': {
                 'POS4': 4,
             },
@@ -46,7 +46,7 @@ def test_use_page_center_as_offset(r):
             },
         }),
 
-        HTRCPageFactory(token_count=300, token_pos_count={
+        HTRCPageFactory(token_count=300, counts={
             'c': {
                 'POS7': 7,
             },
@@ -88,25 +88,25 @@ def test_add_counts_when_offsets_round_together():
 
     v = make_htrc_vol(pages=[
 
-        HTRCPageFactory(token_count=100, token_pos_count={
+        HTRCPageFactory(token_count=100, counts={
             'a': {
                 'POS': 1,
             },
         }),
 
-        HTRCPageFactory(token_count=100, token_pos_count={
+        HTRCPageFactory(token_count=100, counts={
             'a': {
                 'POS': 2,
             },
         }),
 
-        HTRCPageFactory(token_count=100, token_pos_count={
+        HTRCPageFactory(token_count=100, counts={
             'a': {
                 'POS': 3,
             },
         }),
 
-        HTRCPageFactory(token_count=100, token_pos_count={
+        HTRCPageFactory(token_count=100, counts={
             'a': {
                 'POS': 4,
             },

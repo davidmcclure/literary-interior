@@ -12,7 +12,7 @@ class HTRCPageFactory(factory.Factory):
 
     token_count = 100
 
-    token_pos_count = {
+    counts = {
         'word': {
             'POS': 1
         }
@@ -30,6 +30,6 @@ class HTRCPageFactory(factory.Factory):
         return model_class({
             'body': {
                 'tokenCount': kwargs['token_count'],
-                'tokenPosCount': kwargs['token_pos_count'],
+                'tokenPosCount': kwargs['counts'],
             }
         })
