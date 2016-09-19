@@ -4,8 +4,7 @@ import pytest
 
 from lint.htrc.volume import Volume
 
-from test.utils import make_htrc_vol
-from test.factories.htrc import HTRCPageFactory
+from test.factories.htrc import HTRCPageFactory, HTRCVolumeFactory
 
 
 @pytest.mark.parametrize('r', [
@@ -20,7 +19,7 @@ def test_use_page_center_as_offset(r):
     snap the offset onto a 1-N scale, and index the offset -> count.
     """
 
-    v = make_htrc_vol(pages=[
+    v = HTRCVolumeFactory(pages=[
 
         HTRCPageFactory(token_count=100, counts={
             'a': {
@@ -86,7 +85,7 @@ def test_add_counts_when_offsets_round_together():
     the same "tick" value, the counts should be added.
     """
 
-    v = make_htrc_vol(pages=[
+    v = HTRCVolumeFactory(pages=[
 
         HTRCPageFactory(token_count=100, counts={
             'a': {
