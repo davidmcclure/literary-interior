@@ -9,6 +9,7 @@ from lint.models import Base
 from test.result_dir import ResultDir
 from test.htrc_data import HTRCData
 from test.chicago_data import ChicagoData
+from test.gail_data import GailData
 
 
 @pytest.fixture(scope='session', autouse=True)
@@ -86,6 +87,22 @@ def chicago_data(config):
 
 
 @pytest.yield_fixture
+def gail_data(config):
+
+    """
+    Yields: GailData
+    """
+
+    corpus = GailData()
+
+    config.config['gail'] = corpus.path
+
+    yield corpus
+
+    corpus.teardown()
+
+
+@pytest.yield_fixture
 def htrc_results(config):
 
     """
@@ -118,6 +135,22 @@ def chicago_results(config):
 
 
 @pytest.yield_fixture
+def gail_results(config):
+
+    """
+    Yields: ResultDir
+    """
+
+    results = ResultDir()
+
+    config.config['results']['gail'] = results.path
+
+    yield results
+
+    results.teardown()
+
+
+@pytest.yield_fixture
 def mpi(config):
 
     """
@@ -142,4 +175,9 @@ def htrc_mpi(htrc_data, htrc_results, mpi):
 
 @pytest.fixture
 def chicago_mpi(chicago_data, chicago_results, mpi):
+    pass
+
+
+@pytest.fixture
+def gail_mpi(gail_data, gail_results, mpi):
     pass
