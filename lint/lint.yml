@@ -4,8 +4,14 @@ htrc:
   features: /path/to/features
   manifest: /path/to/manifest
 
+chicago: /path/to/corpus
+
+gail: /path/to/corpus
+
 results:
   htrc: /path/to/offsets
+  chicago: /path/to/offsets
+  gail: /path/to/offsets
 
 database: /path/to/file.db
 
