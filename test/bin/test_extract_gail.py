@@ -57,33 +57,33 @@ def test_dump_offsets(gail_data):
     assert Offset.get('gail', 1930, 'nine',  'CD', o3) == 30
 
 
-# def test_round_years_to_decade(gail_data):
+def test_round_years_to_decade(gail_data):
 
-    # """
-    # Volume years should be rounded to the nearest decade.
-    # """
+    """
+    Volume years should be rounded to the nearest decade.
+    """
 
-    # n1 = gailNovelFactory(publ_date=1904, text='one two three')
-    # n2 = gailNovelFactory(publ_date=1905, text='one two three')
-    # n3 = gailNovelFactory(publ_date=1906, text='one two three')
+    t1 = GailTextFactory(year=1904, tokens=['one', 'two', 'three'])
+    t2 = GailTextFactory(year=1905, tokens=['one', 'two', 'three'])
+    t3 = GailTextFactory(year=1906, tokens=['one', 'two', 'three'])
 
-    # gail_data.add_text(n1)
-    # gail_data.add_text(n2)
-    # gail_data.add_text(n3)
+    gail_data.add_text(t1)
+    gail_data.add_text(t2)
+    gail_data.add_text(t3)
 
-    # call(['mpirun', 'bin/extract-gail.py'])
-    # call(['bin/gather-gail.py'])
+    call(['mpirun', 'bin/extract-gail.py'])
+    call(['bin/gather-gail.py'])
 
-    # o1 = round((0/3)*100)
-    # o2 = round((1/3)*100)
-    # o3 = round((2/3)*100)
+    o1 = round((0/3)*100)
+    o2 = round((1/3)*100)
+    o3 = round((2/3)*100)
 
-    # # n1 -> 1900
-    # assert Offset.get('gail', 1900, 'one',   'CD', o1) == 1
-    # assert Offset.get('gail', 1900, 'two',   'CD', o2) == 1
-    # assert Offset.get('gail', 1900, 'three', 'CD', o3) == 1
+    # n1 -> 1900
+    assert Offset.get('gail', 1900, 'one',   'CD', o1) == 1
+    assert Offset.get('gail', 1900, 'two',   'CD', o2) == 1
+    assert Offset.get('gail', 1900, 'three', 'CD', o3) == 1
 
-    # # n2 + n3 -> 1910
-    # assert Offset.get('gail', 1910, 'one',   'CD', o1) == 2
-    # assert Offset.get('gail', 1910, 'two',   'CD', o2) == 2
-    # assert Offset.get('gail', 1910, 'three', 'CD', o3) == 2
+    # n2 + n3 -> 1910
+    assert Offset.get('gail', 1910, 'one',   'CD', o1) == 2
+    assert Offset.get('gail', 1910, 'two',   'CD', o2) == 2
+    assert Offset.get('gail', 1910, 'three', 'CD', o3) == 2
