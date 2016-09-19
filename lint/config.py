@@ -23,15 +23,17 @@ class Config:
         Get a config instance with the default files.
         """
 
+        root = os.environ.get('LINT_CONFIG', '/etc/lint')
+
         # Default paths.
         paths = [
             os.path.join(os.path.dirname(__file__), 'lint.yml'),
-            '~/.lint.yml',
+            os.path.join(root, 'lint.yml'),
         ]
 
-        # Base testing config.
+        # Patch in the testing config.
         if os.environ.get('LINT_ENV') == 'test':
-            paths.append('~/.lint.test.yml')
+            paths.append(os.path.join(root, 'lint.test.yml'))
 
         # MPI overrides.
         paths.append(cls.TMP_YAML)
