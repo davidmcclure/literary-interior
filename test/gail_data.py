@@ -17,6 +17,7 @@ class GailData(TempDir):
             novel (GailText)
         """
 
-        # render template.
+        path = os.path.join(self.path, '{0}.xml'.format(text.id))
 
-        pass
+        with open(path, 'w') as fh:
+            print(text.xml(), file=fh)
