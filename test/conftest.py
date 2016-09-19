@@ -143,20 +143,3 @@ def htrc_mpi(htrc_data, htrc_results, mpi):
 @pytest.fixture
 def chicago_mpi(chicago_data, chicago_results, mpi):
     pass
-
-
-@pytest.fixture
-def fixture_path():
-
-    """
-    Provide a helper function that provides an absolute fixture path.
-    """
-
-    def func(rel_path):
-
-        # ./fixtures
-        dir_path = os.path.join(os.path.dirname(__file__), 'fixtures')
-
-        return os.path.join(dir_path, rel_path)
-
-    return func
