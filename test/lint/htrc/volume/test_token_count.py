@@ -1,6 +1,7 @@
 
 
-from test.utils import make_htrc_page, make_htrc_vol
+from test.utils import make_htrc_vol
+from test.factories.htrc import HTRCPageFactory
 
 
 def test_token_count():
@@ -10,9 +11,9 @@ def test_token_count():
     """
 
     v = make_htrc_vol(pages=[
-        make_htrc_page(token_count=1),
-        make_htrc_page(token_count=2),
-        make_htrc_page(token_count=3),
+        HTRCPageFactory(token_count=1),
+        HTRCPageFactory(token_count=2),
+        HTRCPageFactory(token_count=3),
     ])
 
     assert v.token_count() == 1+2+3

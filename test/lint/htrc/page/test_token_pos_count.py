@@ -2,7 +2,7 @@
 
 from lint.htrc.page import Page
 
-from test.utils import make_htrc_page
+from test.factories.htrc import HTRCPageFactory
 
 
 def test_register_token_pos_counts():
@@ -11,7 +11,7 @@ def test_register_token_pos_counts():
     Map token+POS -> count.
     """
 
-    p = make_htrc_page({
+    p = HTRCPageFactory(token_pos_count={
         'a': {
             'POS1': 1,
             'POS2': 2,
@@ -42,7 +42,7 @@ def test_combine_casing_variants():
     The same tokens with different casing should be combined.
     """
 
-    p = make_htrc_page({
+    p = HTRCPageFactory(token_pos_count={
         'word': {
             'POS': 1,
         },
@@ -62,7 +62,7 @@ def test_ignore_irregular_tokens():
     Tokens that aren't [a-zA-Z] should be skipped.
     """
 
-    p = make_htrc_page({
+    p = HTRCPageFactory(token_pos_count={
 
         'word': {
             'POS': 1,

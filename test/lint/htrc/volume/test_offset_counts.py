@@ -4,7 +4,8 @@ import pytest
 
 from lint.htrc.volume import Volume
 
-from test.utils import make_htrc_page, make_htrc_vol
+from test.utils import make_htrc_vol
+from test.factories.htrc import HTRCPageFactory
 
 
 @pytest.mark.parametrize('r', [
@@ -21,7 +22,7 @@ def test_use_page_center_as_offset(r):
 
     v = make_htrc_vol(pages=[
 
-        make_htrc_page(token_count=100, counts={
+        HTRCPageFactory(token_count=100, token_pos_count={
             'a': {
                 'POS1': 1,
             },
@@ -33,7 +34,7 @@ def test_use_page_center_as_offset(r):
             },
         }),
 
-        make_htrc_page(token_count=200, counts={
+        HTRCPageFactory(token_count=200, token_pos_count={
             'b': {
                 'POS4': 4,
             },
@@ -45,7 +46,7 @@ def test_use_page_center_as_offset(r):
             },
         }),
 
-        make_htrc_page(token_count=300, counts={
+        HTRCPageFactory(token_count=300, token_pos_count={
             'c': {
                 'POS7': 7,
             },
@@ -87,25 +88,25 @@ def test_add_counts_when_offsets_round_together():
 
     v = make_htrc_vol(pages=[
 
-        make_htrc_page(token_count=100, counts={
+        HTRCPageFactory(token_count=100, token_pos_count={
             'a': {
                 'POS': 1,
             },
         }),
 
-        make_htrc_page(token_count=100, counts={
+        HTRCPageFactory(token_count=100, token_pos_count={
             'a': {
                 'POS': 2,
             },
         }),
 
-        make_htrc_page(token_count=100, counts={
+        HTRCPageFactory(token_count=100, token_pos_count={
             'a': {
                 'POS': 3,
             },
         }),
 
-        make_htrc_page(token_count=100, counts={
+        HTRCPageFactory(token_count=100, token_pos_count={
             'a': {
                 'POS': 4,
             },

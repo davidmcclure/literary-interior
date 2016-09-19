@@ -6,25 +6,6 @@ from lint.htrc.page import Page
 from lint.htrc.volume import Volume
 
 
-def make_htrc_page(counts={}, token_count=100):
-
-    """
-    Make a page instance with the provided tokenPosCount map.
-
-    Args:
-        counts (dict)
-
-    Returns: Page
-    """
-
-    return Page({
-        'body': {
-            'tokenCount': token_count,
-            'tokenPosCount': counts,
-        }
-    })
-
-
 def make_htrc_vol(pages=[], year=1900, language='eng', id=None):
 
     """
