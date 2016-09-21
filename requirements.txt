@@ -16,9 +16,9 @@ click
 psutil
 textblob
 numpy
+scipy
 jupyter
 matplotlib
-scipy
 sklearn
 schematics
 bs4
