@@ -7,6 +7,10 @@ from lint.utils import offset_counts
 
 def test_offset_counts():
 
+    """
+    Map (token, POS, offset) -> count.
+    """
+
     counts = offset_counts('one two three four', 4)
 
     assert counts['one',    'CD', 0] == 1
@@ -17,6 +21,10 @@ def test_offset_counts():
 
 @pytest.mark.parametrize('n', [10, 100, 1000])
 def test_round_offsets(n):
+
+    """
+    When the offset is real-valued, round to the nearest integer.
+    """
 
     counts = offset_counts('one two three four', n)
 
@@ -29,3 +37,21 @@ def test_round_offsets(n):
     assert counts['two',    'CD', o2] == 1
     assert counts['three',  'CD', o3] == 1
     assert counts['four',   'CD', o4] == 1
+
+
+def test_combine_casing_variants():
+
+    """
+    The same tokens with different casing should be combined.
+    """
+
+    pass
+
+
+def test_ignore_irregular_tokens():
+
+    """
+    Tokens that aren't [a-zA-Z] should be skipped.
+    """
+
+    pass
