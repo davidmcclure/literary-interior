@@ -23,7 +23,7 @@ class Config:
         Get a config instance with the default files.
         """
 
-        root = os.environ.get('LINT_CONFIG', '/etc/lint')
+        root = os.environ.get('LINT_CONFIG', '~/.lint')
 
         # Default paths.
         paths = [
