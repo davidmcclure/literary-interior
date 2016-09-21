@@ -45,12 +45,11 @@ def test_downcase():
     All tokens should be downcased.
     """
 
-    counts = offset_counts('one One ONE', 3)
+    counts = offset_counts('one Two THREE', 3)
 
-    # TODO: Assert each explicitly.
+    tokens = [k[0] for k in counts.keys()]
 
-    for key in counts.keys():
-        assert key[0] == 'one'
+    assert set(tokens) == set(['one', 'two', 'three'])
 
 
 def test_ignore_irregular_tokens():
@@ -59,7 +58,7 @@ def test_ignore_irregular_tokens():
     Tokens that aren't [a-zA-Z] should be skipped.
     """
 
-    counts = offset_counts('one one1 ... !', 3)
+    counts = offset_counts('one ... 123 !', 4)
 
     assert counts == {
         ('one', 'CD', 0): 1

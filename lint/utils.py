@@ -184,10 +184,10 @@ def offset_counts(text, resolution):
         if not letters.match(token):
             continue
 
-        # Get integer offset.
-
+        # 0-1 offset ratio.
         ratio = i / len(tags)
 
+        # Round offset to 0-N integer.
         offset = round(ratio * resolution)
 
         counts[token, pos, offset] += 1
