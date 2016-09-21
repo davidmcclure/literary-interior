@@ -170,11 +170,21 @@ def offset_counts(text, resolution):
 
     blob = TextBlob(text)
 
-    counts = Counter()
-
     tags = blob.tags
 
+    letters = re.compile('^[a-z]+$')
+
+    counts = Counter()
+
     for i, (token, pos) in enumerate(tags):
+
+        token = token.lower()
+
+        # Ignore irregular tokens.
+        if not letters.match(token):
+            continue
+
+        # Get integer offset.
 
         ratio = i / len(tags)
 

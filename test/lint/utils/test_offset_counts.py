@@ -39,13 +39,18 @@ def test_round_offsets(n):
     assert counts['four',   'CD', o4] == 1
 
 
-def test_combine_casing_variants():
+def test_downcase():
 
     """
-    The same tokens with different casing should be combined.
+    All tokens should be downcased.
     """
 
-    pass
+    counts = offset_counts('one One ONE', 3)
+
+    # TODO: Assert each explicitly.
+
+    for key in counts.keys():
+        assert key[0] == 'one'
 
 
 def test_ignore_irregular_tokens():
@@ -54,4 +59,8 @@ def test_ignore_irregular_tokens():
     Tokens that aren't [a-zA-Z] should be skipped.
     """
 
-    pass
+    counts = offset_counts('one one1 ... !', 3)
+
+    assert counts == {
+        ('one', 'CD', 0): 1
+    }
