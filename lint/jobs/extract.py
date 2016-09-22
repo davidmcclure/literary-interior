@@ -65,7 +65,9 @@ class Extract:
             except Exception as e:
                 print(e)
 
-            if i%100 == 0:
-                print(rank, i, mem_pct())
+            # if i%100 == 0:
+                # print(rank, i, mem_pct())
+
+            print(rank, i, mem_pct())
 
         self.flush()
