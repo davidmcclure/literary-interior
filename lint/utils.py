@@ -186,6 +186,8 @@ def offset_counts(text, resolution):
         if not letters.match(token):
             continue
 
+        # TODO: Pass this as an arg?
+
         # Apply token whitelist.
         if token not in whitelist:
             continue
