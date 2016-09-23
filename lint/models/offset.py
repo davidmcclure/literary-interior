@@ -14,6 +14,9 @@ from lint.utils import flatten_dict, mem_pct, grouper
 from lint.count_cache import CountCache
 
 
+# TODO: Rename to Count?
+
+
 class Offset(Base):
 
 
@@ -132,10 +135,13 @@ class Offset(Base):
         return res.scalar() or 0
 
     @classmethod
-    def baseline_series(cls):
+    def baseline_series(cls, corpus=None):
 
         """
         Get an offset -> count series.
+
+        Args:
+            corpus (str)
 
         Returns: OrderedDict
         """
@@ -147,16 +153,20 @@ class Offset(Base):
             .order_by(cls.offset)
         )
 
+        if corpus:
+            query = query.filter(cls.corpus==corpus)
+
         return OrderedDict(query.all())
 
     @classmethod
-    def token_series(cls, token):
+    def token_series(cls, token, corpus=None):
 
         """
         Get an offset -> count series for a word.
 
         Args:
             token (str)
+            corpus (str)
 
         Returns: OrderedDict
         """
@@ -169,16 +179,20 @@ class Offset(Base):
             .order_by(cls.offset)
         )
 
+        if corpus:
+            query = query.filter(cls.corpus==corpus)
+
         return OrderedDict(query.all())
 
     @classmethod
-    def pos_series(cls, pos):
+    def pos_series(cls, pos, corpus=None):
 
         """
         Get an offset -> count series for a POS.
 
         Args:
             pos (str)
+            corpus (str)
 
         Returns: OrderedDict
         """
@@ -190,5 +204,8 @@ class Offset(Base):
             .group_by(cls.offset)
             .order_by(cls.offset)
         )
+
+        if corpus:
+            query = query.filter(cls.corpus==corpus)
 
         return OrderedDict(query.all())
