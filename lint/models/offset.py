@@ -130,3 +130,65 @@ class Offset(Base):
         )
 
         return res.scalar() or 0
+
+    @classmethod
+    def baseline_series(cls):
+
+        """
+        Get an offset -> count series.
+
+        Returns: OrderedDict
+        """
+
+        query = (
+            session
+            .query(cls.offset, func.sum(cls.count))
+            .group_by(cls.offset)
+            .order_by(cls.offset)
+        )
+
+        return OrderedDict(query.all())
+
+    @classmethod
+    def token_series(cls, token):
+
+        """
+        Get an offset -> count series for a word.
+
+        Args:
+            token (str)
+
+        Returns: OrderedDict
+        """
+
+        query = (
+            session
+            .query(cls.offset, func.sum(cls.count))
+            .filter(cls.token==token)
+            .group_by(cls.offset)
+            .order_by(cls.offset)
+        )
+
+        return OrderedDict(query.all())
+
+    @classmethod
+    def pos_series(cls, pos):
+
+        """
+        Get an offset -> count series for a POS.
+
+        Args:
+            pos (str)
+
+        Returns: OrderedDict
+        """
+
+        query = (
+            session
+            .query(cls.offset, func.sum(cls.count))
+            .filter(cls.pos==pos)
+            .group_by(cls.offset)
+            .order_by(cls.offset)
+        )
+
+        return OrderedDict(query.all())
