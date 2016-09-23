@@ -4,6 +4,7 @@ import pytest
 
 from subprocess import call
 
+from lint.utils import make_offset
 from lint.models import Offset
 
 from test.factories.gail import GailTextFactory
@@ -40,9 +41,9 @@ def test_dump_offsets(gail_data):
     call(['mpirun', 'bin/extract-gail.py'])
     call(['bin/gather-gail.py'])
 
-    o1 = round((0/3)*100)
-    o2 = round((1/3)*100)
-    o3 = round((2/3)*100)
+    o1 = make_offset(0, 3, 100)
+    o2 = make_offset(1, 3, 100)
+    o3 = make_offset(2, 3, 100)
 
     assert Offset.get('gail', 1910, 'one',   'CD', o1) == 10
     assert Offset.get('gail', 1910, 'two',   'CD', o2) == 10
@@ -74,9 +75,9 @@ def test_round_years_to_decade(gail_data):
     call(['mpirun', 'bin/extract-gail.py'])
     call(['bin/gather-gail.py'])
 
-    o1 = round((0/3)*100)
-    o2 = round((1/3)*100)
-    o3 = round((2/3)*100)
+    o1 = make_offset(0, 3, 100)
+    o2 = make_offset(1, 3, 100)
+    o3 = make_offset(2, 3, 100)
 
     # n1 -> 1900
     assert Offset.get('gail', 1900, 'one',   'CD', o1) == 1

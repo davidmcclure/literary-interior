@@ -4,6 +4,7 @@ import pytest
 
 from subprocess import call
 
+from lint.utils import make_offset
 from lint.models import Offset
 
 from test.factories.htrc import HTRCPageFactory, HTRCVolumeFactory
@@ -44,9 +45,9 @@ def test_dump_offsets(htrc_data):
     call(['mpirun', 'bin/extract-htrc.py'])
     call(['bin/gather-htrc.py'])
 
-    o1 = round(( 50/300)*100)
-    o2 = round((150/300)*100)
-    o3 = round((250/300)*100)
+    o1 = make_offset( 50, 300, 100)
+    o2 = make_offset(150, 300, 100)
+    o3 = make_offset(250, 300, 100)
 
     assert Offset.get('htrc', 1910, 'a', 'POS1', o1) == 1
     assert Offset.get('htrc', 1910, 'b', 'POS2', o2) == 2
@@ -85,9 +86,9 @@ def test_ignore_non_english_volumes(htrc_data):
     call(['mpirun', 'bin/extract-htrc.py'])
     call(['bin/gather-htrc.py'])
 
-    o1 = round(( 50/300)*100)
-    o2 = round((150/300)*100)
-    o3 = round((250/300)*100)
+    o1 = make_offset( 50, 300, 100)
+    o2 = make_offset(150, 300, 100)
+    o3 = make_offset(250, 300, 100)
 
     # Skip the German volume.
     assert Offset.get('htrc', 1900, 'a', 'POS', o1) == 1
@@ -129,9 +130,9 @@ def test_round_years_to_decade(htrc_data):
     call(['mpirun', 'bin/extract-htrc.py'])
     call(['bin/gather-htrc.py'])
 
-    o1 = round(( 50/300)*100)
-    o2 = round((150/300)*100)
-    o3 = round((250/300)*100)
+    o1 = make_offset( 50, 300, 100)
+    o2 = make_offset(150, 300, 100)
+    o3 = make_offset(250, 300, 100)
 
     # Snap to decade.
     assert Offset.get('htrc', 1900, 'a', 'POS', o1) == 2

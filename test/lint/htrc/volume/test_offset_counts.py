@@ -2,6 +2,7 @@
 
 import pytest
 
+from lint.utils import make_offset
 from lint.htrc.volume import Volume
 
 from test.factories.htrc import HTRCPageFactory, HTRCVolumeFactory
@@ -61,9 +62,9 @@ def test_use_page_center_as_offset(r):
 
     offsets = v.offset_counts(r)
 
-    o1 = round(( 50/600)*r)
-    o2 = round((200/600)*r)
-    o3 = round((450/600)*r)
+    o1 = make_offset( 50, 600, r)
+    o2 = make_offset(200, 600, r)
+    o3 = make_offset(450, 600, r)
 
     assert offsets['a', 'POS1', o1] == 1
     assert offsets['b', 'POS2', o1] == 2
@@ -87,24 +88,28 @@ def test_add_counts_when_offsets_round_together():
 
     v = HTRCVolumeFactory(pages=[
 
+        # center = 50
         HTRCPageFactory(token_count=100, counts={
             'a': {
                 'POS': 1,
             },
         }),
 
+        # center = 150
         HTRCPageFactory(token_count=100, counts={
             'a': {
                 'POS': 2,
             },
         }),
 
+        # center = 250
         HTRCPageFactory(token_count=100, counts={
             'a': {
                 'POS': 3,
             },
         }),
 
+        # center = 350
         HTRCPageFactory(token_count=100, counts={
             'a': {
                 'POS': 4,
@@ -113,17 +118,14 @@ def test_add_counts_when_offsets_round_together():
 
     ])
 
-    offsets = v.offset_counts(4)
+    offsets = v.offset_counts(3)
 
-    o1 = round(( 50/400)*4)
-    o2 = round((150/400)*4)
-    o3 = round((250/400)*4)
-    o4 = round((350/400)*4)
+    # ( 50/400)*3 -> 0.375 -> 0
+    assert offsets['a', 'POS', 0] == 1
 
-    assert offsets['a', 'POS', o1] == 1
+    # (150/400)*3 -> 1.125 -> 1
+    # (250/400)*3 -> 1.875 -> 1
+    assert offsets['a', 'POS', 1] == 2+3
 
-    # Pages 2 and 3 both snap to offset 2.
-    assert offsets['a', 'POS', o2] == 2+3
-    assert offsets['a', 'POS', o3] == 2+3
-
-    assert offsets['a', 'POS', o4] == 4
+    # (350/400)*3 -> 2.625 -> 2
+    assert offsets['a', 'POS', 2] == 4

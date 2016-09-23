@@ -5,6 +5,7 @@ import os
 import decimal
 import re
 import scandir
+import math
 
 from collections import Counter
 from contextlib import contextmanager
@@ -156,14 +157,31 @@ def get_text(tree, selector):
         return None
 
 
-def offset_counts(text, resolution):
+def make_offset(i, n, bins):
+
+    """
+    Given the index of the current token, the total number of tokens, and a bin
+    count, round to a 1-N integer.
+
+    Args:
+        i (int)
+        n (int)
+        bins (int)
+
+    Returns: int
+    """
+
+    return math.floor((i/n) * bins)
+
+
+def offset_counts(text, bins):
 
     """
     Given a string of text, map (token, POS, offset) -> count.
 
     Args:
         text (str)
-        resolution (int)
+        bins (int)
 
     Returns: Counter
     """
@@ -186,17 +204,12 @@ def offset_counts(text, resolution):
         if not letters.match(token):
             continue
 
-        # TODO: Pass this as an arg?
-
         # Apply token whitelist.
         if token not in whitelist:
             continue
 
-        # 0-1 offset ratio.
-        ratio = i / len(tags)
-
-        # Round offset to 0-N integer.
-        offset = round(ratio * resolution)
+        # Get 0-N offset.
+        offset = make_offset(i, len(tags), bins)
 
         counts[token, pos, offset] += 1
 

@@ -2,6 +2,7 @@
 
 import json
 import bz2
+import math
 
 from collections import Counter
 
@@ -124,7 +125,7 @@ class Volume:
                 token_count
             )
 
-            offset = round(resolution * center)
+            offset = math.floor(resolution * center)
 
             page_counts = page.token_pos_count()
 
