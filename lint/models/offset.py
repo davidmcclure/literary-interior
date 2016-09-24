@@ -134,6 +134,8 @@ class Offset(Base):
 
         return res.scalar() or 0
 
+    # TODO: Shared filter method for corpus / years?
+
     @classmethod
     def baseline_series(cls, corpus=None):
 
