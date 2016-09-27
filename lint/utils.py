@@ -13,8 +13,6 @@ from itertools import islice, chain
 
 from textblob import TextBlob
 
-from lint.singletons import tokens as whitelist
-
 
 def grouper(iterable, size):
 
@@ -202,10 +200,6 @@ def offset_counts(text, bins):
 
         # Ignore irregular tokens.
         if not letters.match(token):
-            continue
-
-        # Apply token whitelist.
-        if token not in whitelist:
             continue
 
         # Get 0-N offset.
