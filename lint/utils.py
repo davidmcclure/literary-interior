@@ -184,23 +184,18 @@ def offset_counts(text, bins):
     Returns: Counter
     """
 
-    # TODO: Use OpenNLP, for consistency with Hathi?
+    # TODO: Use OpenNLP?
 
-    blob = TextBlob(text)
+    # UTF8 -> ASCII.
+    blob = TextBlob(text.encode('ascii', 'ignore').decode())
 
     tags = blob.tags
-
-    letters = re.compile('^[a-z]+$')
 
     counts = Counter()
 
     for i, (token, pos) in enumerate(tags):
 
         token = token.lower()
-
-        # Ignore irregular tokens.
-        if not letters.match(token):
-            continue
 
         # Get 0-N offset.
         offset = make_offset(i, len(tags), bins)

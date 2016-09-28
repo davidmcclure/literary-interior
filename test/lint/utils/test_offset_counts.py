@@ -50,16 +50,3 @@ def test_downcase():
     tokens = [k[0] for k in counts.keys()]
 
     assert set(tokens) == set(['one', 'two', 'three'])
-
-
-def test_ignore_irregular_tokens():
-
-    """
-    Tokens that aren't [a-zA-Z] should be skipped.
-    """
-
-    counts = offset_counts('one ... 123 !', 4)
-
-    assert counts == {
-        ('one', 'CD', 0): 1
-    }
