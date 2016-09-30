@@ -211,3 +211,25 @@ class Offset(Base):
             query = query.filter(cls.corpus==corpus)
 
         return OrderedDict(query.all())
+
+    @classmethod
+    def token_density(cls, *args, **kwargs):
+
+        """
+        Get an offset -> density series for a word.
+
+        Args:
+            token (str)
+            corpus (str)
+
+        Returns: OrderedDict
+        """
+
+        series = cls.token_series(*args, **kwargs)
+
+        total = sum(series.values())
+
+        return OrderedDict([
+            (token, count/total)
+            for token, count in series.items()
+        ])
