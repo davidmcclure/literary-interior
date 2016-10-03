@@ -203,3 +203,27 @@ def offset_counts(text, bins):
         counts[token, pos, offset] += 1
 
     return counts
+
+
+def char_offset_counts(text, bins):
+
+    """
+    Given a string of text, map (char, offset) -> count.
+
+    Args:
+        text (str)
+        bins (int)
+
+    Returns: Counter
+    """
+
+    counts = Counter()
+
+    for i, char in enumerate(text):
+
+        # Get 0-N offset.
+        offset = make_offset(i, len(text), bins)
+
+        counts[char, offset] += 1
+
+    return counts
