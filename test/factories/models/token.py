@@ -2,13 +2,13 @@
 
 import factory
 
-from lint.models import Word
+from lint.models import Token
 
 
-class WordFactory(factory.Factory):
+class TokenFactory(factory.Factory):
 
     class Meta:
-        model = Word
+        model = Token
 
     corpus = 'corpus'
 

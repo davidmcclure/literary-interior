@@ -1,3 +1,3 @@
 
 
-from .word import WordFactory
+from .token import TokenFactory

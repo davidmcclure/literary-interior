@@ -2,8 +2,8 @@
 
 
 from lint.singletons import config
-from lint.models import Word
+from lint.models import Token
 
 
 if __name__ == '__main__':
-    Word.gather_results('gail', config['results']['gail'])
+    Token.gather_results('gail', config['results']['gail'])

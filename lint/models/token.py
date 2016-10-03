@@ -14,10 +14,7 @@ from lint.utils import flatten_dict, mem_pct, grouper
 from lint.count_cache import CountCache
 
 
-# TODO: Rename to Count?
-
-
-class Word(Base):
+class Token(Base):
 
 
     __tablename__ = 'offset'

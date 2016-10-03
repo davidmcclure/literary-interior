@@ -5,7 +5,7 @@ import pytest
 from subprocess import call
 
 from lint.utils import make_offset
-from lint.models import Word
+from lint.models import Token
 
 from test.factories.corpora.chicago import ChicagoNovelFactory
 
@@ -45,17 +45,17 @@ def test_dump_offsets(chicago_data):
     o2 = make_offset(1, 3, 100)
     o3 = make_offset(2, 3, 100)
 
-    assert Word.get('chicago', 1910, 'one',   'CD', o1) == 10
-    assert Word.get('chicago', 1910, 'two',   'CD', o2) == 10
-    assert Word.get('chicago', 1910, 'three', 'CD', o3) == 10
+    assert Token.get('chicago', 1910, 'one',   'CD', o1) == 10
+    assert Token.get('chicago', 1910, 'two',   'CD', o2) == 10
+    assert Token.get('chicago', 1910, 'three', 'CD', o3) == 10
 
-    assert Word.get('chicago', 1920, 'four',  'CD', o1) == 20
-    assert Word.get('chicago', 1920, 'five',  'CD', o2) == 20
-    assert Word.get('chicago', 1920, 'six',   'CD', o3) == 20
+    assert Token.get('chicago', 1920, 'four',  'CD', o1) == 20
+    assert Token.get('chicago', 1920, 'five',  'CD', o2) == 20
+    assert Token.get('chicago', 1920, 'six',   'CD', o3) == 20
 
-    assert Word.get('chicago', 1930, 'seven', 'CD', o1) == 30
-    assert Word.get('chicago', 1930, 'eight', 'CD', o2) == 30
-    assert Word.get('chicago', 1930, 'nine',  'CD', o3) == 30
+    assert Token.get('chicago', 1930, 'seven', 'CD', o1) == 30
+    assert Token.get('chicago', 1930, 'eight', 'CD', o2) == 30
+    assert Token.get('chicago', 1930, 'nine',  'CD', o3) == 30
 
 
 def test_round_years_to_decade(chicago_data):
@@ -80,11 +80,11 @@ def test_round_years_to_decade(chicago_data):
     o3 = make_offset(2, 3, 100)
 
     # n1 -> 1900
-    assert Word.get('chicago', 1900, 'one',   'CD', o1) == 1
-    assert Word.get('chicago', 1900, 'two',   'CD', o2) == 1
-    assert Word.get('chicago', 1900, 'three', 'CD', o3) == 1
+    assert Token.get('chicago', 1900, 'one',   'CD', o1) == 1
+    assert Token.get('chicago', 1900, 'two',   'CD', o2) == 1
+    assert Token.get('chicago', 1900, 'three', 'CD', o3) == 1
 
     # n2 + n3 -> 1910
-    assert Word.get('chicago', 1910, 'one',   'CD', o1) == 2
-    assert Word.get('chicago', 1910, 'two',   'CD', o2) == 2
-    assert Word.get('chicago', 1910, 'three', 'CD', o3) == 2
+    assert Token.get('chicago', 1910, 'one',   'CD', o1) == 2
+    assert Token.get('chicago', 1910, 'two',   'CD', o2) == 2
+    assert Token.get('chicago', 1910, 'three', 'CD', o3) == 2

@@ -1,4 +1,4 @@
 
 
 from .base import Base
-from .word import Word
+from .token import Token
