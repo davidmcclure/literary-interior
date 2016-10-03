@@ -12,7 +12,7 @@ class Extract:
     def args(self):
         raise NotImplementedError
 
-    def add_volume(self, arg):
+    def map(self, arg):
         raise NotImplementedError
 
     def flush(self, arg):
@@ -55,10 +55,10 @@ class Extract:
             try:
 
                 if type(arg) is dict:
-                    self.add_volume(**arg)
+                    self.map(**arg)
 
                 else:
-                    self.add_volume(arg)
+                    self.map(arg)
 
             except Exception as e:
                 print(e)

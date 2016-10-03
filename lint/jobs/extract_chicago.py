@@ -33,7 +33,7 @@ class ExtractChicago(Extract):
         for row in corpus.novels_metadata():
             yield dict(corpus_path=corpus.path, metadata=row)
 
-    def add_volume(self, corpus_path, metadata):
+    def map(self, corpus_path, metadata):
 
         """
         Increment offsets from a volume.

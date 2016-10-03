@@ -31,7 +31,7 @@ class ExtractHTRC(Extract):
 
         yield from manifest.absolute_paths()
 
-    def add_volume(self, path):
+    def map(self, path):
 
         """
         Increment offsets from a volume.

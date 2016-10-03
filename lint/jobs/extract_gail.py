@@ -32,7 +32,7 @@ class ExtractGail(Extract):
 
         yield from corpus.text_paths()
 
-    def add_volume(self, path):
+    def map(self, path):
 
         """
         Increment offsets from a volume.
