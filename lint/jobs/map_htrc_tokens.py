@@ -9,7 +9,7 @@ from lint.utils import round_to_decade
 from .scatter import Scatter
 
 
-class ExtractHTRC(Scatter):
+class MapHTRCTokens(Scatter):
 
     def __init__(self):
 

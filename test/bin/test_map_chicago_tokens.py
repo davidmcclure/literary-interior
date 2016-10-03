@@ -38,7 +38,7 @@ def test_dump_offsets(chicago_data):
             text='seven eight nine',
         ))
 
-    call(['mpirun', 'bin/extract-chicago.py'])
+    call(['mpirun', 'bin/map-chicago-tokens.py'])
     call(['bin/gather-chicago.py'])
 
     o1 = make_offset(0, 3, 100)
@@ -72,7 +72,7 @@ def test_round_years_to_decade(chicago_data):
     chicago_data.add_novel(n2)
     chicago_data.add_novel(n3)
 
-    call(['mpirun', 'bin/extract-chicago.py'])
+    call(['mpirun', 'bin/map-chicago-tokens.py'])
     call(['bin/gather-chicago.py'])
 
     o1 = make_offset(0, 3, 100)

@@ -10,7 +10,7 @@ from lint.count_cache import CountCache
 from .scatter import Scatter
 
 
-class ExtractChicago(Scatter):
+class MapChicagoTokens(Scatter):
 
     def __init__(self):
 

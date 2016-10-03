@@ -38,7 +38,7 @@ def test_dump_offsets(gail_data):
             tokens=['seven', 'eight', 'nine'],
         ))
 
-    call(['mpirun', 'bin/extract-gail.py'])
+    call(['mpirun', 'bin/map-gail-tokens.py'])
     call(['bin/gather-gail.py'])
 
     o1 = make_offset(0, 3, 100)
@@ -72,7 +72,7 @@ def test_round_years_to_decade(gail_data):
     gail_data.add_text(t2)
     gail_data.add_text(t3)
 
-    call(['mpirun', 'bin/extract-gail.py'])
+    call(['mpirun', 'bin/map-gail-tokens.py'])
     call(['bin/gather-gail.py'])
 
     o1 = make_offset(0, 3, 100)
