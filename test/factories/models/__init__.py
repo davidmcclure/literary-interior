@@ -1,3 +1,3 @@
 
 
-from .offset import OffsetFactory
+from .offset import WordFactory

@@ -2,13 +2,13 @@
 
 import factory
 
-from lint.models import Offset
+from lint.models import Word
 
 
-class OffsetFactory(factory.Factory):
+class WordFactory(factory.Factory):
 
     class Meta:
-        model = Offset
+        model = Word
 
     corpus = 'corpus'
 

@@ -2,8 +2,8 @@
 
 
 from lint.singletons import config
-from lint.models import Offset
+from lint.models import Word
 
 
 if __name__ == '__main__':
-    Offset.gather_results('chicago', config['results']['chicago'])
+    Word.gather_results('chicago', config['results']['chicago'])

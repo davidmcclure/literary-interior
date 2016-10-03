@@ -17,7 +17,7 @@ from lint.count_cache import CountCache
 # TODO: Rename to Count?
 
 
-class Offset(Base):
+class Word(Base):
 
 
     __tablename__ = 'offset'
