@@ -5,7 +5,10 @@ import pytest
 from lint.utils import make_offset
 from lint.htrc.volume import Volume
 
-from test.factories.htrc import HTRCPageFactory, HTRCVolumeFactory
+from test.factories.corpora.htrc import (
+    HTRCPageFactory,
+    HTRCVolumeFactory,
+)
 
 
 @pytest.mark.parametrize('r', [

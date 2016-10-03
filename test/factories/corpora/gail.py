@@ -30,8 +30,11 @@ class GailText(Model):
         Returns: str
         """
 
-        # Parse the template.
-        raw = pkgutil.get_data('test.factories', 'templates/gail.j2')
+        raw = pkgutil.get_data(
+            'test.factories.corpora',
+            'templates/gail.j2',
+        )
+
         template = Template(raw.decode('utf8'))
 
         # Render XML.

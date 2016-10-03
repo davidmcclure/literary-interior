@@ -7,7 +7,7 @@ from subprocess import call
 from lint.utils import make_offset
 from lint.models import Word
 
-from test.factories.chicago import ChicagoNovelFactory
+from test.factories.corpora.chicago import ChicagoNovelFactory
 
 
 pytestmark = pytest.mark.usefixtures('db', 'chicago_mpi')

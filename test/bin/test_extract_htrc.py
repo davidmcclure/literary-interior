@@ -7,7 +7,10 @@ from subprocess import call
 from lint.utils import make_offset
 from lint.models import Word
 
-from test.factories.htrc import HTRCPageFactory, HTRCVolumeFactory
+from test.factories.corpora.htrc import (
+    HTRCPageFactory,
+    HTRCVolumeFactory,
+)
 
 
 pytestmark = pytest.mark.usefixtures('db', 'htrc_mpi')

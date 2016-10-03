@@ -7,7 +7,7 @@ from subprocess import call
 from lint.utils import make_offset
 from lint.models import Word
 
-from test.factories.gail import GailTextFactory
+from test.factories.corpora.gail import GailTextFactory
 
 
 pytestmark = pytest.mark.usefixtures('db', 'gail_mpi')

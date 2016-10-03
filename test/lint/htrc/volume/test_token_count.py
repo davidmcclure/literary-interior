@@ -1,6 +1,9 @@
 
 
-from test.factories.htrc import HTRCPageFactory, HTRCVolumeFactory
+from test.factories.corpora.htrc import (
+    HTRCPageFactory,
+    HTRCVolumeFactory,
+)
 
 
 def test_token_count():

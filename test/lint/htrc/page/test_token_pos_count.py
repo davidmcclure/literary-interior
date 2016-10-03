@@ -2,7 +2,7 @@
 
 from lint.htrc.page import Page
 
-from test.factories.htrc import HTRCPageFactory
+from test.factories.corpora.htrc import HTRCPageFactory
 
 
 def test_register_token_pos_counts():
