@@ -50,8 +50,6 @@ class Extract:
 
         ## ** Gather offsets, flush.
 
-        self.cache = CountCache()
-
         for i, arg in enumerate(args):
 
             try:

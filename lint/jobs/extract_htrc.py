@@ -3,12 +3,21 @@
 from lint.singletons import config
 from lint.htrc.manifest  import Manifest
 from lint.htrc.volume import Volume
+from lint.count_cache import CountCache
 from lint.utils import round_to_decade
 
 from .extract import Extract
 
 
 class ExtractHTRC(Extract):
+
+    def __init__(self):
+
+        """
+        Initialize the count cache.
+        """
+
+        self.cache = CountCache()
 
     def args(self):
 

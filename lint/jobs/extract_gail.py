@@ -5,11 +5,20 @@ from lint.utils import round_to_decade, token_offset_counts
 
 from lint.gail.corpus import Corpus
 from lint.gail.text import Text
+from lint.count_cache import CountCache
 
 from .extract import Extract
 
 
 class ExtractGail(Extract):
+
+    def __init__(self):
+
+        """
+        Initialize the count cache.
+        """
+
+        self.cache = CountCache()
 
     def args(self):
 
