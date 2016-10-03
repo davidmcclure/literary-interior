@@ -7,10 +7,10 @@ from lint.chicago.corpus import Corpus
 from lint.chicago.novel import Novel
 from lint.count_cache import CountCache
 
-from .extract import Extract
+from .scatter import Scatter
 
 
-class ExtractChicago(Extract):
+class ExtractChicago(Scatter):
 
     def __init__(self):
 
@@ -33,7 +33,7 @@ class ExtractChicago(Extract):
         for row in corpus.novels_metadata():
             yield dict(corpus_path=corpus.path, metadata=row)
 
-    def map(self, corpus_path, metadata):
+    def process(self, corpus_path, metadata):
 
         """
         Increment offsets from a volume.

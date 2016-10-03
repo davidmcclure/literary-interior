@@ -7,15 +7,15 @@ from lint.count_cache import CountCache
 from lint.utils import mem_pct
 
 
-class Extract:
+class Scatter:
 
     def args(self):
         raise NotImplementedError
 
-    def map(self, arg):
+    def process(self, arg):
         raise NotImplementedError
 
-    def flush(self, arg):
+    def flush(self):
         raise NotImplementedError
 
     def __call__(self):
@@ -55,10 +55,10 @@ class Extract:
             try:
 
                 if type(arg) is dict:
-                    self.map(**arg)
+                    self.process(**arg)
 
                 else:
-                    self.map(arg)
+                    self.process(arg)
 
             except Exception as e:
                 print(e)

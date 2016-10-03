@@ -6,10 +6,10 @@ from lint.htrc.volume import Volume
 from lint.count_cache import CountCache
 from lint.utils import round_to_decade
 
-from .extract import Extract
+from .scatter import Scatter
 
 
-class ExtractHTRC(Extract):
+class ExtractHTRC(Scatter):
 
     def __init__(self):
 
@@ -31,7 +31,7 @@ class ExtractHTRC(Extract):
 
         yield from manifest.absolute_paths()
 
-    def map(self, path):
+    def process(self, path):
 
         """
         Increment offsets from a volume.

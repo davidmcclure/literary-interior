@@ -7,10 +7,10 @@ from lint.gail.corpus import Corpus
 from lint.gail.text import Text
 from lint.count_cache import CountCache
 
-from .extract import Extract
+from .scatter import Scatter
 
 
-class ExtractGail(Extract):
+class ExtractGail(Scatter):
 
     def __init__(self):
 
@@ -32,7 +32,7 @@ class ExtractGail(Extract):
 
         yield from corpus.text_paths()
 
-    def map(self, path):
+    def process(self, path):
 
         """
         Increment offsets from a volume.
