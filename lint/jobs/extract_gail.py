@@ -1,7 +1,7 @@
 
 
 from lint.singletons import config
-from lint.utils import round_to_decade, offset_counts
+from lint.utils import round_to_decade, token_offset_counts
 
 from lint.gail.corpus import Corpus
 from lint.gail.text import Text
@@ -34,7 +34,7 @@ class ExtractGail(Extract):
 
         text = Text(path)
 
-        counts = offset_counts(
+        counts = token_offset_counts(
             text.plain_text(),
             config['offset_resolution'],
         )

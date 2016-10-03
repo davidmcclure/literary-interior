@@ -1,7 +1,7 @@
 
 
 from lint.singletons import config
-from lint.utils import round_to_decade, offset_counts
+from lint.utils import round_to_decade, token_offset_counts
 
 from lint.chicago.corpus import Corpus
 from lint.chicago.novel import Novel
@@ -35,7 +35,7 @@ class ExtractChicago(Extract):
 
         novel = Novel(corpus_path, metadata)
 
-        counts = offset_counts(
+        counts = token_offset_counts(
             novel.source_text(),
             config['offset_resolution'],
         )

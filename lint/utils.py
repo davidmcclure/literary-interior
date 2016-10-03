@@ -172,7 +172,7 @@ def make_offset(i, n, bins):
     return math.floor((i/n) * bins)
 
 
-def offset_counts(text, bins):
+def token_offset_counts(text, bins):
 
     """
     Given a string of text, map (token, POS, offset) -> count.
