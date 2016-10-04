@@ -10,7 +10,7 @@ from lint.count_cache import CountCache
 from .scatter import Scatter
 
 
-class MapGailTokens(Scatter):
+class ExtGailTokens(Scatter):
 
     def __init__(self):
 
