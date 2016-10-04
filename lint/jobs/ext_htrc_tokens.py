@@ -53,7 +53,7 @@ class ExtHTRCTokens(Scatter):
         year = round_to_decade(vol.year())
 
         # Merge counts into cache.
-        self.cache.add_volume(year, offsets)
+        self.cache.add_token_counts(year, offsets)
 
     def flush(self):
 

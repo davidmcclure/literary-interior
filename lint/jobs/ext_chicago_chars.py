@@ -52,11 +52,8 @@ class ExtChicagoChars(Scatter):
         # Round to nearest decade.
         year = round_to_decade(novel.year())
 
-        # TODO: Break out add_token_counts / add_char_counts
-
         # Merge counts into cache.
-        for (char, offset), count in counts.items():
-            self.cache[year, char, offset] += count
+        self.cache.add_char_counts(year, counts)
 
     def flush(self):
 

@@ -53,7 +53,7 @@ class ExtChicagoTokens(Scatter):
         year = round_to_decade(novel.year())
 
         # Merge counts into cache.
-        self.cache.add_volume(year, counts)
+        self.cache.add_token_counts(year, counts)
 
     def flush(self):
 
