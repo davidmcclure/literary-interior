@@ -4,6 +4,7 @@ from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
 
 from lint.singletons import session
 from lint.models import Base
+from lint.count_cache import CountCache
 from lint.utils import grouper
 
 
@@ -33,6 +34,26 @@ class Char(Base):
 
 
     @classmethod
+    def gather_results(cls, corpus, result_dir):
+
+        """
+        Merge and insert pickled count caches.
+
+        Args:
+            corpus (str)
+            result_dir (str)
+        """
+
+        # Merge result pickles.
+        results = CountCache.from_results(result_dir)
+
+        # Clear and insert the counts.
+        cls.delete_corpus(corpus)
+        cls.insert_corpus(corpus, results)
+
+        session.commit()
+
+    @classmethod
     def insert_corpus(cls, corpus, offsets):
 
         """
@@ -57,6 +78,20 @@ class Char(Base):
             ]
 
             session.bulk_insert_mappings(cls, mappings)
+
+    # TODO: Don't duplicate this?
+
+    @classmethod
+    def delete_corpus(cls, corpus):
+
+        """
+        Clear all counts for a corpus.
+
+        Args:
+            corpus (str)
+        """
+
+        cls.query.filter_by(corpus=corpus).delete()
 
     @classmethod
     def get(cls, corpus, year, char, offset):

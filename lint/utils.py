@@ -217,6 +217,8 @@ def char_offset_counts(text, bins):
     Returns: Counter
     """
 
+    text = text.strip()
+
     counts = Counter()
 
     for i, char in enumerate(text):
