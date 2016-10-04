@@ -111,7 +111,7 @@ def htrc_results(config):
 
     results = ResultDir()
 
-    config.config['results']['htrc'] = results.path
+    config.config['results']['htrc']['tokens'] = results.path
 
     yield results
 
@@ -127,7 +127,7 @@ def chicago_results(config):
 
     results = ResultDir()
 
-    config.config['results']['chicago'] = results.path
+    config.config['results']['chicago']['tokens'] = results.path
 
     yield results
 
@@ -143,7 +143,7 @@ def gail_results(config):
 
     results = ResultDir()
 
-    config.config['results']['gail'] = results.path
+    config.config['results']['gail']['tokens'] = results.path
 
     yield results
 

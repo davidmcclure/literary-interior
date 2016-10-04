@@ -61,4 +61,4 @@ class ExtChicagoTokens(Scatter):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['results']['chicago'])
+        self.cache.flush(config['results']['chicago']['tokens'])

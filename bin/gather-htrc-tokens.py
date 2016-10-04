@@ -6,4 +6,7 @@ from lint.models import Token
 
 
 if __name__ == '__main__':
-    Token.gather_results('htrc', config['results']['htrc'])
+
+    result_dir = config['results']['htrc']['tokens']
+
+    Token.gather_results('htrc', result_dir)

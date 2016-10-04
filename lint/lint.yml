@@ -1,20 +1,26 @@
 ---
 
 htrc:
-  features: /path/to/features
-  manifest: /path/to/manifest
+  features: null
+  manifest: null
 
-chicago: /path/to/corpus
+gail: null
 
-gail: /path/to/corpus
+chicago: null
 
 results:
-  htrc: /path/to/offsets
-  chicago: /path/to/offsets
-  gail: /path/to/offsets
+  htrc:
+    tokens: null
+    chars: null
+  chicago:
+    tokens: null
+    chars: null
+  gail:
+    tokens: null
+    chars: null
 
-database: /path/to/file.db
-
-token_depth: 10000
+database: null
 
 offset_resolution: 100
+
+token_depth: 10000

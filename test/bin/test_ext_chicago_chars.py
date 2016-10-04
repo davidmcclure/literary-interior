@@ -10,7 +10,10 @@ from lint.models import Char
 from test.factories.corpora.chicago import ChicagoNovelFactory
 
 
-pytestmark = pytest.mark.usefixtures('db', 'chicago_mpi')
+pytestmark = [
+    pytest.mark.usefixtures('db', 'chicago_mpi'),
+    pytest.mark.skip,
+]
 
 
 def test_dump_offsets(chicago_data):
