@@ -172,6 +172,7 @@ def gail_char_results(mock_result_dir):
 
 @pytest.fixture
 def htrc_mpi(
+    db,
     htrc_data,
     htrc_token_results,
     htrc_char_results,
@@ -181,6 +182,7 @@ def htrc_mpi(
 
 @pytest.fixture
 def chicago_mpi(
+    db,
     chicago_data,
     chicago_token_results,
     chicago_char_results,
@@ -190,6 +192,7 @@ def chicago_mpi(
 
 @pytest.fixture
 def gail_mpi(
+    db,
     gail_data,
     gail_token_results,
     gail_char_results,
