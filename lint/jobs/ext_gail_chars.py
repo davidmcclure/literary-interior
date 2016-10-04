@@ -60,4 +60,4 @@ class ExtGailChars(Scatter):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['results']['gail']['chars'])
+        self.cache.flush(config['results']['chars']['gail'])

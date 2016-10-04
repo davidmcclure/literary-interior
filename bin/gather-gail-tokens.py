@@ -7,6 +7,6 @@ from lint.models import Token
 
 if __name__ == '__main__':
 
-    result_dir = config['results']['gail']['tokens']
+    result_dir = config['results']['tokens']['gail']
 
     Token.gather_results('gail', result_dir)

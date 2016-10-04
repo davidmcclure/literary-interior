@@ -61,4 +61,4 @@ class ExtHTRCTokens(Scatter):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['results']['htrc']['tokens'])
+        self.cache.flush(config['results']['tokens']['htrc'])

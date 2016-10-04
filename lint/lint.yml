@@ -9,15 +9,16 @@ gail: null
 chicago: null
 
 results:
-  htrc:
-    tokens: null
-    chars: null
-  chicago:
-    tokens: null
-    chars: null
-  gail:
-    tokens: null
-    chars: null
+
+  tokens:
+    htrc: null
+    chicago: null
+    gail: null
+
+  chars:
+    htrc: null
+    chicago: null
+    gail: null
 
 database: null
 

@@ -109,11 +109,11 @@ def mock_result_dir(config):
     Yields: ResultDir
     """
 
-    def func(corpus, job):
+    def func(rtype, corpus):
 
         results = ResultDir()
 
-        config.config['results'][corpus][job] = results.path
+        config.config['results'][rtype][corpus] = results.path
 
         yield results
 
@@ -124,32 +124,32 @@ def mock_result_dir(config):
 
 @pytest.yield_fixture
 def htrc_token_results(mock_result_dir):
-    yield from mock_result_dir('htrc', 'tokens')
+    yield from mock_result_dir('tokens', 'htrc')
 
 
 @pytest.yield_fixture
 def htrc_char_results(mock_result_dir):
-    yield from mock_result_dir('htrc', 'chars')
+    yield from mock_result_dir('chars', 'htrc')
 
 
 @pytest.yield_fixture
 def chicago_token_results(mock_result_dir):
-    yield from mock_result_dir('chicago', 'tokens')
+    yield from mock_result_dir('tokens', 'chicago')
 
 
 @pytest.yield_fixture
 def chicago_char_results(mock_result_dir):
-    yield from mock_result_dir('chicago', 'chars')
+    yield from mock_result_dir('chars', 'chicago')
 
 
 @pytest.yield_fixture
 def gail_token_results(mock_result_dir):
-    yield from mock_result_dir('gail', 'tokens')
+    yield from mock_result_dir('tokens', 'gail')
 
 
 @pytest.yield_fixture
 def gail_char_results(mock_result_dir):
-    yield from mock_result_dir('gail', 'chars')
+    yield from mock_result_dir('chars', 'gail')
 
 
 @pytest.yield_fixture

@@ -61,4 +61,4 @@ class ExtChicagoChars(Scatter):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['results']['chicago']['chars'])
+        self.cache.flush(config['results']['chars']['chicago'])
