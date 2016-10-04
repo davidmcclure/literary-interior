@@ -13,7 +13,7 @@ from test.factories.corpora.htrc import (
 )
 
 
-pytestmark = pytest.mark.usefixtures('htrc_mpi')
+pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
 def test_dump_offsets(htrc_data):

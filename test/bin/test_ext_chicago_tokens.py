@@ -10,7 +10,7 @@ from lint.models import Token
 from test.factories.corpora.chicago import ChicagoNovelFactory
 
 
-pytestmark = pytest.mark.usefixtures('chicago_mpi')
+pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
 def test_dump_offsets(chicago_data):

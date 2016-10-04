@@ -123,24 +123,6 @@ def mock_result_dir(config):
 
 
 @pytest.yield_fixture
-def mpi(config):
-
-    """
-    Write the current configuration into the /tmp/.lint.yml file.
-    """
-
-    config.write_tmp()
-
-    yield
-
-    config.clear_tmp()
-
-    session.remove()
-
-    init_testing_db()
-
-
-@pytest.yield_fixture
 def htrc_token_results(mock_result_dir):
     yield from mock_result_dir('htrc', 'tokens')
 
@@ -170,31 +152,37 @@ def gail_char_results(mock_result_dir):
     yield from mock_result_dir('gail', 'chars')
 
 
-@pytest.fixture
-def htrc_mpi(
-    db,
+@pytest.yield_fixture
+def mpi(
+
+    config,
+
+    # Mock all data sources + result dirs.
+
     htrc_data,
     htrc_token_results,
     htrc_char_results,
-    mpi,
-): pass
 
-
-@pytest.fixture
-def chicago_mpi(
-    db,
     chicago_data,
     chicago_token_results,
     chicago_char_results,
-    mpi,
-): pass
 
-
-@pytest.fixture
-def gail_mpi(
-    db,
     gail_data,
     gail_token_results,
     gail_char_results,
-    mpi,
-): pass
+
+):
+
+    """
+    Write the patched config to /tmp/.lint.yml.
+    """
+
+    config.write_tmp()
+
+    yield
+
+    config.clear_tmp()
+
+    session.remove()
+
+    init_testing_db()

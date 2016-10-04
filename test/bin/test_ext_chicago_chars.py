@@ -11,7 +11,7 @@ from test.factories.corpora.chicago import ChicagoNovelFactory
 
 
 pytestmark = [
-    pytest.mark.usefixtures('db', 'chicago_mpi'),
+    pytest.mark.usefixtures('db', 'mpi'),
     pytest.mark.skip,
 ]
 

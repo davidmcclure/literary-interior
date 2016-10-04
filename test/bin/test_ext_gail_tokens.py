@@ -10,7 +10,7 @@ from lint.models import Token
 from test.factories.corpora.gail import GailTextFactory
 
 
-pytestmark = pytest.mark.usefixtures('gail_mpi')
+pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
 def test_dump_offsets(gail_data):
