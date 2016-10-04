@@ -3,7 +3,7 @@
 from lint.count_cache import CountCache
 
 
-def test_from_results(htrc_results):
+def test_from_results(htrc_token_results):
 
     """
     Merge together pickled instances.
@@ -24,11 +24,11 @@ def test_from_results(htrc_results):
     c3[1904, 'token4', 'POS4', 1] = 8
     c3[1905, 'token5', 'POS5', 1] = 9
 
-    htrc_results.add_cache(c1)
-    htrc_results.add_cache(c2)
-    htrc_results.add_cache(c3)
+    htrc_token_results.add_cache(c1)
+    htrc_token_results.add_cache(c2)
+    htrc_token_results.add_cache(c3)
 
-    cache = CountCache.from_results(htrc_results.path)
+    cache = CountCache.from_results(htrc_token_results.path)
 
     assert cache[1901, 'token1', 'POS1', 1] == 1
     assert cache[1902, 'token2', 'POS2', 1] == 2+4

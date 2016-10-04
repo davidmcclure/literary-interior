@@ -141,30 +141,57 @@ def mpi(config):
 
 
 @pytest.yield_fixture
-def htrc_results(mock_result_dir):
+def htrc_token_results(mock_result_dir):
     yield from mock_result_dir('htrc', 'tokens')
 
 
 @pytest.yield_fixture
-def chicago_results(mock_result_dir):
+def htrc_char_results(mock_result_dir):
+    yield from mock_result_dir('htrc', 'chars')
+
+
+@pytest.yield_fixture
+def chicago_token_results(mock_result_dir):
     yield from mock_result_dir('chicago', 'tokens')
 
 
 @pytest.yield_fixture
-def gail_results(mock_result_dir):
+def chicago_char_results(mock_result_dir):
+    yield from mock_result_dir('chicago', 'chars')
+
+
+@pytest.yield_fixture
+def gail_token_results(mock_result_dir):
     yield from mock_result_dir('gail', 'tokens')
 
 
-@pytest.fixture
-def htrc_mpi(htrc_data, htrc_results, mpi):
-    pass
+@pytest.yield_fixture
+def gail_char_results(mock_result_dir):
+    yield from mock_result_dir('gail', 'chars')
 
 
 @pytest.fixture
-def chicago_mpi(chicago_data, chicago_results, mpi):
-    pass
+def htrc_mpi(
+    htrc_data,
+    htrc_token_results,
+    htrc_char_results,
+    mpi,
+): pass
 
 
 @pytest.fixture
-def gail_mpi(gail_data, gail_results, mpi):
-    pass
+def chicago_mpi(
+    chicago_data,
+    chicago_token_results,
+    chicago_char_results,
+    mpi,
+): pass
+
+
+@pytest.fixture
+def gail_mpi(
+    gail_data,
+    gail_token_results,
+    gail_char_results,
+    mpi,
+): pass
