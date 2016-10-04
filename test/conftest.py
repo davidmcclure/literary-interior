@@ -102,52 +102,24 @@ def gail_data(config):
     corpus.teardown()
 
 
-@pytest.yield_fixture
-def htrc_results(config):
+@pytest.fixture
+def mock_result_dir(config):
 
     """
     Yields: ResultDir
     """
 
-    results = ResultDir()
+    def func(corpus, job):
 
-    config.config['results']['htrc']['tokens'] = results.path
+        results = ResultDir()
 
-    yield results
+        config.config['results'][corpus][job] = results.path
 
-    results.teardown()
+        yield results
 
+        results.teardown()
 
-@pytest.yield_fixture
-def chicago_results(config):
-
-    """
-    Yields: ResultDir
-    """
-
-    results = ResultDir()
-
-    config.config['results']['chicago']['tokens'] = results.path
-
-    yield results
-
-    results.teardown()
-
-
-@pytest.yield_fixture
-def gail_results(config):
-
-    """
-    Yields: ResultDir
-    """
-
-    results = ResultDir()
-
-    config.config['results']['gail']['tokens'] = results.path
-
-    yield results
-
-    results.teardown()
+    return func
 
 
 @pytest.yield_fixture
@@ -166,6 +138,21 @@ def mpi(config):
     session.remove()
 
     init_testing_db()
+
+
+@pytest.yield_fixture
+def htrc_results(mock_result_dir):
+    yield from mock_result_dir('htrc', 'tokens')
+
+
+@pytest.yield_fixture
+def chicago_results(mock_result_dir):
+    yield from mock_result_dir('chicago', 'tokens')
+
+
+@pytest.yield_fixture
+def gail_results(mock_result_dir):
+    yield from mock_result_dir('gail', 'tokens')
 
 
 @pytest.fixture
