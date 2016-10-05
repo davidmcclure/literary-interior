@@ -155,6 +155,20 @@ def get_text(tree, selector):
         return None
 
 
+def clean_text(text):
+
+    """
+    Clean a raw text string.
+
+    Args:
+        text (str)
+
+    Returns: str
+    """
+
+    return re.sub('\s{2,}', ' ', text).strip()
+
+
 def make_offset(i, n, bins):
 
     """
@@ -216,6 +230,8 @@ def char_offset_counts(text, bins):
 
     Returns: Counter
     """
+
+    # TODO: Test strip, convert 2+ spaces -> 1 space.
 
     text = text.strip()
 
