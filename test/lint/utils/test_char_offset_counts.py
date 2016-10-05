@@ -37,3 +37,32 @@ def test_round_offsets(n):
     assert counts['b', o2] == 1
     assert counts['c', o3] == 1
     assert counts['d', o4] == 1
+
+
+def test_strip_text():
+
+    """
+    Leading / trailing whitespace should be ignored.
+    """
+
+    counts = char_offset_counts('  abcd  ', 4)
+
+    assert counts['a', 0] == 1
+    assert counts['b', 1] == 1
+    assert counts['c', 2] == 1
+    assert counts['d', 3] == 1
+
+
+def test_collapse_whitespace():
+
+    """
+    2+ spaces should be collapsed to 1 space.
+    """
+
+    counts = char_offset_counts('ab  cd', 5)
+
+    assert counts['a', 0] == 1
+    assert counts['b', 1] == 1
+    assert counts[' ', 2] == 1
+    assert counts['c', 3] == 1
+    assert counts['d', 4] == 1

@@ -231,9 +231,7 @@ def char_offset_counts(text, bins):
     Returns: Counter
     """
 
-    # TODO: Test strip, convert 2+ spaces -> 1 space.
-
-    text = text.strip()
+    text = clean_text(text)
 
     counts = Counter()
 
