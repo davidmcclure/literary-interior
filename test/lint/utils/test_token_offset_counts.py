@@ -50,3 +50,16 @@ def test_downcase():
     tokens = [k[0] for k in counts.keys()]
 
     assert set(tokens) == set(['one', 'two', 'three'])
+
+
+def test_strip_tokens():
+
+    """
+    Strip non-[a-z] chars.
+    """
+
+    counts = token_offset_counts('.one .two .three .four', 4)
+
+    tokens = [k[0] for k in counts.keys()]
+
+    assert set(tokens) == set(['one', 'two', 'three', 'four'])

@@ -155,20 +155,6 @@ def get_text(tree, selector):
         return None
 
 
-def clean_text(text):
-
-    """
-    Clean a raw text string.
-
-    Args:
-        text (str)
-
-    Returns: str
-    """
-
-    return re.sub('\s{2,}', ' ', text).strip()
-
-
 def make_offset(i, n, bins):
 
     """
@@ -186,6 +172,37 @@ def make_offset(i, n, bins):
     return math.floor((i/n) * bins)
 
 
+def clean_text(text):
+
+    """
+    Clean a raw text string.
+
+    Args:
+        text (str)
+
+    Returns: str
+    """
+
+    return re.sub('\s{2,}', ' ', text.strip())
+
+
+def clean_token(token):
+
+    """
+    Clean an individual token.
+
+    - Downcase.
+    - Strip leading / trailing non-[a-z] characters.
+
+    Args:
+        token (str)
+
+    Returns: str
+    """
+
+    return re.sub('^[^a-z]*|[^a-z]*$', '', token.lower())
+
+
 def token_offset_counts(text, bins):
 
     """
@@ -198,8 +215,6 @@ def token_offset_counts(text, bins):
     Returns: Counter
     """
 
-    # TODO: Use OpenNLP?
-
     # UTF8 -> ASCII.
     blob = TextBlob(text.encode('ascii', 'ignore').decode())
 
@@ -209,7 +224,7 @@ def token_offset_counts(text, bins):
 
     for i, (token, pos) in enumerate(tags):
 
-        token = token.lower()
+        token = clean_token(token)
 
         # Get 0-N offset.
         offset = make_offset(i, len(tags), bins)
