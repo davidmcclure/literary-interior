@@ -45,9 +45,20 @@ class Novel:
         Returns: str
         """
 
-        # TODO: Strip out Gutenberg header/footer.
+        i1 = None
+        i2 = None
 
-        return self.text
+        lines = self.text.splitlines()
+
+        for i, line in enumerate(lines):
+
+            if '***' in line and 'START' in line:
+                i1 = i+1
+
+            if '***' in line and 'END' in line:
+                i2 = i
+
+        return '\n'.join(lines[i1:i2])
 
     def year(self):
 
