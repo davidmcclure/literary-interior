@@ -31,10 +31,10 @@ class Novel:
             self.metadata['FILENAME'],
         )
 
-    def source_text(self):
+    def source_lines(self):
 
         """
-        Returns: str
+        Returns: list
         """
 
         with open(
@@ -44,7 +44,15 @@ class Novel:
             errors='ignore'
         ) as fh:
 
-            return fh.read()
+            return fh.readlines()
+
+    def source_text(self):
+
+        """
+        Returns: str
+        """
+
+        return ' '.join(self.source_lines())
 
     def identifier(self):
 
