@@ -41,7 +41,7 @@ class ExtGailChars(Scatter):
             path (str)
         """
 
-        text = Text(path)
+        text = Text.from_path(path)
 
         counts = char_offset_counts(
             text.plain_text(),

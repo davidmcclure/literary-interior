@@ -9,19 +9,29 @@ from lint.utils import get_text
 
 class Text:
 
-    def __init__(self, path):
+    @classmethod
+    def from_path(cls, path):
 
         """
-        Parse the XML.
+        Make an instance from an XML file.
 
         Args:
             path (str)
         """
 
-        self.path = os.path.abspath(path)
+        with open(path, 'rb') as fh:
+            return cls(fh.read())
 
-        with open(self.path, 'rb') as fh:
-            self.xml = BeautifulSoup(fh, 'xml')
+    def __init__(self, xml):
+
+        """
+        Parse the XML tree.
+
+        Args:
+            xml (str)
+        """
+
+        self.tree = BeautifulSoup(xml, 'xml')
 
     def year(self):
 
@@ -29,7 +39,7 @@ class Text:
         Returns: int
         """
 
-        return int(get_text(self.xml, 'pubDate pubDateStart')[:4])
+        return int(get_text(self.tree, 'pubDate pubDateStart')[:4])
 
     def plain_text(self):
 
@@ -37,7 +47,7 @@ class Text:
         Returns: str
         """
 
-        words = self.xml.select('page[type="bodyPage"] wd')
+        words = self.tree.select('page[type="bodyPage"] wd')
 
         strings = [
             w.string
