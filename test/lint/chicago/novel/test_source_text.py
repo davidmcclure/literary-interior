@@ -5,6 +5,18 @@ import pytest
 from test.factories.corpora.chicago import ChicagoNovelFactory
 
 
+headers = [
+    '*** START OF THIS PROJECT GUTENBERG EBOOK ***',
+    '***START OF THIS PROJECT GUTENBERG EBOOK***',
+]
+
+
+footers = [
+    '*** END OF THIS PROJECT GUTENBERG EBOOK ***',
+    '***END OF THIS PROJECT GUTENBERG EBOOK***',
+]
+
+
 def test_source_text():
 
     """
@@ -20,17 +32,6 @@ def test_source_text():
     novel = ChicagoNovelFactory(text=text)
 
     assert novel.source_text() == text
-
-
-headers = [
-    '*** START OF THIS PROJECT GUTENBERG EBOOK ***',
-    '***START OF THIS PROJECT GUTENBERG EBOOK***',
-]
-
-footers = [
-    '*** END OF THIS PROJECT GUTENBERG EBOOK ***',
-    '***END OF THIS PROJECT GUTENBERG EBOOK***',
-]
 
 
 @pytest.mark.parametrize('header', headers)
