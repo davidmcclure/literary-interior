@@ -5,46 +5,45 @@ import os
 
 class Novel:
 
-    def __init__(self, corpus_path, metadata):
+    @classmethod
+    def from_corpus_path(cls, corpus_path, metadata):
 
         """
-        Canonicalize the corpus path, set the novel metadata.
+        Hydrate a text instance from the corpus.
 
         Args:
             corpus_path (str)
             metadata (dict)
         """
 
-        self.corpus_path = os.path.abspath(corpus_path)
+        text_path = os.path.join(
+            corpus_path,
+            'Texts',
+            metadata['FILENAME'],
+        )
+
+        with open(
+            text_path,
+            mode='r',
+            encoding='utf8',
+            errors='ignore',
+        ) as fh:
+
+            return cls(metadata, fh.read())
+
+    def __init__(self, metadata, text):
+
+        """
+        Set the metadata and plain text.
+
+        Args:
+            metadata (dict)
+            text (str)
+        """
 
         self.metadata = metadata
 
-    def source_text_path(self):
-
-        """
-        Returns: str
-        """
-
-        return os.path.join(
-            self.corpus_path,
-            'Texts',
-            self.metadata['FILENAME'],
-        )
-
-    def source_lines(self):
-
-        """
-        Returns: list
-        """
-
-        with open(
-            self.source_text_path(),
-            mode='r',
-            encoding='utf8',
-            errors='ignore'
-        ) as fh:
-
-            return fh.readlines()
+        self.text = text
 
     def source_text(self):
 
@@ -52,7 +51,9 @@ class Novel:
         Returns: str
         """
 
-        return ' '.join(self.source_lines())
+        # TODO: Strip out Gutenberg header/footer.
+
+        return self.text
 
     def identifier(self):
 

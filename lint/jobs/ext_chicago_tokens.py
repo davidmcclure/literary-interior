@@ -42,7 +42,7 @@ class ExtChicagoTokens(Scatter):
             path (str)
         """
 
-        novel = Novel(corpus_path, metadata)
+        novel = Novel.from_corpus_path(corpus_path, metadata)
 
         counts = token_offset_counts(
             novel.source_text(),
