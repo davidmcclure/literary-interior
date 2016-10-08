@@ -22,13 +22,7 @@ class Novel:
             metadata['FILENAME'],
         )
 
-        with open(
-            text_path,
-            mode='r',
-            encoding='utf8',
-            errors='ignore',
-        ) as fh:
-
+        with open(text_path, encoding='utf8', errors='ignore') as fh:
             return cls(metadata, fh.read())
 
     def __init__(self, metadata, text):
