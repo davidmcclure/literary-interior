@@ -24,28 +24,29 @@ class ChicagoData(TempDir):
         Add a novel to the corpus.
 
         Args:
-            novel (ChicagoNovel)
+            novel (Novel)
         """
 
         # Add row to metadata CSV.
 
         first = not self.metadata_exists()
 
-        row = novel.csv_row()
-
         writer = csv.DictWriter(
             open(self.metadata_path(), 'a'),
-            row.keys(),
+            novel.metadata.keys(),
         )
 
         if first:
             writer.writeheader()
 
-        writer.writerow(row)
+        writer.writerow(novel.metadata)
 
         # Write text file.
 
-        text_path = os.path.join(self.texts_path(), novel.filename())
+        text_path = os.path.join(
+            self.texts_path(),
+            novel.metadata['FILENAME'],
+        )
 
         with open_makedirs(text_path, 'w') as fh:
             print(novel.text, file=fh)
