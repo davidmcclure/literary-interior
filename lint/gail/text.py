@@ -33,6 +33,14 @@ class Text:
 
         self.tree = BeautifulSoup(xml, 'xml')
 
+    def identifier(self):
+
+        """
+        Returns: str
+        """
+
+        return get_text(self.tree, 'PSMID')
+
     def year(self):
 
         """

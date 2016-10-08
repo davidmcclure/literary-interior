@@ -14,10 +14,14 @@ class GailData(TempDir):
         Add a text to the corpus.
 
         Args:
-            novel (GailText)
+            novel (Text)
         """
 
-        path = os.path.join(self.path, '{0}.xml'.format(text.id))
+        fname = '{0}.xml'.format(text.identifier())
+
+        path = os.path.join(self.path, fname)
+
+        print(path)
 
         with open(path, 'w') as fh:
-            print(text.xml(), file=fh)
+            print(text.tree, file=fh)

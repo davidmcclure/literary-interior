@@ -3,48 +3,15 @@
 import factory
 import pkgutil
 
-from schematics.models import Model
-from schematics.types import IntType, StringType
-from schematics.types.compound import ListType
-
 from jinja2 import Template
 
-from .schematics import SchematicsFactory
+from lint.gail.text import Text
 
 
-class GailText(Model):
-
-    id = StringType(required=True)
-
-    title = StringType(required=True)
-
-    year = IntType(required=True)
-
-    tokens = ListType(StringType, min_size=1)
-
-    def xml(self):
-
-        """
-        Render the XML template.
-
-        Returns: str
-        """
-
-        raw = pkgutil.get_data(
-            'test.factories.corpora',
-            'templates/gail.j2',
-        )
-
-        template = Template(raw.decode('utf8'))
-
-        # Render XML.
-        return template.render(**dict(self))
-
-
-class GailTextFactory(SchematicsFactory):
+class GailTextFactory(factory.Factory):
 
     class Meta:
-        model = GailText
+        model = Text
 
     id = factory.Sequence(lambda n: 'B000{0}'.format(n))
 
@@ -53,3 +20,24 @@ class GailTextFactory(SchematicsFactory):
     year = 1900
 
     tokens = ['Call', 'me', 'Ishmael.']
+
+    @classmethod
+    def _create(cls, model_class, *args, **kwargs):
+
+        """
+        Returns: Text
+        """
+
+        # Read XML template.
+        raw = pkgutil.get_data(
+            'test.factories.corpora',
+            'templates/gail.j2',
+        )
+
+        # Compile template.
+        template = Template(raw.decode('utf8'))
+
+        # Render XML.
+        xml = template.render(**kwargs)
+
+        return model_class(xml)

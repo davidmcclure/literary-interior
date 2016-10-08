@@ -2,9 +2,6 @@
 
 import factory
 
-from schematics.models import Model
-from schematics.types import IntType, StringType
-
 from lint.chicago.novel import Novel
 
 

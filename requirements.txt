@@ -20,7 +20,6 @@ scipy
 jupyter
 matplotlib
 sklearn
-schematics
 bs4
 lxml
 pandas
