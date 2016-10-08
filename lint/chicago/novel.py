@@ -49,22 +49,6 @@ class Novel:
 
         return self.text
 
-    def identifier(self):
-
-        """
-        Returns: str
-        """
-
-        return self.metadata['BOOK_ID']
-
-    def title(self):
-
-        """
-        Returns: str
-        """
-
-        return self.metadata['TITLE']
-
     def year(self):
 
         """

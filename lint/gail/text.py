@@ -23,22 +23,6 @@ class Text:
         with open(self.path, 'rb') as fh:
             self.xml = BeautifulSoup(fh, 'xml')
 
-    def identifier(self):
-
-        """
-        Returns: str
-        """
-
-        return get_text(self.xml, 'PSMID')
-
-    def title(self):
-
-        """
-        Returns: str
-        """
-
-        return get_text(self.xml, 'titleGroup fullTitle')
-
     def year(self):
 
         """
