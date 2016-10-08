@@ -50,12 +50,22 @@ class Novel:
 
         lines = self.text.splitlines()
 
+        tokens = ['***', 'PROJECT', 'GUTENBERG']
+
         for i, line in enumerate(lines):
 
-            if '***' in line and 'START' in line:
+            # Match "start" line.
+            if False not in [
+                token in line
+                for token in tokens + ['START']
+            ]:
                 i1 = i+1
 
-            if '***' in line and 'END' in line:
+            # Match "end" line.
+            if False not in [
+                token in line
+                for token in tokens + ['END']
+            ]:
                 i2 = i
 
         return '\n'.join(lines[i1:i2])
