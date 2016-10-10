@@ -86,8 +86,11 @@ ORDER BY offset;
 ```
 
 ![](young.png)
+
 ![](boy.png)
+
 ![](girl.png)
+
 ![](school.png)
 
 [gail/chicago birth, youth, etc]
