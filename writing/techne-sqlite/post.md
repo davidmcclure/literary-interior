@@ -107,7 +107,7 @@ And the past tenses, which are essentially mirror images:
 
 [was, were]
 
-This seems like it might be an interesting window onto the temporal orientation or "direction" of the text, whether the what's being narrated happened now or in the past. So, it seems like "presentness" starts low, peaks out in the middle, dips down in the third quarter, and then spikes up massively at the very end? and, conversely, "pastness" is highest at the beginning, declines through the middle, bumps up, and then plummets at the very end?
+This seems like it might be an interesting window onto the temporal orientation or "direction" of the text, whether the what's being narrated happened now or in the past. So, it seems like "presentness" starts low, peaks out in the middle, dips down in the third quarter, and then spikes up massively at the very end? And conversely, "pastness" is highest at the beginning, declines through the middle, bumps up, and then plummets at the very end?
 
 Or, to end on another head-scratcher, also related to the temporality of the grammar - check out "had," which, between the Gail and Chicago corpora, sloshes from the end to the beginning:
 
