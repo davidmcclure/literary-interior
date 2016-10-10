@@ -66,7 +66,7 @@ Now, with the table loaded and indexed, it's trivial to query out time-series tr
 ```sql
 SELECT offset, SUM(count)
 FROM token
-WHERE token="<token>"
+WHERE token="youth"
 GROUP BY offset
 ORDER BY offset;
 ```
@@ -80,7 +80,7 @@ Where 0 is the beginning of the text, 100 the end. Are these trends consistent b
 ```sql
 SELECT offset, SUM(count)
 FROM token
-WHERE token="<token>" AND corpus="<corpus>"
+WHERE token="youth" AND corpus="gail"
 GROUP BY offset
 ORDER BY offset;
 ```
