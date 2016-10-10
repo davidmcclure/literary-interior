@@ -9,3 +9,5 @@
 /dist
 /.cache
 /.env
+
+.ipynb_checkpoints
