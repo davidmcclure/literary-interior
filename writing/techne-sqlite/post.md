@@ -73,7 +73,21 @@ ORDER BY offset;
 
 Just as a gut check on the method, here at the trends for a couple words we'd expect to mark beginnings and endings:
 
-[birth, youth, early, death]
+![](single/young.png)
+
+![](single/boy.png)
+
+![](single/girl.png)
+
+![](single/school.png)
+
+![](single/death.png)
+
+![](single/victory.png)
+
+![](single/defeat.png)
+
+![](single/embrace.png)
 
 Looks about right. Are these trends consistent between the two corpora, separated by about a century? We can slice them apart just by adding another `WHERE` clause:
 
@@ -85,15 +99,21 @@ GROUP BY offset
 ORDER BY offset;
 ```
 
-![](young.png)
+![](split/young.png)
 
-![](boy.png)
+![](split/boy.png)
 
-![](girl.png)
+![](split/girl.png)
 
-![](school.png)
+![](split/school.png)
 
-[gail/chicago birth, youth, etc]
+![](split/death.png)
+
+![](split/victory.png)
+
+![](split/defeat.png)
+
+![](split/embrace.png)
 
 In other cases, though, there are interesting differences - words related to marriage shift towards the narrative beginning, somewhere in the space between the Gail and Chicago corpora:
 
@@ -125,3 +145,7 @@ In C20 - narratives begin in the past perfect?
 
 Anyway, the point being - once the data is structured this way, it's easy to answer a whole _class_ of related questions, not just the one or two that I started out with. To circle back to the original question of what type of data should flow out of the cluster, whether it should be big or small, general-purpose or specific - SQLite sort of lets you have the cake and eat it too. It's possible to write code that dragnets out really quite large large amounts of data that answer the question at hand in the most general and comprehensive case, but then plug the resulting data set - tens, even hundreds of gigabytes - directly into a Jupyter notebook and start answering specific questions immediately. It's a nice glue between the process of observation and analysis, between the huge telescope that vacuums up data out of the sky and the little workstation where you sit down and actually figure stuff out.
 
+
+
+
+concenience of flat file,
