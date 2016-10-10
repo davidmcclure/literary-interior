@@ -157,7 +157,7 @@ And the past tenses, which are essentially mirror images:
 
 ![](split/were.png)
 
-This seems like a possible window onto the temporal orientation or "direction" of the text, whether the what's being narrated happened now or in the past. So, it seems like "presentness" starts low, peaks out in the middle, dips down in the third quarter, and then spikes up massively at the very end? And conversely, "pastness" is highest at the beginning, declines through the middle, bumps up, and then plummets at the very end?
+This seems like a possible window onto the temporal orientation or "direction" of the text, whether what's being narrated happened now or in the past. So, it seems like "presentness" starts low, peaks out in the middle, dips down in the third quarter, and then spikes up massively at the very end? And conversely, "pastness" is highest at the beginning, declines through the middle, bumps up, and then plummets at the very end?
 
 Or, to end on a head-scratcher, also related to the temporality of the grammar - check out "had," which, between the Gail and Chicago corpora, sloshes from the end to the beginning:
 
@@ -165,4 +165,8 @@ Or, to end on a head-scratcher, also related to the temporality of the grammar -
 
 In C20 - narratives begin in the past perfect?
 
-Anyway, the point being - once the data is structured this way, it's easy to answer a whole _class_ of related questions, not just the one or two that I started out with. To circle back to the original question of what type of data should flow out of the cluster, whether it should be big or small, general-purpose or specific - SQLite sort of lets you have the cake and eat it too. It's possible to write code that dragnets out really quite large large amounts of data that answer the question at hand in the most general and comprehensive case, but then plug the resulting data set - tens, even hundreds of gigabytes - directly into a Jupyter notebook and start answering specific questions immediately. It's a nice glue between the process of observation and analysis, between the huge telescope that vacuums up data out of the sky and the little workstation where you sit down and actually figure stuff out.
+## Observation code, analysis code
+
+At a conceptual level, what's really nice about this, I think, is that it has all the convenience of a flat-file format, but it's possible to pipe much larger amounts of data into the final analysis workflow that would be possible with a regular text format. It would be a nightmare to try to load up a 9g JSON file into memory in a Jupyter notebook or R markdown script, let alone try to do any kind of interactive analysis with it. But, SQLite has no trouble at all - properly indexed, it can materialize one of these time-series plots for a word in right around 10 milliseconds, which is remarkable when you remember that this involves funneling down the 9g file to less than a kilobyte of data.
+
+And, in this sense - to circle back to the original question of what type of data should flow out of the cluster, whether it should be big or small, general-purpose or specific - SQLite sort of lets you have the cake and eat it too. It's possible to write code that dragnets out really quite large large amounts of data that answer the question at hand in the most general and comprehensive case, but then plug the resulting data set - tens, even hundreds of gigabytes - directly into a Jupyter notebook and start answering specific questions immediately. It's a nice glue between the process of observation and analysis, between the huge telescope that vacuums up data out of the sky and the little workstation where you sit down and actually figure stuff out.
