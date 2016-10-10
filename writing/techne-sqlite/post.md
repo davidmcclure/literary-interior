@@ -94,14 +94,14 @@ And, ends:
 Looks about right. Are these trends consistent between the two corpora, separated by about a century? We can slice them apart just by tacking on another `WHERE` clause:
 
 ```sql
-; Offsets for "young," just in Gail:
+-- Offsets for "young," just in Gail:
 SELECT offset, SUM(count)
 FROM token
 WHERE token="young" AND corpus="gail"
 GROUP BY offset
 ORDER BY offset;
 
-; And, just in Chicago:
+-- And, just in Chicago:
 SELECT offset, SUM(count)
 FROM token
 WHERE token="young" AND corpus="chicago"
