@@ -71,7 +71,7 @@ GROUP BY offset
 ORDER BY offset;
 ```
 
-Just as a gut check on the method, here at the trends for a couple words we'd expect to mark beginnings:
+Just as a gut check on the method, here are the trends for a couple words we'd expect to mark beginnings:
 
 ![](single/young.png)
 
@@ -167,6 +167,6 @@ In C20 - narratives begin in the past perfect?
 
 ## Observation code, analysis code
 
-At a conceptual level, what's really nice about this, I think, is that it has all the convenience of a flat-file format, but it's possible to pipe much larger amounts of data into the final analysis workflow that would be possible with a regular text format. It would be a nightmare to try to load up a 9g JSON file into memory in a Jupyter notebook or R markdown script, let alone try to do any kind of interactive analysis with it. But, SQLite has no trouble at all - properly indexed, it can materialize one of these time-series plots for a word in right around 10 milliseconds, which is remarkable when you remember that this involves funneling down the 9g file to less than a kilobyte of data.
+At a conceptual level, what's really nice about this, I think, is that it has all the convenience of a flat-file format, but it's possible to pipe much larger amounts of data into the final analysis workflow that would be possible with a regular text format. It would be a nightmare to try to load up a 9g JSON file into memory in a Jupyter notebook or R markdown script, let alone try to do any kind of interactive analysis with it. But, SQLite has no trouble at all - properly indexed, it can materialize one of these time-series plots for a word in right around 10 milliseconds, which is remarkable when you remember that this involves funneling down the 9g database file to a result that's well under a single kilobyte.
 
-And, in this sense - to circle back to the original question of what type of data should flow out of the cluster, whether it should be big or small, general-purpose or specific - SQLite sort of lets you have the cake and eat it too. It's possible to write code that dragnets out really quite large large amounts of data that answer the question at hand in the most general and comprehensive case, but then plug the resulting data set - tens, even hundreds of gigabytes - directly into a Jupyter notebook and start answering specific questions immediately. It's a nice glue between the process of observation and analysis, between the huge telescope that vacuums up data out of the sky and the little workstation where you sit down and actually figure stuff out.
+In a sense, then - to circle back to the question of what type of data should flow out of the cluster, whether it should be big or small, general-purpose or specific - SQLite sort of lets you have the cake and eat it too. It's possible to write code that dragnets out really quite large large amounts of data that answer the question at hand in the most general and comprehensive case, but then plug the resulting data set - tens, even hundreds of gigabytes - directly into a Jupyter notebook and start answering specific questions immediately. It's a nice glue between the process of observation and analysis, between the huge telescope that vacuums up data out of the sky and the little workstation where you sit down and actually figure stuff out.
