@@ -127,11 +127,11 @@ ORDER BY offset;
 
 Very similar. In other cases, though, there are interesting differences - words related to marriage shift towards the narrative beginning, somewhere in the space between the Gail and Chicago corpora:
 
-[marriage]
+![](split/marriage.png)
 
 So, marriage increasingly becomes the _subject_ of narrative, not just its endpoint. Beyond words like these that have pretty obvious narratalogical anchorings, though - even function words that don't carry any kind of semantic meaning show really pronounced trends. Here's "the," again broken out for Gail and Chicago:
 
-[the]
+![](split/the.png)
 
 This starts to edge in a more interesting direction, I think. In a way, it's a bit remarkable that there's _any_ effect here, let alone something so significant - the null hypothesis is that everything would wash out into a uniform distribution, a flat line, that there would be no relationship between the frequency of a word and its position in the narrative. But, "the" - the most common word in the language - has a highly irregular trend, with huge statistical significance (the chi-square p-value literally rounds down to 0, when printed out in Python). So - beginnings and ends are "concrete," in some sense, preoccupied with specific, definite objects? This makes sense. At the start - the stage has to be set, the scene filled with props and characters, the fictional world populated with matter; at the end - the action of the text has to climax and resolve, the plot has to move into its final pose, the pieces moved into their endgame positions. Beginnings and ends are preoccupied with narrative _stagecraft_, which, it seems, pulls the narrative register outwards into the external world and pins it onto specific places and things - the chair, the table, the house, the city, the countryside, the car, the train, the gun, the wedding, the deathbed, etc.
 
@@ -139,23 +139,20 @@ Unlike with the more semantically focused words, this also starts to feel like a
 
 Other things are weirder. Check out the present tenses of "to be":
 
-[is, are]
+![](split/is.png)
+![](split/are.png)
 
 And the past tenses, which are essentially mirror images:
 
-[was, were]
+![](split/was.png)
+![](split/were.png)
 
 This seems like a possible window onto the temporal orientation or "direction" of the text, whether the what's being narrated happened now or in the past. So, it seems like "presentness" starts low, peaks out in the middle, dips down in the third quarter, and then spikes up massively at the very end? And conversely, "pastness" is highest at the beginning, declines through the middle, bumps up, and then plummets at the very end?
 
 Or, to end on a head-scratcher, also related to the temporality of the grammar - check out "had," which, between the Gail and Chicago corpora, sloshes from the end to the beginning:
 
-[had]
+![](split/had.png)
 
 In C20 - narratives begin in the past perfect?
 
 Anyway, the point being - once the data is structured this way, it's easy to answer a whole _class_ of related questions, not just the one or two that I started out with. To circle back to the original question of what type of data should flow out of the cluster, whether it should be big or small, general-purpose or specific - SQLite sort of lets you have the cake and eat it too. It's possible to write code that dragnets out really quite large large amounts of data that answer the question at hand in the most general and comprehensive case, but then plug the resulting data set - tens, even hundreds of gigabytes - directly into a Jupyter notebook and start answering specific questions immediately. It's a nice glue between the process of observation and analysis, between the huge telescope that vacuums up data out of the sky and the little workstation where you sit down and actually figure stuff out.
-
-
-
-
-concenience of flat file,
