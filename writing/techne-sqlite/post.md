@@ -71,7 +71,7 @@ GROUP BY offset
 ORDER BY offset;
 ```
 
-Just as a gut check on the method, here at the trends for a couple words we'd expect to mark beginnings and endings:
+Just as a gut check on the method, here at the trends for a couple words we'd expect to mark beginnings:
 
 ![](single/young.png)
 
@@ -81,6 +81,8 @@ Just as a gut check on the method, here at the trends for a couple words we'd ex
 
 ![](single/school.png)
 
+And, ends:
+
 ![](single/death.png)
 
 ![](single/victory.png)
@@ -89,12 +91,20 @@ Just as a gut check on the method, here at the trends for a couple words we'd ex
 
 ![](single/embrace.png)
 
-Looks about right. Are these trends consistent between the two corpora, separated by about a century? We can slice them apart just by adding another `WHERE` clause:
+Looks about right. Are these trends consistent between the two corpora, separated by about a century? We can slice them apart just by tacking on another `WHERE` clause:
 
 ```sql
+; Offsets for "young," just in Gail:
 SELECT offset, SUM(count)
 FROM token
 WHERE token="young" AND corpus="gail"
+GROUP BY offset
+ORDER BY offset;
+
+; And, just in Chicago:
+SELECT offset, SUM(count)
+FROM token
+WHERE token="young" AND corpus="chicago"
 GROUP BY offset
 ORDER BY offset;
 ```
@@ -115,7 +125,7 @@ ORDER BY offset;
 
 ![](split/embrace.png)
 
-In other cases, though, there are interesting differences - words related to marriage shift towards the narrative beginning, somewhere in the space between the Gail and Chicago corpora:
+Very similar. In other cases, though, there are interesting differences - words related to marriage shift towards the narrative beginning, somewhere in the space between the Gail and Chicago corpora:
 
 [marriage]
 
