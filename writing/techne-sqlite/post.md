@@ -1,7 +1,7 @@
 
 # Storing literary feature data in SQLite
 
-A couple weeks ago I wrote about some of the MPI programs we've been running on the campus cluster to pull out features from some of our larger corpora. But - what comes after this? Eventually the cluster job finishes, the processes get killed, the SSD drives get wiped, and the result, the end product, has to get flushed to disk in one way or another. What's the best way to store this "feature" data? In a very pragmatic sense - where do you _put_ it?
+A couple weeks ago I wrote about some of the MPI programs we've been running on the campus cluster to pull out features from some of our larger corpora. But - what comes after this? Eventually the cluster job finishes, the processes get killed, the SSD drives get wiped, and the "result" - the data that comes out the far end - has to get flushed to disk in one way or another. What's the best way to store this type of feature data? In a very pragmatic sense - where do you _put_ it?
 
 In the toy example from the last post, this was simple - we were just counting up the total number of words in the Extracted Features data from Hathi, so the result was literally just a single integer, which can just be printed off into the logs at the end of the job. But, in many cases, this "feature" data comes out on the far side can itself be quite large and complex. How to store this, how to warehouse it? Regular text formats like JSON or CSV? Directly serialized data structures like Python's pickles or shelve files? Key-value stores like BekerleyDB, Redis, LevelDB, Rlite, Vedis? Scientific formats like hdf5, via something like PyTables? Tabular formats like Parquet or Avro, from Hadoop-land? Column-based databases like HBase or Cassandra? Or just something no-frills like Postgres or MySQL?
 
@@ -41,7 +41,7 @@ CREATE TABLE token (
 );
 ```
 
-Each row contains a word and a count, but the counts are broken out on four pieces of metadata that can be used to aggregate the counts into useful groupings. For example, these rows:
+Where "offset" is a 0-100 integer that represents a percentile along the X-axis inside of the texts. For example, these rows:
 
 ```
 gail|1900|the|DT|14|136894
@@ -49,7 +49,7 @@ gail|1900|the|DT|15|136880
 gail|1900|the|DT|16|136213
 ```
 
-Mean that the word "the" appeared 136,894 times in the Gail American Fiction corpus, in years between 1895 and 1904, as a determiner, and at the 14% marker in the text. At the 15% marker, 136,880 times; at 16%, 136,213 times, and so on and so forth.
+Mean that the word "the" appeared 136,894 times in the Gail American Fiction corpus, in years between 1895 and 1904, as a determiner, and at the 14% marker in narrative time. At the 15% marker, 136,880 times; at 16%, 136,213 times, and so on and so forth.
 
 When this table is indexed with all ~20k novels in the Gail corpus (roughly 1820 - 1920) and another ~10k novels from the 20th century, the counts get broken out into 132,700,715 rows, which SQLite packs into a (fairly) economical 9.2g file. Indexes are left off, by default, to speed up the bulk-insertion that happens during the final step in the extraction pipeline, but, once the table is loaded, indexes can be added to the individual columns to speed up queries:
 
@@ -66,7 +66,7 @@ Now, with the table loaded and indexed, it's trivial to query out time-series tr
 ```sql
 SELECT offset, SUM(count)
 FROM token
-WHERE token="youth"
+WHERE token="young"
 GROUP BY offset
 ORDER BY offset;
 ```
@@ -75,15 +75,20 @@ Just as a gut check on the method, here at the trends for a couple words we'd ex
 
 [birth, youth, early, death]
 
-Where 0 is the beginning of the text, 100 the end. Are these trends consistent between the two corpora, separated by about a century? We can slice the two apart just by adding another `WHERE` clause:
+Looks about right. Are these trends consistent between the two corpora, separated by about a century? We can slice them apart just by adding another `WHERE` clause:
 
 ```sql
 SELECT offset, SUM(count)
 FROM token
-WHERE token="youth" AND corpus="gail"
+WHERE token="young" AND corpus="gail"
 GROUP BY offset
 ORDER BY offset;
 ```
+
+![](young.png)
+![](boy.png)
+![](girl.png)
+![](school.png)
 
 [gail/chicago birth, youth, etc]
 
@@ -97,7 +102,7 @@ So, marriage increasingly becomes the _subject_ of narrative, not just its endpo
 
 This starts to edge in a more interesting direction, I think. In a way, it's a bit remarkable that there's _any_ effect here, let alone something so significant - the null hypothesis is that everything would wash out into a uniform distribution, a flat line, that there would be no relationship between the frequency of a word and its position in the narrative. But, "the" - the most common word in the language - has a highly irregular trend, with huge statistical significance (the chi-square p-value literally rounds down to 0, when printed out in Python). So - beginnings and ends are "concrete," in some sense, preoccupied with specific, definite objects? This makes sense. At the start - the stage has to be set, the scene filled with props and characters, the fictional world populated with matter; at the end - the action of the text has to climax and resolve, the plot has to move into its final pose, the pieces moved into their endgame positions. Beginnings and ends are preoccupied with narrative _stagecraft_, which, it seems, pulls the narrative register outwards into the external world and pins it onto specific places and things - the chair, the table, the house, the city, the countryside, the car, the train, the gun, the wedding, the deathbed, etc.
 
-Unlike with the more semantically focused words, this also starts to feel like a keyhole view onto some kind of broad narratalogical skeleton, a set of structural priors baked into the DNA of stories that manifest in consistent ways across narrative time in large numbers of texts. But, as is often the case at this distance, it's epistemologically difficult - what can be said, at a literary register, about the the "boundaries" that seem to get marked off by this? Is "the" marking off the "beginning" and "end" - does the beginning end at right around the 20% mark, and the end begin right around 65-70%, when it begins to tick back up? If so - why? What would this actually mean, how to interpret it? Is this novelistic convention, essentially, or is there some sense in which it _must_ be this way, that it would be nearly impossible to write a novel that doesn't show this pattern? And what exactly does one of these phase shifts consist of, on the forest floor of an individual text? When the narrative moves out of the concrete beginning - what does it move _into_? What's just across the threshold, in the beginning of the middle, how is 25% different from 20%? It's a zero-sum game - something has to take the place of "the" (and whatever larger semantic cohort it's likely proxying), but what?
+Unlike with the more semantically focused words, this also starts to feel like a keyhole view onto some kind of broad narratalogical skeleton, a set of structural priors baked into the DNA of stories that manifest in consistent ways across narrative time in large numbers of texts. But, as is often the case at this distance, it's epistemologically difficult - what can be said, at a literary register, about the the "boundaries" that seem to get marked off by this? Do the peaks at the beginning and the end mark _the_ beginning and end - does the beginning end at right around the 20% mark, and the end begin right around 65-70%, when it begins to tick back up? If so - why? What would this actually mean, how to interpret it? Is this novelistic convention, essentially, or is there some sense in which it _must_ be this way, that it would be nearly impossible to write a novel that doesn't show this pattern? And what exactly does one of these phase shifts consist of, on the forest floor of an individual text? When the narrative moves out of the concrete beginning - what does it move _into_? What's just across the threshold, in the beginning of the middle, how is 25% different from 20%? It's a zero-sum game - something has to take the place of "the" (and whatever larger semantic cohort it's likely proxying), but what?
 
 Other things are weirder. Check out the present tenses of "to be":
 
@@ -107,9 +112,9 @@ And the past tenses, which are essentially mirror images:
 
 [was, were]
 
-This seems like it might be an interesting window onto the temporal orientation or "direction" of the text, whether the what's being narrated happened now or in the past. So, it seems like "presentness" starts low, peaks out in the middle, dips down in the third quarter, and then spikes up massively at the very end? And conversely, "pastness" is highest at the beginning, declines through the middle, bumps up, and then plummets at the very end?
+This seems like a possible window onto the temporal orientation or "direction" of the text, whether the what's being narrated happened now or in the past. So, it seems like "presentness" starts low, peaks out in the middle, dips down in the third quarter, and then spikes up massively at the very end? And conversely, "pastness" is highest at the beginning, declines through the middle, bumps up, and then plummets at the very end?
 
-Or, to end on another head-scratcher, also related to the temporality of the grammar - check out "had," which, between the Gail and Chicago corpora, sloshes from the end to the beginning:
+Or, to end on a head-scratcher, also related to the temporality of the grammar - check out "had," which, between the Gail and Chicago corpora, sloshes from the end to the beginning:
 
 [had]
 
