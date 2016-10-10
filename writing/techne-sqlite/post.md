@@ -127,7 +127,11 @@ ORDER BY offset;
 
 Very similar. In other cases, though, there are interesting differences - words related to marriage shift towards the narrative beginning, somewhere in the space between the Gail and Chicago corpora:
 
+![](split/married.png)
 ![](split/marriage.png)
+![](split/wife.png)
+![](split/husband.png)
+![](split/wedding.png)
 
 So, marriage increasingly becomes the _subject_ of narrative, not just its endpoint. Beyond words like these that have pretty obvious narratalogical anchorings, though - even function words that don't carry any kind of semantic meaning show really pronounced trends. Here's "the," again broken out for Gail and Chicago:
 
@@ -140,11 +144,13 @@ Unlike with the more semantically focused words, this also starts to feel like a
 Other things are weirder. Check out the present tenses of "to be":
 
 ![](split/is.png)
+
 ![](split/are.png)
 
 And the past tenses, which are essentially mirror images:
 
 ![](split/was.png)
+
 ![](split/were.png)
 
 This seems like a possible window onto the temporal orientation or "direction" of the text, whether the what's being narrated happened now or in the past. So, it seems like "presentness" starts low, peaks out in the middle, dips down in the third quarter, and then spikes up massively at the very end? And conversely, "pastness" is highest at the beginning, declines through the middle, bumps up, and then plummets at the very end?
