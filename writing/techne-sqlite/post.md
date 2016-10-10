@@ -128,9 +128,13 @@ ORDER BY offset;
 Very similar. In other cases, though, there are interesting differences - words related to marriage shift towards the narrative beginning, somewhere in the space between the Gail and Chicago corpora:
 
 ![](split/married.png)
+
 ![](split/marriage.png)
+
 ![](split/wife.png)
+
 ![](split/husband.png)
+
 ![](split/wedding.png)
 
 So, marriage increasingly becomes the _subject_ of narrative, not just its endpoint. Beyond words like these that have pretty obvious narratalogical anchorings, though - even function words that don't carry any kind of semantic meaning show really pronounced trends. Here's "the," again broken out for Gail and Chicago:
