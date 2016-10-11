@@ -13,7 +13,7 @@ I swing back and forth on this from project to project, I think, and the answer 
 
 ## SQLite
 
-But, back to the pragmatic question of where to put the data - in the last few months I've sort of stumbled into an approach that seemed a little weird at first, but which, as I've gotten further along on a couple of projects, I like more and more - when in doubt, just store everything in [SQLite](https://sqlite.org/).
+But, back to the pragmatic question of where to put the data - in the last few months I've stumbled into an approach that seemed a little weird at first, but which, as I've gotten further along on a couple of projects, I like more and more - when in doubt, just store everything in [SQLite](https://sqlite.org/).
 
 This seemed a bit strange, I think, because of some common misconceptions that I had about SQLite from my previous life when I spent most of my time doing application development, not scientific / statistical programming. At first blush SQLite can seem sort of like a toy compared to regular Postgres or MySQL. There's no server - the entire database is stored in a single flat file, and transactions are implemented with unix file locks, which obviously has implications for concurrency that can be showstoppers for, say, a busy web application that needs to do lots of concurrent writes. In my head it was something you might use in mobile apps or embedded systems, for relatively small amounts of data in constrained environments where a full-service database would be overkill.
 
