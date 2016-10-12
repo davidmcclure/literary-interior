@@ -11,3 +11,4 @@
 /.env
 
 .ipynb_checkpoints
+notebooks/cache
