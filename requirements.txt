@@ -23,4 +23,5 @@ sklearn
 bs4
 lxml
 pandas
+statsmodels
 joblib
