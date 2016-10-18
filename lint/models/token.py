@@ -180,7 +180,7 @@ class Token(Base):
         return OrderedDict(query.all())
 
     @classmethod
-    def token_series(cls, token, corpus=None):
+    def token_series(cls, token, corpus=None, year1=None, year2=None):
 
         """
         Get an offset -> count series for a word.
@@ -202,6 +202,12 @@ class Token(Base):
 
         if corpus:
             query = query.filter(cls.corpus==corpus)
+
+        if year1:
+            query = query.filter(cls.year >= year1)
+
+        if year2:
+            query = query.filter(cls.year <= year2)
 
         return OrderedDict(query.all())
 
