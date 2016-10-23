@@ -22,6 +22,8 @@ matplotlib
 sklearn
 bs4
 lxml
+joblib
 pandas
 statsmodels
-joblib
+patsy
+boltons
