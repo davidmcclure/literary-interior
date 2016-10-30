@@ -46,11 +46,14 @@ def config():
     Clear changes to the config dict.
     """
 
-    old = _config.config.copy()
+    # Copy settings.
+    old = _config.copy()
 
     yield _config
 
-    _config.config = old
+    # Restore settings.
+    _config.clear()
+    _config.update(old)
 
 
 @pytest.yield_fixture
@@ -62,8 +65,8 @@ def htrc_data(config):
 
     corpus = HTRCData()
 
-    config.config['htrc']['features'] = corpus.features_path
-    config.config['htrc']['manifest'] = corpus.manifest_path
+    config['htrc']['features'] = corpus.features_path
+    config['htrc']['manifest'] = corpus.manifest_path
 
     yield corpus
 
@@ -79,7 +82,7 @@ def chicago_data(config):
 
     corpus = ChicagoData()
 
-    config.config['chicago'] = corpus.path
+    config['chicago'] = corpus.path
 
     yield corpus
 
@@ -95,7 +98,7 @@ def gail_data(config):
 
     corpus = GailData()
 
-    config.config['gail'] = corpus.path
+    config['gail'] = corpus.path
 
     yield corpus
 
@@ -113,7 +116,7 @@ def mock_result_dir(config):
 
         results = ResultDir()
 
-        config.config['results'][rtype][corpus] = results.path
+        config['results'][rtype][corpus] = results.path
 
         yield results
 

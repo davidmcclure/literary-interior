@@ -12,7 +12,7 @@ from wordfreq import top_n_list
 from contextlib import contextmanager
 
 
-class Config:
+class Config(dict):
 
     TMP_YAML = '/tmp/.lint.yml'
 
@@ -49,21 +49,9 @@ class Config:
             paths (list): YAML paths, from most to least specific.
         """
 
-        self.config = anyconfig.load(paths, ignore_missing=True)
+        config = anyconfig.load(paths, ignore_missing=True)
 
-    def __getitem__(self, key):
-
-        """
-        Get a configuration value.
-
-        Args:
-            key (str): The configuration key.
-
-        Returns:
-            The option value.
-        """
-
-        return self.config.get(key)
+        return super().__init__(config)
 
     def build_sqla_url(self):
 
@@ -142,7 +130,7 @@ class Config:
         """
 
         with open(self.TMP_YAML, 'w') as fh:
-            fh.write(yaml.dump(self.config))
+            fh.write(yaml.dump(self))
 
     def clear_tmp(self):
 
