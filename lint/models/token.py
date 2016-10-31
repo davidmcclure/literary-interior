@@ -1,5 +1,6 @@
 
 
+import numpy as np
 import pickle
 
 from collections import OrderedDict
@@ -131,8 +132,6 @@ class Token(Base):
 
         return res.scalar() or 0
 
-    # TODO: Shared filter method for corpus / years?
-
     @classmethod
     def token_counts(cls, min_count=0):
 
@@ -152,30 +151,6 @@ class Token(Base):
             .having(func.sum(cls.count) > min_count)
             .order_by(func.sum(cls.count).desc())
         )
-
-        return OrderedDict(query.all())
-
-    @classmethod
-    def baseline_series(cls, corpus=None):
-
-        """
-        Get an offset -> count series.
-
-        Args:
-            corpus (str)
-
-        Returns: OrderedDict
-        """
-
-        query = (
-            session
-            .query(cls.offset, func.sum(cls.count))
-            .group_by(cls.offset)
-            .order_by(cls.offset)
-        )
-
-        if corpus:
-            query = query.filter(cls.corpus==corpus)
 
         return OrderedDict(query.all())
 
@@ -209,30 +184,9 @@ class Token(Base):
         if year2:
             query = query.filter(cls.year <= year2)
 
-        return OrderedDict(query.all())
+        series = np.zeros(100)
 
-    @classmethod
-    def pos_series(cls, pos, corpus=None):
+        for offset, count in query:
+            series[offset] = count
 
-        """
-        Get an offset -> count series for a POS.
-
-        Args:
-            pos (str)
-            corpus (str)
-
-        Returns: OrderedDict
-        """
-
-        query = (
-            session
-            .query(cls.offset, func.sum(cls.count))
-            .filter(cls.pos==pos)
-            .group_by(cls.offset)
-            .order_by(cls.offset)
-        )
-
-        if corpus:
-            query = query.filter(cls.corpus==corpus)
-
-        return OrderedDict(query.all())
+        return series
