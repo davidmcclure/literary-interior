@@ -45,8 +45,8 @@ def test_dump_offsets(htrc_data):
     htrc_data.add_vol(v2)
     htrc_data.add_vol(v3)
 
-    call(['mpirun', 'bin/ext-htrc-tokens.py'])
-    call(['bin/gather-htrc-tokens.py'])
+    call(['mpirun', 'bin/ext-htrc-bins.py'])
+    call(['bin/gather-htrc-bins.py'])
 
     o1 = make_offset( 50, 300, 100)
     o2 = make_offset(150, 300, 100)
@@ -86,8 +86,8 @@ def test_ignore_non_english_volumes(htrc_data):
     htrc_data.add_vol(v1)
     htrc_data.add_vol(v2)
 
-    call(['mpirun', 'bin/ext-htrc-tokens.py'])
-    call(['bin/gather-htrc-tokens.py'])
+    call(['mpirun', 'bin/ext-htrc-bins.py'])
+    call(['bin/gather-htrc-bins.py'])
 
     o1 = make_offset( 50, 300, 100)
     o2 = make_offset(150, 300, 100)
@@ -130,8 +130,8 @@ def test_round_years_to_decade(htrc_data):
     htrc_data.add_vol(v2)
     htrc_data.add_vol(v3)
 
-    call(['mpirun', 'bin/ext-htrc-tokens.py'])
-    call(['bin/gather-htrc-tokens.py'])
+    call(['mpirun', 'bin/ext-htrc-bins.py'])
+    call(['bin/gather-htrc-bins.py'])
 
     o1 = make_offset( 50, 300, 100)
     o2 = make_offset(150, 300, 100)

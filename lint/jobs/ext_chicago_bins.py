@@ -3,15 +3,15 @@
 from lint.singletons import config
 from lint.utils import round_to_decade
 
-from lint.gail.corpus import Corpus
-from lint.gail.novel import Novel
+from lint.chicago.corpus import Corpus
+from lint.chicago.novel import Novel
 from lint.count_cache import CountCache
 from lint.text import Text
 
 from .scatter import Scatter
 
 
-class ExtGailTokens(Scatter):
+class ExtChicagoBins(Scatter):
 
     def __init__(self):
 
@@ -24,16 +24,17 @@ class ExtGailTokens(Scatter):
     def args(self):
 
         """
-        Generate text paths.
+        Generate text args.
 
-        Yields: str
+        Yields: dict {corpus_path, metadata}
         """
 
         corpus = Corpus.from_env()
 
-        yield from corpus.text_paths()
+        for row in corpus.novels_metadata():
+            yield dict(corpus_path=corpus.path, metadata=row)
 
-    def process(self, path):
+    def process(self, corpus_path, metadata):
 
         """
         Increment offsets from a volume.
@@ -42,7 +43,7 @@ class ExtGailTokens(Scatter):
             path (str)
         """
 
-        novel = Novel.from_path(path)
+        novel = Novel.from_corpus_path(corpus_path, metadata)
 
         text = Text(novel.plain_text())
 
@@ -60,4 +61,4 @@ class ExtGailTokens(Scatter):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['results']['tokens']['gail'])
+        self.cache.flush(config['results']['tokens']['chicago'])
