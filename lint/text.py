@@ -2,12 +2,14 @@
 
 import re
 
-from collections import namedtuple
+from collections import namedtuple, Counter
 
 from nltk.tokenize import WordPunctTokenizer
 from nltk import pos_tag
 
 from textblob.utils import PUNCTUATION_REGEX
+
+from lint.utils import clean_token
 
 
 Token = namedtuple('Token', [
@@ -58,16 +60,38 @@ class Text:
         tags = pos_tag([t.token for t in self.tokens])
 
         return [
-            Tag(*t, pos)
+
+            Tag(
+                token=clean_token(t.token),
+                char1=t.char1,
+                char2=t.char2,
+                pos=pos,
+            )
+
             for (token, pos), t in zip(tags, self.tokens)
             if not PUNCTUATION_REGEX.match(token)
+
         ]
+
+    def token_offset_counts(self):
+
+        """
+        Map (token, POS, offset) -> count.
+
+        Returns: Counter
+        """
+
+        pass
 
     def snippet(self, offset: int, padding: int=10):
 
         """
         Hydrate a snippet.
+
+        Returns: (prefix, token, suffix)
         """
+
+        # TODO: Handle overflows.
 
         # prefix start
         char1 = self.tokens[offset-padding].char1
