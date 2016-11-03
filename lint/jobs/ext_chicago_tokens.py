@@ -1,11 +1,12 @@
 
 
 from lint.singletons import config
-from lint.utils import round_to_decade, token_offset_counts
+from lint.utils import round_to_decade
 
 from lint.chicago.corpus import Corpus
 from lint.chicago.novel import Novel
 from lint.count_cache import CountCache
+from lint.text import Text
 
 from .scatter import Scatter
 
@@ -44,10 +45,9 @@ class ExtChicagoTokens(Scatter):
 
         novel = Novel.from_corpus_path(corpus_path, metadata)
 
-        counts = token_offset_counts(
-            novel.source_text(),
-            config['offset_resolution'],
-        )
+        text = Text(novel.source_text())
+
+        counts = text.token_offset_counts(config['offset_resolution'])
 
         # Round to nearest decade.
         year = round_to_decade(novel.year())
