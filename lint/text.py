@@ -9,7 +9,7 @@ from nltk import pos_tag
 
 from textblob.utils import PUNCTUATION_REGEX
 
-from lint.utils import clean_token
+from lint.utils import clean_token, make_offset
 
 
 Token = namedtuple('Token', [
@@ -73,7 +73,7 @@ class Text:
 
         ]
 
-    def token_offset_counts(self):
+    def token_offset_counts(self, bins: int):
 
         """
         Map (token, POS, offset) -> count.
@@ -81,7 +81,18 @@ class Text:
         Returns: Counter
         """
 
-        pass
+        tags = self.pos_tags()
+
+        counts = Counter()
+
+        for i, tag in enumerate(tags):
+
+            # Make 0-N offset.
+            offset = make_offset(i, len(tags), bins)
+
+            counts[tag.token, tag.pos, offset] += 1
+
+        return counts
 
     def snippet(self, offset: int, padding: int=10):
 
