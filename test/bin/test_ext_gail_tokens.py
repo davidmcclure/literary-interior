@@ -21,19 +21,19 @@ def test_dump_offsets(gail_data):
     """
 
     for i in range(10):
-        gail_data.add_text(GailNovelFactory(
+        gail_data.add_novel(GailNovelFactory(
             year=1910,
             tokens=['one', 'two', 'three'],
         ))
 
     for i in range(20):
-        gail_data.add_text(GailNovelFactory(
+        gail_data.add_novel(GailNovelFactory(
             year=1920,
             tokens=['four', 'five', 'six'],
         ))
 
     for i in range(30):
-        gail_data.add_text(GailNovelFactory(
+        gail_data.add_novel(GailNovelFactory(
             year=1930,
             tokens=['seven', 'eight', 'nine'],
         ))
@@ -68,9 +68,9 @@ def test_round_years_to_decade(gail_data):
     n2 = GailNovelFactory(year=1905, tokens=['one', 'two', 'three'])
     n3 = GailNovelFactory(year=1906, tokens=['one', 'two', 'three'])
 
-    gail_data.add_text(n1)
-    gail_data.add_text(n2)
-    gail_data.add_text(n3)
+    gail_data.add_novel(n1)
+    gail_data.add_novel(n2)
+    gail_data.add_novel(n3)
 
     call(['mpirun', 'bin/ext-gail-tokens.py'])
     call(['bin/gather-gail-tokens.py'])

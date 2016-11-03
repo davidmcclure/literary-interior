@@ -8,7 +8,7 @@ from test.temp_dir import TempDir
 
 class GailData(TempDir):
 
-    def add_text(self, text):
+    def add_novel(self, text):
 
         """
         Add a text to the corpus.
