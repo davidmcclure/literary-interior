@@ -1,6 +1,12 @@
 
 
-from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
+from sqlalchemy import (
+    Column,
+    Integer,
+    Float,
+    String,
+    PrimaryKeyConstraint,
+)
 
 from lint.models import Base
 
@@ -29,4 +35,6 @@ class Token(Base):
 
     pos = Column(String, nullable=False)
 
-    # TODO: positions?
+    offset = Column(Integer, nullable=False)
+
+    ratio = Column(Float, nullable=False)
