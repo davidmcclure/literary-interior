@@ -4,7 +4,7 @@ from lint.singletons import config
 from lint.utils import round_to_decade, token_offset_counts
 
 from lint.gail.corpus import Corpus
-from lint.gail.text import Text
+from lint.gail.novel import Novel
 from lint.count_cache import CountCache
 
 from .scatter import Scatter
@@ -41,15 +41,15 @@ class ExtGailTokens(Scatter):
             path (str)
         """
 
-        text = Text.from_path(path)
+        novel = Novel.from_path(path)
 
         counts = token_offset_counts(
-            text.plain_text(),
+            novel.plain_text(),
             config['offset_resolution'],
         )
 
         # Round to nearest decade.
-        year = round_to_decade(text.year())
+        year = round_to_decade(novel.year())
 
         # Merge counts into cache.
         self.cache.add_token_counts(year, counts)

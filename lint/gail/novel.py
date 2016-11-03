@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from lint.utils import get_text
 
 
-class Text:
+class Novel:
 
     @classmethod
     def from_path(cls, path):

@@ -7,7 +7,7 @@ from subprocess import call
 from lint.utils import make_offset
 from lint.models import TokenBin
 
-from test.factories.corpora.gail import GailTextFactory
+from test.factories.corpora.gail import GailNovelFactory
 
 
 pytestmark = pytest.mark.usefixtures('db', 'mpi')
@@ -21,19 +21,19 @@ def test_dump_offsets(gail_data):
     """
 
     for i in range(10):
-        gail_data.add_text(GailTextFactory(
+        gail_data.add_text(GailNovelFactory(
             year=1910,
             tokens=['one', 'two', 'three'],
         ))
 
     for i in range(20):
-        gail_data.add_text(GailTextFactory(
+        gail_data.add_text(GailNovelFactory(
             year=1920,
             tokens=['four', 'five', 'six'],
         ))
 
     for i in range(30):
-        gail_data.add_text(GailTextFactory(
+        gail_data.add_text(GailNovelFactory(
             year=1930,
             tokens=['seven', 'eight', 'nine'],
         ))
@@ -64,13 +64,13 @@ def test_round_years_to_decade(gail_data):
     Volume years should be rounded to the nearest decade.
     """
 
-    t1 = GailTextFactory(year=1904, tokens=['one', 'two', 'three'])
-    t2 = GailTextFactory(year=1905, tokens=['one', 'two', 'three'])
-    t3 = GailTextFactory(year=1906, tokens=['one', 'two', 'three'])
+    n1 = GailNovelFactory(year=1904, tokens=['one', 'two', 'three'])
+    n2 = GailNovelFactory(year=1905, tokens=['one', 'two', 'three'])
+    n3 = GailNovelFactory(year=1906, tokens=['one', 'two', 'three'])
 
-    gail_data.add_text(t1)
-    gail_data.add_text(t2)
-    gail_data.add_text(t3)
+    gail_data.add_text(n1)
+    gail_data.add_text(n2)
+    gail_data.add_text(n3)
 
     call(['mpirun', 'bin/ext-gail-tokens.py'])
     call(['bin/gather-gail-tokens.py'])

@@ -5,13 +5,13 @@ import pkgutil
 
 from jinja2 import Template
 
-from lint.gail.text import Text
+from lint.gail.novel import Novel
 
 
-class GailTextFactory(factory.Factory):
+class GailNovelFactory(factory.Factory):
 
     class Meta:
-        model = Text
+        model = Novel
 
     id = factory.Sequence(lambda n: 'B000{0}'.format(n))
 
