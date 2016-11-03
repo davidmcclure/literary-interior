@@ -2,13 +2,13 @@
 
 import factory
 
-from lint.models import Token
+from lint.models import TokenBin
 
 
-class TokenFactory(factory.Factory):
+class TokenBinFactory(factory.Factory):
 
     class Meta:
-        model = Token
+        model = TokenBin
 
     corpus = 'corpus'
 

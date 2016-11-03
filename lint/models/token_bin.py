@@ -15,10 +15,10 @@ from lint.utils import flatten_dict, mem_pct, grouper
 from lint.count_cache import CountCache
 
 
-class Token(Base):
+class TokenBin(Base):
 
 
-    __tablename__ = 'token'
+    __tablename__ = 'token_bin'
 
     __table_args__ = (
         PrimaryKeyConstraint(

@@ -1,3 +1,3 @@
 
 
-from .token import TokenFactory
+from .token import TokenBinFactory
