@@ -21,7 +21,5 @@ class GailData(TempDir):
 
         path = os.path.join(self.path, fname)
 
-        print(path)
-
         with open(path, 'w') as fh:
             print(text.tree, file=fh)
