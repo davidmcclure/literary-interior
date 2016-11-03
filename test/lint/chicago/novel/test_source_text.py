@@ -17,7 +17,7 @@ footers = [
 ]
 
 
-def test_source_text():
+def test_plain_text():
 
     """
     Return the entire text, when no Gutenberg header/footer.
@@ -31,7 +31,7 @@ def test_source_text():
 
     novel = ChicagoNovelFactory(text=text)
 
-    assert novel.source_text() == text
+    assert novel.plain_text() == text
 
 
 @pytest.mark.parametrize('header', headers)
@@ -53,7 +53,7 @@ def test_strip_gutenberg_header(header):
 
     novel = ChicagoNovelFactory(text=text)
 
-    assert novel.source_text() == '\n'.join([
+    assert novel.plain_text() == '\n'.join([
         'line4',
         'line5',
         'line6',
@@ -79,7 +79,7 @@ def test_strip_gutenberg_footer(footer):
 
     novel = ChicagoNovelFactory(text=text)
 
-    assert novel.source_text() == '\n'.join([
+    assert novel.plain_text() == '\n'.join([
         'line1',
         'line2',
         'line3',
@@ -109,7 +109,7 @@ def test_strip_gutenberg_header_and_footer(header, footer):
 
     novel = ChicagoNovelFactory(text=text)
 
-    assert novel.source_text() == '\n'.join([
+    assert novel.plain_text() == '\n'.join([
         'line4',
         'line5',
         'line6',

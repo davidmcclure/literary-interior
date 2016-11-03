@@ -39,7 +39,7 @@ class Novel:
 
         self.text = text
 
-    def source_text(self):
+    def plain_text(self):
 
         """
         Returns: str

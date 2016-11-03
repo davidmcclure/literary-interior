@@ -45,7 +45,7 @@ class ExtChicagoTokens(Scatter):
 
         novel = Novel.from_corpus_path(corpus_path, metadata)
 
-        text = Text(novel.source_text())
+        text = Text(novel.plain_text())
 
         counts = text.token_offset_counts(config['offset_resolution'])
 
