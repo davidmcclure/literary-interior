@@ -11,7 +11,7 @@ from sqlalchemy.sql import text, func
 
 from lint.singletons import config, session
 from lint.models import Base
-from lint.utils import flatten_dict, mem_pct, grouper
+from lint.utils import mem_pct, grouper
 from lint.count_cache import CountCache
 
 
