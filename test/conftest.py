@@ -141,6 +141,11 @@ def gail_bin_results(mock_result_dir):
 
 
 @pytest.yield_fixture
+def gail_token_results(mock_result_dir):
+    yield from mock_result_dir('tokens', 'gail')
+
+
+@pytest.yield_fixture
 def mpi(
 
     config,
@@ -155,6 +160,7 @@ def mpi(
 
     gail_data,
     gail_bin_results,
+    gail_token_results,
 
 ):
 

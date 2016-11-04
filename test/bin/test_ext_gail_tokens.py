@@ -12,7 +12,6 @@ from test.factories.corpora.gail import GailNovelFactory
 pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
-@pytest.mark.skip
 def test_dump_offsets(gail_data):
 
     """
@@ -21,16 +20,19 @@ def test_dump_offsets(gail_data):
     """
 
     n1 = GailNovelFactory(
-        tokens=['one', 'two', 'three'],
+        id='1',
         year=1910,
+        tokens=['one', 'two', 'three'],
     )
 
     n2 = GailNovelFactory(
+        id='2',
         year=1920,
         tokens=['four', 'five', 'six'],
     )
 
     n3 = GailNovelFactory(
+        id='3',
         year=1930,
         tokens=['seven', 'eight', 'nine'],
     )
@@ -46,25 +48,26 @@ def test_dump_offsets(gail_data):
         Token.query
         .filter_by(
             corpus='gail',
-            identifier=n1.id,
+            identifier='1',
             year=1910,
             token='one',
             pos='CD',
             offset=0,
             ratio=0,
         )
-        .exists()
-        .scalar()
-    )
+        .count()
+    ) == 1
 
-    # assert TokenBin.get('gail', 1910, 'one',   'CD', o1) == 10
-    # assert TokenBin.get('gail', 1910, 'two',   'CD', o2) == 10
-    # assert TokenBin.get('gail', 1910, 'three', 'CD', o3) == 10
-
-    # assert TokenBin.get('gail', 1920, 'four',  'CD', o1) == 20
-    # assert TokenBin.get('gail', 1920, 'five',  'CD', o2) == 20
-    # assert TokenBin.get('gail', 1920, 'six',   'CD', o3) == 20
-
-    # assert TokenBin.get('gail', 1930, 'seven', 'CD', o1) == 30
-    # assert TokenBin.get('gail', 1930, 'eight', 'CD', o2) == 30
-    # assert TokenBin.get('gail', 1930, 'nine',  'CD', o3) == 30
+    assert (
+        Token.query
+        .filter_by(
+            corpus='gail',
+            identifier='1',
+            year=1910,
+            token='two',
+            pos='CD',
+            offset=1,
+            ratio=1/3,
+        )
+        .count()
+    ) == 1
