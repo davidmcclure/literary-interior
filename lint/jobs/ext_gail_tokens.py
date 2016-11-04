@@ -71,6 +71,8 @@ class ExtGailTokens(Scatter):
 
         # Assemble token list.
 
+        # TODO: Where to thread in the ratio?
+
         tokens = [
 
             dict(

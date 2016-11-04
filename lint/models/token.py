@@ -67,3 +67,12 @@ class Token(Base):
                 print(i)
 
         session.commit()
+
+    @classmethod
+    def exists(cls, **kwargs):
+
+        """
+        Check that a row exists.
+        """
+
+        return cls.query.filter_by(**kwargs).count() == 1
