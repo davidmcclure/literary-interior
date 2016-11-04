@@ -127,7 +127,7 @@ def mock_result_dir(config):
 
 @pytest.yield_fixture
 def htrc_token_results(mock_result_dir):
-    yield from mock_result_dir('tokens', 'htrc')
+    yield from mock_result_dir('bins', 'htrc')
 
 
 @pytest.yield_fixture
@@ -137,7 +137,7 @@ def htrc_char_results(mock_result_dir):
 
 @pytest.yield_fixture
 def chicago_token_results(mock_result_dir):
-    yield from mock_result_dir('tokens', 'chicago')
+    yield from mock_result_dir('bins', 'chicago')
 
 
 @pytest.yield_fixture
@@ -147,7 +147,7 @@ def chicago_char_results(mock_result_dir):
 
 @pytest.yield_fixture
 def gail_token_results(mock_result_dir):
-    yield from mock_result_dir('tokens', 'gail')
+    yield from mock_result_dir('bins', 'gail')
 
 
 @pytest.yield_fixture

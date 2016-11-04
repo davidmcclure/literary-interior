@@ -60,4 +60,4 @@ class ExtGailBins(Scatter):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['results']['tokens']['gail'])
+        self.cache.flush(config['results']['bins']['gail'])

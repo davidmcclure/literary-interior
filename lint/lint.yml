@@ -10,7 +10,7 @@ chicago: null
 
 results:
 
-  tokens:
+  bins:
     htrc: null
     chicago: null
     gail: null

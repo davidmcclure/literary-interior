@@ -61,4 +61,4 @@ class ExtChicagoBins(Scatter):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['results']['tokens']['chicago'])
+        self.cache.flush(config['results']['bins']['chicago'])
