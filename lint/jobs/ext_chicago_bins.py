@@ -47,7 +47,7 @@ class ExtChicagoBins(Scatter):
 
         text = Text(novel.plain_text())
 
-        counts = text.token_offset_counts(config['offset_resolution'])
+        counts = text.token_offset_counts(config['bins'])
 
         # Round to nearest decade.
         year = round_to_decade(novel.year())

@@ -22,4 +22,4 @@ results:
 
 database: null
 
-offset_resolution: 100
+bins: 100
