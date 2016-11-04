@@ -4,11 +4,20 @@ from lint.singletons import config
 
 from lint.text import Text
 from lint.gail.corpus import Corpus
+from lint.gail.novel import Novel
 
 from .scatter import Scatter
 
 
-class ExtGailBins(Scatter):
+class ExtGailTokens(Scatter):
+
+    def __init__(self, corpus_dir: str):
+
+        """
+        Set the corpus directory.
+        """
+
+        self.corpus_dir = corpus_dir
 
     def args(self):
 
@@ -18,7 +27,7 @@ class ExtGailBins(Scatter):
         Yields: str
         """
 
-        corpus = Corpus.from_env()
+        corpus = Corpus(self.corpus_dir)
 
         yield from corpus.text_paths()
 
