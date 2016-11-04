@@ -13,7 +13,7 @@ class GailNovelFactory(factory.Factory):
     class Meta:
         model = Novel
 
-    id = factory.Sequence(lambda n: 'B000{0}'.format(n))
+    psmid = factory.Sequence(lambda n: 'B000{0}'.format(n))
 
     title = 'Moby Dick'
 

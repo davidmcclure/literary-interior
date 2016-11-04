@@ -20,19 +20,19 @@ def test_dump_offsets(gail_data):
     """
 
     n1 = GailNovelFactory(
-        id='1',
+        psmid='1',
         year=1910,
         tokens=['one', 'two', 'three'],
     )
 
     n2 = GailNovelFactory(
-        id='2',
+        psmid='2',
         year=1920,
         tokens=['four', 'five', 'six'],
     )
 
     n3 = GailNovelFactory(
-        id='3',
+        psmid='3',
         year=1930,
         tokens=['seven', 'eight', 'nine'],
     )
@@ -44,30 +44,18 @@ def test_dump_offsets(gail_data):
     call(['mpirun', 'bin/ext-gail-tokens.py'])
     call(['bin/gather-gail-tokens.py'])
 
-    assert (
-        Token.query
-        .filter_by(
-            corpus='gail',
-            identifier='1',
-            year=1910,
-            token='one',
-            pos='CD',
-            offset=0,
-            ratio=0,
-        )
-        .count()
-    ) == 1
+    for i, token in enumerate(['one', 'two', 'three']):
 
-    assert (
-        Token.query
-        .filter_by(
+        # assert Token.exists('gail', '1', token, 1910, 'CD', i, i/3)
+
+        query = Token.query.filter_by(
             corpus='gail',
             identifier='1',
             year=1910,
-            token='two',
+            token=token,
             pos='CD',
-            offset=1,
-            ratio=1/3,
+            offset=i,
+            ratio=i/3,
         )
-        .count()
-    ) == 1
+
+        assert query.count() == 1
