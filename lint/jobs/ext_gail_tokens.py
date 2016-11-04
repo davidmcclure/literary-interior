@@ -16,6 +16,18 @@ from .scatter import Scatter
 
 class ExtGailTokens(Scatter):
 
+    @classmethod
+    def from_config(cls):
+
+        """
+        Apply config values.
+        """
+
+        return cls(
+            corpus_dir=config['gail'],
+            result_dir=config['results']['tokens']['gail'],
+        )
+
     def __init__(self, corpus_dir: str, result_dir: str):
 
         """

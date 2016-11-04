@@ -15,6 +15,10 @@ results:
     chicago: null
     gail: null
 
+  tokens:
+    chicago: null
+    gail: null
+
 database: null
 
 bins: 100
