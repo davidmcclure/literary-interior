@@ -22,7 +22,6 @@ Token = namedtuple('Token', [
 Tag = namedtuple('Tag', [
     'token',
     'pos',
-    'offset',
 ])
 
 
@@ -65,10 +64,9 @@ class Text:
             Tag(
                 token=token.lower(),
                 pos=pos,
-                offset=offset,
             )
 
-            for offset, (token, pos) in enumerate(tags)
+            for token, pos in tags
 
         ]
 
