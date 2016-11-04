@@ -13,11 +13,27 @@ from .scatter import Scatter
 
 class ExtChicagoBins(Scatter):
 
-    def __init__(self):
+    @classmethod
+    def from_config(cls):
+
+        """
+        Apply config values.
+        """
+
+        return cls(
+            result_dir=config['results']['bins']['chicago'],
+            bins=config['bins'],
+        )
+
+    def __init__(self, result_dir: str, bins: int):
 
         """
         Initialize the count cache.
         """
+
+        self.result_dir = result_dir
+
+        self.bins = bins
 
         self.cache = CountCache()
 
@@ -34,20 +50,17 @@ class ExtChicagoBins(Scatter):
         for row in corpus.novels_metadata():
             yield dict(corpus_path=corpus.path, metadata=row)
 
-    def process(self, corpus_path, metadata):
+    def process(self, corpus_path: str, metadata: dict):
 
         """
         Increment offsets from a volume.
-
-        Args:
-            path (str)
         """
 
         novel = Novel.from_corpus_path(corpus_path, metadata)
 
         text = Text(novel.plain_text())
 
-        counts = text.token_offset_counts(config['bins'])
+        counts = text.token_offset_counts(self.bins)
 
         # Round to nearest decade.
         year = round_to_decade(novel.year())
@@ -61,4 +74,4 @@ class ExtChicagoBins(Scatter):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['results']['bins']['chicago'])
+        self.cache.flush(self.result_dir)
