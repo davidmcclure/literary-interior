@@ -16,6 +16,8 @@ Token = namedtuple('Token', [
     'token',
     'char1',
     'char2',
+    'offset',
+    'ratio',
 ])
 
 
@@ -38,15 +40,19 @@ class Text:
 
         tokenizer = WordPunctTokenizer()
 
+        spans = list(tokenizer.span_tokenize(self.text))
+
         self.tokens = [
 
             Token(
                 token=self.text[c1:c2],
                 char1=c1,
                 char2=c2,
+                offset=i,
+                ratio=i/len(spans)
             )
 
-            for c1, c2 in tokenizer.span_tokenize(self.text)
+            for i, (c1, c2) in enumerate(spans)
 
         ]
 
