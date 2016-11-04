@@ -1,5 +1,9 @@
 
 
+import os
+import pickle
+import uuid
+
 from lint.singletons import config
 
 from lint.text import Text
@@ -12,13 +16,15 @@ from .scatter import Scatter
 
 class ExtGailTokens(Scatter):
 
-    def __init__(self, corpus_dir: str):
+    def __init__(self, corpus_dir: str, result_dir: str):
 
         """
         Set the corpus directory.
         """
 
         self.corpus_dir = corpus_dir
+
+        self.result_dir = result_dir
 
     def args(self):
 
@@ -43,13 +49,15 @@ class ExtGailTokens(Scatter):
 
         novel = Novel.from_path(path)
 
-        text = Text(novel.plain_text())
-
         identifier = novel.identifier()
 
         year = novel.year()
 
+        text = Text(novel.plain_text())
+
         tags = text.pos_tags()
+
+        # Assemble token list.
 
         tokens = [
 
@@ -65,4 +73,9 @@ class ExtGailTokens(Scatter):
 
         ]
 
-        print(tokens)
+        # Flush to disk.
+
+        path = os.path.join(self.result_dir, str(uuid.uuid4()))
+
+        with open(path, 'wb') as fh:
+            pickle.dump(tokens, fh)
