@@ -136,13 +136,13 @@ def chicago_bin_results(mock_result_dir):
 
 
 @pytest.yield_fixture
-def gail_bin_results(mock_result_dir):
-    yield from mock_result_dir('bins', 'gail')
+def gail_text_results(mock_result_dir):
+    yield from mock_result_dir('texts', 'gail')
 
 
 @pytest.yield_fixture
-def gail_token_results(mock_result_dir):
-    yield from mock_result_dir('tokens', 'gail')
+def gail_bin_results(mock_result_dir):
+    yield from mock_result_dir('bins', 'gail')
 
 
 @pytest.yield_fixture
@@ -159,8 +159,8 @@ def mpi(
     chicago_bin_results,
 
     gail_data,
+    gail_text_results,
     gail_bin_results,
-    gail_token_results,
 
 ):
 

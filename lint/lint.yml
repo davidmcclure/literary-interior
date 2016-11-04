@@ -10,12 +10,12 @@ chicago: null
 
 results:
 
-  bins:
-    htrc: null
+  texts:
     chicago: null
     gail: null
 
-  tokens:
+  bins:
+    htrc: null
     chicago: null
     gail: null
 
