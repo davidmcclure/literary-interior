@@ -45,6 +45,24 @@ class ExtGailTokens(Scatter):
 
         text = Text(novel.plain_text())
 
+        identifier = novel.identifier()
+
+        year = novel.year()
+
         tags = text.pos_tags()
 
-        # TODO
+        tokens = [
+
+            dict(
+                corpus='gail',
+                identifier=identifier,
+                year=year,
+                ratio=i/len(tags),
+                **tag._asdict(),
+            )
+
+            for i, tag in enumerate(tags)
+
+        ]
+
+        print(tokens)
