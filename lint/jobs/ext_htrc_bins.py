@@ -19,15 +19,22 @@ class ExtHTRCBins(Scatter):
         """
 
         return cls(
+            features=config['htrc']['features'],
+            manifest=config['htrc']['manifest'],
             result_dir=config['results']['bins']['htrc'],
             bins=config['bins'],
         )
 
-    def __init__(self, result_dir: str, bins: int):
+    def __init__(self, features: str, manifest: str,
+            result_dir: str, bins: int):
 
         """
         Initialize the count cache.
         """
+
+        self.features = features
+
+        self.manifest = manifest
 
         self.result_dir = result_dir
 
@@ -43,7 +50,7 @@ class ExtHTRCBins(Scatter):
         Yields: str
         """
 
-        manifest = Manifest.from_env()
+        manifest = Manifest(self.features, self.manifest)
 
         yield from manifest.absolute_paths()
 

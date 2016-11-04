@@ -3,8 +3,6 @@
 import csv
 import os
 
-from lint.singletons import config
-
 
 class Corpus:
 

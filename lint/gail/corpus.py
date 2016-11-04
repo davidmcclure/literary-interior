@@ -2,7 +2,6 @@
 
 import os
 
-from lint.singletons import config
 from lint.utils import scan_paths
 
 
