@@ -3,8 +3,9 @@
 from lint.singletons import config
 
 from lint.text import Text
-from lint.gail.corpus import Corpus
 from lint.gail.novel import Novel
+from lint.gail.corpus import Corpus
+from lint.models import Token
 
 from .scatter import Scatter
 
@@ -44,4 +45,6 @@ class ExtGailTokens(Scatter):
 
         text = Text(novel.plain_text())
 
-        print(text.pos_tags())
+        tags = text.pos_tags()
+
+        # TODO
