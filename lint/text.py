@@ -102,10 +102,8 @@ class Text:
         Returns: (prefix, token, suffix)
         """
 
-        # TODO: Handle overflows.
-
         # prefix start
-        char1 = self.tokens[offset-padding].char1
+        char1 = self.tokens[max(offset-padding, 0)].char1
 
         # token start
         char2 = self.tokens[offset].char1
@@ -114,7 +112,7 @@ class Text:
         char3 = self.tokens[offset].char2
 
         # suffix end
-        char4 = self.tokens[offset+padding].char2
+        char4 = self.tokens[min(offset+padding, len(self.tokens)-1)].char2
 
         return (
             self.text[char1:char2],
