@@ -21,15 +21,18 @@ class ExtGailBins(Scatter):
         """
 
         return cls(
+            corpus_dir=config['gail'],
             result_dir=config['results']['bins']['gail'],
             bins=config['bins'],
         )
 
-    def __init__(self, result_dir: str, bins: int):
+    def __init__(self, corpus_dir: str, result_dir: str, bins: int):
 
         """
         Initialize the count cache.
         """
+
+        self.corpus_dir = corpus_dir
 
         self.result_dir = result_dir
 
@@ -45,7 +48,7 @@ class ExtGailBins(Scatter):
         Yields: str
         """
 
-        corpus = Corpus.from_env()
+        corpus = Corpus(self.corpus_dir)
 
         yield from corpus.text_paths()
 

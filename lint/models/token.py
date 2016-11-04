@@ -19,9 +19,8 @@ class Token(Base):
     __table_args__ = (
         PrimaryKeyConstraint(
             'corpus',
-            'year',
-            'token',
-            'pos',
+            'identifier',
+            'offset',
         ),
     )
 

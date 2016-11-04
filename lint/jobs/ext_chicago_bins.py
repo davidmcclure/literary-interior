@@ -21,15 +21,18 @@ class ExtChicagoBins(Scatter):
         """
 
         return cls(
+            corpus_dir=config['chicago'],
             result_dir=config['results']['bins']['chicago'],
             bins=config['bins'],
         )
 
-    def __init__(self, result_dir: str, bins: int):
+    def __init__(self, corpus_dir: str, result_dir: str, bins: int):
 
         """
         Initialize the count cache.
         """
+
+        self.corpus_dir = corpus_dir
 
         self.result_dir = result_dir
 
@@ -45,7 +48,7 @@ class ExtChicagoBins(Scatter):
         Yields: dict {corpus_path, metadata}
         """
 
-        corpus = Corpus.from_env()
+        corpus = Corpus(self.corpus_dir)
 
         for row in corpus.novels_metadata():
             yield dict(corpus_path=corpus.path, metadata=row)
