@@ -21,9 +21,8 @@ Token = namedtuple('Token', [
 
 Tag = namedtuple('Tag', [
     'token',
-    'char1',
-    'char2',
     'pos',
+    'offset',
 ])
 
 
@@ -62,13 +61,12 @@ class Text:
         return [
 
             Tag(
-                token=clean_token(t.token),
-                char1=t.char1,
-                char2=t.char2,
+                token=clean_token(token),
                 pos=pos,
+                offset=offset,
             )
 
-            for (token, pos), t in zip(tags, self.tokens)
+            for offset, (token, pos) in enumerate(tags)
             if not PUNCTUATION_REGEX.match(token)
 
         ]
