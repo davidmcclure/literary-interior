@@ -49,6 +49,30 @@ class Novel:
 
         return int(get_text(self.tree, 'pubDate pubDateStart')[:4])
 
+    def title(self):
+
+        """
+        Returns: str
+        """
+
+        return get_text(self.tree, 'titleGroup fullTitle')
+
+    def author_first(self):
+
+        """
+        Returns: str
+        """
+
+        return get_text(self.tree, 'author first')
+
+    def author_last(self):
+
+        """
+        Returns: str
+        """
+
+        return get_text(self.tree, 'author last')
+
     def plain_text(self):
 
         """
