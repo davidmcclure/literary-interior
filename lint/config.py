@@ -8,9 +8,6 @@ from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.engine.url import URL
 
-from wordfreq import top_n_list
-from contextlib import contextmanager
-
 
 class Config(dict):
 
@@ -110,18 +107,6 @@ class Config(dict):
         """
 
         return scoped_session(self.build_sqla_sessionmaker())
-
-    def build_tokens(self):
-
-        """
-        Get a set of whitelisted tokens.
-
-        Returns: set
-        """
-
-        tokens = top_n_list('en', self['token_depth'], ascii_only=True)
-
-        return set(tokens)
 
     def write_tmp(self):
 

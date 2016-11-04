@@ -23,5 +23,3 @@ results:
 database: null
 
 offset_resolution: 100
-
-token_depth: 10000
