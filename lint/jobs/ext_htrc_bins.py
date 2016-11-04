@@ -11,11 +11,27 @@ from .scatter import Scatter
 
 class ExtHTRCBins(Scatter):
 
-    def __init__(self):
+    @classmethod
+    def from_config(cls):
+
+        """
+        Apply config values.
+        """
+
+        return cls(
+            result_dir=config['results']['bins']['htrc'],
+            bins=config['bins'],
+        )
+
+    def __init__(self, result_dir: str, bins: int):
 
         """
         Initialize the count cache.
         """
+
+        self.result_dir = result_dir
+
+        self.bins = bins
 
         self.cache = CountCache()
 
@@ -47,7 +63,7 @@ class ExtHTRCBins(Scatter):
             return
 
         # Get token offset counts.
-        offsets = vol.offset_counts(config['bins'])
+        offsets = vol.offset_counts(self.bins)
 
         # Round to nearest decade.
         year = round_to_decade(vol.year())
@@ -61,4 +77,4 @@ class ExtHTRCBins(Scatter):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['results']['bins']['htrc'])
+        self.cache.flush(self.result_dir)

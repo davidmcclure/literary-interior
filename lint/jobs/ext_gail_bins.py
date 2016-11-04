@@ -13,11 +13,27 @@ from .scatter import Scatter
 
 class ExtGailBins(Scatter):
 
-    def __init__(self):
+    @classmethod
+    def from_config(cls):
+
+        """
+        Apply config values.
+        """
+
+        return cls(
+            result_dir=config['results']['bins']['gail'],
+            bins=config['bins'],
+        )
+
+    def __init__(self, result_dir: str, bins: int):
 
         """
         Initialize the count cache.
         """
+
+        self.result_dir = result_dir
+
+        self.bins = bins
 
         self.cache = CountCache()
 
@@ -46,7 +62,7 @@ class ExtGailBins(Scatter):
 
         text = Text(novel.plain_text())
 
-        counts = text.token_offset_counts(config['bins'])
+        counts = text.token_offset_counts(self.bins)
 
         # Round to nearest decade.
         year = round_to_decade(novel.year())
@@ -60,4 +76,4 @@ class ExtGailBins(Scatter):
         Dump the offsets to disk.
         """
 
-        self.cache.flush(config['results']['bins']['gail'])
+        self.cache.flush(self.result_dir)
