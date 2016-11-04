@@ -1,5 +1,9 @@
 
 
+import pickle
+
+from scandir import scandir
+
 from sqlalchemy import (
     Column,
     Integer,
@@ -8,11 +12,11 @@ from sqlalchemy import (
     PrimaryKeyConstraint,
 )
 
+from lint.singletons import session
 from lint.models import Base
 
 
 class Token(Base):
-
 
     __tablename__ = 'token'
 
@@ -37,3 +41,29 @@ class Token(Base):
     offset = Column(Integer, nullable=False)
 
     ratio = Column(Float, nullable=False)
+
+    @classmethod
+    def gather(cls, result_dir: str):
+
+        """
+        Bulk-insert tokens.
+        """
+
+        # Gather pickle paths.
+        paths = [
+            d.path
+            for d in scandir(result_dir)
+            if d.is_file()
+        ]
+
+        # Walk paths.
+        for i, path in enumerate(paths):
+            with open(path, 'rb') as fh:
+
+                mappings = pickle.load(fh)
+
+                # Bulk-insert the rows.
+                session.bulk_insert_mappings(cls, mappings)
+                print(i)
+
+        session.commit()
