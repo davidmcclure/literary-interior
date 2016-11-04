@@ -15,11 +15,6 @@ results:
     chicago: null
     gail: null
 
-  chars:
-    htrc: null
-    chicago: null
-    gail: null
-
 database: null
 
 bins: 100
