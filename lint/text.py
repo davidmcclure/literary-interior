@@ -16,8 +16,6 @@ Token = namedtuple('Token', [
     'token',
     'char1',
     'char2',
-    'offset',
-    'ratio',
 ])
 
 
@@ -40,7 +38,7 @@ class Text:
 
         tokenizer = WordPunctTokenizer()
 
-        spans = list(tokenizer.span_tokenize(self.text))
+        spans = tokenizer.span_tokenize(self.text)
 
         self.tokens = [
 
@@ -48,8 +46,6 @@ class Text:
                 token=self.text[c1:c2],
                 char1=c1,
                 char2=c2,
-                offset=i,
-                ratio=i/len(spans)
             )
 
             for i, (c1, c2) in enumerate(spans)
@@ -67,13 +63,12 @@ class Text:
         return [
 
             Tag(
-                token=clean_token(token),
+                token=token.lower(),
                 pos=pos,
                 offset=offset,
             )
 
             for offset, (token, pos) in enumerate(tags)
-            if not PUNCTUATION_REGEX.match(token)
 
         ]
 
