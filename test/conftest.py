@@ -126,17 +126,17 @@ def mock_result_dir(config):
 
 
 @pytest.yield_fixture
-def htrc_token_results(mock_result_dir):
+def htrc_bin_results(mock_result_dir):
     yield from mock_result_dir('bins', 'htrc')
 
 
 @pytest.yield_fixture
-def chicago_token_results(mock_result_dir):
+def chicago_bin_results(mock_result_dir):
     yield from mock_result_dir('bins', 'chicago')
 
 
 @pytest.yield_fixture
-def gail_token_results(mock_result_dir):
+def gail_bin_results(mock_result_dir):
     yield from mock_result_dir('bins', 'gail')
 
 
@@ -148,13 +148,13 @@ def mpi(
     # Mock all data sources + result dirs.
 
     htrc_data,
-    htrc_token_results,
+    htrc_bin_results,
 
     chicago_data,
-    chicago_token_results,
+    chicago_bin_results,
 
     gail_data,
-    gail_token_results,
+    gail_bin_results,
 
 ):
 

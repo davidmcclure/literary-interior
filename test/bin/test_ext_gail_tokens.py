@@ -12,6 +12,7 @@ from test.factories.corpora.gail import GailNovelFactory
 pytestmark = pytest.mark.usefixtures('db', 'mpi')
 
 
+@pytest.mark.skip
 def test_dump_offsets(gail_data):
 
     """
