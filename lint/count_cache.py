@@ -41,19 +41,20 @@ class CountCache(TreeCounter):
 
         return offsets
 
-    def add_token_counts(self, year, counts):
+    def add_token_counts(self, corpus, year, counts):
 
         """
         Increment token counts:
-        (token, pos, offset) -> count
+        (corpus, year, token, pos, offset) -> count
 
         Args:
+            corpus (str)
             year (int)
             counts (Counter)
         """
 
         for (token, pos, offset), count in counts.items():
-            self[year, token, pos, offset] += count
+            self[corpus, year, token, pos, offset] += count
 
     def flush(self, data_dir):
 
