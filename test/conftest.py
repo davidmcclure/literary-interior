@@ -3,6 +3,8 @@
 import pytest
 import os
 
+from functools import reduce
+
 from lint.singletons import config as _config, session
 from lint.models import Base
 
@@ -112,11 +114,13 @@ def mock_result_dir(config):
     Yields: ResultDir
     """
 
-    def func(rtype, corpus):
+    def func(*keys):
 
         results = ResultDir()
 
-        config['results'][rtype][corpus] = results.path
+        path = reduce(lambda d, k: d[k], keys[:-1], config['results'])
+
+        path[keys[-1]] = results.path
 
         yield results
 
