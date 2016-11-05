@@ -13,9 +13,13 @@ class GailNovelFactory(factory.Factory):
     class Meta:
         model = Novel
 
-    psmid = factory.Sequence(lambda n: 'B000{0}'.format(n))
+    identifier = factory.Sequence(lambda n: 'B000{0}'.format(n))
 
     title = 'Moby Dick'
+
+    author_first = 'Herman'
+
+    author_last = 'Melville'
 
     year = 1900
 

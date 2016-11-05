@@ -25,13 +25,13 @@ class Text(Base):
 
     identifier = Column(String, nullable=False)
 
-    year = Column(Integer, nullable=False)
-
     title = Column(String, nullable=False)
 
     author_first = Column(String, nullable=False)
 
     author_last = Column(String, nullable=False)
+
+    year = Column(Integer, nullable=False)
 
     text = Column(String, nullable=False)
 

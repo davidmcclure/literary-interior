@@ -4,6 +4,7 @@ import os
 import uuid
 import json
 
+from lint.singletons import config
 from lint.gail.novel import Novel
 from lint.gail.corpus import Corpus
 from lint.models import Text
@@ -12,6 +13,18 @@ from .scatter import Scatter
 
 
 class ExtGailTexts(Scatter):
+
+    @classmethod
+    def from_config(cls):
+
+        """
+        Apply config values.
+        """
+
+        return cls(
+            corpus_dir=config['gail'],
+            result_dir=config['results']['texts']['gail'],
+        )
 
     def __init__(self, corpus_dir: str, result_dir: str):
 
