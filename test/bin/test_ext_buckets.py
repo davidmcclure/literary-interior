@@ -67,33 +67,45 @@ def test_dump_offsets():
     assert Bucket.get('corpus3', 1930, 'nine',  'CD', o3) == 30
 
 
-# def test_round_years_to_decade(chicago_data):
+def test_round_years_to_decade():
 
-    # """
-    # Volume years should be rounded to the nearest decade.
-    # """
+    """
+    Volume years should be rounded to the nearest decade.
+    """
 
-    # n1 = ChicagoNovelFactory(publ_date=1904, text='one two three')
-    # n2 = ChicagoNovelFactory(publ_date=1905, text='one two three')
-    # n3 = ChicagoNovelFactory(publ_date=1906, text='one two three')
+    session.add(TextFactory(
+        corpus='corpus',
+        year=1904,
+        text='one two three',
+    ))
 
-    # chicago_data.add_novel(n1)
-    # chicago_data.add_novel(n2)
-    # chicago_data.add_novel(n3)
+    session.add(TextFactory(
+        corpus='corpus',
+        year=1905,
+        text='one two three',
+    ))
 
-    # call(['mpirun', 'bin/ext-chicago-tokens.py'])
-    # call(['bin/gather-chicago-tokens.py'])
+    session.add(TextFactory(
+        corpus='corpus',
+        year=1906,
+        text='one two three',
+    ))
 
-    # o1 = make_offset(0, 3, 100)
-    # o2 = make_offset(1, 3, 100)
-    # o3 = make_offset(2, 3, 100)
+    session.commit()
 
-    # # n1 -> 1900
-    # assert Token.get('chicago', 1900, 'one',   'CD', o1) == 1
-    # assert Token.get('chicago', 1900, 'two',   'CD', o2) == 1
-    # assert Token.get('chicago', 1900, 'three', 'CD', o3) == 1
+    call(['mpirun', 'bin/ext-buckets.py'])
+    call(['bin/gather-buckets.py'])
 
-    # # n2 + n3 -> 1910
-    # assert Token.get('chicago', 1910, 'one',   'CD', o1) == 2
-    # assert Token.get('chicago', 1910, 'two',   'CD', o2) == 2
-    # assert Token.get('chicago', 1910, 'three', 'CD', o3) == 2
+    o1 = make_offset(0, 3, 100)
+    o2 = make_offset(1, 3, 100)
+    o3 = make_offset(2, 3, 100)
+
+    # n1 -> 1900
+    assert Bucket.get('corpus', 1900, 'one',   'CD', o1) == 1
+    assert Bucket.get('corpus', 1900, 'two',   'CD', o2) == 1
+    assert Bucket.get('corpus', 1900, 'three', 'CD', o3) == 1
+
+    # n2 + n3 -> 1910
+    assert Bucket.get('corpus', 1910, 'one',   'CD', o1) == 2
+    assert Bucket.get('corpus', 1910, 'two',   'CD', o2) == 2
+    assert Bucket.get('corpus', 1910, 'three', 'CD', o3) == 2
