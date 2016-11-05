@@ -76,7 +76,6 @@ class Config(dict):
         engine = create_engine(url)
 
         # Fix transaction bugs in pysqlite.
-        # http://docs.sqlalchemy.org/en/rel_1_0/dialects/sqlite.html#pysqlite-serializable
 
         @event.listens_for(engine, 'connect')
         def connect(conn, record):

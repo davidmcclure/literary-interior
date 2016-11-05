@@ -2,11 +2,11 @@
 
 
 from lint.singletons import config
-from lint.models import TokenBin
+from lint.models import Bucket
 
 
 if __name__ == '__main__':
 
     result_dir = config['results']['bins']['htrc']
 
-    TokenBin.gather_results('htrc', result_dir)
+    Bucket.gather_results('htrc', result_dir)

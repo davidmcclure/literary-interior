@@ -3,7 +3,7 @@
 import pytest
 
 from lint.count_cache import CountCache
-from lint.models import TokenBin
+from lint.models import Bucket
 
 
 pytestmark = pytest.mark.usefixtures('db')
@@ -21,8 +21,8 @@ def test_insert_corpus():
     cache[1902, 'token2', 'POS2', 2] = 2
     cache[1903, 'token3', 'POS3', 3] = 3
 
-    TokenBin.insert_corpus('corpus', cache)
+    Bucket.insert_corpus('corpus', cache)
 
-    assert TokenBin.get('corpus', 1901, 'token1', 'POS1', 1) == 1
-    assert TokenBin.get('corpus', 1902, 'token2', 'POS2', 2) == 2
-    assert TokenBin.get('corpus', 1903, 'token3', 'POS3', 3) == 3
+    assert Bucket.get('corpus', 1901, 'token1', 'POS1', 1) == 1
+    assert Bucket.get('corpus', 1902, 'token2', 'POS2', 2) == 2
+    assert Bucket.get('corpus', 1903, 'token3', 'POS3', 3) == 3

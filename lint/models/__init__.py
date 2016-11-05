@@ -1,5 +1,5 @@
 
 
 from .base import Base
-from .token_bin import TokenBin
+from .bucket import Bucket
 from .text import Text

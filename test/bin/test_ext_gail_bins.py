@@ -5,7 +5,7 @@ import pytest
 from subprocess import call
 
 from lint.utils import make_offset
-from lint.models import TokenBin
+from lint.models import Bucket
 
 from test.factories.corpora.gail import GailNovelFactory
 
@@ -45,17 +45,17 @@ def test_dump_offsets(gail_data):
     o2 = make_offset(1, 3, 100)
     o3 = make_offset(2, 3, 100)
 
-    assert TokenBin.get('gail', 1910, 'one',   'CD', o1) == 10
-    assert TokenBin.get('gail', 1910, 'two',   'CD', o2) == 10
-    assert TokenBin.get('gail', 1910, 'three', 'CD', o3) == 10
+    assert Bucket.get('gail', 1910, 'one',   'CD', o1) == 10
+    assert Bucket.get('gail', 1910, 'two',   'CD', o2) == 10
+    assert Bucket.get('gail', 1910, 'three', 'CD', o3) == 10
 
-    assert TokenBin.get('gail', 1920, 'four',  'CD', o1) == 20
-    assert TokenBin.get('gail', 1920, 'five',  'CD', o2) == 20
-    assert TokenBin.get('gail', 1920, 'six',   'CD', o3) == 20
+    assert Bucket.get('gail', 1920, 'four',  'CD', o1) == 20
+    assert Bucket.get('gail', 1920, 'five',  'CD', o2) == 20
+    assert Bucket.get('gail', 1920, 'six',   'CD', o3) == 20
 
-    assert TokenBin.get('gail', 1930, 'seven', 'CD', o1) == 30
-    assert TokenBin.get('gail', 1930, 'eight', 'CD', o2) == 30
-    assert TokenBin.get('gail', 1930, 'nine',  'CD', o3) == 30
+    assert Bucket.get('gail', 1930, 'seven', 'CD', o1) == 30
+    assert Bucket.get('gail', 1930, 'eight', 'CD', o2) == 30
+    assert Bucket.get('gail', 1930, 'nine',  'CD', o3) == 30
 
 
 def test_round_years_to_decade(gail_data):
@@ -80,11 +80,11 @@ def test_round_years_to_decade(gail_data):
     o3 = make_offset(2, 3, 100)
 
     # n1 -> 1900
-    assert TokenBin.get('gail', 1900, 'one',   'CD', o1) == 1
-    assert TokenBin.get('gail', 1900, 'two',   'CD', o2) == 1
-    assert TokenBin.get('gail', 1900, 'three', 'CD', o3) == 1
+    assert Bucket.get('gail', 1900, 'one',   'CD', o1) == 1
+    assert Bucket.get('gail', 1900, 'two',   'CD', o2) == 1
+    assert Bucket.get('gail', 1900, 'three', 'CD', o3) == 1
 
     # n2 + n3 -> 1910
-    assert TokenBin.get('gail', 1910, 'one',   'CD', o1) == 2
-    assert TokenBin.get('gail', 1910, 'two',   'CD', o2) == 2
-    assert TokenBin.get('gail', 1910, 'three', 'CD', o3) == 2
+    assert Bucket.get('gail', 1910, 'one',   'CD', o1) == 2
+    assert Bucket.get('gail', 1910, 'two',   'CD', o2) == 2
+    assert Bucket.get('gail', 1910, 'three', 'CD', o3) == 2

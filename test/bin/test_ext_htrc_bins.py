@@ -5,7 +5,7 @@ import pytest
 from subprocess import call
 
 from lint.utils import make_offset
-from lint.models import TokenBin
+from lint.models import Bucket
 
 from test.factories.corpora.htrc import (
     HTRCPageFactory,
@@ -52,17 +52,17 @@ def test_dump_offsets(htrc_data):
     o2 = make_offset(150, 300, 100)
     o3 = make_offset(250, 300, 100)
 
-    assert TokenBin.get('htrc', 1910, 'a', 'POS1', o1) == 1
-    assert TokenBin.get('htrc', 1910, 'b', 'POS2', o2) == 2
-    assert TokenBin.get('htrc', 1910, 'c', 'POS3', o3) == 3
+    assert Bucket.get('htrc', 1910, 'a', 'POS1', o1) == 1
+    assert Bucket.get('htrc', 1910, 'b', 'POS2', o2) == 2
+    assert Bucket.get('htrc', 1910, 'c', 'POS3', o3) == 3
 
-    assert TokenBin.get('htrc', 1920, 'b', 'POS4', o1) == 4
-    assert TokenBin.get('htrc', 1920, 'c', 'POS5', o2) == 5
-    assert TokenBin.get('htrc', 1920, 'd', 'POS6', o3) == 6
+    assert Bucket.get('htrc', 1920, 'b', 'POS4', o1) == 4
+    assert Bucket.get('htrc', 1920, 'c', 'POS5', o2) == 5
+    assert Bucket.get('htrc', 1920, 'd', 'POS6', o3) == 6
 
-    assert TokenBin.get('htrc', 1930, 'c', 'POS7', o1) == 7
-    assert TokenBin.get('htrc', 1930, 'd', 'POS8', o2) == 8
-    assert TokenBin.get('htrc', 1930, 'e', 'POS9', o3) == 9
+    assert Bucket.get('htrc', 1930, 'c', 'POS7', o1) == 7
+    assert Bucket.get('htrc', 1930, 'd', 'POS8', o2) == 8
+    assert Bucket.get('htrc', 1930, 'e', 'POS9', o3) == 9
 
 
 def test_ignore_non_english_volumes(htrc_data):
@@ -94,9 +94,9 @@ def test_ignore_non_english_volumes(htrc_data):
     o3 = make_offset(250, 300, 100)
 
     # Skip the German volume.
-    assert TokenBin.get('htrc', 1900, 'a', 'POS', o1) == 1
-    assert TokenBin.get('htrc', 1900, 'b', 'POS', o2) == 2
-    assert TokenBin.get('htrc', 1900, 'c', 'POS', o3) == 3
+    assert Bucket.get('htrc', 1900, 'a', 'POS', o1) == 1
+    assert Bucket.get('htrc', 1900, 'b', 'POS', o2) == 2
+    assert Bucket.get('htrc', 1900, 'c', 'POS', o3) == 3
 
 
 def test_round_years_to_decade(htrc_data):
@@ -138,10 +138,10 @@ def test_round_years_to_decade(htrc_data):
     o3 = make_offset(250, 300, 100)
 
     # Snap to decade.
-    assert TokenBin.get('htrc', 1900, 'a', 'POS', o1) == 2
-    assert TokenBin.get('htrc', 1900, 'b', 'POS', o2) == 4
-    assert TokenBin.get('htrc', 1900, 'c', 'POS', o3) == 8
+    assert Bucket.get('htrc', 1900, 'a', 'POS', o1) == 2
+    assert Bucket.get('htrc', 1900, 'b', 'POS', o2) == 4
+    assert Bucket.get('htrc', 1900, 'c', 'POS', o3) == 8
 
-    assert TokenBin.get('htrc', 1910, 'a', 'POS', o1) == 16+128
-    assert TokenBin.get('htrc', 1910, 'b', 'POS', o2) == 32+256
-    assert TokenBin.get('htrc', 1910, 'c', 'POS', o3) == 64+512
+    assert Bucket.get('htrc', 1910, 'a', 'POS', o1) == 16+128
+    assert Bucket.get('htrc', 1910, 'b', 'POS', o2) == 32+256
+    assert Bucket.get('htrc', 1910, 'c', 'POS', o3) == 64+512

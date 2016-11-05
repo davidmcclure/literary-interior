@@ -15,9 +15,9 @@ from lint.utils import mem_pct, grouper
 from lint.count_cache import CountCache
 
 
-class TokenBin(Base):
+class Bucket(Base):
 
-    __tablename__ = 'token_bin'
+    __tablename__ = 'bucket'
 
     __table_args__ = (
         PrimaryKeyConstraint(
