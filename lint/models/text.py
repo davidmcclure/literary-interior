@@ -131,7 +131,7 @@ class Text(Base):
 
         ]
 
-    def token_offset_counts(self, bins: int):
+    def bucket_counts(self, bins: int):
 
         """
         Map (token, POS, offset) -> count.
