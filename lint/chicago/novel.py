@@ -39,6 +39,46 @@ class Novel:
 
         self.text = text
 
+    def identifier(self):
+
+        """
+        Returns: str
+        """
+
+        return self.metadata['BOOK_ID']
+
+    def title(self):
+
+        """
+        Returns: str
+        """
+
+        return self.metadata['TITLE']
+
+    def author_first(self):
+
+        """
+        Returns: str
+        """
+
+        return self.metadata['AUTH_FIRST']
+
+    def author_last(self):
+
+        """
+        Returns: str
+        """
+
+        return self.metadata['AUTH_LAST']
+
+    def year(self):
+
+        """
+        Returns: int
+        """
+
+        return int(self.metadata['PUBL_DATE'])
+
     def plain_text(self):
 
         """
@@ -69,11 +109,3 @@ class Novel:
                 i2 = i
 
         return '\n'.join(lines[i1:i2])
-
-    def year(self):
-
-        """
-        Returns: int
-        """
-
-        return int(self.metadata['PUBL_DATE'])

@@ -41,14 +41,6 @@ class Novel:
 
         return get_text(self.tree, 'PSMID')
 
-    def year(self):
-
-        """
-        Returns: int
-        """
-
-        return int(get_text(self.tree, 'pubDate pubDateStart')[:4])
-
     def title(self):
 
         """
@@ -72,6 +64,14 @@ class Novel:
         """
 
         return get_text(self.tree, 'author last')
+
+    def year(self):
+
+        """
+        Returns: int
+        """
+
+        return int(get_text(self.tree, 'pubDate pubDateStart')[:4])
 
     def plain_text(self):
 

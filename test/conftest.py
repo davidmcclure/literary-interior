@@ -131,6 +131,11 @@ def htrc_bin_results(mock_result_dir):
 
 
 @pytest.yield_fixture
+def chicago_text_results(mock_result_dir):
+    yield from mock_result_dir('texts', 'chicago')
+
+
+@pytest.yield_fixture
 def chicago_bin_results(mock_result_dir):
     yield from mock_result_dir('bins', 'chicago')
 
@@ -156,6 +161,7 @@ def mpi(
     htrc_bin_results,
 
     chicago_data,
+    chicago_text_results,
     chicago_bin_results,
 
     gail_data,
