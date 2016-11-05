@@ -17,7 +17,6 @@ from lint.count_cache import CountCache
 
 class TokenBin(Base):
 
-
     __tablename__ = 'token_bin'
 
     __table_args__ = (
@@ -41,7 +40,6 @@ class TokenBin(Base):
     offset = Column(Integer, nullable=False)
 
     count = Column(Integer, nullable=False)
-
 
     @classmethod
     def gather_results(cls, corpus, result_dir):
