@@ -14,12 +14,7 @@ class Text(Base):
 
     __tablename__ = 'text'
 
-    __table_args__ = (
-        PrimaryKeyConstraint(
-            'corpus',
-            'identifier',
-        ),
-    )
+    id = Column(Integer, primary_key=True)
 
     corpus = Column(String, nullable=False)
 
