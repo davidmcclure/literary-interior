@@ -50,7 +50,7 @@ def test_ext_gail_texts(gail_data):
     gail_data.add_novel(n3)
 
     call(['mpirun', 'bin/ext-gail-texts.py'])
-    call(['bin/gather-gail-texts.py'])
+    call(['bin/gather-texts.py'])
 
     t1 = Text.query.filter_by(corpus='gail', identifier='1').one()
     t2 = Text.query.filter_by(corpus='gail', identifier='2').one()

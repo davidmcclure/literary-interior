@@ -23,7 +23,7 @@ class ExtChicagoTexts(Scatter):
 
         return cls(
             corpus_dir=config['chicago'],
-            result_dir=config['results']['texts']['chicago'],
+            result_dir=config['results']['texts'],
         )
 
     def __init__(self, corpus_dir: str, result_dir: str):

@@ -23,7 +23,7 @@ class ExtGailTexts(Scatter):
 
         return cls(
             corpus_dir=config['gail'],
-            result_dir=config['results']['texts']['gail'],
+            result_dir=config['results']['texts'],
         )
 
     def __init__(self, corpus_dir: str, result_dir: str):

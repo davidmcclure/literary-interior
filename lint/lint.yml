@@ -9,15 +9,7 @@ gail: null
 chicago: null
 
 results:
-
-  texts:
-    chicago: null
-    gail: null
-
-  bins:
-    htrc: null
-    chicago: null
-    gail: null
+  texts: null
 
 database: null
 

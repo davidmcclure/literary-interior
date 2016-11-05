@@ -6,4 +6,4 @@ from lint.models import Text
 
 
 if __name__ == '__main__':
-    Text.gather(config['results']['texts']['gail'])
+    Text.gather(config['results']['texts'])

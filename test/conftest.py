@@ -112,11 +112,11 @@ def mock_result_dir(config):
     Yields: ResultDir
     """
 
-    def func(rtype, corpus):
+    def func(rtype):
 
         results = ResultDir()
 
-        config['results'][rtype][corpus] = results.path
+        config['results'][rtype] = results.path
 
         yield results
 
@@ -126,28 +126,13 @@ def mock_result_dir(config):
 
 
 @pytest.yield_fixture
-def htrc_bin_results(mock_result_dir):
-    yield from mock_result_dir('bins', 'htrc')
+def text_results(mock_result_dir):
+    yield from mock_result_dir('texts')
 
 
 @pytest.yield_fixture
-def chicago_text_results(mock_result_dir):
-    yield from mock_result_dir('texts', 'chicago')
-
-
-@pytest.yield_fixture
-def chicago_bin_results(mock_result_dir):
-    yield from mock_result_dir('bins', 'chicago')
-
-
-@pytest.yield_fixture
-def gail_text_results(mock_result_dir):
-    yield from mock_result_dir('texts', 'gail')
-
-
-@pytest.yield_fixture
-def gail_bin_results(mock_result_dir):
-    yield from mock_result_dir('bins', 'gail')
+def bucket_results(mock_result_dir):
+    yield from mock_result_dir('buckets')
 
 
 @pytest.yield_fixture
@@ -158,15 +143,11 @@ def mpi(
     # Mock all data sources + result dirs.
 
     htrc_data,
-    htrc_bin_results,
-
     chicago_data,
-    chicago_text_results,
-    chicago_bin_results,
-
     gail_data,
-    gail_text_results,
-    gail_bin_results,
+
+    text_results,
+    bucket_results,
 
 ):
 

@@ -50,7 +50,7 @@ def test_ext_gail_texts(chicago_data):
     chicago_data.add_novel(n3)
 
     call(['mpirun', 'bin/ext-chicago-texts.py'])
-    call(['bin/gather-chicago-texts.py'])
+    call(['bin/gather-texts.py'])
 
     t1 = Text.query.filter_by(corpus='chicago', identifier='1').one()
     t2 = Text.query.filter_by(corpus='chicago', identifier='2').one()
