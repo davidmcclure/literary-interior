@@ -9,7 +9,7 @@ from lint.models import Text
 from test.factories.corpora.chicago import ChicagoNovelFactory
 
 
-pytestmark = pytest.mark.usefixtures('db', 'mpi')
+pytestmark = pytest.mark.usefixtures('mpi')
 
 
 def test_ext_gail_texts(chicago_data):

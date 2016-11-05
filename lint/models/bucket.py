@@ -42,27 +42,44 @@ class Bucket(Base):
     count = Column(Integer, nullable=False)
 
     @classmethod
-    def gather_results(cls, corpus, result_dir):
+    def gather(cls, result_dir):
 
         """
-        Merge and insert pickled count caches.
+        Merge + insert pickled count caches.
 
         Args:
-            corpus (str)
             result_dir (str)
         """
 
         # Merge result pickles.
         results = CountCache.from_results(result_dir)
 
-        # Clear and insert the counts.
-        cls.delete_corpus(corpus)
-        cls.insert_corpus(corpus, results)
+        for group in grouper(results.flatten(), 1000):
+
+            mappings = [
+                dict(
+                    corpus=corpus,
+                    year=year,
+                    token=token,
+                    pos=pos,
+                    offset=offset,
+                    count=count,
+                )
+                for (
+                    corpus,
+                    year,
+                    token,
+                    pos,
+                    offset,
+                ), count in group
+            ]
+
+            session.bulk_insert_mappings(cls, mappings)
 
         session.commit()
 
     @classmethod
-    def insert_corpus(cls, corpus, offsets):
+    def insert_corpus(cls, offsets):
 
         """
         Flush an offset cache to disk.
@@ -83,7 +100,7 @@ class Bucket(Base):
                     offset=offset,
                     count=count,
                 )
-                for (year, token, pos, offset), count in group
+                for (corpus, year, token, pos, offset), count in group
             ]
 
             session.bulk_insert_mappings(cls, mappings)
