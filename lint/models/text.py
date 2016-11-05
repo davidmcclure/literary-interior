@@ -2,12 +2,21 @@
 
 import json
 
+from collections import namedtuple
 from scandir import scandir
 
 from sqlalchemy import Column, Integer, String, UniqueConstraint
+from nltk.tokenize import WordPunctTokenizer
 
 from lint.singletons import session
 from lint.models import Base
+
+
+Token = namedtuple('Token', [
+    'token',
+    'char1',
+    'char2',
+])
 
 
 class Text(Base):
@@ -61,3 +70,25 @@ class Text(Base):
                 print(i)
 
         session.commit()
+
+    def tokens(self):
+
+        """
+        Tokenize the text.
+        """
+
+        tokenizer = WordPunctTokenizer()
+
+        spans = tokenizer.span_tokenize(self.text)
+
+        return [
+
+            Token(
+                token=self.text[c1:c2],
+                char1=c1,
+                char2=c2,
+            )
+
+            for i, (c1, c2) in enumerate(spans)
+
+        ]
