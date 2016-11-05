@@ -1,11 +1,11 @@
 
 
-from lint.text import Text
+from lint.models import Text
 
 
 def test_snippet():
 
-    text = Text('zero one two three four five six')
+    text = Text(text='zero one two three four five six')
 
     prefix, token, suffix = text.snippet(3, padding=2)
 
@@ -16,7 +16,7 @@ def test_snippet():
 
 def test_left_overflow():
 
-    text = Text('zero one two three four five six')
+    text = Text(text='zero one two three four five six')
 
     prefix, token, suffix = text.snippet(2, padding=3)
 
@@ -27,7 +27,7 @@ def test_left_overflow():
 
 def test_right_overflow():
 
-    text = Text('zero one two three four five six')
+    text = Text(text='zero one two three four five six')
 
     prefix, token, suffix = text.snippet(4, padding=3)
 

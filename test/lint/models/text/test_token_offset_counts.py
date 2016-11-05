@@ -3,7 +3,7 @@
 import pytest
 
 from lint.utils import make_offset
-from lint.text import Text
+from lint.models import Text
 
 
 def test_offset_counts():
@@ -12,7 +12,7 @@ def test_offset_counts():
     Map (token, POS, offset) -> count.
     """
 
-    text = Text('one two three four')
+    text = Text(text='one two three four')
 
     counts = text.token_offset_counts(4)
 
@@ -29,7 +29,7 @@ def test_round_offsets(n):
     When the offset is real-valued, round to the nearest integer.
     """
 
-    text = Text('one two three four')
+    text = Text(text='one two three four')
 
     counts = text.token_offset_counts(n)
 
@@ -50,7 +50,7 @@ def test_downcase():
     All tokens should be downcased.
     """
 
-    text = Text('one Two THREE')
+    text = Text(text='one Two THREE')
 
     counts = text.token_offset_counts(3)
 
