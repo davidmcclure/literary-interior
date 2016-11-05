@@ -22,19 +22,19 @@ def test_dump_offsets(chicago_data):
 
     for i in range(10):
         chicago_data.add_novel(ChicagoNovelFactory(
-            publ_date=1910,
+            year=1910,
             text='one two three',
         ))
 
     for i in range(20):
         chicago_data.add_novel(ChicagoNovelFactory(
-            publ_date=1920,
+            year=1920,
             text='four five six',
         ))
 
     for i in range(30):
         chicago_data.add_novel(ChicagoNovelFactory(
-            publ_date=1930,
+            year=1930,
             text='seven eight nine',
         ))
 
@@ -64,9 +64,9 @@ def test_round_years_to_decade(chicago_data):
     Volume years should be rounded to the nearest decade.
     """
 
-    n1 = ChicagoNovelFactory(publ_date=1904, text='one two three')
-    n2 = ChicagoNovelFactory(publ_date=1905, text='one two three')
-    n3 = ChicagoNovelFactory(publ_date=1906, text='one two three')
+    n1 = ChicagoNovelFactory(year=1904, text='one two three')
+    n2 = ChicagoNovelFactory(year=1905, text='one two three')
+    n3 = ChicagoNovelFactory(year=1906, text='one two three')
 
     chicago_data.add_novel(n1)
     chicago_data.add_novel(n2)

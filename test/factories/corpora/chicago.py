@@ -10,11 +10,15 @@ class ChicagoNovelFactory(factory.Factory):
     class Meta:
         model = Novel
 
-    book_id = factory.Sequence(lambda n: n+1)
+    identifier = factory.Sequence(lambda n: n+1)
 
     title = 'Moby Dick'
 
-    publ_date = 1900
+    author_first = 'Herman'
+
+    author_last = 'Melville'
+
+    year = 1900
 
     text = 'Call me Ishmael.'
 
@@ -25,16 +29,18 @@ class ChicagoNovelFactory(factory.Factory):
         Returns: Volume
         """
 
-        file_id = str(kwargs['book_id']).zfill(8)
+        file_id = str(kwargs['identifier']).zfill(8)
 
         # Generate the file name.
         filename = '{0}.txt'.format(file_id)
 
         # Construct the metadata row.
         metadata = dict(
-            BOOK_ID=kwargs['book_id'],
-            PUBL_DATE=kwargs['publ_date'],
+            BOOK_ID=kwargs['identifier'],
             TITLE=kwargs['title'],
+            AUTH_FIRST=kwargs['author_first'],
+            AUTH_LAST=kwargs['author_last'],
+            PUBL_DATE=kwargs['year'],
             FILENAME=filename,
         )
 
