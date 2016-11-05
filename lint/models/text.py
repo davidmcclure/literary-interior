@@ -4,7 +4,7 @@ import json
 
 from scandir import scandir
 
-from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
+from sqlalchemy import Column, Integer, String, UniqueConstraint
 
 from lint.singletons import session
 from lint.models import Base
@@ -13,6 +13,13 @@ from lint.models import Base
 class Text(Base):
 
     __tablename__ = 'text'
+
+    __table_args__ = (
+        UniqueConstraint(
+            'corpus',
+            'identifier',
+        ),
+    )
 
     id = Column(Integer, primary_key=True)
 
