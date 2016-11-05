@@ -55,19 +55,6 @@ class CountCache(TreeCounter):
         for (token, pos, offset), count in counts.items():
             self[year, token, pos, offset] += count
 
-    def add_char_counts(self, year, counts):
-
-        """
-        Increment character counts:
-        (char, offset) -> count
-
-        Args:
-            counts (Counter)
-        """
-
-        for (char, offset), count in counts.items():
-            self[year, char, offset] += count
-
     def flush(self, data_dir):
 
         """
