@@ -79,45 +79,6 @@ class Bucket(Base):
         session.commit()
 
     @classmethod
-    def insert_corpus(cls, offsets):
-
-        """
-        Flush an offset cache to disk.
-
-        Args:
-            corpus (str)
-            offsets (CountCache)
-        """
-
-        for group in grouper(offsets.flatten(), 1000):
-
-            mappings = [
-                dict(
-                    corpus=corpus,
-                    year=year,
-                    token=token,
-                    pos=pos,
-                    offset=offset,
-                    count=count,
-                )
-                for (corpus, year, token, pos, offset), count in group
-            ]
-
-            session.bulk_insert_mappings(cls, mappings)
-
-    @classmethod
-    def delete_corpus(cls, corpus):
-
-        """
-        Clear all counts for a corpus.
-
-        Args:
-            corpus (str)
-        """
-
-        cls.query.filter_by(corpus=corpus).delete()
-
-    @classmethod
     def get(cls, corpus, year, token, pos, offset):
 
         """
