@@ -71,3 +71,11 @@ class Token(Base):
                 print(i)
 
         session.commit()
+
+    def snippet(self, padding: int=500):
+
+        """
+        Get a snippet from the source text.
+        """
+
+        return self.text.snippet(self.char1, self.char2, padding)
