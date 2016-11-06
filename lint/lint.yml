@@ -10,6 +10,8 @@ chicago: null
 
 results:
   texts: null
+  buckets: null
+  tokens: null
 
 database: null
 

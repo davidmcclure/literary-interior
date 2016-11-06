@@ -136,6 +136,11 @@ def bucket_results(mock_result_dir):
 
 
 @pytest.yield_fixture
+def token_results(mock_result_dir):
+    yield from mock_result_dir('tokens')
+
+
+@pytest.yield_fixture
 def mpi(
 
     config,
@@ -148,6 +153,7 @@ def mpi(
 
     text_results,
     bucket_results,
+    token_results,
 
 ):
 

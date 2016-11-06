@@ -14,7 +14,7 @@ from test.factories.models import TextFactory
 pytestmark = pytest.mark.usefixtures('mpi')
 
 
-def test_dump_offsets():
+def test_ext_buckets():
 
     """
     ExtBuckets should index:

@@ -12,7 +12,7 @@ from test.factories.corpora.chicago import ChicagoNovelFactory
 pytestmark = pytest.mark.usefixtures('mpi')
 
 
-def test_ext_gail_texts(chicago_data):
+def test_ext_chicago_texts(chicago_data):
 
     """
     ExttChicagoTexts should index text rows.
