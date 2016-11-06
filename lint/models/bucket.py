@@ -1,7 +1,6 @@
 
 
 import numpy as np
-import pickle
 
 from collections import OrderedDict
 from scandir import scandir

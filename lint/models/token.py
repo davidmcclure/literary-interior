@@ -39,6 +39,10 @@ class Token(Base):
 
     pos = Column(String, nullable=False)
 
+    char1 = Column(Integer, nullable=False)
+
+    char2 = Column(Integer, nullable=False)
+
     offset = Column(Integer, nullable=False)
 
     ratio = Column(Integer, nullable=False)

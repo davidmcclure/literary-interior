@@ -18,13 +18,15 @@ Token = namedtuple('Token', [
     'token',
     'char1',
     'char2',
+    'offset',
+    'ratio',
 ])
 
 
-Tag = namedtuple('Tag', [
-    'token',
-    'pos',
-])
+TaggedToken = namedtuple('Tag',
+    Token._fields +
+    ('pos',)
+)
 
 
 class Text(Base):
@@ -98,14 +100,20 @@ class Text(Base):
 
         tokenizer = WordPunctTokenizer()
 
-        spans = tokenizer.span_tokenize(self.text)
+        spans = list(tokenizer.span_tokenize(self.text))
 
         return [
 
             Token(
+
                 token=self.text[c1:c2],
+
                 char1=c1,
                 char2=c2,
+
+                offset=i,
+                ratio=i/len(spans)
+
             )
 
             for i, (c1, c2) in enumerate(spans)
@@ -118,16 +126,27 @@ class Text(Base):
         POS-tag the token stream.
         """
 
-        tags = pos_tag([t.token for t in self.tokens()])
+        tokens = self.tokens()
+
+        tags = pos_tag([t.token for t in tokens])
 
         return [
 
-            Tag(
-                token=token.lower(),
+            TaggedToken(
+
+                token=token.token.lower(),
+
+                char1=token.char1,
+                char2=token.char2,
+
+                offset=token.offset,
+                ratio=token.ratio,
+
                 pos=pos,
+
             )
 
-            for token, pos in tags
+            for token, (_, pos) in zip(tokens, tags)
 
         ]
 

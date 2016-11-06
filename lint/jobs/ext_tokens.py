@@ -54,16 +54,11 @@ class ExtTokens(Scatter):
         tokens = [
 
             dict(
-
                 text_id=id,
                 **tag._asdict(),
-
-                offset=i,
-                ratio=i/len(tags),
-
             )
 
-            for i, tag in enumerate(tags)
+            for tag in tags
 
         ]
 
