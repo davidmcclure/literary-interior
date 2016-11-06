@@ -132,6 +132,8 @@ class Text(Base):
 
         return [
 
+            # TODO: Mass-assign the token?
+
             TaggedToken(
 
                 token=token.token.lower(),
