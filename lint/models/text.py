@@ -46,11 +46,11 @@ class Text(Base):
 
     identifier = Column(String, nullable=False)
 
-    title = Column(String, nullable=False)
+    title = Column(String, nullable=True)
 
-    author_first = Column(String, nullable=False)
+    author_first = Column(String, nullable=True)
 
-    author_last = Column(String, nullable=False)
+    author_last = Column(String, nullable=True)
 
     year = Column(Integer, nullable=False)
 
