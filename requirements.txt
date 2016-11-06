@@ -27,3 +27,4 @@ pandas
 statsmodels
 patsy
 boltons
+attrs

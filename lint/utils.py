@@ -203,58 +203,13 @@ def clean_token(token):
     return re.sub('^[^a-z]*|[^a-z]*$', '', token.lower())
 
 
-def token_offset_counts(text, bins):
+def pos_tag(text: str):
 
     """
-    Given a string of text, map (token, POS, offset) -> count.
-
-    Args:
-        text (str)
-        bins (int)
-
-    Returns: Counter
+    ASCII-encode and POS-tag a text.
     """
 
     # UTF8 -> ASCII.
     blob = TextBlob(text.encode('ascii', 'ignore').decode())
 
-    tags = blob.tags
-
-    counts = Counter()
-
-    for i, (token, pos) in enumerate(tags):
-
-        token = clean_token(token)
-
-        # Get 0-N offset.
-        offset = make_offset(i, len(tags), bins)
-
-        counts[token, pos, offset] += 1
-
-    return counts
-
-
-def char_offset_counts(text, bins):
-
-    """
-    Given a string of text, map (char, offset) -> count.
-
-    Args:
-        text (str)
-        bins (int)
-
-    Returns: Counter
-    """
-
-    text = clean_text(text)
-
-    counts = Counter()
-
-    for i, char in enumerate(text):
-
-        # Get 0-N offset.
-        offset = make_offset(i, len(text), bins)
-
-        counts[char, offset] += 1
-
-    return counts
+    return blob.tags

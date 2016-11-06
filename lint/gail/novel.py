@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from lint.utils import get_text
 
 
-class Text:
+class Novel:
 
     @classmethod
     def from_path(cls, path):
@@ -40,6 +40,30 @@ class Text:
         """
 
         return get_text(self.tree, 'PSMID')
+
+    def title(self):
+
+        """
+        Returns: str
+        """
+
+        return get_text(self.tree, 'titleGroup fullTitle')
+
+    def author_first(self):
+
+        """
+        Returns: str
+        """
+
+        return get_text(self.tree, 'author first')
+
+    def author_last(self):
+
+        """
+        Returns: str
+        """
+
+        return get_text(self.tree, 'author last')
 
     def year(self):
 

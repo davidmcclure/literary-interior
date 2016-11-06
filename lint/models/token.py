@@ -1,192 +1,81 @@
 
 
-import numpy as np
-import pickle
+import json
 
-from collections import OrderedDict
 from scandir import scandir
 
-from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
-from sqlalchemy.sql import text, func
+from sqlalchemy import (
+    Column,
+    Integer,
+    Float,
+    String,
+    PrimaryKeyConstraint,
+    ForeignKey,
+)
 
-from lint.singletons import config, session
+from sqlalchemy.orm import relationship
+
+from lint.singletons import session
 from lint.models import Base
-from lint.utils import flatten_dict, mem_pct, grouper
-from lint.count_cache import CountCache
 
 
 class Token(Base):
-
 
     __tablename__ = 'token'
 
     __table_args__ = (
         PrimaryKeyConstraint(
-            'corpus',
-            'year',
+            'text_id',
             'token',
-            'pos',
             'offset',
         ),
     )
 
-    corpus = Column(String, nullable=False)
+    text_id = Column(Integer, ForeignKey('text.id'))
 
-    year = Column(Integer, nullable=False)
+    text = relationship('Text')
 
     token = Column(String, nullable=False)
 
     pos = Column(String, nullable=False)
 
+    char1 = Column(Integer, nullable=False)
+
+    char2 = Column(Integer, nullable=False)
+
     offset = Column(Integer, nullable=False)
 
-    count = Column(Integer, nullable=False)
-
+    ratio = Column(Integer, nullable=False)
 
     @classmethod
-    def gather_results(cls, corpus, result_dir):
+    def gather(cls, result_dir: str):
 
         """
-        Merge and insert pickled count caches.
-
-        Args:
-            corpus (str)
-            result_dir (str)
+        Bulk-insert tokens.
         """
 
-        # Merge result pickles.
-        results = CountCache.from_results(result_dir)
+        # Gather JSON paths.
+        paths = [
+            d.path
+            for d in scandir(result_dir)
+            if d.is_file()
+        ]
 
-        # Clear and insert the counts.
-        cls.delete_corpus(corpus)
-        cls.insert_corpus(corpus, results)
+        # Walk paths.
+        for i, path in enumerate(paths):
+            with open(path) as fh:
+
+                mappings = json.load(fh)
+
+                session.bulk_insert_mappings(cls, mappings)
+                print(i)
 
         session.commit()
 
-    @classmethod
-    def insert_corpus(cls, corpus, offsets):
+    def snippet(self, padding: int=500):
 
         """
-        Flush an offset cache to disk.
-
-        Args:
-            corpus (str)
-            offsets (CountCache)
+        Get a snippet from the source text.
         """
 
-        for group in grouper(offsets.flatten(), 1000):
-
-            mappings = [
-                dict(
-                    corpus=corpus,
-                    year=year,
-                    token=token,
-                    pos=pos,
-                    offset=offset,
-                    count=count,
-                )
-                for (year, token, pos, offset), count in group
-            ]
-
-            session.bulk_insert_mappings(cls, mappings)
-
-    @classmethod
-    def delete_corpus(cls, corpus):
-
-        """
-        Clear all counts for a corpus.
-
-        Args:
-            corpus (str)
-        """
-
-        cls.query.filter_by(corpus=corpus).delete()
-
-    @classmethod
-    def get(cls, corpus, year, token, pos, offset):
-
-        """
-        Get a token count by the composite primary key.
-
-        Args:
-            corpus (str)
-            year (int)
-            token (str)
-            pos (str)
-            offset (int)
-
-        Returns: int
-        """
-
-        res = (
-            session
-            .query(cls.count)
-            .filter_by(
-                corpus=corpus,
-                year=year,
-                token=token,
-                pos=pos,
-                offset=offset,
-            )
-        )
-
-        return res.scalar() or 0
-
-    @classmethod
-    def token_counts(cls, min_count=0):
-
-        """
-        Get total (un-bucketed) token counts.
-
-        Args:
-            min_count (int)
-
-        Returns: OrderedDict
-        """
-
-        query = (
-            session
-            .query(cls.token, func.sum(cls.count))
-            .group_by(cls.token)
-            .having(func.sum(cls.count) > min_count)
-            .order_by(func.sum(cls.count).desc())
-        )
-
-        return OrderedDict(query.all())
-
-    @classmethod
-    def token_series(cls, token, corpus=None, year1=None, year2=None):
-
-        """
-        Get an offset -> count series for a word.
-
-        Args:
-            token (str)
-            corpus (str)
-
-        Returns: OrderedDict
-        """
-
-        query = (
-            session
-            .query(cls.offset, func.sum(cls.count))
-            .filter(cls.token==token)
-            .group_by(cls.offset)
-            .order_by(cls.offset)
-        )
-
-        if corpus:
-            query = query.filter(cls.corpus==corpus)
-
-        if year1:
-            query = query.filter(cls.year >= year1)
-
-        if year2:
-            query = query.filter(cls.year <= year2)
-
-        series = np.zeros(100)
-
-        for offset, count in query:
-            series[offset] = count
-
-        return series
+        return self.text.snippet(self.char1, self.char2, padding)

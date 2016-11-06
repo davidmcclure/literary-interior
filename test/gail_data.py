@@ -8,7 +8,7 @@ from test.temp_dir import TempDir
 
 class GailData(TempDir):
 
-    def add_text(self, text):
+    def add_novel(self, text):
 
         """
         Add a text to the corpus.
@@ -20,8 +20,6 @@ class GailData(TempDir):
         fname = '{0}.xml'.format(text.identifier())
 
         path = os.path.join(self.path, fname)
-
-        print(path)
 
         with open(path, 'w') as fh:
             print(text.tree, file=fh)

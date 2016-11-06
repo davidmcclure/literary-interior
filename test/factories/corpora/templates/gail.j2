@@ -3,7 +3,7 @@
 <book contentType="monograph" ID="{{ id }}" FAID="AMFCF0002" COLID="C00000">
 	<bookInfo>
 		<ocr>56.66</ocr>
-    <PSMID>{{ id }}</PSMID>
+    <PSMID>{{ identifier }}</PSMID>
 		<assetID>WUQLKP724100933</assetID>
 		<assetIDeTOC>LDWXMF531190421</assetIDeTOC>
 		<dviCollectionID>AMFCC0001</dviCollectionID>
@@ -28,9 +28,9 @@
 		<authorGroup role="author">
 			<author>
 				<composed>McClure, David W.</composed>
-				<first>David</first>
+        <first>{{ author_first }}</first>
 				<middle>W.</middle>
-				<last>McClure</last>
+        <last>{{ author_last }}</last>
 				<birthDate>1810</birthDate>
 				<deathDate>1867</deathDate>
 			</author>

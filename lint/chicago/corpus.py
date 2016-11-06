@@ -3,21 +3,8 @@
 import csv
 import os
 
-from lint.singletons import config
-
 
 class Corpus:
-
-    @classmethod
-    def from_env(cls):
-
-        """
-        Wrap the ENV-defined directory.
-
-        Returns: cls
-        """
-
-        return cls(config['chicago'])
 
     def __init__(self, path):
 

@@ -3,6 +3,7 @@
 import numpy as np
 import json
 
+from lint.models import Text
 from lint.count_cache import CountCache
 from lint.utils import mem_pct
 
@@ -16,7 +17,7 @@ class Scatter:
         raise NotImplementedError
 
     def flush(self):
-        raise NotImplementedError
+        pass
 
     def __call__(self):
 
@@ -38,7 +39,7 @@ class Scatter:
         if rank == 0:
 
             segments = [
-                json.dumps(list(s))
+                json.dumps(s.tolist())
                 for s in np.array_split(list(self.args()), size)
             ]
 

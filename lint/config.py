@@ -8,9 +8,6 @@ from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.engine.url import URL
 
-from wordfreq import top_n_list
-from contextlib import contextmanager
-
 
 class Config(dict):
 
@@ -79,7 +76,6 @@ class Config(dict):
         engine = create_engine(url)
 
         # Fix transaction bugs in pysqlite.
-        # http://docs.sqlalchemy.org/en/rel_1_0/dialects/sqlite.html#pysqlite-serializable
 
         @event.listens_for(engine, 'connect')
         def connect(conn, record):
@@ -110,18 +106,6 @@ class Config(dict):
         """
 
         return scoped_session(self.build_sqla_sessionmaker())
-
-    def build_tokens(self):
-
-        """
-        Get a set of whitelisted tokens.
-
-        Returns: set
-        """
-
-        tokens = top_n_list('en', self['token_depth'], ascii_only=True)
-
-        return set(tokens)
 
     def write_tmp(self):
 

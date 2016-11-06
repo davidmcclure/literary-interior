@@ -9,19 +9,10 @@ gail: null
 chicago: null
 
 results:
-
-  tokens:
-    htrc: null
-    chicago: null
-    gail: null
-
-  chars:
-    htrc: null
-    chicago: null
-    gail: null
+  texts: null
+  buckets: null
+  tokens: null
 
 database: null
 
-offset_resolution: 100
-
-token_depth: 10000
+bins: 100
