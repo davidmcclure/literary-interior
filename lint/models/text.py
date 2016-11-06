@@ -120,7 +120,7 @@ class Text(Base):
 
         ]
 
-    def pos_tags(self):
+    def tagged_tokens(self):
 
         """
         POS-tag the token stream.
@@ -160,7 +160,7 @@ class Text(Base):
         Returns: Counter
         """
 
-        tags = self.pos_tags()
+        tags = self.tagged_tokens()
 
         counts = Counter()
 

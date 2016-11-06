@@ -47,18 +47,18 @@ class ExtTokens(Scatter):
 
         text = Text.query.get(id)
 
-        tags = text.pos_tags()
+        tokens = text.tagged_tokens()
 
         # Assemble token list.
 
-        tokens = [
+        rows = [
 
             dict(
                 text_id=id,
-                **tag._asdict(),
+                **token._asdict(),
             )
 
-            for tag in tags
+            for token in tokens
 
         ]
 
@@ -67,4 +67,4 @@ class ExtTokens(Scatter):
         path = os.path.join(self.result_dir, str(uuid.uuid4()))
 
         with open(path, 'w') as fh:
-            json.dump(tokens, fh)
+            json.dump(rows, fh)
