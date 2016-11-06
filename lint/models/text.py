@@ -1,6 +1,6 @@
 
 
-import json
+import ujson
 
 from collections import namedtuple, Counter
 from scandir import scandir
@@ -74,7 +74,7 @@ class Text(Base):
         for i, path in enumerate(paths):
             with open(path) as fh:
 
-                data = json.load(fh)
+                data = ujson.load(fh)
 
                 session.add(cls(**data))
                 print(i)

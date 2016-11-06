@@ -28,3 +28,4 @@ statsmodels
 patsy
 boltons
 attrs
+ujson

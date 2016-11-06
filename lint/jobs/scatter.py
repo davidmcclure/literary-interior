@@ -1,7 +1,7 @@
 
 
 import numpy as np
-import json
+import ujson
 
 from lint.models import Text
 from lint.count_cache import CountCache
@@ -39,13 +39,13 @@ class Scatter:
         if rank == 0:
 
             segments = [
-                json.dumps(s.tolist())
+                ujson.dumps(s.tolist())
                 for s in np.array_split(list(self.args()), size)
             ]
 
         segment = comm.scatter(segments, root=0)
 
-        args = json.loads(segment)
+        args = ujson.loads(segment)
 
         print(rank, len(args))
 

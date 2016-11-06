@@ -1,6 +1,6 @@
 
 
-import json
+import ujson
 import bz2
 import math
 
@@ -24,7 +24,7 @@ class Volume:
         """
 
         with bz2.open(path, 'rt') as fh:
-            return cls(json.loads(fh.read()))
+            return cls(ujson.loads(fh.read()))
 
     def __init__(self, data):
 

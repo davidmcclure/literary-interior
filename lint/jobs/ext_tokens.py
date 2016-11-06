@@ -1,7 +1,7 @@
 
 
 import os
-import json
+import ujson
 import uuid
 
 from lint.singletons import config
@@ -67,4 +67,4 @@ class ExtTokens(Scatter):
         path = os.path.join(self.result_dir, str(uuid.uuid4()))
 
         with open(path, 'w') as fh:
-            json.dump(rows, fh)
+            ujson.dump(rows, fh)

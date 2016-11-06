@@ -1,6 +1,6 @@
 
 
-import json
+import ujson
 
 from scandir import scandir
 
@@ -45,7 +45,7 @@ class Token(Base):
 
     offset = Column(Integer, nullable=False)
 
-    ratio = Column(Integer, nullable=False)
+    ratio = Column(Float, nullable=False)
 
     @classmethod
     def gather(cls, result_dir: str):
@@ -65,7 +65,7 @@ class Token(Base):
         for i, path in enumerate(paths):
             with open(path) as fh:
 
-                mappings = json.load(fh)
+                mappings = ujson.load(fh)
 
                 session.bulk_insert_mappings(cls, mappings)
                 print(i)
@@ -78,4 +78,8 @@ class Token(Base):
         Get a snippet from the source text.
         """
 
-        return self.text.snippet(self.char1, self.char2, padding)
+        return self.text.snippet(
+            self.char1,
+            self.char2,
+            padding,
+        )

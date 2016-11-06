@@ -2,7 +2,7 @@
 
 import os
 import uuid
-import json
+import ujson
 
 from lint.singletons import config
 from lint.chicago.novel import Novel
@@ -70,4 +70,4 @@ class ExtChicagoTexts(Scatter):
         path = os.path.join(self.result_dir, str(uuid.uuid4()))
 
         with open(path, 'w') as fh:
-            json.dump(text, fh)
+            ujson.dump(text, fh)

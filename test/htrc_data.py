@@ -1,7 +1,7 @@
 
 
 import os
-import json
+import ujson
 
 from bz2 import compress
 
@@ -30,10 +30,10 @@ class HTRCData(TempDir):
 
         path = os.path.join(
             self.features_path,
-            '{0}.json.bz2'.format(vol.id),
+            '{0}.ujson.bz2'.format(vol.id),
         )
 
-        data = compress(json.dumps(vol.data).encode('utf8'))
+        data = compress(ujson.dumps(vol.data).encode('utf8'))
 
         # Write the volume JSON.
         with open_makedirs(path, 'wb') as fh:
