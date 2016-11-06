@@ -5,32 +5,21 @@ from lint.models import Text
 
 def test_snippet():
 
-    text = Text(text='zero one two three four five six')
+    text = Text(text='0123456')
 
-    prefix, token, suffix = text.snippet(3, padding=2)
+    prefix, token, suffix = text.snippet(2, 5, padding=2)
 
-    assert prefix   == 'one two '
-    assert token    == 'three'
-    assert suffix   == ' four five'
-
-
-def test_left_overflow():
-
-    text = Text(text='zero one two three four five six')
-
-    prefix, token, suffix = text.snippet(2, padding=3)
-
-    assert prefix   == 'zero one '
-    assert token    == 'two'
-    assert suffix   == ' three four five'
+    assert prefix   == '01'
+    assert token    == '234'
+    assert suffix   == '56'
 
 
-def test_right_overflow():
+def test_overflow():
 
-    text = Text(text='zero one two three four five six')
+    text = Text(text='0123456')
 
-    prefix, token, suffix = text.snippet(4, padding=3)
+    prefix, token, suffix = text.snippet(2, 5, padding=20)
 
-    assert prefix   == 'one two three '
-    assert token    == 'four'
-    assert suffix   == ' five six'
+    assert prefix   == '01'
+    assert token    == '234'
+    assert suffix   == '56'

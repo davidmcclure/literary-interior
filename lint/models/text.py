@@ -111,6 +111,8 @@ class Text(Base):
                 char1=c1,
                 char2=c2,
 
+                # TODO: Move to job?
+
                 offset=i,
                 ratio=i/len(spans)
 
@@ -173,7 +175,7 @@ class Text(Base):
 
         return counts
 
-    def snippet(self, offset: int, padding: int=10):
+    def snippet(self, char1: int, char2: int, padding: int=500):
 
         """
         Hydrate a snippet.
@@ -181,22 +183,11 @@ class Text(Base):
         Returns: (prefix, token, suffix)
         """
 
-        tokens = self.tokens()
-
-        # prefix start
-        char1 = tokens[max(offset-padding, 0)].char1
-
-        # token start
-        char2 = tokens[offset].char1
-
-        # suffix start
-        char3 = tokens[offset].char2
-
-        # suffix end
-        char4 = tokens[min(offset+padding, len(tokens)-1)].char2
+        char0 = max(char1-padding, 0)
+        char3 = min(char2+padding, len(self.text))
 
         return (
+            self.text[char0:char1],
             self.text[char1:char2],
             self.text[char2:char3],
-            self.text[char3:char4],
         )
