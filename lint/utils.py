@@ -8,8 +8,7 @@ import scandir
 import math
 
 from contextlib import contextmanager
-
-from textblob import TextBlob
+from itertools import islice, chain
 
 
 def grouper(iterable, size):

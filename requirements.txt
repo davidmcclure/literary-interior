@@ -26,6 +26,5 @@ joblib
 pandas
 statsmodels
 patsy
-boltons
 attrs
 ujson

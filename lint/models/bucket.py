@@ -4,7 +4,6 @@ import numpy as np
 
 from collections import OrderedDict
 from scandir import scandir
-from boltons.iterutils import chunked_iter
 
 from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
 from sqlalchemy.sql import text, func
@@ -12,7 +11,7 @@ from sqlalchemy.sql import text, func
 from lint.singletons import config, session
 from lint.models import Base
 from lint.count_cache import CountCache
-from lint.utils import mem_pct
+from lint.utils import mem_pct, grouper
 
 
 class Bucket(Base):
@@ -54,7 +53,7 @@ class Bucket(Base):
         # Merge result pickles.
         results = CountCache.from_results(result_dir)
 
-        for chunk in chunked_iter(results.flatten(), 1000):
+        for group in grouper(results.flatten(), 1000):
 
             mappings = [
                 dict(
@@ -71,7 +70,7 @@ class Bucket(Base):
                     token,
                     pos,
                     offset,
-                ), count in chunk
+                ), count in group
             ]
 
             session.bulk_insert_mappings(cls, mappings)
