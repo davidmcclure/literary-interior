@@ -5,6 +5,7 @@ import ujson
 import uuid
 
 from lint.singletons import config
+from lint.utils import open_makedirs
 from lint.models import Text
 
 from .scatter import Scatter
@@ -71,5 +72,5 @@ class ExtTokens(Scatter):
 
         path = os.path.join(self.result_dir, str(uuid.uuid4()))
 
-        with open(path, 'w') as fh:
+        with open_makedirs(path, 'w') as fh:
             ujson.dump(rows, fh)

@@ -1,9 +1,9 @@
 
 
 import os
-import uuid
 import ujson
 
+from lint.utils import open_makedirs
 from lint.singletons import config
 from lint.chicago.novel import Novel
 from lint.chicago.corpus import Corpus
@@ -67,7 +67,11 @@ class ExtChicagoTexts(Scatter):
             text=novel.plain_text(),
         )
 
-        path = os.path.join(self.result_dir, str(uuid.uuid4()))
+        path = os.path.join(
+            self.result_dir,
+            'chicago',
+            text['identifier'],
+        )
 
-        with open(path, 'w') as fh:
+        with open_makedirs(path, 'w') as fh:
             ujson.dump(text, fh)
