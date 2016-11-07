@@ -7,9 +7,7 @@ import re
 import scandir
 import math
 
-from collections import Counter
 from contextlib import contextmanager
-from itertools import islice, chain
 
 
 def flatten_dict(d, root=True):
