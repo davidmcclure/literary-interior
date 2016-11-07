@@ -1,6 +1,7 @@
 
 
 import ujson
+import attr
 
 from collections import namedtuple, Counter
 from scandir import scandir
@@ -14,19 +15,18 @@ from lint.models import Base
 from lint.utils import make_offset
 
 
-Token = namedtuple('Token', [
-    'token',
-    'char1',
-    'char2',
-    'offset',
-    'ratio',
-])
+@attr.s
+class Token:
+    token = attr.ib()
+    char1 = attr.ib()
+    char2 = attr.ib()
+    offset = attr.ib()
+    ratio = attr.ib()
 
 
-TaggedToken = namedtuple('Tag',
-    Token._fields +
-    ('pos',)
-)
+@attr.s
+class TaggedToken(Token):
+    pos = attr.ib()
 
 
 class Text(Base):
