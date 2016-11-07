@@ -1,7 +1,6 @@
 
 
 import ujson
-import attr
 
 from collections import namedtuple, Counter
 from scandir import scandir
@@ -15,18 +14,12 @@ from lint.models import Base
 from lint.utils import make_offset
 
 
-@attr.s
-class Token:
-    token = attr.ib()
-    char1 = attr.ib()
-    char2 = attr.ib()
-    offset = attr.ib()
-    ratio = attr.ib()
-
-
-@attr.s
-class TaggedToken(Token):
-    pos = attr.ib()
+Token = namedtuple('Token', [
+    'token',
+    'char1',
+    'char2',
+    'pos',
+])
 
 
 class Text(Base):
@@ -100,57 +93,25 @@ class Text(Base):
 
         tokenizer = WordPunctTokenizer()
 
+        # Get token character spans.
         spans = list(tokenizer.span_tokenize(self.text))
+
+        # Materialize the token stream.
+        tokens = [self.text[c1:c2] for c1, c2 in spans]
+
+        tags = pos_tag(tokens)
 
         return [
 
             Token(
-
-                token=self.text[c1:c2],
-
+                token=token.lower(),
                 char1=c1,
                 char2=c2,
-
-                # TODO: Move to job?
-
-                offset=i,
-                ratio=i/len(spans)
-
-            )
-
-            for i, (c1, c2) in enumerate(spans)
-
-        ]
-
-    def tagged_tokens(self):
-
-        """
-        POS-tag the token stream.
-        """
-
-        tokens = self.tokens()
-
-        tags = pos_tag([t.token for t in tokens])
-
-        return [
-
-            # TODO: Mass-assign the token?
-
-            TaggedToken(
-
-                token=token.token.lower(),
-
-                char1=token.char1,
-                char2=token.char2,
-
-                offset=token.offset,
-                ratio=token.ratio,
-
                 pos=pos,
-
             )
 
-            for token, (_, pos) in zip(tokens, tags)
+            for (c1, c2), token, (_, pos) in
+            zip(spans, tokens, tags)
 
         ]
 
@@ -162,18 +123,17 @@ class Text(Base):
         Returns: Counter
         """
 
-        tags = self.tagged_tokens()
+        tokens = self.tokens()
 
         counts = Counter()
 
-        for i, tag in enumerate(tags):
-
-            # TODO: Use ratios on tokens?
+        for i, token in enumerate(tokens):
 
             # Make 0-N offset.
-            offset = make_offset(i, len(tags), bins)
+            offset = make_offset(i, len(tokens), bins)
 
-            counts[tag.token, tag.pos, offset] += 1
+            # Increment the path.
+            counts[token.token, token.pos, offset] += 1
 
         return counts
 

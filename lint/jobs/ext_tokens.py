@@ -3,7 +3,6 @@
 import os
 import ujson
 import uuid
-import attr
 
 from lint.singletons import config
 from lint.models import Text
@@ -48,18 +47,23 @@ class ExtTokens(Scatter):
 
         text = Text.query.get(id)
 
-        tokens = text.tagged_tokens()
+        tokens = text.tokens()
 
         # Assemble token list.
 
         rows = [
 
             dict(
+
                 text_id=id,
-                **attr.asdict(token),
+                **token._asdict(),
+
+                offset=i,
+                ratio=i/len(tokens),
+
             )
 
-            for token in tokens
+            for i, token in enumerate(tokens)
 
         ]
 
