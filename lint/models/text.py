@@ -168,6 +168,8 @@ class Text(Base):
 
         for i, tag in enumerate(tags):
 
+            # TODO: Use ratios on tokens?
+
             # Make 0-N offset.
             offset = make_offset(i, len(tags), bins)
 
