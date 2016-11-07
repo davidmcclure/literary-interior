@@ -6,7 +6,7 @@ import uuid
 
 from scandir import scandir
 
-from lint.utils import flatten_dict, mem_pct
+from lint.utils import mem_pct, open_makedirs
 from lint.tree_counter import TreeCounter
 
 
@@ -69,7 +69,7 @@ class CountCache(TreeCounter):
 
         path = os.path.join(data_dir, str(uuid.uuid4()))
 
-        with open(path, 'wb') as fh:
+        with open_makedirs(path, 'wb') as fh:
             pickle.dump(self, fh)
 
         return path

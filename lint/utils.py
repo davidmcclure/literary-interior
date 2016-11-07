@@ -199,15 +199,3 @@ def clean_token(token):
     """
 
     return re.sub('^[^a-z]*|[^a-z]*$', '', token.lower())
-
-
-def pos_tag(text: str):
-
-    """
-    ASCII-encode and POS-tag a text.
-    """
-
-    # UTF8 -> ASCII.
-    blob = TextBlob(text.encode('ascii', 'ignore').decode())
-
-    return blob.tags
