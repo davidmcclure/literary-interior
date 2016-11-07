@@ -9,6 +9,28 @@ import math
 
 from contextlib import contextmanager
 
+from textblob import TextBlob
+
+
+def grouper(iterable, size):
+
+    """
+    Yield "groups" from an iterable.
+
+    Args:
+        iterable (iter): The iterable.
+        size (int): The number of elements in each group.
+
+    Yields:
+        The next group.
+    """
+
+    source = iter(iterable)
+
+    while True:
+        group = islice(source, size)
+        yield chain([next(group)], group)
+
 
 def flatten_dict(d, root=True):
 
