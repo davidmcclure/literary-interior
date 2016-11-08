@@ -2,8 +2,6 @@
 
 import ujson
 
-from scandir import scandir
-
 from sqlalchemy import (
     Column,
     Integer,
