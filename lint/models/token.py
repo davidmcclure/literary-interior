@@ -15,6 +15,7 @@ from sqlalchemy import (
 
 from sqlalchemy.orm import relationship
 
+from lint.utils import scan_paths
 from lint.singletons import session
 from lint.models import Base
 
@@ -54,23 +55,17 @@ class Token(Base):
         Bulk-insert tokens.
         """
 
-        # Gather JSON paths.
-        paths = [
-            d.path
-            for d in scandir(result_dir)
-            if d.is_file()
-        ]
-
         # Walk paths.
-        for i, path in enumerate(paths):
+        for i, path in enumerate(scan_paths(result_dir)):
             with open(path) as fh:
 
                 mappings = ujson.load(fh)
 
+                # Bulk-insert rows.
                 session.bulk_insert_mappings(cls, mappings)
-                print(i)
+                session.commit()
 
-        session.commit()
+                print(i)
 
     def snippet(self, padding: int=500):
 
