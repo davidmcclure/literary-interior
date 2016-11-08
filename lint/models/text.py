@@ -65,9 +65,9 @@ class Text(Base):
 
                 # Insert row.
                 session.add(cls(**data))
-                print(i)
+                session.commit()
 
-        session.commit()
+                print(i)
 
     @classmethod
     def ids(cls):
