@@ -57,10 +57,11 @@ class ExtTokens(Scatter):
             dict(
 
                 text_id=id,
-                **token._asdict(),
 
-                offset=i,
                 ratio=i/len(tokens),
+                offset=i,
+
+                **token._asdict(),
 
             )
 
