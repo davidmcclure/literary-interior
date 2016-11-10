@@ -61,7 +61,7 @@ class ExtTokens(Scatter):
                 ratio=i/len(tokens),
                 offset=i,
 
-                **token._asdict(),
+                **token._asdict()
 
             )
 
