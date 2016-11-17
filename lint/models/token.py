@@ -71,8 +71,4 @@ class Token(Base):
         Get a snippet from the source text.
         """
 
-        return self.text.snippet(
-            self.char1,
-            self.char2,
-            padding,
-        )
+        return self.text.snippet(self.char1, self.char2, padding)
