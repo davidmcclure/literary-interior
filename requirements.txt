@@ -28,4 +28,3 @@ statsmodels
 patsy
 attrs
 ujson
-blessings
