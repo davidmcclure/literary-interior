@@ -1,8 +1,8 @@
 
 # The migration of "had"
-## Structural changes in the novel from 1840 to 2000
+**Structural changes in the novel from 1840 to 2000**
 
-## 1
+### 1
 
 At the beginning of "A Introduction to the Structural Analysis of Narrative," Barthes' contribution to the 1966 special issue of *Communications* that would later seem like a crossroads in the history of narrative theory in the 20th century, Barthes begins by warning of the difficulties of taking an "inductive" approach to studying narrative:
 
