@@ -1,6 +1,6 @@
 
 # The migration of "had"
-**Structural changes in the novel from 1840 to 2000**
+### Structural changes in the novel from 1840 to 2000
 
 ### 1
 
