@@ -180,13 +180,13 @@ A huge spike at the beginning that falls off very quickly in the first 10% of th
 
 But, in what sense? What does "the" mark, at a literary register? Again, any one of these questions could be taken up as a project in its own right, but, it's easy to speculate -- perhaps one way to think about beginnings and endings is that they both have to concern themselves with specific, concrete things? This fits with the idea that the beginning has to essentially hammer together the "stage" of the narrative -- the room, the house, the table, the chair, the street, the train, the material platform on which the plot plays out. And, the end? There's an intuitive sense in which the end seems to return to this "surface" of the fictive world, though it's a bit harder to put a finger on what the gist of this is. One way to think about it, I guess, is just to say that things happen at the end -- pistols are fired, people are killed, lovers are reunited, the bride walks down the aisle, etc. The action of the narrative crescendos, the pieces of the plot are moved into their final positions -- Robert Jordan blows the bridge; Ralph dies and Isabel goes back to England, only then to return to Osmond in Italy; Lucy and George marry and go back to Florence. We can imagine, if a novel is turned into a screenplay, that the beginnings and ends have the largest amount of "description" in the text of the script, the prose narration that the screenwriter threads in between the lines, the rough sketch of what would appear on the screen but not in the dialogue -- the layout of the set, the physical movements of the characters, the broad strokes of the photography. Beginnings and ends are preoccupied with narrative *stagecraft*, which pulls the narrative out into a register of description, physicality, specificity, concreteness, *particularity* -- the domain of "the."
 
-Indeed, though it would take lots of analytical and interpretive work to really tease out the mechanics of this in any detail, we can start to triangulate onto this sort of account by looking at looking at the combined trends of much larger cohorts of words in the dictionary. For example, to hook onto the extent to which the text is being *descriptive* -- we can merge together all words that get tagged as adjectives by a part-of-speech tagger, all words that are modifying nouns. As with "the," we see a large spike at the beginning, and a smaller (though still statistically enormous) rise at the end:
-
-![](images/adjectives.png)
-
-And also for nouns:
+Indeed, though it would take lots of analytical and interpretive work to really tease out the mechanics of this in any detail, we can start to triangulate onto this sort of account by looking at looking at the combined trends of much larger cohorts of words in the dictionary. For example, to hook onto the extent to which the narrative is concerned with objects or particulars -- we can merge together all words that get tagged as nouns by a part-of-speech tagger. As with "the," we see a large spike at the beginning, and a smaller (though still statistically enormous) rise at the end:
 
 ![](images/nouns.png)
+
+And, something similar for adjectives, which we can assume provide some kind of simple proxy for "descriptiveness":
+
+![](images/adjectives.png)
 
 So, beginnings and ends are filled with objects and descriptions, particulars, marked by "the" -- but "a" is only needed at the beginning, when the fictive matter of the text is first being narrated into existence. But, this really just scratches the surface -- there are many more questions than answers here. If narratives begin and end on the physical "surface" of things, the description of objects -- then what sits "below" this surface, outside the beginning and the end, in the middle? To pick up a variation of the question posed by Levine and Ortiz-Robles in *Narrative Middles* -- if we can say that beginnings and ends are concrete, physical, or external, then how do we interpret the *absence* of this signal across the middle of the text? A narrative middle that's non-concrete, non-physical, non-material, somehow internal and abstract? What is this, exactly? Instead of just saying what this isn't, what *is* this middle, in a positive sense? What is the narratological negation of the physical description of the beginning, or the the activity and climax of the end? Maybe -- some sort of psychological interiority? Or, to pick up with the screenwriting analogy -- maybe dialogue, interactions between characters? Indeed, the quotation mark -- a good if not completely foolproof proxy for dialogism, the degree to which characters are speaking to each other -- is an almost perfect inverse of "the" -- very low at the beginning, high through the middle of the text, and then falling off at the end, though not as strongly as at the beginning:
 
@@ -202,11 +202,11 @@ And, perhaps the flip side of "said" -- "think":
 
 This looks about right, really, though it's interesting to see it shake out of the data so organically. In the most schematic sense, then, can we say that -- novels begin with description, pass through a middle filled with speaking and thinking, and then circle back to description at the end? The center of the novel is human discourse -- inter-personal (speech) and intra-personal (thought) -- bookended by physical description and action?
 
-Other things are more mysterious. For example, it appears that gender, in some sense, has distributional patterns across narrative time. What should be made, for instance, of the fact that "her" is basically flat across the novel, but then spikes suddenly at the end:
+Other things are more mysterious. For example, it appears that gender has distributional patterns across narrative time. What should be made, for instance, of the fact that "her" is basically flat across the novel, but then spikes suddenly at the end:
 
 ![](images/her.png)
 
-Whereas "him" rises linearly across the text, and then craters in the last 5%?
+Whereas "him" rises in a remarkably linear way across the text, and then craters in the last 5%?
 
 ![](images/him.png)
 
@@ -214,7 +214,7 @@ Or that "and" and "or" should behave so differently at the end?
 
 ![](images/and-or.png)
 
-Or any of the other high-frequency stopwords that show irregular patterns -- I, you, of, me, to, will, we, what, do, etc? Each of these feels like a loose thread that might be tugged at, one little strand in a larger matrix of energies that clearly act on narratives in very powerful and fundamental ways, but in ways that fly below the conscious experience of writing or reading. But, the full shape of this, and how it all fits together -- are questions for another time.
+Or for that matter, what's happening with any of the other high-frequency stopwords that show irregular patterns -- "I," "you," "of," "me," "to," "will," "we," "what," "do," etc? Each of these feels like a loose thread that might be tugged at, one little strand in a larger matrix of energies that clearly act on narratives in very powerful and fundamental ways, but in ways that fly below the conscious experience of writing or reading. But, the full shape of this, and how it all fits together -- are questions for another time.
 
 ## 3
 
