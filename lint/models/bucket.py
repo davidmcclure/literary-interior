@@ -130,7 +130,7 @@ class Bucket(Base):
         return OrderedDict(query.all())
 
     @classmethod
-    def token_series(cls, token, corpus=None, year1=None, year2=None, pos=None):
+    def token_series(cls, token, corpus=None, year1=None, year2=None):
 
         """
         Get an offset -> count series for a word.
@@ -158,36 +158,6 @@ class Bucket(Base):
 
         if year2:
             query = query.filter(cls.year <= year2)
-
-        if pos:
-            query = query.filter(cls.pos==pos)
-
-        series = np.zeros(100)
-
-        for offset, count in query:
-            series[offset] = count
-
-        return series
-
-    @classmethod
-    def pos_series(cls, *pos):
-
-        """
-        Get an offset -> count series for a set of parts of speech.
-
-        Args:
-            *pos (str)
-
-        Returns: OrderedDict
-        """
-
-        query = (
-            session
-            .query(cls.offset, func.sum(cls.count))
-            .filter(cls.pos.in_(pos))
-            .group_by(cls.offset)
-            .order_by(cls.offset)
-        )
 
         series = np.zeros(100)
 
