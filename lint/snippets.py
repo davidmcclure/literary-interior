@@ -72,3 +72,39 @@ def query_snippets(
 
     for token in query.limit(limit):
         print_snippet(token.text, *token.snippet())
+
+
+def snippets_csv(
+    token,
+    year1=None,
+    year2=None,
+    ratio1=None,
+    ratio2=None,
+    limit=100,
+):
+
+    """
+    Print snippets to a CSV.
+    """
+
+    query = (
+        session
+        .query(Token)
+        .join('text')
+        .filter(Token.token==token)
+    )
+
+    if year1:
+        query = query.filter(Text.year >= year1)
+
+    if year2:
+        query = query.filter(Text.year <= year2)
+
+    if ratio1:
+        query = query.filter(Token.ratio >= ratio1)
+
+    if ratio2:
+        query = query.filter(Token.ratio <= ratio2)
+
+    for token in query.limit(limit):
+        print('{} *{}* {}'.format(*token.snippet(50)))
