@@ -14,11 +14,8 @@ pytestmark = pytest.mark.usefixtures('mpi')
 
 
 def test_ext_tokens():
-
+    """ExtTokens should index token rows.
     """
-    ExtTokens should index token rows.
-    """
-
     t1 = TextFactory(text='t01 t02 t03 t04')
     t2 = TextFactory(text='t05 t06 t07 t08')
     t3 = TextFactory(text='t09 t10 t11 t12')

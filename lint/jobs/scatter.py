@@ -20,11 +20,8 @@ class Scatter:
         pass
 
     def __call__(self):
-
+        """Dump year -> token -> offset -> count.
         """
-        Dump year -> token -> offset -> count.
-        """
-
         from mpi4py import MPI
 
         comm = MPI.COMM_WORLD

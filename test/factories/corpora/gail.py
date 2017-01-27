@@ -27,11 +27,8 @@ class GailNovelFactory(factory.Factory):
 
     @classmethod
     def _create(cls, model_class, *args, **kwargs):
-
+        """Returns: Text
         """
-        Returns: Text
-        """
-
         # Read XML template.
         raw = pkgutil.get_data(
             'test.factories.corpora',

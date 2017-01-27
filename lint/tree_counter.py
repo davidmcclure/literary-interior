@@ -10,33 +10,24 @@ from lint.utils import flatten_dict
 class TreeCounter:
 
     def __init__(self, tree=None):
-
+        """Initialize the count tree.
         """
-        Initialize the count tree.
-        """
-
         self.tree = tree or {}
 
     def __repr__(self):
-
-        """
-        Print the tree.
+        """Print the tree.
 
         Returns: str
         """
-
         return pprint.pformat(self.tree, indent=2)
 
     def __setitem__(self, path, val):
-
-        """
-        Set the count for a path.
+        """Set the count for a path.
 
         Args:
             path (tuple)
             val (int)
         """
-
         if not isinstance(path, tuple):
             path = (path,)
 
@@ -57,14 +48,11 @@ class TreeCounter:
         reduce(vivify, enumerate(path), self.tree)
 
     def __getitem__(self, path):
-
-        """
-        Get the count for a path.
+        """Get the count for a path.
 
         Args:
             path (tuple)
         """
-
         if not isinstance(path, tuple):
             path = (path,)
 
@@ -85,28 +73,22 @@ class TreeCounter:
         return reduce(vivify, enumerate(path), self.tree)
 
     def __iadd__(self, other):
-
-        """
-        Add another counter to this instance.
+        """Add another counter to this instance.
 
         Args:
             other (TreeCounter)
         """
-
         for path, count in other.flatten():
             self[path] += count
 
         return self
 
     def __eq__(self, other):
-
-        """
-        Compare other counter instances and raw dicts.
+        """Compare other counter instances and raw dicts.
 
         Args:
             other (TreeCounter|dict)
         """
-
         if isinstance(other, self.__class__):
             return self.tree == other.tree
 
@@ -114,11 +96,8 @@ class TreeCounter:
             return self.tree == other
 
     def flatten(self):
-
-        """
-        Generate flattened tuples of for all branches.
+        """Generate flattened tuples of for all branches.
 
         Yields: (path1, path2, ..., count)
         """
-
         yield from flatten_dict(self.tree)

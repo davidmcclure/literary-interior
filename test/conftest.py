@@ -14,11 +14,8 @@ from test.gail_data import GailData
 
 @pytest.fixture(scope='session', autouse=True)
 def init_testing_db():
-
+    """Drop and recreate the tables.
     """
-    Drop and recreate the tables.
-    """
-
     engine = _config.build_sqla_engine()
 
     Base.metadata.drop_all(engine)
@@ -27,11 +24,8 @@ def init_testing_db():
 
 @pytest.yield_fixture
 def db():
-
+    """Reset the testing database.
     """
-    Reset the testing database.
-    """
-
     session.begin_nested()
 
     yield
@@ -41,11 +35,8 @@ def db():
 
 @pytest.yield_fixture
 def config():
-
+    """Clear changes to the config dict.
     """
-    Clear changes to the config dict.
-    """
-
     # Copy settings.
     old = _config.copy()
 
@@ -58,11 +49,8 @@ def config():
 
 @pytest.yield_fixture
 def htrc_data(config):
-
+    """Yields: HTRCData
     """
-    Yields: HTRCData
-    """
-
     corpus = HTRCData()
 
     config['htrc']['features'] = corpus.features_path
@@ -75,11 +63,8 @@ def htrc_data(config):
 
 @pytest.yield_fixture
 def chicago_data(config):
-
+    """Yields: ChicagoData
     """
-    Yields: ChicagoData
-    """
-
     corpus = ChicagoData()
 
     config['chicago'] = corpus.path
@@ -91,11 +76,8 @@ def chicago_data(config):
 
 @pytest.yield_fixture
 def gail_data(config):
-
+    """Yields: GailData
     """
-    Yields: GailData
-    """
-
     corpus = GailData()
 
     config['gail'] = corpus.path
@@ -107,9 +89,7 @@ def gail_data(config):
 
 @pytest.fixture
 def mock_result_dir(config):
-
-    """
-    Yields: ResultDir
+    """Yields: ResultDir
     """
 
     def func(rtype):
@@ -156,11 +136,8 @@ def mpi(
     token_results,
 
 ):
-
+    """Write the patched config to /tmp/.lint.yml.
     """
-    Write the patched config to /tmp/.lint.yml.
-    """
-
     config.write_tmp()
 
     yield

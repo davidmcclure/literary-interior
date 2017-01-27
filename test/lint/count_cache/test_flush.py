@@ -6,11 +6,8 @@ from lint.count_cache import CountCache
 
 
 def test_write_pickle(bucket_results):
-
+    """CountCache#flush() should pickle the data to disk.
     """
-    CountCache#flush() should pickle the data to disk.
-    """
-
     c1 = CountCache()
     c1[1900, 'token', 'POS', 1] = 1
 

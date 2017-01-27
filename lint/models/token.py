@@ -48,11 +48,8 @@ class Token(Base):
 
     @classmethod
     def gather(cls, result_dir: str):
-
+        """Bulk-insert tokens.
         """
-        Bulk-insert tokens.
-        """
-
         # Walk paths.
         for i, path in enumerate(scan_paths(result_dir)):
             with open(path) as fh:
@@ -66,9 +63,6 @@ class Token(Base):
                 print(i)
 
     def snippet(self, padding: int=500):
-
+        """Get a snippet from the source text.
         """
-        Get a snippet from the source text.
-        """
-
         return self.text.snippet(self.char1, self.char2, padding)

@@ -42,14 +42,11 @@ class Bucket(Base):
 
     @classmethod
     def gather(cls, result_dir):
-
-        """
-        Merge + insert pickled count caches.
+        """Merge + insert pickled count caches.
 
         Args:
             result_dir (str)
         """
-
         # Merge result pickles.
         results = CountCache.from_results(result_dir)
 
@@ -79,9 +76,7 @@ class Bucket(Base):
 
     @classmethod
     def get(cls, corpus, year, token, pos, offset):
-
-        """
-        Get a token count by the composite primary key.
+        """Get a token count by the composite primary key.
 
         Args:
             corpus (str)
@@ -92,7 +87,6 @@ class Bucket(Base):
 
         Returns: int
         """
-
         res = (
             session
             .query(cls.count)
@@ -109,16 +103,13 @@ class Bucket(Base):
 
     @classmethod
     def token_counts(cls, min_count=0):
-
-        """
-        Get total (un-bucketed) token counts.
+        """Get total (un-bucketed) token counts.
 
         Args:
             min_count (int)
 
         Returns: OrderedDict
         """
-
         query = (
             session
             .query(cls.token, func.sum(cls.count))
@@ -131,9 +122,7 @@ class Bucket(Base):
 
     @classmethod
     def token_series(cls, token, corpus=None, year1=None, year2=None):
-
-        """
-        Get an offset -> count series for a word.
+        """Get an offset -> count series for a word.
 
         Args:
             token (str)
@@ -141,7 +130,6 @@ class Bucket(Base):
 
         Returns: OrderedDict
         """
-
         query = (
             session
             .query(cls.offset, func.sum(cls.count))

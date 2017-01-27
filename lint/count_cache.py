@@ -12,14 +12,11 @@ class CountCache(TreeCounter):
 
     @classmethod
     def from_results(cls, result_dir):
-
-        """
-        Merge together a set of pickled instances.
+        """Merge together a set of pickled instances.
 
         Args:
             result_dir (str)
         """
-
         offsets = cls()
 
         # Walk paths.
@@ -33,9 +30,7 @@ class CountCache(TreeCounter):
         return offsets
 
     def add_token_counts(self, corpus, year, counts):
-
-        """
-        Increment token counts:
+        """Increment token counts:
         (corpus, year, token, pos, offset) -> count
 
         Args:
@@ -43,21 +38,17 @@ class CountCache(TreeCounter):
             year (int)
             counts (Counter)
         """
-
         for (token, pos, offset), count in counts.items():
             self[corpus, year, token, pos, offset] += count
 
     def flush(self, data_dir):
-
-        """
-        Pickle the cache to a directory.
+        """Pickle the cache to a directory.
 
         Args:
             data_dir (str)
 
         Returns: str
         """
-
         path = os.path.join(data_dir, str(uuid.uuid4()))
 
         with open_makedirs(path, 'wb') as fh:

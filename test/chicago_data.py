@@ -19,14 +19,11 @@ class ChicagoData(TempDir):
         return os.path.isfile(self.metadata_path())
 
     def add_novel(self, novel):
-
-        """
-        Add a novel to the corpus.
+        """Add a novel to the corpus.
 
         Args:
             novel (Novel)
         """
-
         # Add row to metadata CSV.
 
         first = not self.metadata_exists()

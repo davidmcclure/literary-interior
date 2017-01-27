@@ -15,37 +15,25 @@ class ExtTokens(Scatter):
 
     @classmethod
     def from_config(cls):
-
+        """Apply config values.
         """
-        Apply config values.
-        """
-
         return cls(result_dir=config['results']['tokens'])
 
     def __init__(self, result_dir: str):
-
+        """Set the result dir.
         """
-        Set the result dir.
-        """
-
         self.result_dir = result_dir
 
     def args(self):
-
-        """
-        Generate text ids.
+        """Generate text ids.
 
         Returns: list
         """
-
         return Text.ids()
 
     def process(self, id: int):
-
+        """Increment offsets from a volume.
         """
-        Increment offsets from a volume.
-        """
-
         text = Text.query.get(id)
 
         tokens = text.tokens()

@@ -50,11 +50,8 @@ class HTRCVolumeFactory(factory.Factory):
 
     @classmethod
     def _create(cls, model_class, *args, **kwargs):
-
+        """Returns: Volume
         """
-        Returns: Volume
-        """
-
         return model_class({
 
             'id': kwargs['id'],

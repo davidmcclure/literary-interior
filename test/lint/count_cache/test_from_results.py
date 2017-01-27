@@ -4,11 +4,8 @@ from lint.count_cache import CountCache
 
 
 def test_from_results(bucket_results):
-
+    """Merge together pickled instances.
     """
-    Merge together pickled instances.
-    """
-
     c1 = CountCache()
     c1[1901, 'token1', 'POS1', 1] = 1
     c1[1902, 'token2', 'POS2', 1] = 2

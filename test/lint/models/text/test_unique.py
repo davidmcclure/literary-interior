@@ -13,11 +13,8 @@ pytestmark = pytest.mark.usefixtures('db')
 
 
 def test_unique_corpus_identifier():
-
+    """Corpus + identifier should be unique.
     """
-    Corpus + identifier should be unique.
-    """
-
     t1 = TextFactory(corpus='corpus', identifier='1')
     t2 = TextFactory(corpus='corpus', identifier='1')
 

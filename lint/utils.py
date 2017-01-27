@@ -12,9 +12,7 @@ from itertools import islice, chain
 
 
 def grouper(iterable, size):
-
-    """
-    Yield "groups" from an iterable.
+    """Yield "groups" from an iterable.
 
     Args:
         iterable (iter): The iterable.
@@ -23,7 +21,6 @@ def grouper(iterable, size):
     Yields:
         The next group.
     """
-
     source = iter(iterable)
 
     while True:
@@ -32,16 +29,13 @@ def grouper(iterable, size):
 
 
 def flatten_dict(d, root=True):
-
-    """
-    Flatten a dict into a list of tuples.
+    """Flatten a dict into a list of tuples.
 
     Args:
         nested (dict)
 
     Yields: ((key1, key2, ...), val)
     """
-
     for k, v in d.items():
 
         if isinstance(v, dict):
@@ -61,11 +55,8 @@ def flatten_dict(d, root=True):
 
 @contextmanager
 def open_makedirs(fpath, *args, **kwargs):
-
+    """Create the directory for a file, open it.
     """
-    Create the directory for a file, open it.
-    """
-
     path = os.path.dirname(fpath)
 
     os.makedirs(path, exist_ok=True)
@@ -75,29 +66,23 @@ def open_makedirs(fpath, *args, **kwargs):
 
 
 def mem_pct():
-
-    """
-    Get the percentage of available memory used by the process.
+    """Get the percentage of available memory used by the process.
 
     Returns: float
     """
-
     mem = psutil.virtual_memory()
 
     return mem.percent
 
 
 def round_to_decade(year):
-
-    """
-    Round a year to the nearest decade.
+    """Round a year to the nearest decade.
 
     Args:
         year (int)
 
     Returns: int
     """
-
     decades = decimal.Decimal(year/10)
 
     rounded = decades.quantize(
@@ -109,9 +94,7 @@ def round_to_decade(year):
 
 
 def scan_paths(root, pattern=None):
-
-    """
-    Walk a directory and yield file paths that match a pattern.
+    """Walk a directory and yield file paths that match a pattern.
 
     Args:
         root (str)
@@ -119,7 +102,6 @@ def scan_paths(root, pattern=None):
 
     Yields: str
     """
-
     for root, dirs, files in scandir.walk(root, followlinks=True):
         for name in files:
 
@@ -129,9 +111,7 @@ def scan_paths(root, pattern=None):
 
 
 def get_text(tree, selector):
-
-    """
-    Extract text from an element. Return None if the element is missing or the
+    """Extract text from an element. Return None if the element is missing or the
     value is empty.
 
     Args:
@@ -140,7 +120,6 @@ def get_text(tree, selector):
 
     Returns: str|None
     """
-
     tag = tree.select_one(selector)
 
     if tag:
@@ -151,9 +130,7 @@ def get_text(tree, selector):
 
 
 def make_offset(i, n, bins):
-
-    """
-    Given the index of the current token, the total number of tokens, and a bin
+    """Given the index of the current token, the total number of tokens, and a bin
     count, round to a 1-N integer.
 
     Args:
@@ -163,28 +140,22 @@ def make_offset(i, n, bins):
 
     Returns: int
     """
-
     return math.floor((i/n) * bins)
 
 
 def clean_text(text):
-
-    """
-    Clean a raw text string.
+    """Clean a raw text string.
 
     Args:
         text (str)
 
     Returns: str
     """
-
     return re.sub('\s{2,}', ' ', text.strip())
 
 
 def clean_token(token):
-
-    """
-    Clean an individual token.
+    """Clean an individual token.
 
     - Downcase.
     - Strip leading / trailing non-[a-z] characters.
@@ -194,5 +165,4 @@ def clean_token(token):
 
     Returns: str
     """
-
     return re.sub('^[^a-z]*|[^a-z]*$', '', token.lower())

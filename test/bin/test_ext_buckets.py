@@ -15,9 +15,7 @@ pytestmark = pytest.mark.usefixtures('mpi')
 
 
 def test_ext_buckets():
-
-    """
-    ExtBuckets should index:
+    """ExtBuckets should index:
     (corpus, year, token, pos, offset) -> count
     """
 
@@ -68,11 +66,8 @@ def test_ext_buckets():
 
 
 def test_round_years_to_decade():
-
+    """Volume years should be rounded to the nearest decade.
     """
-    Volume years should be rounded to the nearest decade.
-    """
-
     session.add(TextFactory(
         corpus='corpus',
         year=1904,

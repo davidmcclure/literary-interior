@@ -13,11 +13,8 @@ pytestmark = pytest.mark.usefixtures('mpi')
 
 
 def test_ext_gail_texts(gail_data):
-
+    """ExttGailTexts should index text rows.
     """
-    ExttGailTexts should index text rows.
-    """
-
     n1 = GailNovelFactory(
         identifier='1',
         title='title1',

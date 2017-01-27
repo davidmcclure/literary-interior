@@ -17,47 +17,35 @@ class ExtGailTexts(Scatter):
 
     @classmethod
     def from_config(cls):
-
+        """Apply config values.
         """
-        Apply config values.
-        """
-
         return cls(
             corpus_dir=config['gail'],
             result_dir=config['results']['texts'],
         )
 
     def __init__(self, corpus_dir: str, result_dir: str):
-
+        """Set input / output directories.
         """
-        Set input / output directories.
-        """
-
         self.corpus_dir = corpus_dir
 
         self.result_dir = result_dir
 
     def args(self):
-
-        """
-        Generate text paths.
+        """Generate text paths.
 
         Yields: str
         """
-
         corpus = Corpus(self.corpus_dir)
 
         yield from corpus.text_paths()
 
     def process(self, path):
-
-        """
-        Extract text metadata.
+        """Extract text metadata.
 
         Args:
             path (str)
         """
-
         novel = Novel.from_path(path)
 
         text = dict(

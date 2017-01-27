@@ -24,11 +24,8 @@ class ChicagoNovelFactory(factory.Factory):
 
     @classmethod
     def _create(cls, model_class, *args, **kwargs):
-
+        """Returns: Volume
         """
-        Returns: Volume
-        """
-
         file_id = str(kwargs['identifier']).zfill(8)
 
         # Generate the file name.

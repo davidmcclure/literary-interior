@@ -7,15 +7,12 @@ class Novel:
 
     @classmethod
     def from_corpus_path(cls, corpus_path, metadata):
-
-        """
-        Hydrate a text instance from the corpus.
+        """Hydrate a text instance from the corpus.
 
         Args:
             corpus_path (str)
             metadata (dict)
         """
-
         text_path = os.path.join(
             corpus_path,
             'Texts',
@@ -26,65 +23,44 @@ class Novel:
             return cls(metadata, fh.read())
 
     def __init__(self, metadata, text):
-
-        """
-        Set the metadata and plain text.
+        """Set the metadata and plain text.
 
         Args:
             metadata (dict)
             text (str)
         """
-
         self.metadata = metadata
 
         self.text = text
 
     def identifier(self):
-
+        """Returns: str
         """
-        Returns: str
-        """
-
         return self.metadata['BOOK_ID']
 
     def title(self):
-
+        """Returns: str
         """
-        Returns: str
-        """
-
         return self.metadata['TITLE']
 
     def author_first(self):
-
+        """Returns: str
         """
-        Returns: str
-        """
-
         return self.metadata['AUTH_FIRST']
 
     def author_last(self):
-
+        """Returns: str
         """
-        Returns: str
-        """
-
         return self.metadata['AUTH_LAST']
 
     def year(self):
-
+        """Returns: int
         """
-        Returns: int
-        """
-
         return int(self.metadata['PUBL_DATE'])
 
     def plain_text(self):
-
+        """Returns: str
         """
-        Returns: str
-        """
-
         i1 = None
         i2 = None
 

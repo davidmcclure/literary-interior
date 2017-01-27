@@ -16,45 +16,33 @@ class ExtChicagoTexts(Scatter):
 
     @classmethod
     def from_config(cls):
-
+        """Apply config values.
         """
-        Apply config values.
-        """
-
         return cls(
             corpus_dir=config['chicago'],
             result_dir=config['results']['texts'],
         )
 
     def __init__(self, corpus_dir: str, result_dir: str):
-
+        """Set input / output directories.
         """
-        Set input / output directories.
-        """
-
         self.corpus_dir = corpus_dir
 
         self.result_dir = result_dir
 
     def args(self):
-
-        """
-        Generate text args.
+        """Generate text args.
 
         Yields: dict {corpus_path, metadata}
         """
-
         corpus = Corpus(self.corpus_dir)
 
         for row in corpus.novels_metadata():
             yield dict(corpus_path=corpus.path, metadata=row)
 
     def process(self, corpus_path: str, metadata: dict):
-
+        """Extract text metadata.
         """
-        Extract text metadata.
-        """
-
         novel = Novel.from_corpus_path(corpus_path, metadata)
 
         text = dict(

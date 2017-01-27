@@ -13,22 +13,16 @@ class ExtBuckets(Scatter):
 
     @classmethod
     def from_config(cls):
-
+        """Apply config values.
         """
-        Apply config values.
-        """
-
         return cls(
             result_dir=config['results']['buckets'],
             bins=config['bins'],
         )
 
     def __init__(self, result_dir: str, bins: int):
-
+        """Initialize the count cache.
         """
-        Initialize the count cache.
-        """
-
         self.result_dir = result_dir
 
         self.bins = bins
@@ -36,21 +30,15 @@ class ExtBuckets(Scatter):
         self.cache = CountCache()
 
     def args(self):
-
-        """
-        Generate text ids.
+        """Generate text ids.
 
         Returns: list
         """
-
         return Text.ids()
 
     def process(self, id: int):
-
+        """Increment offsets from a volume.
         """
-        Increment offsets from a volume.
-        """
-
         text = Text.query.get(id)
 
         counts = text.bucket_counts(self.bins)
@@ -62,9 +50,6 @@ class ExtBuckets(Scatter):
         self.cache.add_token_counts(text.corpus, year, counts)
 
     def flush(self):
-
+        """Dump the offsets to disk.
         """
-        Dump the offsets to disk.
-        """
-
         self.cache.flush(self.result_dir)

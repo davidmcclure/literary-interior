@@ -51,11 +51,8 @@ class Text(Base):
 
     @classmethod
     def gather(cls, result_dir: str):
-
+        """Bulk-insert tokens.
         """
-        Bulk-insert tokens.
-        """
-
         # Walk paths.
         for i, path in enumerate(scan_paths(result_dir)):
             with open(path) as fh:
@@ -71,21 +68,15 @@ class Text(Base):
 
     @classmethod
     def ids(cls):
-
+        """Query a list of all ids.
         """
-        Query a list of all ids.
-        """
-
         query = session.query(cls.id).all()
 
         return [row[0] for row in query]
 
     def tokens(self):
-
+        """Tokenize the text.
         """
-        Tokenize the text.
-        """
-
         tokenizer = WordPunctTokenizer()
 
         # Get token character spans.
@@ -111,13 +102,10 @@ class Text(Base):
         ]
 
     def bucket_counts(self, bins: int):
-
-        """
-        Map (token, POS, offset) -> count.
+        """Map (token, POS, offset) -> count.
 
         Returns: Counter
         """
-
         tokens = self.tokens()
 
         counts = Counter()
@@ -133,13 +121,10 @@ class Text(Base):
         return counts
 
     def snippet(self, char1: int, char2: int, padding: int=500):
-
-        """
-        Hydrate a snippet.
+        """Hydrate a snippet.
 
         Returns: (prefix, token, suffix)
         """
-
         char0 = max(char1-padding, 0)
         char3 = min(char2+padding, len(self.text))
 

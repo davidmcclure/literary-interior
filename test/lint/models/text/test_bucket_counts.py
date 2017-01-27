@@ -7,11 +7,8 @@ from lint.models import Text
 
 
 def test_offset_counts():
-
+    """Map (token, POS, offset) -> count.
     """
-    Map (token, POS, offset) -> count.
-    """
-
     text = Text(text='one two three four')
 
     counts = text.bucket_counts(4)
@@ -24,11 +21,8 @@ def test_offset_counts():
 
 @pytest.mark.parametrize('n', [10, 100, 1000])
 def test_round_offsets(n):
-
+    """When the offset is real-valued, round to the nearest integer.
     """
-    When the offset is real-valued, round to the nearest integer.
-    """
-
     text = Text(text='one two three four')
 
     counts = text.bucket_counts(n)
@@ -45,11 +39,8 @@ def test_round_offsets(n):
 
 
 def test_downcase():
-
+    """All tokens should be downcased.
     """
-    All tokens should be downcased.
-    """
-
     text = Text(text='one Two THREE')
 
     counts = text.bucket_counts(3)

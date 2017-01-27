@@ -20,14 +20,11 @@ class HTRCData(TempDir):
         return os.path.join(self.path, 'pd-basic-file-listing.txt')
 
     def add_vol(self, vol):
-
-        """
-        Add a volume to the corpus.
+        """Add a volume to the corpus.
 
         Args:
             vol (Volume)
         """
-
         path = os.path.join(
             self.features_path,
             '{0}.ujson.bz2'.format(vol.id),

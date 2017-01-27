@@ -13,11 +13,8 @@ pytestmark = pytest.mark.usefixtures('mpi')
 
 
 def test_ext_chicago_texts(chicago_data):
-
+    """ExttChicagoTexts should index text rows.
     """
-    ExttChicagoTexts should index text rows.
-    """
-
     n1 = ChicagoNovelFactory(
         identifier='1',
         title='title1',
