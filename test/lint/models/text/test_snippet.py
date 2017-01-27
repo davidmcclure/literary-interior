@@ -9,9 +9,9 @@ def test_snippet():
 
     prefix, token, suffix = text.snippet(2, 5, padding=2)
 
-    assert prefix   == '01'
-    assert token    == '234'
-    assert suffix   == '56'
+    assert prefix == '01'
+    assert token == '234'
+    assert suffix == '56'
 
 
 def test_overflow():
@@ -20,6 +20,6 @@ def test_overflow():
 
     prefix, token, suffix = text.snippet(2, 5, padding=20)
 
-    assert prefix   == '01'
-    assert token    == '234'
-    assert suffix   == '56'
+    assert prefix == '01'
+    assert token == '234'
+    assert suffix == '56'
