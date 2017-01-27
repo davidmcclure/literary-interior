@@ -68,17 +68,17 @@ def test_merge_shared_prefixes():
 
     c = TreeCounter()
 
-    c[1,1,1] = 1
-    c[1,1,2] = 2
+    c[1, 1, 1] = 1
+    c[1, 1, 2] = 2
 
-    c[1,2,1] = 3
-    c[1,2,2] = 4
+    c[1, 2, 1] = 3
+    c[1, 2, 2] = 4
 
-    c[2,1,1] = 5
-    c[2,1,2] = 6
+    c[2, 1, 1] = 5
+    c[2, 1, 2] = 6
 
-    c[2,2,1] = 7
-    c[2,2,2] = 8
+    c[2, 2, 1] = 7
+    c[2, 2, 2] = 8
 
     assert c.tree == {
         1: {
@@ -108,8 +108,8 @@ def test_override_subpath():
 
     c = TreeCounter()
 
-    c[1,2,3] = 4
-    c[1,2,3,4] = 5
+    c[1, 2, 3] = 4
+    c[1, 2, 3, 4] = 5
 
     assert c.tree == {
         1: {
@@ -126,8 +126,8 @@ def test_override_superpath():
 
     c = TreeCounter()
 
-    c[1,2,3,4] = 5
-    c[1,2,3] = 4
+    c[1, 2, 3, 4] = 5
+    c[1, 2, 3] = 4
 
     assert c.tree == {
         1: {

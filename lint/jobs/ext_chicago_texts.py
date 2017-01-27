@@ -7,7 +7,6 @@ from lint.utils import open_makedirs
 from lint.singletons import config
 from lint.chicago.novel import Novel
 from lint.chicago.corpus import Corpus
-from lint.models import Text
 
 from .scatter import Scatter
 

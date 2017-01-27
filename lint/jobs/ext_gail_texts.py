@@ -1,14 +1,12 @@
 
 
 import os
-import uuid
 import ujson
 
 from lint.utils import open_makedirs
 from lint.singletons import config
 from lint.gail.novel import Novel
 from lint.gail.corpus import Corpus
-from lint.models import Text
 
 from .scatter import Scatter
 

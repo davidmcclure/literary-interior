@@ -1,7 +1,6 @@
 
 
 import pytest
-import os
 
 from lint.singletons import config as _config, session
 from lint.models import Base

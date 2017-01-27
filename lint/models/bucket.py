@@ -3,15 +3,14 @@
 import numpy as np
 
 from collections import OrderedDict
-from scandir import scandir
 
 from sqlalchemy import Column, Integer, String, PrimaryKeyConstraint
-from sqlalchemy.sql import text, func
+from sqlalchemy.sql import func
 
-from lint.singletons import config, session
+from lint.singletons import session
 from lint.models import Base
 from lint.count_cache import CountCache
-from lint.utils import mem_pct, grouper
+from lint.utils import grouper
 
 
 class Bucket(Base):
@@ -133,13 +132,13 @@ class Bucket(Base):
         query = (
             session
             .query(cls.offset, func.sum(cls.count))
-            .filter(cls.token==token)
+            .filter(cls.token == token)
             .group_by(cls.offset)
             .order_by(cls.offset)
         )
 
         if corpus:
-            query = query.filter(cls.corpus==corpus)
+            query = query.filter(cls.corpus == corpus)
 
         if year1:
             query = query.filter(cls.year >= year1)

@@ -4,9 +4,9 @@ import pytest
 
 from subprocess import call
 
-from lint.utils import make_offset
-from lint.models import Bucket, Text
 from lint.singletons import session
+from lint.models import Bucket
+from lint.utils import make_offset
 
 from test.factories.models import TextFactory
 

@@ -1,7 +1,6 @@
 
 
 import os
-import csv
 
 from test.temp_dir import TempDir
 

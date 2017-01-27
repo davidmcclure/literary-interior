@@ -3,8 +3,6 @@
 import numpy as np
 import ujson
 
-from lint.models import Text
-from lint.count_cache import CountCache
 from lint.utils import mem_pct
 
 
@@ -46,7 +44,7 @@ class Scatter:
 
         print(rank, len(args))
 
-        ## ** Gather offsets, flush.
+        # ** Gather offsets, flush.
 
         for i, arg in enumerate(args):
 

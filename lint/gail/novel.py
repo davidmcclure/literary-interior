@@ -1,7 +1,5 @@
 
 
-import os
-
 from bs4 import BeautifulSoup
 
 from lint.utils import get_text

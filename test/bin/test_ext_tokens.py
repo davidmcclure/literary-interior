@@ -4,7 +4,7 @@ import pytest
 
 from subprocess import call
 
-from lint.models import Text, Token
+from lint.models import Token
 from lint.singletons import session
 
 from test.factories.models import TextFactory

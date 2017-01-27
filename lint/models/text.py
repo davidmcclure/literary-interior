@@ -3,7 +3,6 @@
 import ujson
 
 from collections import namedtuple, Counter
-from scandir import scandir
 
 from sqlalchemy import Column, Integer, String, UniqueConstraint
 from nltk import pos_tag

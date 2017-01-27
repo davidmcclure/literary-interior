@@ -34,13 +34,13 @@ def test_subpath():
 
     c = TreeCounter()
 
-    c[1,2,3,4] = 5
-    assert c[1,2,3] == 0
+    c[1, 2, 3, 4] = 5
+    assert c[1, 2, 3] == 0
 
 
 def test_superpath():
 
     c = TreeCounter()
 
-    c[1,2,3] = 4
-    assert c[1,2,3,4] == 0
+    c[1, 2, 3] = 4
+    assert c[1, 2, 3, 4] == 0
