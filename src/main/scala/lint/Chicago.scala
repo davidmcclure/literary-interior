@@ -2,7 +2,9 @@
 
 package lint.chicago
 
+import scala.io.Source
 import java.io.File
+import org.apache.commons.io.FilenameUtils
 import com.github.tototoshi.csv.CSVReader
 
 
@@ -14,9 +16,9 @@ case class Metadata(
   year: Int
 )
 
+// TODO: S3?
 class Corpus(val metadataPath: String, textPath: String) {
 
-  // Read metadata CSV.
   private val reader = CSVReader.open(new File(metadataPath))
 
   // Get (id, metadata) tuples.
@@ -37,6 +39,18 @@ class Corpus(val metadataPath: String, textPath: String) {
   // Map id -> metadata.
   val metadata: Map[Int, Metadata] = pairs.toMap
 
+  /* Read plain text by ID.
+   */
+  def plainText(identifier: Int): String = {
+
+    // Left-pad zeros to 8 digits.
+    val basename = "%08d".format(identifier)
+
+    val path = FilenameUtils.concat(textPath, s"${basename}.txt")
+    Source.fromFile(path).getLines.mkString
+
+  }
+
 }
 
 object Chicago extends App {
@@ -46,6 +60,6 @@ object Chicago extends App {
     "/Users/dclure/Projects/data/stacks/Chicago Corpus/Texts"
   )
 
-  println(c.metadata)
+  println(c.plainText(1))
 
 }
