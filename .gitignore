@@ -1,14 +1,22 @@
 
-*.pyc
-*.egg-info
-*.tar.gz
+*.class
+*.log
 
-/env
-/build
-/static
-/dist
-/.cache
-/.env
+# sbt specific
+.cache
+.history
+.lib/
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
 
-.ipynb_checkpoints
-cache
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
+
+# ENSIME specific
+.ensime_cache/
+.ensime
