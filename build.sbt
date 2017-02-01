@@ -14,6 +14,7 @@ lazy val root = (project in file(".")).
 
     libraryDependencies ++= Seq(
       scalaXML,
+      scalaCSV,
       scalaTest % Test
     )
 
