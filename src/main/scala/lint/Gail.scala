@@ -34,9 +34,17 @@ class Novel(val xml: Elem) {
   }
 
   def plainText: String = {
-    val words = xml \\ "page" \\ "wd"
+
+    val words = for {
+      page <- xml \\ "page"
+      if (page \ "@type").text == "bodyPage"
+      word <- page \\ "wd"
+    } yield word
+
     val texts = for (w <- words) yield w.text
+
     texts.mkString(" ")
+
   }
 
 }
