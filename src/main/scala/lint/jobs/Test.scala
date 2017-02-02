@@ -4,6 +4,8 @@ import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 
+import pprint.pprintln
+
 
 object Test {
 
@@ -19,7 +21,7 @@ object Test {
       .map(word => (word, 1))
       .reduceByKey((a, b) => a+b)
 
-    println(wordcount.collect().toMap)
+    pprintln(wordcount.collect().toMap)
     sc.stop()
 
   }
