@@ -5,6 +5,8 @@ package lint.corpus
 
 case class Tokenizer(regex: String = "[a-z]+") {
 
+  /* Given a string, generate a stream of Tokens.
+   */
   def apply(text: String): Seq[Token] = {
 
     val matches = regex.r.findAllMatchIn(text.toLowerCase).toSeq
@@ -41,6 +43,8 @@ final case class Text private (
 
 object Text {
 
+  /* Tokenize the raw text.
+   */
   def apply(
     identifier: String,
     title: String,
