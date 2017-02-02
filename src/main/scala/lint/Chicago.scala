@@ -18,8 +18,12 @@ case class Metadata(
 
 
 abstract class Corpus {
+
   val metadata: Map[Int, Metadata]
   def plainText(id: Int): String
+
+  // TODO: Strip Gutenberg header / footer.
+
 }
 
 
