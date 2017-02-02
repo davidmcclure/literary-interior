@@ -28,7 +28,7 @@ final case class Token(
 )
 
 
-final case class Text(
+final case class Text private (
   identifier: String,
   title: String,
   authorFirst: String,
@@ -48,7 +48,7 @@ object Text {
     authorLast: String,
     year: Int,
     text: String
-  ): Text = {
+  ) = {
 
     val tokenize = new Tokenizer
 
