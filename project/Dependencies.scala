@@ -12,7 +12,7 @@ object Dependencies {
   lazy val scalaCSV =
     "com.github.tototoshi" %% "scala-csv" % "1.3.4"
 
-  lazy val spark =
+  lazy val sparkCore =
     "org.apache.spark" %% "spark-core" % "2.1.0" % "provided"
 
   lazy val sparkSQL =

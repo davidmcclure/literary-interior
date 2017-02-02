@@ -16,7 +16,7 @@ lazy val root = (project in file(".")).
       commonsIO,
       scalaXML,
       scalaCSV,
-      spark,
+      sparkCore,
       sparkSQL,
       pprint,
       openNLP,
