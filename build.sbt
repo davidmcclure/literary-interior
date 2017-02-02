@@ -17,6 +17,7 @@ lazy val root = (project in file(".")).
       spark,
       scalaxml,
       scalacsv,
+      pprint,
       scalatest % Test
     )
 
