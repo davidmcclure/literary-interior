@@ -13,13 +13,13 @@ lazy val root = (project in file(".")).
     name := "lint",
 
     libraryDependencies ++= Seq(
-      commonsio,
+      commonsIO,
+      scalaXML,
+      scalaCSV,
       spark,
-      sparksql,
-      scalaxml,
-      scalacsv,
+      sparkSQL,
       pprint,
-      scalatest % Test
+      scalaTest % Test
     ),
 
     assemblyJarName in assembly := "lint.jar"
