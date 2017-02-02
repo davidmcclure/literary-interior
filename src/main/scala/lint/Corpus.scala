@@ -41,7 +41,7 @@ final case class Text(
 
 object Text {
 
-  def tokenize(
+  def apply(
     identifier: String,
     title: String,
     authorFirst: String,
@@ -54,7 +54,7 @@ object Text {
 
     val tokens = tokenize(text)
 
-    Text(
+    new Text(
       identifier,
       title,
       authorFirst,
