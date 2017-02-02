@@ -16,8 +16,15 @@ case class Metadata(
   year: Int
 )
 
-// TODO: S3?
-class Corpus(val metadataPath: String, textPath: String) {
+abstract class Corpus {
+  val metadata: Map[Int, Metadata]
+  def plainText(identifier: Int): String
+}
+
+class LocalCorpus(
+  val metadataPath: String,
+  textPath: String
+) extends Corpus {
 
   private val reader = CSVReader.open(new File(metadataPath))
 
@@ -55,7 +62,7 @@ class Corpus(val metadataPath: String, textPath: String) {
 
 object Chicago extends App {
 
-  val c = new Corpus(
+  val c = new LocalCorpus(
     "/Users/dclure/Projects/data/stacks/Chicago Corpus/NOVELS_METADATA.csv",
     "/Users/dclure/Projects/data/stacks/Chicago Corpus/Texts"
   )
