@@ -15,6 +15,7 @@ lazy val root = (project in file(".")).
     libraryDependencies ++= Seq(
       commonsio,
       spark,
+      sparksql,
       scalaxml,
       scalacsv,
       pprint,
