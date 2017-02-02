@@ -6,17 +6,17 @@ lazy val root = (project in file(".")).
 
     inThisBuild(List(
       organization := "edu.lint",
-      scalaVersion := "2.12.1",
+      scalaVersion := "2.11.8",
       version      := "0.1.0-SNAPSHOT"
     )),
 
     name := "lint",
 
     libraryDependencies ++= Seq(
-      scalaxml,
       commonsio,
+      spark,
+      scalaxml,
       scalacsv,
-      awscala,
       scalatest % Test
     )
 
