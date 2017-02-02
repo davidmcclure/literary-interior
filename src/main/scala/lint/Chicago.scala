@@ -25,6 +25,8 @@ abstract class Corpus {
 
 object Corpus {
 
+  /* Left-pad zeros to 8 digits.
+   */
   def idToFilename(id: Int): String = {
     val basename = "%08d".format(id)
     s"${basename}.txt"
