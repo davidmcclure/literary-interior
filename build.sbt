@@ -19,6 +19,8 @@ lazy val root = (project in file(".")).
       scalacsv,
       pprint,
       scalatest % Test
-    )
+    ),
+
+    assemblyJarName in assembly := "lint.jar"
 
   )
