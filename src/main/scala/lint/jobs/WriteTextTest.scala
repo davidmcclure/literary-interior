@@ -1,8 +1,5 @@
 
 
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
-import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 
 import lint.corpus._
@@ -13,7 +10,6 @@ object WriteTextTest {
 
   def main(args: Array[String]) {
 
-    val sc = new SparkContext
     val spark = SparkSession.builder.getOrCreate()
     import spark.implicits._
 
@@ -37,7 +33,6 @@ object WriteTextTest {
     val ds = spark.createDataset(Seq(text))
 
     ds.show()
-    sc.stop()
 
   }
 
