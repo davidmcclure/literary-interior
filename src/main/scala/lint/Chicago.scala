@@ -19,7 +19,17 @@ case class Metadata(
 
 abstract class Corpus {
   val metadata: Map[Int, Metadata]
-  def plainText(identifier: Int): String
+  def plainText(id: Int): String
+}
+
+
+object Corpus {
+
+  def idToFilename(id: Int): String = {
+    val basename = "%08d".format(id)
+    s"${basename}.txt"
+  }
+
 }
 
 
@@ -50,12 +60,12 @@ class LocalCorpus(
 
   /* Read plain text by ID.
    */
-  def plainText(identifier: Int): String = {
+  def plainText(id: Int): String = {
 
     // Left-pad zeros to 8 digits.
-    val basename = "%08d".format(identifier)
+    val filename = Corpus.idToFilename(id)
 
-    val path = FilenameUtils.concat(textPath, s"${basename}.txt")
+    val path = FilenameUtils.concat(textPath, filename)
     Source.fromFile(path).getLines.mkString
 
   }
@@ -63,13 +73,4 @@ class LocalCorpus(
 }
 
 
-object Chicago extends App {
-
-  val c = new LocalCorpus(
-    "/Users/dclure/Projects/data/stacks/Chicago Corpus/NOVELS_METADATA.csv",
-    "/Users/dclure/Projects/data/stacks/Chicago Corpus/Texts"
-  )
-
-  println(c.plainText(1))
-
-}
+// TODO: S3Corpus

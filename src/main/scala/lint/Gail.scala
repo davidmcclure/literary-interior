@@ -71,9 +71,3 @@ object Novel {
   }
 
 }
-
-
-object Gail extends App {
-  val novel = Novel.fromFile("/Users/dclure/Projects/data/stacks/gail/AMFCF0002-C00000-B1001700.xml")
-  println(novel.plainText)
-}
