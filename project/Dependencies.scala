@@ -21,6 +21,9 @@ object Dependencies {
   lazy val pprint =
     "com.lihaoyi" %% "pprint" % "0.4.3"
 
+  lazy val openNLP =
+    "org.apache.opennlp" % "opennlp-tools" % "1.7.1"
+
   lazy val scalaTest =
     "org.scalatest" %% "scalatest" % "3.0.1"
 

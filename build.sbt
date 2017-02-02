@@ -19,6 +19,7 @@ lazy val root = (project in file(".")).
       spark,
       sparkSQL,
       pprint,
+      openNLP,
       scalaTest % Test
     ),
 
