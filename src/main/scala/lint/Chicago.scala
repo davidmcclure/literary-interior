@@ -37,7 +37,7 @@ object Corpus {
 
 class LocalCorpus(
   val metadataPath: String,
-  textPath: String
+  val textPath: String
 ) extends Corpus {
 
   private val reader = CSVReader.open(new File(metadataPath))
