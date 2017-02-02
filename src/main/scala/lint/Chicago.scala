@@ -16,10 +16,12 @@ case class Metadata(
   year: Int
 )
 
+
 abstract class Corpus {
   val metadata: Map[Int, Metadata]
   def plainText(identifier: Int): String
 }
+
 
 class LocalCorpus(
   val metadataPath: String,
@@ -59,6 +61,7 @@ class LocalCorpus(
   }
 
 }
+
 
 object Chicago extends App {
 
