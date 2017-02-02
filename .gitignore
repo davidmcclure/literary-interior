@@ -20,3 +20,6 @@ project/plugins/project/
 # ENSIME specific
 .ensime_cache/
 .ensime
+
+# lint
+*.parquet

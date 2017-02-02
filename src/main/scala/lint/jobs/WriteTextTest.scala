@@ -32,6 +32,7 @@ object WriteTextTest {
 
     val ds = spark.createDataset(Seq(text))
 
+    ds.write.parquet("text.parquet")
     ds.show()
 
   }
