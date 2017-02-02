@@ -5,9 +5,9 @@ package lint.corpus
 
 case class Tokenizer(regex: String = "[a-z]+") {
 
-  def apply(text: String): List[Token] = {
+  def apply(text: String): Seq[Token] = {
 
-    val matches = regex.r.findAllMatchIn(text.toLowerCase).toList
+    val matches = regex.r.findAllMatchIn(text.toLowerCase).toSeq
 
     val length = matches.length
 
@@ -35,7 +35,7 @@ final case class Text(
   authorLast: String,
   year: Int,
   text: String,
-  tokens: List[Token]
+  tokens: Seq[Token]
 )
 
 
