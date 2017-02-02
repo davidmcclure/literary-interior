@@ -7,7 +7,7 @@ import org.apache.spark.SparkConf
 import pprint.pprintln
 
 
-object Test {
+object Test2 {
 
   def main(args: Array[String]) {
 
