@@ -2,12 +2,24 @@
 
 package lint.corpus
 
+import java.io.FileInputStream
+import scala.io.Source
+import opennlp.tools.sentdetect._
+import pprint.pprintln
+
 
 case class Tokenizer(regex: String = "[a-z]+") {
+
+  // Sentence detector.
+  val sentPath = getClass.getResource("/en-sent.bin")
+  val sentModel = new SentenceModel(sentPath)
+  val sentDetector = new SentenceDetectorME(sentModel)
 
   /* Given a string, generate a stream of Tokens.
    */
   def apply(text: String): Seq[Token] = {
+
+    pprintln(sentDetector.sentDetect(text))
 
     val matches = regex.r.findAllMatchIn(text.toLowerCase).toSeq
 
@@ -70,4 +82,10 @@ object Text {
 
   }
 
+}
+
+
+object Corpus extends App {
+  val tokenize = new Tokenizer
+  tokenize("This is a sentence. And another one.")
 }
