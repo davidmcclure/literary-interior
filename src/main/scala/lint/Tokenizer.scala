@@ -71,7 +71,7 @@ object Tokenizer {
         val start = sentSpan.getStart + span.getStart
         val end = sentSpan.getStart + span.getEnd
 
-        (token, tag, start, end)
+        (token.toLowerCase, tag, start, end)
 
       }
 
