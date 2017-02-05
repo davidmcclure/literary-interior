@@ -6,6 +6,7 @@ import lint.tokenizer._
 
 
 final case class Text private (
+  corpus: String,
   identifier: String,
   title: String,
   authorFirst: String,
@@ -21,6 +22,7 @@ object Text {
   /* Tokenize the raw text.
    */
   def apply(
+    corpus: String,
     identifier: String,
     title: String,
     authorFirst: String,
@@ -32,6 +34,7 @@ object Text {
     val tokens = Tokenizer.tokenize(text)
 
     new Text(
+      corpus,
       identifier,
       title,
       authorFirst,

@@ -15,6 +15,7 @@ object ReadTexts {
 
     val texts = spark.read.parquet("text.parquet").as[Text]
 
+    pprintln(texts.head)
     pprintln(texts.head.tokens)
 
   }

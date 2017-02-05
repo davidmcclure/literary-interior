@@ -15,6 +15,7 @@ object WriteTexts {
     val texts = for (i <- 0 to 1000) yield {
 
       Text(
+        corpus="chicago",
         identifier=i.toString,
         title=s"Title${i}",
         authorFirst=s"David${i}",
