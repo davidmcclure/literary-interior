@@ -5,7 +5,16 @@ package lint.corpus
 import java.io.FileInputStream
 import scala.io.Source
 import opennlp.tools.sentdetect._
-import pprint.pprintln
+import opennlp.tools.postag._
+import opennlp.tools.tokenize._
+
+
+final case class Token(
+  token: String,
+  start: Int,
+  end: Int,
+  offset: Double
+)
 
 
 case class Tokenizer(regex: String = "[a-z]+") {
@@ -35,15 +44,19 @@ object Tokenizer {
     new SentenceDetectorME(model)
   }
 
+  def loadTokenzerModel = {
+    val path = getClass.getResource("/en-token.bin")
+    val model = new TokenizerModel(path)
+    new TokenizerME(model)
+  }
+
+  def loadPOSModel = {
+    val path = getClass.getResource("/en-pos-maxent.bin")
+    val model = new POSModel(path)
+    new POSTaggerME(model)
+  }
+
 }
-
-
-final case class Token(
-  token: String,
-  start: Int,
-  end: Int,
-  offset: Double
-)
 
 
 final case class Text private (
