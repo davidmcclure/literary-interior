@@ -10,16 +10,9 @@ import pprint.pprintln
 
 case class Tokenizer(regex: String = "[a-z]+") {
 
-  // Sentence detector.
-  val sentPath = getClass.getResource("/en-sent.bin")
-  val sentModel = new SentenceModel(sentPath)
-  val sentDetector = new SentenceDetectorME(sentModel)
-
   /* Given a string, generate a stream of Tokens.
    */
   def apply(text: String): Seq[Token] = {
-
-    pprintln(sentDetector.sentDetect(text))
 
     val matches = regex.r.findAllMatchIn(text.toLowerCase).toSeq
 
@@ -29,6 +22,17 @@ case class Tokenizer(regex: String = "[a-z]+") {
       new Token(m.matched, m.start, m.end, i.toDouble / length)
     }
 
+  }
+
+}
+
+
+object Tokenizer {
+
+  def loadSentenceModel = {
+    val path = getClass.getResource("/en-sent.bin")
+    val model = new SentenceModel(path)
+    new SentenceDetectorME(model)
   }
 
 }
@@ -82,10 +86,4 @@ object Text {
 
   }
 
-}
-
-
-object Corpus extends App {
-  val tokenize = new Tokenizer
-  tokenize("This is a sentence. And another one.")
 }
