@@ -2,8 +2,7 @@
 
 import org.apache.spark.sql.SparkSession
 
-import lint.corpus._
-import pprint.pprintln
+import lint.text._
 
 
 object WriteTexts {

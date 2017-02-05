@@ -1,6 +1,6 @@
 
 
-package lint.corpus
+package lint.tokenizer
 
 import java.io.FileInputStream
 import scala.io.Source
@@ -93,48 +93,7 @@ object Tokenizer {
 }
 
 
-final case class Text private (
-  identifier: String,
-  title: String,
-  authorFirst: String,
-  authorLast: String,
-  year: Int,
-  text: String,
-  tokens: Seq[Token]
-)
-
-
-object Text {
-
-  /* Tokenize the raw text.
-   */
-  def apply(
-    identifier: String,
-    title: String,
-    authorFirst: String,
-    authorLast: String,
-    year: Int,
-    text: String
-  ) = {
-
-    val tokens = Tokenizer.tokenize(text)
-
-    new Text(
-      identifier,
-      title,
-      authorFirst,
-      authorLast,
-      year,
-      text,
-      tokens
-    )
-
-  }
-
-}
-
-
-object Corpus extends App {
-  val tokens = Tokenizer.tokenize("My name is David. I love Kara.")
+object Test extends App {
+  val tokens = Tokenizer.tokenize("My name is David. Does this work??")
   pprintln(tokens)
 }

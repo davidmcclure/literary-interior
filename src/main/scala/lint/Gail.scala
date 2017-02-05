@@ -6,7 +6,6 @@ import java.io.File
 import scala.xml.{XML,Elem,Node}
 
 
-// TODO: test
 class Novel(val xml: Elem) {
 
   def identifier: String = {
