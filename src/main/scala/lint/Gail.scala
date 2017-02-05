@@ -56,6 +56,7 @@ object Novel {
    */
   def fromFile(path: String): Novel = {
 
+    // TODO: Singleton?
     val factory = javax.xml.parsers.SAXParserFactory.newInstance()
 
     factory.setFeature(
