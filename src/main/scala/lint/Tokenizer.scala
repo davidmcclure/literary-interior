@@ -21,23 +21,19 @@ final case class Token(
 
 object Tokenizer {
 
-  val sentenceModel = loadSentenceModel
-  val tokenizerModel = loadTokenizerModel
-  val posModel = loadPOSModel
-
-  def loadSentenceModel = {
+  val sentenceModel = {
     val path = getClass.getResource("/en-sent.bin")
     val model = new SentenceModel(path)
     new SentenceDetectorME(model)
   }
 
-  def loadTokenizerModel = {
+  val tokenizerModel = {
     val path = getClass.getResource("/en-token.bin")
     val model = new TokenizerModel(path)
     new TokenizerME(model)
   }
 
-  def loadPOSModel = {
+  val posModel = {
     val path = getClass.getResource("/en-pos-maxent.bin")
     val model = new POSModel(path)
     new POSTaggerME(model)
@@ -94,6 +90,6 @@ object Tokenizer {
 
 
 object Test extends App {
-  val tokens = Tokenizer.tokenize("My name is David. Does this work??")
+  val tokens = Tokenizer.tokenize("My name is David. Does this work???")
   pprintln(tokens)
 }
