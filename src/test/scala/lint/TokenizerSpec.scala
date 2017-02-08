@@ -57,6 +57,8 @@ class TokenizerSpec extends FlatSpec with Matchers {
     tokens(1).end shouldEqual 6
 
     tokens(2).token shouldEqual "."
+    tokens(2).start shouldEqual 6
+    tokens(2).end shouldEqual 7
 
     tokens(3).token shouldEqual "she"
     tokens(3).start shouldEqual 8
@@ -67,6 +69,8 @@ class TokenizerSpec extends FlatSpec with Matchers {
     tokens(4).end shouldEqual 16
 
     tokens(5).token shouldEqual "."
+    tokens(5).start shouldEqual 16
+    tokens(5).end shouldEqual 17
 
     tokens(6).token shouldEqual "he"
     tokens(6).start shouldEqual 18
@@ -75,6 +79,10 @@ class TokenizerSpec extends FlatSpec with Matchers {
     tokens(7).token shouldEqual "strolls"
     tokens(7).start shouldEqual 21
     tokens(7).end shouldEqual 28
+
+    tokens(8).token shouldEqual "."
+    tokens(8).start shouldEqual 28
+    tokens(8).end shouldEqual 29
 
   }
 
@@ -99,9 +107,42 @@ class TokenizerSpec extends FlatSpec with Matchers {
 
   }
 
+  it should "track 0-1 ratio offsets across sentences" in {
+
+    val tokens = Tokenizer.tokenize("I walk. She runs. He strolls.")
+
+    tokens(0).token shouldEqual "i"
+    tokens(0).offset shouldEqual 0
+
+    tokens(1).token shouldEqual "walk"
+    tokens(1).offset shouldEqual 0.125
+
+    tokens(2).token shouldEqual "."
+    tokens(2).offset shouldEqual 0.25
+
+    tokens(3).token shouldEqual "she"
+    tokens(3).offset shouldEqual 0.375
+
+    tokens(4).token shouldEqual "runs"
+    tokens(4).offset shouldEqual 0.5
+
+    tokens(5).token shouldEqual "."
+    tokens(5).offset shouldEqual 0.625
+
+    tokens(6).token shouldEqual "he"
+    tokens(6).offset shouldEqual 0.75
+
+    tokens(7).token shouldEqual "strolls"
+    tokens(7).offset shouldEqual 0.875
+
+    tokens(8).token shouldEqual "."
+    tokens(8).offset shouldEqual 1
+
+  }
+
   it should "downcase tokens" in {
 
-    val tokens = Tokenizer.tokenize("MY NAME IS DAVID")
+    val tokens = Tokenizer.tokenize("My Name Is David.")
 
     tokens(0).token shouldEqual "my"
     tokens(1).token shouldEqual "name"
