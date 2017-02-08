@@ -52,22 +52,25 @@ class Novel(val xml: Elem) {
 
 object Novel {
 
-  /* Read Gail XML, disabling DTD validation.
-   */
-  def fromFile(path: String): Novel = {
+  // Singleton SAX parser.
+  val factory = {
 
-    // TODO: Singleton?
-    val factory = javax.xml.parsers.SAXParserFactory.newInstance()
+    val saxFactory = javax.xml.parsers.SAXParserFactory.newInstance()
 
-    factory.setFeature(
+    saxFactory.setFeature(
       "http://apache.org/xml/features/nonvalidating/load-external-dtd",
       false
     )
 
+    saxFactory
+
+  }
+
+  /* Read Gail XML, disabling DTD validation.
+   */
+  def fromFile(path: String): Novel = {
     val tree = XML.withSAXParser(factory.newSAXParser).loadFile(path)
-
     new Novel(tree)
-
   }
 
 }
