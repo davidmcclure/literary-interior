@@ -9,29 +9,29 @@ import scala.xml.{XML,Elem,Node}
 class NovelSpec extends FlatSpec with Matchers {
 
   ".identifier()" should "provide the PSMID" in {
-    val novel = new Novel(NovelXML(identifier="1"))
+    val novel = NovelFixture(identifier="1")
     novel.identifier shouldEqual "1"
   }
 
   ".title()" should "provide the title" in {
-    val novel = new Novel(NovelXML(title="Moby Dick"))
+    val novel = NovelFixture(title="Moby Dick")
     novel.title shouldEqual "Moby Dick"
   }
 
   ".authorFirst()" should "provide the author's first name" in {
-    val novel = new Novel(NovelXML(authorFirst="Herman"))
+    val novel = NovelFixture(authorFirst="Herman")
     novel.authorFirst shouldEqual "Herman"
   }
 
   ".authorLast()" should "provide the author's last name" in {
-    val novel = new Novel(NovelXML(authorFirst="Melville"))
+    val novel = NovelFixture(authorFirst="Melville")
     novel.authorFirst shouldEqual "Melville"
   }
 
 }
 
 
-object NovelXML {
+object NovelFixture {
 
   def apply(
     identifier: String = "1",
@@ -39,14 +39,15 @@ object NovelXML {
     authorFirst: String = "Herman",
     authorLast: String = "Melville",
     year: Int = 1900
-  ): Elem = {
+  ): Novel = {
 
-//<?xml version="1.0" encoding="UTF-8"?>
-//<!DOCTYPE book SYSTEM "amfcbook.dtd">
-<book contentType="monograph" ID="{ identifier }" FAID="AMFCF0002" COLID="C00000">
+    val xml =s"""
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book SYSTEM "amfcbook.dtd">
+<book contentType="monograph" ID="$identifier" FAID="AMFCF0002" COLID="C00000">
 	<bookInfo>
 		<ocr>56.66</ocr>
-    <PSMID>{ identifier }</PSMID>
+    <PSMID>$identifier</PSMID>
 		<assetID>WUQLKP724100933</assetID>
 		<assetIDeTOC>LDWXMF531190421</assetIDeTOC>
 		<dviCollectionID>AMFCC0001</dviCollectionID>
@@ -56,7 +57,7 @@ object NovelXML {
 		<pubDate>
 			<irregular>[1849]</irregular>
 			<composed>[1849]</composed>
-			<pubDateStart>{ year }0000</pubDateStart>
+			<pubDateStart>${year}0000</pubDateStart>
 		</pubDate>
 		<releaseDate>20160331</releaseDate>
 		<sourceLibrary>
@@ -71,16 +72,16 @@ object NovelXML {
 		<authorGroup role="author">
 			<author>
 				<composed>McClure, David W.</composed>
-        <first>{ authorFirst }</first>
+        <first>$authorFirst</first>
 				<middle>W.</middle>
-        <last>{ authorLast }</last>
+        <last>$authorLast</last>
 				<birthDate>1810</birthDate>
 				<deathDate>1867</deathDate>
 			</author>
 		</authorGroup>
 		<titleGroup>
-			<fullTitle>{ title }</fullTitle>
-			<displayTitle>{ title }</displayTitle>
+			<fullTitle>$title</fullTitle>
+			<displayTitle>$title</displayTitle>
 		</titleGroup>
 		<volumeGroup>
 			<currentVolume>0</currentVolume>
@@ -136,6 +137,9 @@ object NovelXML {
 
 	</text>
 </book>
+"""
+
+    Novel.fromString(xml.trim)
 
   }
 

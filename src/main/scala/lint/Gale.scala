@@ -52,24 +52,31 @@ class Novel(val xml: Elem) {
 
 object Novel {
 
-  // Singleton SAX parser.
-  val factory = {
+  // Singleton SAX parser, with DTD validation disabled.
+  val loader = {
 
-    val saxFactory = javax.xml.parsers.SAXParserFactory.newInstance()
+    val factory = javax.xml.parsers.SAXParserFactory.newInstance()
 
-    saxFactory.setFeature(
+    factory.setFeature(
       "http://apache.org/xml/features/nonvalidating/load-external-dtd",
       false
     )
 
-    saxFactory
+    XML.withSAXParser(factory.newSAXParser)
 
   }
 
-  /* Read Gale XML, disabling DTD validation.
+  /* Make novel from XML string.
    */
-  def fromFile(path: String): Novel = {
-    val tree = XML.withSAXParser(factory.newSAXParser).loadFile(path)
+  def fromString(markup: String): Novel = {
+    val tree = loader.loadString(markup)
+    new Novel(tree)
+  }
+
+  /* Make novel from a file path.
+   */
+  def fromPath(path: String): Novel = {
+    val tree = loader.loadFile(path)
     new Novel(tree)
   }
 
