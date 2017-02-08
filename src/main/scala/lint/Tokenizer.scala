@@ -21,19 +21,11 @@ final case class Token(
 
 object Tokenizer {
 
+  // Sentences
+
   val sentenceModel = {
     val path = getClass.getResource("/en-sent.bin")
     new SentenceModel(path)
-  }
-
-  val tokenizerModel = {
-    val path = getClass.getResource("/en-token.bin")
-    new TokenizerModel(path)
-  }
-
-  val posModel = {
-    val path = getClass.getResource("/en-pos-maxent.bin")
-    new POSModel(path)
   }
 
   def getSentPos(text: String) = {
@@ -41,9 +33,23 @@ object Tokenizer {
     detector.sentPosDetect(text)
   }
 
+  // Tokens
+
+  val tokenizerModel = {
+    val path = getClass.getResource("/en-token.bin")
+    new TokenizerModel(path)
+  }
+
   def getTokenPos(sentence: String) = {
     val tokenizer = new TokenizerME(tokenizerModel)
     tokenizer.tokenizePos(sentence)
+  }
+
+  // POS-tags
+
+  val posModel = {
+    val path = getClass.getResource("/en-pos-maxent.bin")
+    new POSModel(path)
   }
 
   def getPosTags(tokens: Array[String]) = {
