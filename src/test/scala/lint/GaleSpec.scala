@@ -1,6 +1,6 @@
 
 
-package lint.gail
+package lint.gale
 
 import org.scalatest._
 

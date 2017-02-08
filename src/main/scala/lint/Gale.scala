@@ -1,6 +1,6 @@
 
 
-package lint.gail
+package lint.gale
 
 import java.io.File
 import scala.xml.{XML,Elem,Node}
@@ -66,7 +66,7 @@ object Novel {
 
   }
 
-  /* Read Gail XML, disabling DTD validation.
+  /* Read Gale XML, disabling DTD validation.
    */
   def fromFile(path: String): Novel = {
     val tree = XML.withSAXParser(factory.newSAXParser).loadFile(path)
