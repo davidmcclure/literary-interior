@@ -44,4 +44,25 @@ class TokenizerSpec extends FlatSpec with Matchers {
 
   }
 
+  it should "store 0-1 ratio offsets" in {
+
+    val tokens = Tokenizer.tokenize("1 2 3 4 5")
+
+    tokens(0).token shouldEqual "1"
+    tokens(0).offset shouldEqual 0
+
+    tokens(1).token shouldEqual "2"
+    tokens(1).offset shouldEqual 0.25
+
+    tokens(2).token shouldEqual "3"
+    tokens(2).offset shouldEqual 0.5
+
+    tokens(3).token shouldEqual "4"
+    tokens(3).offset shouldEqual 0.75
+
+    tokens(4).token shouldEqual "5"
+    tokens(4).offset shouldEqual 1
+
+  }
+
 }
