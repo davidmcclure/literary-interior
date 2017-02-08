@@ -65,4 +65,15 @@ class TokenizerSpec extends FlatSpec with Matchers {
 
   }
 
+  it should "downcase tokens" in {
+
+    val tokens = Tokenizer.tokenize("MY NAME IS DAVID")
+
+    tokens(0).token shouldEqual "my"
+    tokens(1).token shouldEqual "name"
+    tokens(2).token shouldEqual "is"
+    tokens(3).token shouldEqual "david"
+
+  }
+
 }
