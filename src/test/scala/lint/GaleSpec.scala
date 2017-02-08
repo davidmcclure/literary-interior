@@ -28,6 +28,11 @@ class NovelSpec extends FlatSpec with Matchers {
     novel.authorFirst shouldEqual "Melville"
   }
 
+  ".year()" should "provide the publication year" in {
+    val novel = NovelFixture(year=1851)
+    novel.year shouldEqual 1851
+  }
+
 }
 
 
