@@ -36,16 +36,27 @@ object Tokenizer {
     new POSModel(path)
   }
 
+  def getSentPos(text: String) = {
+    val detector = new SentenceDetectorME(sentenceModel)
+    detector.sentPosDetect(text)
+  }
+
+  def getTokenPos(sentence: String) = {
+    val tokenizer = new TokenizerME(tokenizerModel)
+    tokenizer.tokenizePos(sentence)
+  }
+
+  def getPosTags(tokens: Array[String]) = {
+    val tagger = new POSTaggerME(posModel)
+    tagger.tag(tokens)
+  }
+
   /* Convert a string into a stream of Tokens.
    */
   def tokenize(text: String): Seq[Token] = {
 
-    val sentenceDetector = new SentenceDetectorME(sentenceModel)
-    val tokenizer = new TokenizerME(tokenizerModel)
-    val posTagger = new POSTaggerME(posModel)
-
     // Get sentence boundaries.
-    val sentPos = sentenceDetector.sentPosDetect(text)
+    val sentPos = getSentPos(text)
 
     val tokens = sentPos.flatMap(sentSpan => {
 
@@ -53,7 +64,7 @@ object Tokenizer {
       val sentence = text.slice(sentSpan.getStart, sentSpan.getEnd)
 
       // Get token boundaries.
-      val tokenPos = tokenizer.tokenizePos(sentence)
+      val tokenPos = getTokenPos(sentence)
 
       // Extract tokens
       val tokens = for (tokenSpan <- tokenPos) yield {
@@ -61,7 +72,7 @@ object Tokenizer {
       }
 
       // POS-tag tokens.
-      val tags = posTagger.tag(tokens)
+      val tags = getPosTags(tokens)
 
       // Zip together (token, POS, start, end).
       for (
