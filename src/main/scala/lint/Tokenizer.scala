@@ -116,6 +116,6 @@ object Test extends App {
   }
 
   val t2 = System.nanoTime
-  println(t2-t1)
+  println((t2-t1) / 1e9)
 
 }
