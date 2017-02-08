@@ -23,28 +23,29 @@ object Tokenizer {
 
   val sentenceModel = {
     val path = getClass.getResource("/en-sent.bin")
-    val model = new SentenceModel(path)
-    new SentenceDetectorME(model)
+    new SentenceModel(path)
   }
 
   val tokenizerModel = {
     val path = getClass.getResource("/en-token.bin")
-    val model = new TokenizerModel(path)
-    new TokenizerME(model)
+    new TokenizerModel(path)
   }
 
   val posModel = {
     val path = getClass.getResource("/en-pos-maxent.bin")
-    val model = new POSModel(path)
-    new POSTaggerME(model)
+    new POSModel(path)
   }
 
   /* Convert a string into a stream of Tokens.
    */
   def tokenize(text: String): Seq[Token] = {
 
+    val sentenceDetector = new SentenceDetectorME(sentenceModel)
+    val tokenizer = new TokenizerME(tokenizerModel)
+    val posTagger = new POSTaggerME(posModel)
+
     // Get sentence boundaries.
-    val sentPos = sentenceModel.sentPosDetect(text)
+    val sentPos = sentenceDetector.sentPosDetect(text)
 
     val tokens = sentPos.flatMap(sentSpan => {
 
@@ -52,7 +53,7 @@ object Tokenizer {
       val sentence = text.slice(sentSpan.getStart, sentSpan.getEnd)
 
       // Get token boundaries.
-      val tokenPos = tokenizerModel.tokenizePos(sentence)
+      val tokenPos = tokenizer.tokenizePos(sentence)
 
       // Extract tokens
       val tokens = for (tokenSpan <- tokenPos) yield {
@@ -60,7 +61,7 @@ object Tokenizer {
       }
 
       // POS-tag tokens.
-      val tags = posModel.tag(tokens)
+      val tags = posTagger.tag(tokens)
 
       // Zip together (token, POS, start, end).
       for (
@@ -90,6 +91,14 @@ object Tokenizer {
 
 
 object Test extends App {
-  val tokens = Tokenizer.tokenize("My name is David. Does this work???")
-  pprintln(tokens)
+
+  val t1 = System.nanoTime
+
+  for (_ <- 0 to 1000) {
+    Tokenizer.tokenize("My name is David. Does this work???")
+  }
+
+  val t2 = System.nanoTime
+  println(t2-t1)
+
 }
