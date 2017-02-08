@@ -44,6 +44,40 @@ class TokenizerSpec extends FlatSpec with Matchers {
 
   }
 
+  it should "track character offsets across sentences" in {
+
+    val tokens = Tokenizer.tokenize("I walk. She runs. He strolls.")
+
+    tokens(0).token shouldEqual "i"
+    tokens(0).start shouldEqual 0
+    tokens(0).end shouldEqual 1
+
+    tokens(1).token shouldEqual "walk"
+    tokens(1).start shouldEqual 2
+    tokens(1).end shouldEqual 6
+
+    tokens(2).token shouldEqual "."
+
+    tokens(3).token shouldEqual "she"
+    tokens(3).start shouldEqual 8
+    tokens(3).end shouldEqual 11
+
+    tokens(4).token shouldEqual "runs"
+    tokens(4).start shouldEqual 12
+    tokens(4).end shouldEqual 16
+
+    tokens(5).token shouldEqual "."
+
+    tokens(6).token shouldEqual "he"
+    tokens(6).start shouldEqual 18
+    tokens(6).end shouldEqual 20
+
+    tokens(7).token shouldEqual "strolls"
+    tokens(7).start shouldEqual 21
+    tokens(7).end shouldEqual 28
+
+  }
+
   it should "store 0-1 ratio offsets" in {
 
     val tokens = Tokenizer.tokenize("1 2 3 4 5")
