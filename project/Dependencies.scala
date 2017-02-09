@@ -27,4 +27,7 @@ object Dependencies {
   lazy val scalaTest =
     "org.scalatest" %% "scalatest" % "3.0.1"
 
+  lazy val jinjava =
+    "com.hubspot.jinjava" % "jinjava" % "2.1.14"
+
 }
