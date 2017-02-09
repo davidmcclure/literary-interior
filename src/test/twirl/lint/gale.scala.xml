@@ -3,7 +3,8 @@ identifier: String = "1",
 title: String = "Moby Dick",
 year: Int = 1851,
 authorFirst: String = "Herman",
-authorLast: String = "Melville"
+authorLast: String = "Melville",
+tokens: Seq[String] = Seq("Call", "me", "Ishmael.")
 )
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book SYSTEM "amfcbook.dtd">
@@ -93,7 +94,9 @@ authorLast: String = "Melville"
 			</pageInfo>
 			<pageContent>
 				<p>
-					<wd pos="0,0,0,0">word</wd>
+          @for(token <- tokens) {
+            <wd pos="0,0,0,0">@token</wd>
+          }
 				</p>
 			</pageContent>
 		</page>

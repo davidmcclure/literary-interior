@@ -10,34 +10,40 @@ import com.hubspot.jinjava.Jinjava
 
 class NovelSpec extends FlatSpec with Matchers {
 
-  ".identifier()" should "provide the PSMID" in {
+  ".identifier" should "provide the PSMID" in {
     val xml = lint.xml.gale(identifier="1")
     val novel = Novel.fromString(xml.toString.trim)
     novel.identifier shouldEqual "1"
   }
 
-  ".title()" should "provide the title" in {
+  ".title" should "provide the title" in {
     val xml = lint.xml.gale(title="Moby Dick")
     val novel = Novel.fromString(xml.toString.trim)
     novel.title shouldEqual "Moby Dick"
   }
 
-  ".authorFirst()" should "provide the author's first name" in {
+  ".authorFirst" should "provide the author's first name" in {
     val xml = lint.xml.gale(authorFirst="Herman")
     val novel = Novel.fromString(xml.toString.trim)
     novel.authorFirst shouldEqual "Herman"
   }
 
-  ".authorLast()" should "provide the author's last name" in {
+  ".authorLast" should "provide the author's last name" in {
     val xml = lint.xml.gale(authorLast="Melville")
     val novel = Novel.fromString(xml.toString.trim)
     novel.authorLast shouldEqual "Melville"
   }
 
-  ".year()" should "provide the publication year" in {
+  ".year" should "provide the publication year" in {
     val xml = lint.xml.gale(year=1851)
     val novel = Novel.fromString(xml.toString.trim)
     novel.year shouldEqual 1851
+  }
+
+  ".plainText" should "provide joined tokens" in {
+    val xml = lint.xml.gale(tokens=Seq("Call", "me", "Ishmael."))
+    val novel = Novel.fromString(xml.toString.trim)
+    novel.plainText shouldEqual "Call me Ishmael."
   }
 
 }
