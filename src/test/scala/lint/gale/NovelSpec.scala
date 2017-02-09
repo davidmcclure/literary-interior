@@ -11,64 +11,33 @@ import com.hubspot.jinjava.Jinjava
 class NovelSpec extends FlatSpec with Matchers {
 
   ".identifier()" should "provide the PSMID" in {
-
     val xml = lint.xml.gale(identifier="1")
-
     val novel = Novel.fromString(xml.toString.trim)
-
     novel.identifier shouldEqual "1"
-
   }
 
-  //".title()" should "provide the title" in {
-    //val novel = NovelFixture(title="Moby Dick")
-    //novel.title shouldEqual "Moby Dick"
-  //}
+  ".title()" should "provide the title" in {
+    val xml = lint.xml.gale(title="Moby Dick")
+    val novel = Novel.fromString(xml.toString.trim)
+    novel.title shouldEqual "Moby Dick"
+  }
 
-  //".authorFirst()" should "provide the author's first name" in {
-    //val novel = NovelFixture(authorFirst="Herman")
-    //novel.authorFirst shouldEqual "Herman"
-  //}
+  ".authorFirst()" should "provide the author's first name" in {
+    val xml = lint.xml.gale(authorFirst="Herman")
+    val novel = Novel.fromString(xml.toString.trim)
+    novel.authorFirst shouldEqual "Herman"
+  }
 
-  //".authorLast()" should "provide the author's last name" in {
-    //val novel = NovelFixture(authorFirst="Melville")
-    //novel.authorFirst shouldEqual "Melville"
-  //}
+  ".authorLast()" should "provide the author's last name" in {
+    val xml = lint.xml.gale(authorLast="Melville")
+    val novel = Novel.fromString(xml.toString.trim)
+    novel.authorLast shouldEqual "Melville"
+  }
 
-  //".year()" should "provide the publication year" in {
-    //val novel = NovelFixture(year=1851)
-    //novel.year shouldEqual 1851
-  //}
+  ".year()" should "provide the publication year" in {
+    val xml = lint.xml.gale(year=1851)
+    val novel = Novel.fromString(xml.toString.trim)
+    novel.year shouldEqual 1851
+  }
 
 }
-
-
-//object NovelFixture {
-
-  //def apply(
-    //identifier: String = "1",
-    //title: String = "Moby Dick",
-    //authorFirst: String = "Herman",
-    //authorLast: String = "Melville",
-    //year: Int = 1900
-  //): Novel = {
-
-    //val stream = getClass.getResourceAsStream("/gale.xml")
-    //val template = Source.fromInputStream(stream).mkString
-
-    //val ctx = new java.util.HashMap[String, String]
-
-    //ctx.put("identifier", identifier)
-    //ctx.put("title", title)
-    //ctx.put("authorFirst", authorFirst)
-    //ctx.put("authorLast", authorLast)
-    //ctx.put("year", year.toString)
-
-    //val jinjava = new Jinjava
-    //val xml = jinjava.render(template, ctx)
-
-    //Novel.fromString(xml)
-
-  //}
-
-//}
