@@ -1,9 +1,16 @@
+@(
+identifier: String = "1",
+title: String = "Moby Dick",
+year: Int = 1851,
+authorFirst: String = "Herman",
+authorLast: String = "Melville"
+)
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book SYSTEM "amfcbook.dtd">
-<book contentType="monograph" ID="{{ identifier }}" FAID="AMFCF0002" COLID="C00000">
+<book contentType="monograph" ID="@identifier" FAID="AMFCF0002" COLID="C00000">
 	<bookInfo>
 		<ocr>56.66</ocr>
-    <PSMID>{{ identifier }}</PSMID>
+    <PSMID>@identifier</PSMID>
 		<assetID>WUQLKP724100933</assetID>
 		<assetIDeTOC>LDWXMF531190421</assetIDeTOC>
 		<dviCollectionID>AMFCC0001</dviCollectionID>
@@ -13,7 +20,7 @@
 		<pubDate>
 			<irregular>[1849]</irregular>
 			<composed>[1849]</composed>
-      <pubDateStart>{{ year }}0000</pubDateStart>
+      <pubDateStart>@{year}0000</pubDateStart>
 		</pubDate>
 		<releaseDate>20160331</releaseDate>
 		<sourceLibrary>
@@ -28,16 +35,16 @@
 		<authorGroup role="author">
 			<author>
 				<composed>McClure, David W.</composed>
-        <first>{{ authorFirst }}</first>
+        <first>@authorFirst</first>
 				<middle>W.</middle>
-        <last>{{ authorLast }}</last>
+        <last>@authorLast</last>
 				<birthDate>1810</birthDate>
 				<deathDate>1867</deathDate>
 			</author>
 		</authorGroup>
 		<titleGroup>
-      <fullTitle>{{ title }}</fullTitle>
-      <displayTitle>{{ title }}</displayTitle>
+      <fullTitle>@title</fullTitle>
+      <displayTitle>@title</displayTitle>
 		</titleGroup>
 		<volumeGroup>
 			<currentVolume>0</currentVolume>
