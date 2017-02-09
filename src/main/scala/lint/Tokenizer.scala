@@ -105,17 +105,3 @@ object Tokenizer {
   }
 
 }
-
-
-object Test extends App {
-
-  val t1 = System.nanoTime
-
-  for (_ <- 0 to 1000) {
-    Tokenizer.tokenize("My name is David. Does this work???")
-  }
-
-  val t2 = System.nanoTime
-  println((t2-t1) / 1e9)
-
-}
