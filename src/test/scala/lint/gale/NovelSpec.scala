@@ -48,8 +48,6 @@ object NovelFixture {
     year: Int = 1900
   ): Novel = {
 
-    val jinjava = new Jinjava
-
     val stream = getClass.getResourceAsStream("/gale.xml")
     val template = Source.fromInputStream(stream).mkString
 
@@ -61,6 +59,7 @@ object NovelFixture {
     ctx.put("authorLast", authorLast)
     ctx.put("year", year.toString)
 
+    val jinjava = new Jinjava
     val xml = jinjava.render(template, ctx)
 
     Novel.fromString(xml)
