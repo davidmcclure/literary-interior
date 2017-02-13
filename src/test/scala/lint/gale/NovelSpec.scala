@@ -55,12 +55,12 @@ object NovelSpec {
   ): Novel = {
 
     val xml = lint.xml.gale(
-      identifier=identifier,
-      title=title,
-      authorFirst=authorFirst,
-      authorLast=authorLast,
-      year=year,
-      tokens=tokens
+      identifier = identifier,
+      title = title,
+      authorFirst = authorFirst,
+      authorLast = authorLast,
+      year = year,
+      tokens = tokens
     )
 
     Novel.fromString(xml.toString.trim)
