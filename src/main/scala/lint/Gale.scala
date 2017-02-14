@@ -5,6 +5,8 @@ package lint.gale
 import java.io.File
 import scala.xml.{XML,Elem,Node}
 
+import lint.text.Text
+
 
 class Novel(val xml: Elem) {
 
@@ -78,6 +80,35 @@ object Novel {
   def fromPath(path: String): Novel = {
     val tree = loader.loadFile(path)
     new Novel(tree)
+  }
+
+}
+
+
+trait Loader[T] {
+  def listSources: List[T]
+  def parse(source: T): Text
+}
+
+
+object FilesystemLoader extends Loader[String] {
+
+  def listSources = {
+    List("path1", "path2")
+  }
+
+  def parse(source: String) = {
+
+    Text(
+      corpus="gale",
+      identifier="1",
+      title="Title",
+      authorFirst="David",
+      authorLast="McClure",
+      year=2000,
+      text="Test."
+    )
+
   }
 
 }
