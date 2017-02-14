@@ -4,6 +4,7 @@ package lint.gale
 
 import java.io.File
 import scala.xml.{XML,Elem,Node}
+import scala.util.matching.Regex
 
 import lint.text.Text
 
@@ -85,6 +86,39 @@ object Novel {
 }
 
 
+object FileSystem {
+
+  /* List a directory recursively.
+   */
+  def walkTree(f: File): Iterable[File] = {
+
+    val children = new Iterable[File] {
+      def iterator = {
+        if (f.isDirectory) f.listFiles.iterator
+        else Iterator.empty
+      }
+    }
+
+    Seq(f) ++: children.flatMap(walkTree(_))
+
+  }
+
+}
+
+
+class Corpus(private val path: String) {
+
+  val root = new File(path)
+
+  /* Recursively list XML sources.
+   */
+  def listPaths = {
+    FileSystem.walkTree(root).filter(_.toString.endsWith(".xml"))
+  }
+
+}
+
+
 trait Loader[T] {
   def listSources: List[T]
   def parse(source: T): Text
@@ -94,11 +128,13 @@ trait Loader[T] {
 object FilesystemLoader extends Loader[String] {
 
   def listSources = {
+    // TODO: List files.
     List("path1", "path2")
   }
 
   def parse(source: String) = {
 
+    // TODO: Read XML from file, parse fields.
     Text(
       corpus="gale",
       identifier="1",
