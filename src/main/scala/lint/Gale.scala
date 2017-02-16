@@ -62,7 +62,7 @@ class Novel(val xml: Elem) {
 object Novel {
 
   // Singleton SAX parser, with DTD validation disabled.
-  val loader = {
+  def loader = {
 
     val factory = javax.xml.parsers.SAXParserFactory.newInstance()
 
