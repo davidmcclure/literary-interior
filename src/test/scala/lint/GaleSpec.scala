@@ -35,11 +35,11 @@ class NovelSpec extends FreeSpec with Matchers {
     }
 
     ".authorFirst" in new Novel {
-      novel.authorFirst shouldEqual "Herman"
+      novel.authorFirst shouldEqual Some("Herman")
     }
 
     ".authorLast" in new Novel {
-      novel.authorLast shouldEqual "Melville"
+      novel.authorLast shouldEqual Some("Melville")
     }
 
     ".year" in new Novel {
@@ -75,25 +75,21 @@ class NovelSpec extends FreeSpec with Matchers {
       novel.title shouldEqual "Moby Dick"
     }
 
-    //".authorFirst" in {
-      //val novel = NovelSpec.makeNovel(authorFirst="Herman")
-      //novel.authorFirst shouldEqual "Herman"
-    //}
+    ".authorFirst" in new Novel {
+      novel.authorFirst shouldEqual None
+    }
 
-    //".authorLast" in {
-      //val novel = NovelSpec.makeNovel(authorLast="Melville")
-      //novel.authorLast shouldEqual "Melville"
-    //}
+    ".authorLast" in new Novel {
+      novel.authorLast shouldEqual None
+    }
 
-    //".year" in {
-      //val novel = NovelSpec.makeNovel(year=1851)
-      //novel.year shouldEqual 1851
-    //}
+    ".year" in new Novel {
+      novel.year shouldEqual 1851
+    }
 
-    //".plainText" in {
-      //val novel = NovelSpec.makeNovel(tokens=Seq("Call", "me", "Ishmael."))
-      //novel.plainText shouldEqual "Call me Ishmael."
-    //}
+    ".plainText" in new Novel {
+      novel.plainText shouldEqual "Call me Ishmael."
+    }
 
   }
 

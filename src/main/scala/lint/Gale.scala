@@ -19,16 +19,22 @@ class Novel(val xml: Elem) {
     (xml \\ "titleGroup" \ "fullTitle").head.text
   }
 
-  def author: Node = {
-    (xml \\ "author").head
+  def author: Option[Node] = {
+    (xml \\ "author").headOption
   }
 
-  def authorFirst: String = {
-    (author \ "first").head.text
+  def authorFirst: Option[String] = {
+    author match {
+      case Some(a) => Some((a \ "first").head.text)
+      case None => None
+    }
   }
 
-  def authorLast: String = {
-    (author \ "last").head.text
+  def authorLast: Option[String] = {
+    author match {
+      case Some(a) => Some((a \ "last").head.text)
+      case None => None
+    }
   }
 
   def year: Int = {

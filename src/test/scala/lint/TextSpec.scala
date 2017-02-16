@@ -15,8 +15,8 @@ class TextSpec extends FlatSpec with Matchers {
       corpus="chicago",
       identifier="1",
       title="Moby Dick",
-      authorFirst="Herman",
-      authorLast="Melville",
+      authorFirst=Some("Herman"),
+      authorLast=Some("Melville"),
       year=1851,
       text="Call me Ishmael."
     )

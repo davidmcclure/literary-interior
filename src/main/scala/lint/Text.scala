@@ -9,8 +9,8 @@ final case class Text private (
   corpus: String,
   identifier: String,
   title: String,
-  authorFirst: String,
-  authorLast: String,
+  authorFirst: Option[String],
+  authorLast: Option[String],
   year: Int,
   text: String,
   tokens: Seq[Token]
@@ -25,8 +25,8 @@ object Text {
     corpus: String,
     identifier: String,
     title: String,
-    authorFirst: String,
-    authorLast: String,
+    authorFirst: Option[String],
+    authorLast: Option[String],
     year: Int,
     text: String
   ) = {

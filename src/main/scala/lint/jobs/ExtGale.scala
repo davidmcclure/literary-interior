@@ -20,9 +20,7 @@ object ExtGale {
 
     val texts = sc
       .parallelize(FileSystemLoader.listSources)
-      .map(s => Try(FileSystemLoader.parse(s)))
-      .filter(_.isSuccess)
-      .map(_.get)
+      .map(FileSystemLoader.parse)
 
     val ds = spark.createDataset(texts)
 

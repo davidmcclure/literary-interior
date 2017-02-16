@@ -18,8 +18,8 @@ object WriteTexts {
         corpus="chicago",
         identifier=i.toString,
         title=s"Title${i}",
-        authorFirst=s"David${i}",
-        authorLast=s"McClure${i}",
+        authorFirst=Some(s"David${i}"),
+        authorLast=Some(s"McClure${i}"),
         year=2000+i,
         text="Does this work?"
       )
