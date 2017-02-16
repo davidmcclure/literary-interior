@@ -11,33 +11,42 @@ class NovelSpec extends FreeSpec with Matchers {
 
   "Author" - {
 
-    ".identifier" in {
-      val novel = NovelSpec.makeNovel(identifier="1")
+    trait Novel {
+
+      val xml = lint.xml.galeDefault(
+        identifier="1",
+        title="Moby Dick",
+        authorFirst="Herman",
+        authorLast="Melville",
+        year=1851,
+        tokens=Seq("Call", "me", "Ishmael.")
+      )
+
+      val novel = Novel.fromString(xml.toString.trim)
+
+    }
+
+    ".identifier" in new Novel {
       novel.identifier shouldEqual "1"
     }
 
-    ".title" in {
-      val novel = NovelSpec.makeNovel(title="Moby Dick")
+    ".title" in new Novel {
       novel.title shouldEqual "Moby Dick"
     }
 
-    ".authorFirst" in {
-      val novel = NovelSpec.makeNovel(authorFirst="Herman")
+    ".authorFirst" in new Novel {
       novel.authorFirst shouldEqual "Herman"
     }
 
-    ".authorLast" in {
-      val novel = NovelSpec.makeNovel(authorLast="Melville")
+    ".authorLast" in new Novel {
       novel.authorLast shouldEqual "Melville"
     }
 
-    ".year" in {
-      val novel = NovelSpec.makeNovel(year=1851)
+    ".year" in new Novel {
       novel.year shouldEqual 1851
     }
 
-    ".plainText" in {
-      val novel = NovelSpec.makeNovel(tokens=Seq("Call", "me", "Ishmael."))
+    ".plainText" in new Novel {
       novel.plainText shouldEqual "Call me Ishmael."
     }
 
@@ -45,16 +54,26 @@ class NovelSpec extends FreeSpec with Matchers {
 
   "No author" - {
 
-    ".identifier" in {
-      val xml = lint.xml.galeNoAuthor(identifier="1")
+    trait Novel {
+
+      val xml = lint.xml.galeNoAuthor(
+        identifier="1",
+        title="Moby Dick",
+        year=1851,
+        tokens=Seq("Call", "me", "Ishmael.")
+      )
+
       val novel = Novel.fromString(xml.toString.trim)
+
+    }
+
+    ".identifier" in new Novel {
       novel.identifier shouldEqual "1"
     }
 
-    //".title" in {
-      //val novel = NovelSpec.makeNovel(title="Moby Dick")
-      //novel.title shouldEqual "Moby Dick"
-    //}
+    ".title" in new Novel {
+      novel.title shouldEqual "Moby Dick"
+    }
 
     //".authorFirst" in {
       //val novel = NovelSpec.makeNovel(authorFirst="Herman")
@@ -75,33 +94,6 @@ class NovelSpec extends FreeSpec with Matchers {
       //val novel = NovelSpec.makeNovel(tokens=Seq("Call", "me", "Ishmael."))
       //novel.plainText shouldEqual "Call me Ishmael."
     //}
-
-  }
-
-}
-
-
-object NovelSpec {
-
-  def makeNovel(
-    identifier: String = "1",
-    title: String = "title",
-    authorFirst: String = "first",
-    authorLast: String = "last",
-    year: Int = 1900,
-    tokens: Seq[String] = Seq("token")
-  ): Novel = {
-
-    val xml = lint.xml.galeDefault(
-      identifier = identifier,
-      title = title,
-      authorFirst = authorFirst,
-      authorLast = authorLast,
-      year = year,
-      tokens = tokens
-    )
-
-    Novel.fromString(xml.toString.trim)
 
   }
 
