@@ -1,0 +1,91 @@
+@(
+  identifier: String = "1",
+  title: String = "title",
+  year: Int = 1900,
+  tokens: Seq[String] = Seq("token")
+)
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book SYSTEM "amfcbook.dtd">
+<book contentType="monograph" ID="B0169300" FAID="AMFCF0002" COLID="C00000">
+	<bookInfo>
+		<ocr>50.70</ocr>
+		<PSMID>@identifier</PSMID>
+		<assetID>OVXORT274028555</assetID>
+		<assetIDeTOC>OSOCOV831637410</assetIDeTOC>
+		<dviCollectionID>AMFCC0001</dviCollectionID>
+		<bibliographicID type="MARC">ocm02171952</bibliographicID>
+		<reel>T-2</reel>
+		<mcode>2YPR</mcode>
+		<pubDate>
+			<year>1864</year>
+			<composed>1864</composed>
+			<pubDateStart>@{year}0000</pubDateStart>
+		</pubDate>
+		<releaseDate>20160331</releaseDate>
+		<sourceLibrary>
+			<libraryName>Primary Source Media</libraryName>
+			<libraryLocation>Meriden, CT, United States</libraryLocation>
+		</sourceLibrary>
+		<language ocr="English" primary="Y">English</language>
+		<documentType>Monograph</documentType>
+		<notes>Wright Bibliography Vol. II, 2425</notes>
+	</bookInfo>
+	<citation>
+		<titleGroup>
+			<fullTitle>@title</fullTitle>
+			<displayTitle>@title</displayTitle>
+		</titleGroup>
+		<volumeGroup>
+			<currentVolume>0</currentVolume>
+			<Volume>0</Volume>
+			<totalVolumes>0</totalVolumes>
+		</volumeGroup>
+		<imprint>
+			<imprintFull>Philadelphia: Barclay, 1864</imprintFull>
+			<imprintPublisher>Barclay</imprintPublisher>
+		</imprint>
+		<collation>1 online resource 84 pages</collation>
+		<publicationPlace>
+			<publicationPlaceCity>Philadelphia</publicationPlaceCity>
+			<publicationPlaceComposed>Philadelphia</publicationPlaceComposed>
+		</publicationPlace>
+		<totalPages>63</totalPages>
+	</citation>
+  <text>
+
+		<page type="titlePage" firstPage="yes">
+			<pageInfo>
+				<pageID>00010</pageID>
+				<assetID>IZPNRZ642169961</assetID>
+				<ocrLanguage>English</ocrLanguage>
+				<ocr>42.94</ocr>
+				<imageLink pageIndicator="single" width="1842" height="2992" type="jpeg" colorimage="grayscale">AMFCF0002-C00000-B0000400-00010.jpg</imageLink>
+			</pageInfo>
+			<pageContent>
+				<p>
+					<wd pos="0,0,0,0">front</wd>
+					<wd pos="0,0,0,0">matter</wd>
+				</p>
+			</pageContent>
+		</page>
+
+		<page type="bodyPage" firstPage="yes">
+			<pageInfo>
+				<pageID>00050</pageID>
+				<assetID>YLWWEE906356237</assetID>
+				<ocrLanguage>English</ocrLanguage>
+				<sourcePage>11</sourcePage>
+				<ocr>57.63</ocr>
+				<imageLink pageIndicator="single" width="1896" height="2981" type="jpeg" colorimage="grayscale">AMFCF0002-C00000-B0000400-00050.jpg</imageLink>
+			</pageInfo>
+			<pageContent>
+				<p>
+          @for(token <- tokens) {
+            <wd pos="0,0,0,0">@token</wd>
+          }
+				</p>
+			</pageContent>
+		</page>
+
+	</text>
+</book>

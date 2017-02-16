@@ -7,36 +7,75 @@ import scala.xml.{XML,Elem,Node}
 import scala.io.Source
 
 
-class NovelSpec extends FlatSpec with Matchers {
+class NovelSpec extends FreeSpec with Matchers {
 
-  ".identifier" should "provide the PSMID" in {
-    val novel = NovelSpec.makeNovel(identifier="1")
-    novel.identifier shouldEqual "1"
+  "Author" - {
+
+    ".identifier" in {
+      val novel = NovelSpec.makeNovel(identifier="1")
+      novel.identifier shouldEqual "1"
+    }
+
+    ".title" in {
+      val novel = NovelSpec.makeNovel(title="Moby Dick")
+      novel.title shouldEqual "Moby Dick"
+    }
+
+    ".authorFirst" in {
+      val novel = NovelSpec.makeNovel(authorFirst="Herman")
+      novel.authorFirst shouldEqual "Herman"
+    }
+
+    ".authorLast" in {
+      val novel = NovelSpec.makeNovel(authorLast="Melville")
+      novel.authorLast shouldEqual "Melville"
+    }
+
+    ".year" in {
+      val novel = NovelSpec.makeNovel(year=1851)
+      novel.year shouldEqual 1851
+    }
+
+    ".plainText" in {
+      val novel = NovelSpec.makeNovel(tokens=Seq("Call", "me", "Ishmael."))
+      novel.plainText shouldEqual "Call me Ishmael."
+    }
+
   }
 
-  ".title" should "provide the title" in {
-    val novel = NovelSpec.makeNovel(title="Moby Dick")
-    novel.title shouldEqual "Moby Dick"
-  }
+  "No author" - {
 
-  ".authorFirst" should "provide the author's first name" in {
-    val novel = NovelSpec.makeNovel(authorFirst="Herman")
-    novel.authorFirst shouldEqual "Herman"
-  }
+    ".identifier" in {
+      val xml = lint.xml.galeNoAuthor(identifier="1")
+      val novel = Novel.fromString(xml.toString.trim)
+      novel.identifier shouldEqual "1"
+    }
 
-  ".authorLast" should "provide the author's last name" in {
-    val novel = NovelSpec.makeNovel(authorLast="Melville")
-    novel.authorLast shouldEqual "Melville"
-  }
+    //".title" in {
+      //val novel = NovelSpec.makeNovel(title="Moby Dick")
+      //novel.title shouldEqual "Moby Dick"
+    //}
 
-  ".year" should "provide the publication year" in {
-    val novel = NovelSpec.makeNovel(year=1851)
-    novel.year shouldEqual 1851
-  }
+    //".authorFirst" in {
+      //val novel = NovelSpec.makeNovel(authorFirst="Herman")
+      //novel.authorFirst shouldEqual "Herman"
+    //}
 
-  ".plainText" should "provide joined tokens" in {
-    val novel = NovelSpec.makeNovel(tokens=Seq("Call", "me", "Ishmael."))
-    novel.plainText shouldEqual "Call me Ishmael."
+    //".authorLast" in {
+      //val novel = NovelSpec.makeNovel(authorLast="Melville")
+      //novel.authorLast shouldEqual "Melville"
+    //}
+
+    //".year" in {
+      //val novel = NovelSpec.makeNovel(year=1851)
+      //novel.year shouldEqual 1851
+    //}
+
+    //".plainText" in {
+      //val novel = NovelSpec.makeNovel(tokens=Seq("Call", "me", "Ishmael."))
+      //novel.plainText shouldEqual "Call me Ishmael."
+    //}
+
   }
 
 }
@@ -53,7 +92,7 @@ object NovelSpec {
     tokens: Seq[String] = Seq("token")
   ): Novel = {
 
-    val xml = lint.xml.gale(
+    val xml = lint.xml.galeDefault(
       identifier = identifier,
       title = title,
       authorFirst = authorFirst,

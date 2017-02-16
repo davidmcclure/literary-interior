@@ -20,7 +20,7 @@ object ExtGale {
 
     val texts = sc
       .parallelize(FileSystemLoader.listSources)
-      .map(FileSystemLoader.parse)
+      .map(s => Try(FileSystemLoader.parse(s)))
       .filter(_.isSuccess)
       .map(_.get)
 
