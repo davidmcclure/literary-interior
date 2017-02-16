@@ -3,6 +3,9 @@ import sbt._
 
 object Dependencies {
 
+  lazy val tsConfig =
+    "com.typesafe" % "config" % "1.3.1"
+
   lazy val commonsIO =
     "commons-io" % "commons-io" % "2.4"
 
@@ -26,8 +29,5 @@ object Dependencies {
 
   lazy val scalaTest =
     "org.scalatest" %% "scalatest" % "3.0.1"
-
-  lazy val jinjava =
-    "com.hubspot.jinjava" % "jinjava" % "2.1.14"
 
 }

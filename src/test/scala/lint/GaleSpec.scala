@@ -5,7 +5,6 @@ package lint.gale
 import org.scalatest._
 import scala.xml.{XML,Elem,Node}
 import scala.io.Source
-import com.hubspot.jinjava.Jinjava
 
 
 class NovelSpec extends FlatSpec with Matchers {

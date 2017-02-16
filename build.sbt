@@ -13,6 +13,7 @@ lazy val root = (project in file("."))
     name := "lint",
 
     libraryDependencies ++= Seq(
+      tsConfig,
       commonsIO,
       scalaXML,
       scalaCSV,
@@ -20,7 +21,6 @@ lazy val root = (project in file("."))
       sparkSQL,
       pprint,
       openNLP,
-      jinjava,
       scalaTest % Test
     ),
 

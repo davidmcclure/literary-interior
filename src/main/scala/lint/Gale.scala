@@ -76,16 +76,17 @@ object Novel {
     new Novel(tree)
   }
 
-  /* Make novel from a file path.
+  /* Make novel from a file.
    */
-  def fromPath(path: String): Novel = {
-    val tree = loader.loadFile(path)
+  def fromFile(file: File): Novel = {
+    val tree = loader.loadFile(file)
     new Novel(tree)
   }
 
 }
 
 
+// TODO: Different file.
 object FileSystem {
 
   /* List a directory recursively.
@@ -119,30 +120,42 @@ class Corpus(private val path: String) {
 }
 
 
+object Corpus {
+
+  /* Read corpus root from config.
+   * TODO
+   */
+  def fromConfig: Corpus = {
+    new Corpus("/Users/dclure/Projects/data/stacks/gale")
+  }
+
+}
+
+
 trait Loader[T] {
   def listSources: List[T]
   def parse(source: T): Text
 }
 
 
-object FilesystemLoader extends Loader[String] {
+object FileSystemLoader extends Loader[File] {
 
   def listSources = {
-    // TODO: List files.
-    List("path1", "path2")
+    Corpus.fromConfig.listPaths.toList
   }
 
-  def parse(source: String) = {
+  def parse(source: File) = {
 
-    // TODO: Read XML from file, parse fields.
+    val novel = Novel.fromFile(source)
+
     Text(
       corpus="gale",
-      identifier="1",
-      title="Title",
-      authorFirst="David",
-      authorLast="McClure",
-      year=2000,
-      text="Test."
+      identifier=novel.identifier,
+      title=novel.title,
+      authorFirst=novel.authorFirst,
+      authorLast=novel.authorLast,
+      year=novel.year,
+      text=novel.plainText
     )
 
   }
