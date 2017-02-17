@@ -179,4 +179,34 @@ class NovelFixturesSpec extends FreeSpec with Matchers {
 
   }
 
+  "AMFCF0003-C00000-B0000100" - {
+
+    val novel = getNovel("AMFCF0003-C00000", "AMFCF0003-C00000-B0000100")
+
+    ".identifier" in {
+      novel.identifier shouldEqual "AMFCF0003-C00000-B0000100"
+    }
+
+    ".title" in {
+      novel.title shouldEqual "Brilla: By Anna M. Doling"
+    }
+
+    ".authorFirst" in {
+      novel.authorFirst shouldEqual Some("Anna")
+    }
+
+    ".authorLast" in {
+      novel.authorLast shouldEqual Some("Doling")
+    }
+
+    ".year" in {
+      novel.year shouldEqual 1913
+    }
+
+    ".plainText" in {
+      novel.plainText should include ("Captain Bawkah they call me.")
+    }
+
+  }
+
 }
