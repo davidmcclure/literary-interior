@@ -98,10 +98,14 @@ class NovelSpec extends FreeSpec with Matchers {
 
 class NovelFixturesSpec extends FreeSpec with Matchers {
 
+  def getNovel(segment: String, identifier: String): Novel = {
+    val url = getClass().getResource(s"/fixtures/gale/${segment}/Monographs/${identifier}.xml")
+    Novel.fromPath(url.getFile)
+  }
+
   "AMFCF0002-C00000-B0000400" - {
 
-    val url = getClass().getResource("/fixtures/gale/AMFCF0002-C00000/Monographs/AMFCF0002-C00000-B0000400.xml")
-    val novel = Novel.fromPath(url.getFile)
+    val novel = getNovel("AMFCF0002-C00000", "AMFCF0002-C00000-B0000400")
 
     ".identifier" in {
       novel.identifier shouldEqual "AMFCF0002-C00000-B0000400"
@@ -147,8 +151,7 @@ class NovelFixturesSpec extends FreeSpec with Matchers {
 
   "AMFCF0002-C00000-B0000600" - {
 
-    val url = getClass().getResource("/fixtures/gale/AMFCF0002-C00000/Monographs/AMFCF0002-C00000-B0000600.xml")
-    val novel = Novel.fromPath(url.getFile)
+    val novel = getNovel("AMFCF0002-C00000", "AMFCF0002-C00000-B0000600")
 
     ".identifier" in {
       novel.identifier shouldEqual "AMFCF0002-C00000-B0000600"
