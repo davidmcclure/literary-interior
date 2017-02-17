@@ -180,4 +180,34 @@ class NovelSpec extends FreeSpec with Matchers {
 
   }
 
+  "AMFCF0002-C00000-B1020300 (multiple authors)" - {
+
+    val novel = getNovel("AMFCF0002-C00000", "AMFCF0002-C00000-B1020300")
+
+    ".identifier" in {
+      novel.identifier shouldEqual "AMFCF0002-C00000-B1020300"
+    }
+
+    ".title" in {
+      novel.title shouldEqual "The Elixir of Life, or, Robert's Pilgrimage: An Allegory: By Eleve …"
+    }
+
+    ".authorFirst" in {
+      novel.authorFirst shouldEqual "H."
+    }
+
+    ".authorLast" in {
+      novel.authorLast shouldEqual "Stowe"
+    }
+
+    ".year" in {
+      novel.year shouldEqual 1890
+    }
+
+    ".plainText" in {
+      novel.plainText should include ("A vast land filled with wild and uncultivated people")
+    }
+
+  }
+
 }
