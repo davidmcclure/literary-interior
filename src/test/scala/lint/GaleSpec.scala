@@ -239,4 +239,34 @@ class NovelFixturesSpec extends FreeSpec with Matchers {
 
   }
 
+  "AMFCF0002-C00000-B0169300 (no author)" - {
+
+    val novel = getNovel("AMFCF0002-C00000", "AMFCF0002-C00000-B0169300")
+
+    ".identifier" in {
+      novel.identifier shouldEqual "AMFCF0002-C00000-B0169300"
+    }
+
+    ".title" in {
+      novel.title shouldEqual "Tales of the Picket-Guard, or, the Blue Devils Driven from Camp: A Collection of Stories: Told by Three Rollicking Boys on Picket-Guard"
+    }
+
+    ".authorFirst" in {
+      novel.authorFirst shouldEqual None
+    }
+
+    ".authorLast" in {
+      novel.authorLast shouldEqual None
+    }
+
+    ".year" in {
+      novel.year shouldEqual 1864
+    }
+
+    ".plainText" in {
+      novel.plainText should include ("While our regiment was lying in winter quarters")
+    }
+
+  }
+
 }
