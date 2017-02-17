@@ -119,27 +119,6 @@ object Novel {
 }
 
 
-// TODO: Different file.
-object FileSystem {
-
-  /* List a directory recursively.
-   */
-  def walkTree(f: File): Iterable[File] = {
-
-    val children = new Iterable[File] {
-      def iterator = {
-        if (f.isDirectory) f.listFiles.iterator
-        else Iterator.empty
-      }
-    }
-
-    Seq(f) ++: children.flatMap(walkTree(_))
-
-  }
-
-}
-
-
 class Corpus(private val path: String) {
 
   val root = new File(path)
