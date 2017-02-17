@@ -27,4 +27,3 @@ lazy val root = (project in file("."))
     assemblyJarName in assembly := "lint.jar"
 
   )
-  .enablePlugins(SbtTwirl)
