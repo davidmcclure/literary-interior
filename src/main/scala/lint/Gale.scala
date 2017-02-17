@@ -7,6 +7,7 @@ import scala.xml.{XML,Elem,Node}
 import scala.util.matching.Regex
 
 import lint.corpus.{Text,Loader}
+import lint.fileSystem.{FileSystem}
 
 
 class Novel(val xml: Elem) {
@@ -157,7 +158,7 @@ object Corpus {
   /* Read corpus root from config.
    */
   def fromConfig: Corpus = {
-    // TODO
+    // TODO: Read from config.
     new Corpus("/Users/dclure/Projects/data/stacks/gale")
   }
 
