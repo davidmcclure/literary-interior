@@ -33,8 +33,8 @@ class Novel(val xml: Elem) {
 
   def authorFirst: Option[String] = {
     author match {
-      case None => None
       case Some(a) => Some((a \ "first").head.text)
+      case None => None
     }
   }
 
@@ -52,15 +52,15 @@ class Novel(val xml: Elem) {
 
   def plainText: String = {
 
-    val words = for {
-      page <- xml \\ "page"
-      if (page \ "@type").text == "bodyPage"
-      word <- page \\ "wd"
-    } yield word
+    (xml \\ "page")
 
-    val texts = for (w <- words) yield w.text
+      // Take words on "body" pages.
+      .filter(p => (p \ "@type").text == "bodyPage")
+      .flatMap(_ \\ "wd")
 
-    texts.mkString(" ")
+      // Get text, join on space.
+      .map(_.text)
+      .mkString(" ")
 
   }
 
