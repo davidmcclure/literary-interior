@@ -8,6 +8,7 @@ import scala.util.matching.Regex
 
 import lint.corpus.{Text,Loader}
 import lint.fileSystem.{FileSystem}
+import lint.config.Config
 
 
 class Novel(val xml: Elem) {
@@ -132,13 +133,12 @@ class Corpus(private val path: String) {
 }
 
 
-object Corpus {
+object Corpus extends Config {
 
   /* Read corpus root from config.
    */
   def fromConfig: Corpus = {
-    // TODO: Read from config.
-    new Corpus("/Users/dclure/Projects/data/stacks/gale")
+    new Corpus(config.gale.directory)
   }
 
 }

@@ -7,7 +7,6 @@ import scala.io.Source
 import opennlp.tools.sentdetect._
 import opennlp.tools.postag._
 import opennlp.tools.tokenize._
-import pprint._
 
 
 final case class Token(

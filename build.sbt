@@ -13,7 +13,7 @@ lazy val root = (project in file("."))
     name := "lint",
 
     libraryDependencies ++= Seq(
-      tsConfig,
+      pureConfig,
       commonsIO,
       scalaXML,
       scalaCSV,
