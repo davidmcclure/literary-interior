@@ -193,11 +193,11 @@ class NovelSpec extends FreeSpec with Matchers {
     }
 
     ".authorFirst" in {
-      novel.authorFirst shouldEqual "H."
+      novel.authorFirst shouldEqual Some("H.")
     }
 
     ".authorLast" in {
-      novel.authorLast shouldEqual "Stowe"
+      novel.authorLast shouldEqual Some("Stowe")
     }
 
     ".year" in {

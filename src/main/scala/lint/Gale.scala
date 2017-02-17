@@ -20,13 +20,20 @@ class Novel(val xml: Elem) {
   }
 
   def author: Option[Node] = {
-    (xml \\ "author").headOption
+
+    val authors = xml \\ "author"
+
+    // Take the first author with a <first> child.
+    if (authors.length == 0) None else {
+      Some(authors.filter(a => (a \ "first").length == 1).head)
+    }
+
   }
 
   def authorFirst: Option[String] = {
     author match {
-      case Some(a) => Some((a \ "first").head.text)
       case None => None
+      case Some(a) => Some((a \ "first").head.text)
     }
   }
 
@@ -54,6 +61,18 @@ class Novel(val xml: Elem) {
 
     texts.mkString(" ")
 
+  }
+
+  def mkText: Text = {
+    Text(
+      corpus="gale",
+      identifier=identifier,
+      title=title,
+      authorFirst=authorFirst,
+      authorLast=authorLast,
+      year=year,
+      text=plainText
+    )
   }
 
 }
@@ -135,9 +154,9 @@ class Corpus(private val path: String) {
 object Corpus {
 
   /* Read corpus root from config.
-   * TODO
    */
   def fromConfig: Corpus = {
+    // TODO
     new Corpus("/Users/dclure/Projects/data/stacks/gale")
   }
 
@@ -152,24 +171,16 @@ trait Loader[T] {
 
 object FileSystemLoader extends Loader[File] {
 
+  /* List XML paths.
+   */
   def listSources = {
     Corpus.fromConfig.listPaths.toList
   }
 
+  /* XML -> Text.
+   */
   def parse(source: File) = {
-
-    val novel = Novel.fromFile(source)
-
-    Text(
-      corpus="gale",
-      identifier=novel.identifier,
-      title=novel.title,
-      authorFirst=novel.authorFirst,
-      authorLast=novel.authorLast,
-      year=novel.year,
-      text=novel.plainText
-    )
-
+    Novel.fromFile(source).mkText
   }
 
 }
