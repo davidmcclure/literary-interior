@@ -1,8 +1,7 @@
 
 
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkConf
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.{SparkContext,SparkConf}
+import org.apache.spark.sql.{SparkSession,SaveMode}
 import scala.util.{Try,Success,Failure}
 
 import lint.text._
@@ -23,18 +22,14 @@ object ExtGale {
       .map(s => Try(FileSystemLoader.parse(s)))
       .filter {
         case Success(v) => true
-        case Failure(e) => {
-          println(e)
-          false
-        }
+        case Failure(e) => println(e); false;
       }
       .map(_.get)
 
     val ds = spark.createDataset(texts)
 
-    ds.write.parquet("gale.parquet")
+    ds.write.mode(SaveMode.Overwrite).parquet("gale.parquet")
     ds.show()
-    println(ds.count())
 
   }
 

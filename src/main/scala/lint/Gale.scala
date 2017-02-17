@@ -80,7 +80,8 @@ class Novel(val xml: Elem) {
 
 object Novel {
 
-  // Singleton SAX parser, with DTD validation disabled.
+  /* SAX parser, with DTD validation disabled.
+   */
   def loader = {
 
     val factory = javax.xml.parsers.SAXParserFactory.newInstance()
