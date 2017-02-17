@@ -209,4 +209,34 @@ class NovelFixturesSpec extends FreeSpec with Matchers {
 
   }
 
+  "AMFCF0003-C00000-B0000200" - {
+
+    val novel = getNovel("AMFCF0003-C00000", "AMFCF0003-C00000-B0000200")
+
+    ".identifier" in {
+      novel.identifier shouldEqual "AMFCF0003-C00000-B0000200"
+    }
+
+    ".title" in {
+      novel.title shouldEqual "Virginia's Inheritance: By Cooke Don-Carlos"
+    }
+
+    ".authorFirst" in {
+      novel.authorFirst shouldEqual Some("Cooke")
+    }
+
+    ".authorLast" in {
+      novel.authorLast shouldEqual Some("Don-Carlos")
+    }
+
+    ".year" in {
+      novel.year shouldEqual 1915
+    }
+
+    ".plainText" in {
+      novel.plainText should include ("Ariminta Grannis knew it all the time")
+    }
+
+  }
+
 }
