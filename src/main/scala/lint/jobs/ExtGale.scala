@@ -4,7 +4,7 @@ import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 import scala.util.{Try,Success,Failure}
 
-import lint.text._
+import lint.corpus._
 import lint.gale._
 
 

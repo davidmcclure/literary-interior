@@ -1,6 +1,6 @@
 
 
-package lint.text
+package lint.corpus
 
 import lint.tokenizer._
 
@@ -46,4 +46,10 @@ object Text {
 
   }
 
+}
+
+
+trait Loader[T] {
+  def listSources: List[T]
+  def parse(source: T): Text
 }

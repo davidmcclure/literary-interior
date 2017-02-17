@@ -1,6 +1,6 @@
 
 
-package lint.text
+package lint.corpus
 
 import org.scalatest._
 import lint.tokenizer._

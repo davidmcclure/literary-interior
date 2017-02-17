@@ -6,7 +6,7 @@ import java.io.File
 import scala.xml.{XML,Elem,Node}
 import scala.util.matching.Regex
 
-import lint.text.Text
+import lint.corpus.{Text,Loader}
 
 
 class Novel(val xml: Elem) {
@@ -161,12 +161,6 @@ object Corpus {
     new Corpus("/Users/dclure/Projects/data/stacks/gale")
   }
 
-}
-
-
-trait Loader[T] {
-  def listSources: List[T]
-  def parse(source: T): Text
 }
 
 
