@@ -94,3 +94,86 @@ class NovelSpec extends FreeSpec with Matchers {
   }
 
 }
+
+
+class NovelFixturesSpec extends FreeSpec with Matchers {
+
+  "AMFCF0002-C00000-B0000400" - {
+
+    val url = getClass().getResource("/fixtures/gale/AMFCF0002-C00000/Monographs/AMFCF0002-C00000-B0000400.xml")
+    val novel = Novel.fromPath(url.getFile)
+
+    ".identifier" in {
+      novel.identifier shouldEqual "AMFCF0002-C00000-B0000400"
+    }
+
+    ".title" in {
+      novel.title shouldEqual "Illustrated Lives and Adventures of the Desperadoes of the New World: Containing an Account of the Different Modes of Lynching, the Cane Hill Murders, the Victims, the Execution, the Justicifation, Etc., Etc: As Well as the Lives of the Principal Duellist"
+    }
+
+    ".authorFirst" in {
+      novel.authorFirst shouldEqual Some("Alfred")
+    }
+
+    ".authorLast" in {
+      novel.authorLast shouldEqual Some("Arrington")
+    }
+
+    ".year" in {
+      novel.year shouldEqual 1849
+    }
+
+    ".plainText" - {
+
+      "titlePage" in {
+        novel.plainText should not include ("THE LIVES MODERATOR BY CHARLES SOTM")
+      }
+
+      "frontmatter" in {
+        novel.plainText should not include ("The scenes presented in the following pages")
+      }
+
+      "bodyPage" in {
+        novel.plainText should include ("The court of the lynchers has been migratory.")
+      }
+
+      "backmatter" in {
+        novel.plainText should not include ("T. B. PETERSON, No. 98")
+      }
+
+    }
+
+  }
+
+  "AMFCF0002-C00000-B0000600" - {
+
+    val url = getClass().getResource("/fixtures/gale/AMFCF0002-C00000/Monographs/AMFCF0002-C00000-B0000600.xml")
+    val novel = Novel.fromPath(url.getFile)
+
+    ".identifier" in {
+      novel.identifier shouldEqual "AMFCF0002-C00000-B0000600"
+    }
+
+    ".title" in {
+      novel.title shouldEqual "Agnes, or, the Possessed: A Revelation of Mesmerism: By T. S. Arthur"
+    }
+
+    ".authorFirst" in {
+      novel.authorFirst shouldEqual Some("Timothy")
+    }
+
+    ".authorLast" in {
+      novel.authorLast shouldEqual Some("Arthur")
+    }
+
+    ".year" in {
+      novel.year shouldEqual 1848
+    }
+
+    ".plainText" in {
+      novel.plainText should include ("We are fearfully and wonderfully made!")
+    }
+
+  }
+
+}
