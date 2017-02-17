@@ -89,6 +89,12 @@ object Novel {
     new Novel(tree)
   }
 
+  /* Make novel from a file path.
+   */
+  def fromPath(path: String): Novel = {
+    fromFile(new File(path))
+  }
+
 }
 
 

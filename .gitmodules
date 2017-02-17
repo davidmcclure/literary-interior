@@ -1,0 +1,3 @@
+[submodule "src/test/resources/fixtures"]
+	path = src/test/resources/fixtures
+	url = https://github.com/davidmcclure/stacks-fixtures.git
