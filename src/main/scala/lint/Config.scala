@@ -2,8 +2,9 @@
 
 package lint.config
 
-import scala.util.{Success,Failure}
-import pureconfig.loadConfig
+import com.typesafe.config.ConfigFactory
+import net.ceedubs.ficus.Ficus._
+import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 
 
 case class LintConfig(gale: GaleConfig)
@@ -11,10 +12,5 @@ case class GaleConfig(directory: String)
 
 
 trait Config {
-
-  lazy val config = loadConfig[LintConfig] match {
-    case Failure(f) => throw f
-    case Success(conf) => conf
-  }
-
+  lazy val config = ConfigFactory.load.as[LintConfig]("lint")
 }

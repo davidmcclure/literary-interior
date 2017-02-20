@@ -1,38 +1,41 @@
 
 
-import scala.util.{Try,Success,Failure}
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
+import scala.util.{Try,Success,Failure}
 
 import lint.corpus._
-import lint.gale.Corpus
+import lint.gale._
 
 
 object ExtGale {
 
   def main(args: Array[String]) {
 
-    val c = Corpus.fromConfig
-    println(c.listPaths)
+    val conf = new SparkConf
+    val sc = new SparkContext(conf)
+    val spark = SparkSession.builder.getOrCreate()
+    import spark.implicits._
 
-    //val conf = new SparkConf
-    //val sc = new SparkContext(conf)
-    //val spark = SparkSession.builder.getOrCreate()
-    //import spark.implicits._
+    val texts = sc
 
-    //val texts = sc
-      //.parallelize(FileSystemLoader.listSources)
-      //.map(s => Try(FileSystemLoader.parse(s)))
-      //.filter {
-        //case Success(v) => true
-        //case Failure(e) => println(e); false;
-      //}
-      //.map(_.get)
+      // Parse sources.
+      .parallelize(FileSystemLoader.listSources)
+      .map(s => Try(FileSystemLoader.parse(s)))
 
-    //val ds = spark.createDataset(texts)
+      // Log + prune errors.
+      .filter {
+        case Success(v) => true
+        case Failure(e) => println(e); false;
+      }
 
-    //ds.write.mode(SaveMode.Overwrite).parquet("gale.parquet")
-    //ds.show()
+      // Get results.
+      .map(_.get)
+
+    val ds = spark.createDataset(texts)
+
+    ds.write.mode(SaveMode.Overwrite).parquet("gale.parquet")
+    ds.show()
 
   }
 

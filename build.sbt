@@ -14,6 +14,7 @@ lazy val root = (project in file("."))
 
     libraryDependencies ++= Seq(
       pureConfig,
+      ficus,
       commonsIO,
       scalaXML,
       scalaCSV,
