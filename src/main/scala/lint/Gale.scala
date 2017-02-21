@@ -120,7 +120,7 @@ object Novel {
 }
 
 
-class Corpus(private val path: String) {
+class FileSystemCorpus(private val path: String) {
 
   val root = new File(path)
 
@@ -133,12 +133,12 @@ class Corpus(private val path: String) {
 }
 
 
-object Corpus extends Config {
+object FileSystemCorpus extends Config {
 
   /* Read corpus root from config.
    */
-  def fromConfig: Corpus = {
-    new Corpus(config.gale.directory)
+  def fromConfig: FileSystemCorpus = {
+    new FileSystemCorpus(config.gale.directory)
   }
 
 }
@@ -149,7 +149,7 @@ object FileSystemLoader extends Loader[File] {
   /* List XML paths.
    */
   def listSources = {
-    Corpus.fromConfig.listPaths.toList
+    FileSystemCorpus.fromConfig.listPaths.toList
   }
 
   /* XML -> Text.
@@ -159,3 +159,6 @@ object FileSystemLoader extends Loader[File] {
   }
 
 }
+
+
+// TODO: S3Corpus, S3Loader
