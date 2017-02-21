@@ -53,3 +53,27 @@ trait Loader[T] {
   def listSources: List[T]
   def parse(source: T): Text
 }
+
+
+
+
+
+
+//final case class Text private (
+  //corpus: String,
+  //identifier: String,
+  //text: String,
+  //tokens: Seq[Token]
+//)
+
+
+//object Text {
+
+  /* Tokenize the raw text.
+   */
+  //def apply(corpus: String, identifier: String, text: String) = {
+    //val tokens = Tokenizer.tokenize(text)
+    //new Text(corpus, identifier, text, tokens)
+  //}
+
+//}

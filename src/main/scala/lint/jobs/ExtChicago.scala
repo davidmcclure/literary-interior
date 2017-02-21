@@ -4,7 +4,7 @@ import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 import scala.util.{Try,Success,Failure}
 
-import lint.chicago.FileSystemLoader
+import lint.chicago.FileSystemNovelsCSV
 
 
 object ExtChicago {
@@ -15,22 +15,8 @@ object ExtChicago {
     val spark = SparkSession.builder.getOrCreate()
     import spark.implicits._
 
-    val texts = sc
-
-      // Parse sources.
-      .parallelize(FileSystemLoader.listSources)
-      .map(s => Try(FileSystemLoader.parse(s)))
-
-      // Log + prune errors.
-      .filter {
-        case Success(v) => true
-        case Failure(e) => println(e); false;
-      }
-
-      // Get results.
-      .map(_.get)
-
-    val ds = spark.createDataset(texts)
+    val novels = FileSystemNovelsCSV.fromConfig.read
+    val ds = spark.createDataset(novels)
 
     ds.write.mode(SaveMode.Overwrite).parquet("chicago.parquet")
     ds.show()
@@ -38,3 +24,4 @@ object ExtChicago {
   }
 
 }
+
