@@ -12,8 +12,7 @@ object ExtGale {
 
   def main(args: Array[String]) {
 
-    val conf = new SparkConf
-    val sc = new SparkContext(conf)
+    val sc = new SparkContext(new SparkConf)
     val spark = SparkSession.builder.getOrCreate()
     import spark.implicits._
 

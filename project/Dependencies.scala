@@ -3,9 +3,6 @@ import sbt._
 
 object Dependencies {
 
-  lazy val pureConfig =
-    "com.github.melrief" %% "pureconfig" % "0.5.1"
-
   lazy val ficus =
     "com.iheart" %% "ficus" % "1.4.0"
 
