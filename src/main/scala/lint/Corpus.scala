@@ -2,48 +2,22 @@
 
 package lint.corpus
 
-import lint.tokenizer._
+import lint.tokenizer.Token
 
 
-final case class Text private (
-  corpus: String,
-  identifier: String,
-  title: String,
-  authorFirst: Option[String],
-  authorLast: Option[String],
-  year: Int,
+case class TextData(
   text: String,
   tokens: Seq[Token]
 )
 
 
-object Text {
+trait Text {
 
-  /* Tokenize the raw text.
-   */
-  def apply(
-    corpus: String,
-    identifier: String,
-    title: String,
-    authorFirst: Option[String],
-    authorLast: Option[String],
-    year: Int,
-    text: String
-  ) = {
+  val text: String
+  val tokens: Seq[Token]
 
-    val tokens = Tokenizer.tokenize(text)
-
-    new Text(
-      corpus,
-      identifier,
-      title,
-      authorFirst,
-      authorLast,
-      year,
-      text,
-      tokens
-    )
-
+  def normalize: TextData = {
+    TextData(text, tokens)
   }
 
 }
@@ -55,16 +29,51 @@ trait Loader[T] {
 }
 
 
-
-
-
-
 //final case class Text private (
   //corpus: String,
   //identifier: String,
+  //title: String,
+  //authorFirst: Option[String],
+  //authorLast: Option[String],
+  //year: Int,
   //text: String,
   //tokens: Seq[Token]
 //)
+
+
+//object Text {
+
+  /* Tokenize the raw text.
+   */
+  //def apply(
+    //corpus: String,
+    //identifier: String,
+    //title: String,
+    //authorFirst: Option[String],
+    //authorLast: Option[String],
+    //year: Int,
+    //text: String
+  //) = {
+
+    //val tokens = Tokenizer.tokenize(text)
+
+    //new Text(
+      //corpus,
+      //identifier,
+      //title,
+      //authorFirst,
+      //authorLast,
+      //year,
+      //text,
+      //tokens
+    //)
+
+  //}
+
+//}
+
+
+
 
 
 //object Text {

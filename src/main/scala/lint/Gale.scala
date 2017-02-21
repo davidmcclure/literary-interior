@@ -6,7 +6,7 @@ import java.io.File
 import scala.xml.{XML,Elem,Node}
 import scala.util.matching.Regex
 
-import lint.corpus.{Text,Loader}
+import lint.corpus.Text
 import lint.fileSystem.{FileSystem}
 import lint.config.Config
 
@@ -65,17 +65,17 @@ class Novel(val xml: Elem) {
 
   }
 
-  def mkText: Text = {
-    Text(
-      corpus="gale",
-      identifier=identifier,
-      title=title,
-      authorFirst=authorFirst,
-      authorLast=authorLast,
-      year=year,
-      text=plainText
-    )
-  }
+  //def mkText: Text = {
+    //Text(
+      //corpus="gale",
+      //identifier=identifier,
+      //title=title,
+      //authorFirst=authorFirst,
+      //authorLast=authorLast,
+      //year=year,
+      //text=plainText
+    //)
+  //}
 
 }
 
@@ -120,45 +120,45 @@ object Novel {
 }
 
 
-class FileSystemCorpus(private val path: String) {
+//class FileSystemCorpus(private val path: String) {
 
-  val root = new File(path)
+  //val root = new File(path)
 
   /* Recursively list XML sources.
    */
-  def listPaths = {
-    FileSystem.walkTree(root).filter(_.toString.endsWith(".xml"))
-  }
+  //def listPaths = {
+    //FileSystem.walkTree(root).filter(_.toString.endsWith(".xml"))
+  //}
 
-}
+//}
 
 
-object FileSystemCorpus extends Config {
+//object FileSystemCorpus extends Config {
 
   /* Read corpus root from config.
    */
-  def fromConfig: FileSystemCorpus = {
-    new FileSystemCorpus(config.gale.directory)
-  }
+  //def fromConfig: FileSystemCorpus = {
+    //new FileSystemCorpus(config.gale.directory)
+  //}
 
-}
+//}
 
 
-object FileSystemLoader extends Loader[File] {
+//object FileSystemLoader extends Loader[File] {
 
   /* List XML paths.
    */
-  def listSources: List[File] = {
-    FileSystemCorpus.fromConfig.listPaths.toList
-  }
+  //def listSources: List[File] = {
+    //FileSystemCorpus.fromConfig.listPaths.toList
+  //}
 
   /* XML -> Text.
    */
-  def parse(source: File): Text = {
-    Novel.fromFile(source).mkText
-  }
+  //def parse(source: File): Text = {
+    //Novel.fromFile(source).mkText
+  //}
 
-}
+//}
 
 
 // TODO: S3Corpus, S3Loader
