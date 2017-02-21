@@ -59,8 +59,8 @@ class FileSystemTextDir(val path: String) {
 
   /* Given a book ID, hydrate the text.
    */
-  def read(bookId: String): String = {
-    val textPath = Paths.get(path, s"${bookId}.txt").toString
+  def read(filename: String): String = {
+    val textPath = Paths.get(path, filename).toString
     Source.fromFile(textPath).getLines.mkString
   }
 
@@ -74,7 +74,7 @@ class FileSystemTextDir(val path: String) {
       authorFirst=Some(row.authFirst),
       authorLast=Some(row.authLast),
       year=row.publDate,
-      text=read(row.bookId)
+      text=read(row.filename)
     )
   }
 
@@ -97,7 +97,7 @@ object FileSystemLoader extends Loader[NovelMetadata] {
   /* List novel metadata rows.
    */
   def listSources: List[NovelMetadata] = {
-    FileSystemNovelsCSV.fromConfig.read
+    FileSystemNovelsCSV.fromConfig.read.slice(0, 20) // TODO|dev
   }
 
   /* Load novel text.

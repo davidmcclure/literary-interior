@@ -4,10 +4,10 @@ import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 import scala.util.{Try,Success,Failure}
 
-import lint.gale.FileSystemLoader
+import lint.chicago.FileSystemLoader
 
 
-object ExtGale {
+object ExtChicago {
 
   def main(args: Array[String]) {
 
@@ -32,7 +32,7 @@ object ExtGale {
 
     val ds = spark.createDataset(texts)
 
-    ds.write.mode(SaveMode.Overwrite).parquet("gale.parquet")
+    ds.write.mode(SaveMode.Overwrite).parquet("chicago.parquet")
     ds.show()
 
   }
