@@ -148,13 +148,13 @@ object FileSystemLoader extends Loader[File] {
 
   /* List XML paths.
    */
-  def listSources = {
+  def listSources: List[File] = {
     FileSystemCorpus.fromConfig.listPaths.toList
   }
 
   /* XML -> Text.
    */
-  def parse(source: File) = {
+  def parse(source: File): Text = {
     Novel.fromFile(source).mkText
   }
 
