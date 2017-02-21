@@ -57,11 +57,25 @@ object FileSystemNovelsCSV extends Config {
 
 class FileSystemTextDir(val path: String) {
 
-  /* Given a metadata row, hydrate the text.
+  /* Given a book ID, hydrate the text.
    */
-  def read(metadata: NovelMetadata): String = {
-    val textPath = Paths.get(path, metadata.filename).toString
+  def read(bookId: String): String = {
+    val textPath = Paths.get(path, s"${bookId}.txt").toString
     Source.fromFile(textPath).getLines.mkString
+  }
+
+  /* Given a metadata row, build a text.
+   */
+  def mkText(row: NovelMetadata): Text = {
+    Text(
+      corpus="chicago",
+      identifier=row.bookId,
+      title=row.title,
+      authorFirst=Some(row.authFirst),
+      authorLast=Some(row.authLast),
+      year=row.publDate,
+      text=read(row.bookId)
+    )
   }
 
 }
@@ -78,18 +92,18 @@ object FileSystemTextDir extends Config {
 }
 
 
-//object FileSystemLoader extends Loader[NovelCSVRow] {
+object FileSystemLoader extends Loader[NovelMetadata] {
 
-  /* List novel CSV rows.
+  /* List novel metadata rows.
    */
-  //def listSources: List[NovelCSVRow] = {
-    //FileSystemCorpus.fromConfig.listPaths.toList
-  //}
+  def listSources: List[NovelMetadata] = {
+    FileSystemNovelsCSV.fromConfig.read
+  }
 
-  /* XML -> Text.
+  /* Load novel text.
    */
-  //def parse(source: NovelCSVRow): Text = {
-    //// TODO
-  //}
+  def parse(source: NovelMetadata): Text = {
+    FileSystemTextDir.fromConfig.mkText(source)
+  }
 
-//}
+}
