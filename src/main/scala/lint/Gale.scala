@@ -25,7 +25,7 @@ case class Novel(
 
 class NovelXML(val xml: Elem) {
 
-  def identifier: String = {
+  def psmid: String = {
     (xml \\ "PSMID").head.text
   }
 
@@ -85,7 +85,7 @@ class NovelXML(val xml: Elem) {
     val tokens = Tokenizer.tokenize(text)
 
     Novel(
-      psmid=identifier,
+      psmid=psmid,
       title=title,
       authorFirst=authorFirst,
       authorLast=authorLast,

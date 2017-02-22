@@ -9,8 +9,8 @@ import scala.io.Source
 
 class NovelXMLSpec extends FreeSpec with Matchers {
 
-  def getNovel(segment: String, identifier: String): NovelXML = {
-    val url = getClass().getResource(s"/fixtures/gale/${segment}/Monographs/${identifier}.xml")
+  def getNovel(segment: String, psmid: String): NovelXML = {
+    val url = getClass().getResource(s"/fixtures/gale/${segment}/Monographs/${psmid}.xml")
     NovelXML.fromPath(url.getFile)
   }
 
@@ -18,8 +18,8 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     val novel = getNovel("AMFCF0002-C00000", "AMFCF0002-C00000-B0000400")
 
-    ".identifier" in {
-      novel.identifier shouldEqual "AMFCF0002-C00000-B0000400"
+    ".psmid" in {
+      novel.psmid shouldEqual "AMFCF0002-C00000-B0000400"
     }
 
     ".title" in {
@@ -64,8 +64,8 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     val novel = getNovel("AMFCF0002-C00000", "AMFCF0002-C00000-B0000600")
 
-    ".identifier" in {
-      novel.identifier shouldEqual "AMFCF0002-C00000-B0000600"
+    ".psmid" in {
+      novel.psmid shouldEqual "AMFCF0002-C00000-B0000600"
     }
 
     ".title" in {
@@ -94,8 +94,8 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     val novel = getNovel("AMFCF0003-C00000", "AMFCF0003-C00000-B0000100")
 
-    ".identifier" in {
-      novel.identifier shouldEqual "AMFCF0003-C00000-B0000100"
+    ".psmid" in {
+      novel.psmid shouldEqual "AMFCF0003-C00000-B0000100"
     }
 
     ".title" in {
@@ -124,8 +124,8 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     val novel = getNovel("AMFCF0003-C00000", "AMFCF0003-C00000-B0000200")
 
-    ".identifier" in {
-      novel.identifier shouldEqual "AMFCF0003-C00000-B0000200"
+    ".psmid" in {
+      novel.psmid shouldEqual "AMFCF0003-C00000-B0000200"
     }
 
     ".title" in {
@@ -154,8 +154,8 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     val novel = getNovel("AMFCF0002-C00000", "AMFCF0002-C00000-B0169300")
 
-    ".identifier" in {
-      novel.identifier shouldEqual "AMFCF0002-C00000-B0169300"
+    ".psmid" in {
+      novel.psmid shouldEqual "AMFCF0002-C00000-B0169300"
     }
 
     ".title" in {
@@ -184,8 +184,8 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     val novel = getNovel("AMFCF0002-C00000", "AMFCF0002-C00000-B1020300")
 
-    ".identifier" in {
-      novel.identifier shouldEqual "AMFCF0002-C00000-B1020300"
+    ".psmid" in {
+      novel.psmid shouldEqual "AMFCF0002-C00000-B1020300"
     }
 
     ".title" in {
