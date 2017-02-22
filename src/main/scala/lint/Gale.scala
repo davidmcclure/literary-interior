@@ -6,9 +6,21 @@ import java.io.File
 import scala.xml.{XML,Elem,Node}
 import scala.util.matching.Regex
 
+import lint.tokenizer.{Tokenizer,Token}
 import lint.corpus.Text
 import lint.fileSystem.{FileSystem}
 import lint.config.Config
+
+
+case class Novel(
+  psmid: String,
+  title: String,
+  authorFirst: Option[String],
+  authorLast: Option[String],
+  year: Int,
+  text: String,
+  tokens: Seq[Token]
+) extends Text
 
 
 class NovelXML(val xml: Elem) {
@@ -65,17 +77,24 @@ class NovelXML(val xml: Elem) {
 
   }
 
-  //def mkText: Text = {
-    //Text(
-      //corpus="gale",
-      //identifier=identifier,
-      //title=title,
-      //authorFirst=authorFirst,
-      //authorLast=authorLast,
-      //year=year,
-      //text=plainText
-    //)
-  //}
+  /* Map XML into Novel.
+   */
+  def mkNovel: Novel = {
+
+    val text = plainText
+    val tokens = Tokenizer.tokenize(text)
+
+    Novel(
+      psmid=identifier,
+      title=title,
+      authorFirst=authorFirst,
+      authorLast=authorLast,
+      year=year,
+      text=text,
+      tokens=tokens
+    )
+
+  }
 
 }
 
@@ -120,45 +139,42 @@ object NovelXML {
 }
 
 
-//class FileSystemCorpus(private val path: String) {
+class FileSystemCorpus(private val path: String) {
 
-  //val root = new File(path)
+  val root = new File(path)
 
   /* Recursively list XML sources.
    */
-  //def listPaths = {
-    //FileSystem.walkTree(root).filter(_.toString.endsWith(".xml"))
-  //}
+  def listPaths = {
+    FileSystem.walkTree(root).filter(_.toString.endsWith(".xml"))
+  }
 
-//}
+}
 
 
-//object FileSystemCorpus extends Config {
+object FileSystemCorpus extends Config {
 
   /* Read corpus root from config.
    */
-  //def fromConfig: FileSystemCorpus = {
-    //new FileSystemCorpus(config.gale.directory)
-  //}
+  def fromConfig: FileSystemCorpus = {
+    new FileSystemCorpus(config.gale.directory)
+  }
 
-//}
+}
 
 
-//object FileSystemLoader extends Loader[File] {
+object FileSystemLoader {
 
   /* List XML paths.
    */
-  //def listSources: List[File] = {
-    //FileSystemCorpus.fromConfig.listPaths.toList
-  //}
+  def sources: List[File] = {
+    FileSystemCorpus.fromConfig.listPaths.toList
+  }
 
   /* XML -> Text.
    */
-  //def parse(source: File): Text = {
-    //Novel.fromFile(source).mkText
-  //}
+  def parse(source: File): Novel = {
+    NovelXML.fromFile(source).mkNovel
+  }
 
-//}
-
-
-// TODO: S3Corpus, S3Loader
+}
