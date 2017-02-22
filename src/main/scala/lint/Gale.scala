@@ -63,6 +63,10 @@ class NovelXML(val xml: Elem) {
     date.slice(0, 4).toInt
   }
 
+  def ocrPercentage: Double = {
+    (xml \\ "bookInfo" \ "ocr").head.text.toDouble
+  }
+
   def plainText: String = {
 
     (xml \\ "page")

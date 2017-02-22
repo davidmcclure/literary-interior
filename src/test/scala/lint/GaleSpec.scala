@@ -38,6 +38,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.year shouldEqual 1849
     }
 
+    ".ocrPercentage" in {
+      novel.ocrPercentage shouldEqual 56.66
+    }
+
     ".plainText" - {
 
       "titlePage" in {
@@ -84,6 +88,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.year shouldEqual 1848
     }
 
+    ".ocrPercentage" in {
+      novel.ocrPercentage shouldEqual 63.70
+    }
+
     ".plainText" in {
       novel.plainText should include ("We are fearfully and wonderfully made!")
     }
@@ -112,6 +120,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".year" in {
       novel.year shouldEqual 1913
+    }
+
+    ".ocrPercentage" in {
+      novel.ocrPercentage shouldEqual 65.10
     }
 
     ".plainText" in {
@@ -144,6 +156,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.year shouldEqual 1915
     }
 
+    ".ocrPercentage" in {
+      novel.ocrPercentage shouldEqual 65.99
+    }
+
     ".plainText" in {
       novel.plainText should include ("Ariminta Grannis knew it all the time")
     }
@@ -174,6 +190,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.year shouldEqual 1864
     }
 
+    ".ocrPercentage" in {
+      novel.ocrPercentage shouldEqual 50.70
+    }
+
     ".plainText" in {
       novel.plainText should include ("While our regiment was lying in winter quarters")
     }
@@ -202,6 +222,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".year" in {
       novel.year shouldEqual 1890
+    }
+
+    ".ocrPercentage" in {
+      novel.ocrPercentage shouldEqual 60.88
     }
 
     ".plainText" in {
