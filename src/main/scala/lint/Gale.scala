@@ -30,7 +30,7 @@ class NovelXML(val xml: Elem) {
   }
 
   def title: String = {
-    (xml \\ "titleGroup" \ "fullTitle").head.text
+    (xml \\ "fullTitle").head.text
   }
 
   def author: Option[Node] = {
@@ -64,7 +64,11 @@ class NovelXML(val xml: Elem) {
   }
 
   def ocrPercentage: Double = {
-    (xml \\ "bookInfo" \ "ocr").head.text.toDouble
+    (xml \\ "ocr").head.text.toDouble
+  }
+
+  def documentType: String = {
+    (xml \\ "documentType").head.text
   }
 
   def plainText: String = {

@@ -42,6 +42,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.ocrPercentage shouldEqual 56.66
     }
 
+    ".documentType" in {
+      novel.documentType shouldEqual "Monograph"
+    }
+
     ".plainText" - {
 
       "titlePage" in {
@@ -92,6 +96,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.ocrPercentage shouldEqual 63.70
     }
 
+    ".documentType" in {
+      novel.documentType shouldEqual "Monograph"
+    }
+
     ".plainText" in {
       novel.plainText should include ("We are fearfully and wonderfully made!")
     }
@@ -124,6 +132,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".ocrPercentage" in {
       novel.ocrPercentage shouldEqual 65.10
+    }
+
+    ".documentType" in {
+      novel.documentType shouldEqual "Monograph"
     }
 
     ".plainText" in {
@@ -160,6 +172,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.ocrPercentage shouldEqual 65.99
     }
 
+    ".documentType" in {
+      novel.documentType shouldEqual "Monograph"
+    }
+
     ".plainText" in {
       novel.plainText should include ("Ariminta Grannis knew it all the time")
     }
@@ -194,6 +210,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.ocrPercentage shouldEqual 50.70
     }
 
+    ".documentType" in {
+      novel.documentType shouldEqual "Monograph"
+    }
+
     ".plainText" in {
       novel.plainText should include ("While our regiment was lying in winter quarters")
     }
@@ -226,6 +246,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".ocrPercentage" in {
       novel.ocrPercentage shouldEqual 60.88
+    }
+
+    ".documentType" in {
+      novel.documentType shouldEqual "Monograph"
     }
 
     ".plainText" in {
