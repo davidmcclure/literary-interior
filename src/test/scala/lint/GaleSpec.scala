@@ -7,11 +7,11 @@ import scala.xml.{XML,Elem,Node}
 import scala.io.Source
 
 
-class NovelSpec extends FreeSpec with Matchers {
+class NovelXMLSpec extends FreeSpec with Matchers {
 
-  def getNovel(segment: String, identifier: String): Novel = {
+  def getNovel(segment: String, identifier: String): NovelXML = {
     val url = getClass().getResource(s"/fixtures/gale/${segment}/Monographs/${identifier}.xml")
-    Novel.fromPath(url.getFile)
+    NovelXML.fromPath(url.getFile)
   }
 
   "AMFCF0002-C00000-B0000400" - {

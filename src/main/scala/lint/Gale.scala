@@ -11,7 +11,7 @@ import lint.fileSystem.{FileSystem}
 import lint.config.Config
 
 
-class Novel(val xml: Elem) {
+class NovelXML(val xml: Elem) {
 
   def identifier: String = {
     (xml \\ "PSMID").head.text
@@ -80,7 +80,7 @@ class Novel(val xml: Elem) {
 }
 
 
-object Novel {
+object NovelXML {
 
   /* SAX parser, with DTD validation disabled.
    */
@@ -99,21 +99,21 @@ object Novel {
 
   /* Make novel from XML string.
    */
-  def fromString(markup: String): Novel = {
+  def fromString(markup: String): NovelXML = {
     val tree = loader.loadString(markup)
-    new Novel(tree)
+    new NovelXML(tree)
   }
 
   /* Make novel from a file.
    */
-  def fromFile(file: File): Novel = {
+  def fromFile(file: File): NovelXML = {
     val tree = loader.loadFile(file)
-    new Novel(tree)
+    new NovelXML(tree)
   }
 
   /* Make novel from a file path.
    */
-  def fromPath(path: String): Novel = {
+  def fromPath(path: String): NovelXML = {
     fromFile(new File(path))
   }
 
