@@ -46,6 +46,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.documentType shouldEqual "Monograph"
     }
 
+    ".language" in {
+      novel.language shouldEqual "English"
+    }
+
     ".plainText" - {
 
       "titlePage" in {
@@ -100,6 +104,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.documentType shouldEqual "Monograph"
     }
 
+    ".language" in {
+      novel.language shouldEqual "English"
+    }
+
     ".plainText" in {
       novel.plainText should include ("We are fearfully and wonderfully made!")
     }
@@ -136,6 +144,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".documentType" in {
       novel.documentType shouldEqual "Monograph"
+    }
+
+    ".language" in {
+      novel.language shouldEqual "English"
     }
 
     ".plainText" in {
@@ -176,6 +188,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.documentType shouldEqual "Monograph"
     }
 
+    ".language" in {
+      novel.language shouldEqual "English"
+    }
+
     ".plainText" in {
       novel.plainText should include ("Ariminta Grannis knew it all the time")
     }
@@ -214,6 +230,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.documentType shouldEqual "Monograph"
     }
 
+    ".language" in {
+      novel.language shouldEqual "English"
+    }
+
     ".plainText" in {
       novel.plainText should include ("While our regiment was lying in winter quarters")
     }
@@ -250,6 +270,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".documentType" in {
       novel.documentType shouldEqual "Monograph"
+    }
+
+    ".language" in {
+      novel.language shouldEqual "English"
     }
 
     ".plainText" in {

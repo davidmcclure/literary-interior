@@ -71,6 +71,10 @@ class NovelXML(val xml: Elem) {
     (xml \\ "documentType").head.text
   }
 
+  def language: String = {
+    (xml \\ "language").head.text
+  }
+
   def plainText: String = {
 
     (xml \\ "page")
