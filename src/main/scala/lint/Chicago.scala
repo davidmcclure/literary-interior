@@ -51,8 +51,8 @@ case class Author(
   authLast: String,
   authFirst: String,
   altFirst: String,
-  dateB: Int,
-  dateD: Int,
+  dateB: Option[Int],
+  dateD: Option[Int],
   nationality: String,
   gender: String,
   raceEthnicity: String,
@@ -123,8 +123,8 @@ class AuthorCSV(val path: String) {
         authLast=row("AUTH_LAST"),
         authFirst=row("AUTH_FIRST"),
         altFirst=row("ALT_FIRST"),
-        dateB=row("DATE_B").toInt,
-        dateD=row("DATE_D").toInt,
+        dateB=AuthorCSV.parseYear(row("DATE_B")),
+        dateD=AuthorCSV.parseYear(row("DATE_D")),
         nationality=row("NATIONALITY"),
         gender=row("GENDER"),
         raceEthnicity=row("RACE_ETHNICITY"),
@@ -151,6 +151,15 @@ object AuthorCSV extends Config {
    */
   def fromConfig: AuthorCSV = {
     new AuthorCSV(config.chicago.authorMetadataPath)
+  }
+
+  /* Clean a year string, case to integer.
+   */
+  def parseYear(year: String): Option[Int] = {
+    "[0-9]{4}".r.findFirstIn(year) match {
+      case Some(yearStr) => Some(yearStr.toInt)
+      case None => None
+    }
   }
 
 }
