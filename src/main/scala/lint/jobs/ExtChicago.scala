@@ -3,7 +3,7 @@
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
-import lint.chicago.FileSystemLoader
+import lint.chicago.Loader
 
 
 object ExtChicago {
@@ -15,8 +15,8 @@ object ExtChicago {
   def main(args: Array[String]) {
 
     val novels = sc
-      .parallelize(FileSystemLoader.sources)
-      .map(FileSystemLoader.parse)
+      .parallelize(Loader.sources)
+      .map(Loader.parse)
 
     val ds = spark.createDataset(novels)
 

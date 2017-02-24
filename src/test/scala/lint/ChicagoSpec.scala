@@ -5,10 +5,10 @@ package lint.chicago
 import org.scalatest._
 
 
-class FileSystemNovelsCSVSpec extends FreeSpec with Matchers {
+class NovelsCSVSpec extends FreeSpec with Matchers {
 
   val url = getClass().getResource("/fixtures/chicago/NOVELS_METADATA.csv")
-  val reader = new FileSystemNovelsCSV(url.getFile)
+  val reader = new NovelsCSV(url.getFile)
 
   "CSV should parse without errors" in {
     val rows = reader.read

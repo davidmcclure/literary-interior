@@ -68,7 +68,7 @@ case class Author(
 )
 
 
-class FileSystemNovelsCSV(val path: String) {
+class NovelsCSV(val path: String) {
 
   /* Map CSV rows into NovelMetadata instances.
    */
@@ -98,18 +98,18 @@ class FileSystemNovelsCSV(val path: String) {
 }
 
 
-object FileSystemNovelsCSV extends Config {
+object NovelsCSV extends Config {
 
   /* Bind config novels CSV path.
    */
-  def fromConfig: FileSystemNovelsCSV = {
-    new FileSystemNovelsCSV(config.chicago.novelMetadataPath)
+  def fromConfig: NovelsCSV = {
+    new NovelsCSV(config.chicago.novelMetadataPath)
   }
 
 }
 
 
-class FileSystemAuthorsCSV(val path: String) {
+class AuthorsCSV(val path: String) {
 
   /* Map CSV rows into Author instances.
    */
@@ -145,18 +145,18 @@ class FileSystemAuthorsCSV(val path: String) {
 }
 
 
-object FileSystemAuthorsCSV extends Config {
+object AuthorsCSV extends Config {
 
   /* Bind config novels CSV path.
    */
-  def fromConfig: FileSystemAuthorsCSV = {
-    new FileSystemAuthorsCSV(config.chicago.authorMetadataPath)
+  def fromConfig: AuthorsCSV = {
+    new AuthorsCSV(config.chicago.authorMetadataPath)
   }
 
 }
 
 
-class FileSystemTextDir(val path: String) {
+class TextDir(val path: String) {
 
   /* Given a book ID, hydrate the text.
    */
@@ -194,29 +194,29 @@ class FileSystemTextDir(val path: String) {
 }
 
 
-object FileSystemTextDir extends Config {
+object TextDir extends Config {
 
   /* Bind config text path.
    */
-  def fromConfig: FileSystemTextDir = {
-    new FileSystemTextDir(config.chicago.textDirectory)
+  def fromConfig: TextDir = {
+    new TextDir(config.chicago.textDirectory)
   }
 
 }
 
 
-object FileSystemLoader {
+object Loader {
 
   /* List novel metadata rows.
    */
   def sources: List[NovelMetadata] = {
-    FileSystemNovelsCSV.fromConfig.read.slice(0, 20) // TODO|dev
+    NovelsCSV.fromConfig.read.slice(0, 20) // TODO|dev
   }
 
   /* Load novel text.
    */
   def parse(source: NovelMetadata): Novel = {
-    FileSystemTextDir.fromConfig.mkNovel(source)
+    TextDir.fromConfig.mkNovel(source)
   }
 
 }

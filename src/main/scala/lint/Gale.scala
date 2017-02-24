@@ -8,7 +8,7 @@ import scala.util.matching.Regex
 
 import lint.tokenizer.{Tokenizer,Token}
 import lint.corpus.Text
-import lint.fileSystem.{FileSystem}
+import lint.fileSystem.FileSystem
 import lint.config.Config
 
 
@@ -157,7 +157,7 @@ object NovelXML {
 }
 
 
-class FileSystemCorpus(private val path: String) {
+class Corpus(private val path: String) {
 
   val root = new File(path)
 
@@ -170,23 +170,23 @@ class FileSystemCorpus(private val path: String) {
 }
 
 
-object FileSystemCorpus extends Config {
+object Corpus extends Config {
 
   /* Read corpus root from config.
    */
-  def fromConfig: FileSystemCorpus = {
-    new FileSystemCorpus(config.gale.directory)
+  def fromConfig: Corpus = {
+    new Corpus(config.gale.directory)
   }
 
 }
 
 
-object FileSystemLoader {
+object Loader {
 
   /* List XML paths.
    */
   def sources: List[File] = {
-    FileSystemCorpus.fromConfig.listPaths.toList
+    Corpus.fromConfig.listPaths.toList
   }
 
   /* XML -> Text.
