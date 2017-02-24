@@ -68,7 +68,7 @@ case class Author(
 )
 
 
-class NovelsCSV(val path: String) {
+class NovelCSV(val path: String) {
 
   /* Map CSV rows into NovelMetadata instances.
    */
@@ -98,18 +98,18 @@ class NovelsCSV(val path: String) {
 }
 
 
-object NovelsCSV extends Config {
+object NovelCSV extends Config {
 
   /* Bind config novels CSV path.
    */
-  def fromConfig: NovelsCSV = {
-    new NovelsCSV(config.chicago.novelMetadataPath)
+  def fromConfig: NovelCSV = {
+    new NovelCSV(config.chicago.novelMetadataPath)
   }
 
 }
 
 
-class AuthorsCSV(val path: String) {
+class AuthorCSV(val path: String) {
 
   /* Map CSV rows into Author instances.
    */
@@ -145,12 +145,12 @@ class AuthorsCSV(val path: String) {
 }
 
 
-object AuthorsCSV extends Config {
+object AuthorCSV extends Config {
 
   /* Bind config novels CSV path.
    */
-  def fromConfig: AuthorsCSV = {
-    new AuthorsCSV(config.chicago.authorMetadataPath)
+  def fromConfig: AuthorCSV = {
+    new AuthorCSV(config.chicago.authorMetadataPath)
   }
 
 }
@@ -210,7 +210,7 @@ object Loader {
   /* List novel metadata rows.
    */
   def sources: List[NovelMetadata] = {
-    NovelsCSV.fromConfig.read.slice(0, 20) // TODO|dev
+    NovelCSV.fromConfig.read.slice(0, 20) // TODO|dev
   }
 
   /* Load novel text.
