@@ -46,6 +46,28 @@ case class Novel(
 ) extends Text
 
 
+case class Author(
+  authId: String,
+  authLast: String,
+  authFirst: String,
+  altFirst: String,
+  dateB: Int,
+  dateD: Int,
+  nationality: String,
+  gender: String,
+  raceEthnicity: String,
+  hyphenatedIdentity: String,
+  sexualIdentity: String,
+  education: String,
+  mfa: String,
+  secondOccupation: String,
+  coterie: String,
+  religion: String,
+  ses: String,
+  geography: String
+)
+
+
 class FileSystemNovelsCSV(val path: String) {
 
   /* Map CSV rows into Novel instances.
