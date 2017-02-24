@@ -17,7 +17,10 @@ case class Novel(
   title: String,
   authorFirst: Option[String],
   authorLast: Option[String],
+  language: String,
   year: Int,
+  ocrPercentage: Double,
+  documentType: String,
   text: String,
   tokens: Seq[Token]
 ) extends Text
@@ -101,7 +104,10 @@ class NovelXML(val xml: Elem) {
       title=title,
       authorFirst=authorFirst,
       authorLast=authorLast,
+      language=language,
       year=year,
+      ocrPercentage=ocrPercentage,
+      documentType=documentType,
       text=text,
       tokens=tokens
     )
