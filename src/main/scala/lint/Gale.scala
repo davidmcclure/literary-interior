@@ -58,6 +58,10 @@ class NovelXML(val xml: Elem) {
     }
   }
 
+  def language: String = {
+    (xml \\ "language").head.text
+  }
+
   def year: Int = {
     val date = (xml \\ "pubDate" \ "pubDateStart").head.text
     date.slice(0, 4).toInt
@@ -69,10 +73,6 @@ class NovelXML(val xml: Elem) {
 
   def documentType: String = {
     (xml \\ "documentType").head.text
-  }
-
-  def language: String = {
-    (xml \\ "language").head.text
   }
 
   def plainText: String = {

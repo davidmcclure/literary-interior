@@ -34,6 +34,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.authorLast shouldEqual Some("Arrington")
     }
 
+    ".language" in {
+      novel.language shouldEqual "English"
+    }
+
     ".year" in {
       novel.year shouldEqual 1849
     }
@@ -44,10 +48,6 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".documentType" in {
       novel.documentType shouldEqual "Monograph"
-    }
-
-    ".language" in {
-      novel.language shouldEqual "English"
     }
 
     ".plainText" - {
@@ -92,6 +92,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.authorLast shouldEqual Some("Arthur")
     }
 
+    ".language" in {
+      novel.language shouldEqual "English"
+    }
+
     ".year" in {
       novel.year shouldEqual 1848
     }
@@ -102,10 +106,6 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".documentType" in {
       novel.documentType shouldEqual "Monograph"
-    }
-
-    ".language" in {
-      novel.language shouldEqual "English"
     }
 
     ".plainText" in {
@@ -134,6 +134,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.authorLast shouldEqual Some("Doling")
     }
 
+    ".language" in {
+      novel.language shouldEqual "English"
+    }
+
     ".year" in {
       novel.year shouldEqual 1913
     }
@@ -144,10 +148,6 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".documentType" in {
       novel.documentType shouldEqual "Monograph"
-    }
-
-    ".language" in {
-      novel.language shouldEqual "English"
     }
 
     ".plainText" in {
@@ -176,6 +176,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.authorLast shouldEqual Some("Don-Carlos")
     }
 
+    ".language" in {
+      novel.language shouldEqual "English"
+    }
+
     ".year" in {
       novel.year shouldEqual 1915
     }
@@ -186,10 +190,6 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".documentType" in {
       novel.documentType shouldEqual "Monograph"
-    }
-
-    ".language" in {
-      novel.language shouldEqual "English"
     }
 
     ".plainText" in {
@@ -218,6 +218,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.authorLast shouldEqual None
     }
 
+    ".language" in {
+      novel.language shouldEqual "English"
+    }
+
     ".year" in {
       novel.year shouldEqual 1864
     }
@@ -228,10 +232,6 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".documentType" in {
       novel.documentType shouldEqual "Monograph"
-    }
-
-    ".language" in {
-      novel.language shouldEqual "English"
     }
 
     ".plainText" in {
@@ -260,6 +260,10 @@ class NovelXMLSpec extends FreeSpec with Matchers {
       novel.authorLast shouldEqual Some("Stowe")
     }
 
+    ".language" in {
+      novel.language shouldEqual "English"
+    }
+
     ".year" in {
       novel.year shouldEqual 1890
     }
@@ -270,10 +274,6 @@ class NovelXMLSpec extends FreeSpec with Matchers {
 
     ".documentType" in {
       novel.documentType shouldEqual "Monograph"
-    }
-
-    ".language" in {
-      novel.language shouldEqual "English"
     }
 
     ".plainText" in {
