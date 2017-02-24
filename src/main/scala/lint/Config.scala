@@ -18,6 +18,7 @@ case class GaleConfig(
 
 case class ChicagoConfig(
   novelMetadataPath: String,
+  authorMetadataPath: String,
   textDirectory: String
 )
 

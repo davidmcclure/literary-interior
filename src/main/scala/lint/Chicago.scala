@@ -60,7 +60,7 @@ case class Author(
   sexualIdentity: String,
   education: String,
   mfa: String,
-  secondOccupation: String,
+  secondaryOccupation: String,
   coterie: String,
   religion: String,
   ses: String,
@@ -70,7 +70,7 @@ case class Author(
 
 class FileSystemNovelsCSV(val path: String) {
 
-  /* Map CSV rows into Novel instances.
+  /* Map CSV rows into NovelMetadata instances.
    */
   def read: List[NovelMetadata] = {
 
@@ -104,6 +104,53 @@ object FileSystemNovelsCSV extends Config {
    */
   def fromConfig: FileSystemNovelsCSV = {
     new FileSystemNovelsCSV(config.chicago.novelMetadataPath)
+  }
+
+}
+
+
+class FileSystemAuthorsCSV(val path: String) {
+
+  /* Map CSV rows into Author instances.
+   */
+  def read: List[Author] = {
+
+    val reader = CSVReader.open(new File(path))
+
+    for (row <- reader.allWithHeaders) yield {
+      Author(
+        authId=row("AUTH_ID"),
+        authLast=row("AUTH_LAST"),
+        authFirst=row("AUTH_FIRST"),
+        altFirst=row("ALT_FIRST"),
+        dateB=row("DATE_B").toInt,
+        dateD=row("DATE_D").toInt,
+        nationality=row("NATIONALITY"),
+        gender=row("GENDER"),
+        raceEthnicity=row("RACE_ETHNICITY"),
+        hyphenatedIdentity=row("HYPHENATED_IDENTITY"),
+        sexualIdentity=row("SEXUAL_IDENTITY"),
+        education=row("EDUCATION"),
+        mfa=row("MFA"),
+        secondaryOccupation=row("SECONDARY_OCCUPATION"),
+        coterie=row("COTERIE"),
+        religion=row("RELIGION"),
+        ses=row("CLASS"),
+        geography=row("GEOGRAPHY")
+      )
+    }
+
+  }
+
+}
+
+
+object FileSystemAuthorsCSV extends Config {
+
+  /* Bind config novels CSV path.
+   */
+  def fromConfig: FileSystemAuthorsCSV = {
+    new FileSystemAuthorsCSV(config.chicago.authorMetadataPath)
   }
 
 }
