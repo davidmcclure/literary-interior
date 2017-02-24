@@ -3,10 +3,10 @@
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
-import lint.chicago.Loader
+import lint.chicago.AuthorCSV
 
 
-object ExtChicago {
+object LoadChicagoAuthors {
 
   val sc = new SparkContext(new SparkConf)
   val spark = SparkSession.builder.getOrCreate()
@@ -14,17 +14,13 @@ object ExtChicago {
 
   def main(args: Array[String]) {
 
-    val novels = sc
-      .parallelize(Loader.sources)
-      .map(Loader.parse)
+    val authors = AuthorCSV.fromConfig.read
+    val ds = spark.createDataset(authors)
 
-    val ds = spark.createDataset(novels)
-
-    ds.write.mode(SaveMode.Overwrite).parquet("chicago.parquet")
-
+    // TODO: Config path.
+    ds.write.mode(SaveMode.Overwrite).parquet("chicago-authors.parquet")
     ds.show()
 
   }
 
 }
-

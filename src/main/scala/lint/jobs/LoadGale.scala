@@ -6,7 +6,7 @@ import org.apache.spark.sql.{SparkSession,SaveMode}
 import lint.gale.Loader
 
 
-object ExtGale {
+object LoadGale {
 
   val sc = new SparkContext(new SparkConf)
   val spark = SparkSession.builder.getOrCreate()
@@ -20,8 +20,8 @@ object ExtGale {
 
     val ds = spark.createDataset(novels)
 
+    // TODO: Config path.
     ds.write.mode(SaveMode.Overwrite).parquet("gale.parquet")
-
     ds.show()
 
   }
