@@ -3,8 +3,10 @@
 import org.apache.spark.{SparkContext,SparkConf}
 import pprint.pprintln
 
+import lint.config.Config
 
-object Benchmark {
+
+object TestConfig extends Config {
 
   val sc = new SparkContext(new SparkConf)
 
@@ -14,8 +16,7 @@ object Benchmark {
 
     val res = data
       .map(i => {
-        new Thread
-        Thread.sleep(1000)
+        pprintln(config)
         i+1
       })
       .collect()
