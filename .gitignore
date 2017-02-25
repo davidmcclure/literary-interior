@@ -25,3 +25,4 @@ project/plugins/project/
 *.parquet
 spark-warehouse/
 metastore_db/
+application.conf
