@@ -3,8 +3,10 @@
 import org.apache.spark.{SparkContext,SparkConf}
 import pprint.pprintln
 
+import lint.config.Config
 
-object Benchmark {
+
+object Benchmark extends Config {
 
   val sc = new SparkContext(new SparkConf)
 
@@ -21,6 +23,7 @@ object Benchmark {
       .collect()
 
     pprintln(res)
+    pprintln(config)
 
   }
 
