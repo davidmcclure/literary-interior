@@ -23,7 +23,7 @@ object Tokenizer {
   // Sentences
 
   val sentenceModel = {
-    val path = getClass.getResource("/en-sent.bin")
+    val path = getClass.getResource("/models/en-sent.bin")
     new SentenceModel(path)
   }
 
@@ -35,7 +35,7 @@ object Tokenizer {
   // Tokens
 
   val tokenizerModel = {
-    val path = getClass.getResource("/en-token.bin")
+    val path = getClass.getResource("/models/en-token.bin")
     new TokenizerModel(path)
   }
 
@@ -47,7 +47,7 @@ object Tokenizer {
   // POS-tags
 
   val posModel = {
-    val path = getClass.getResource("/en-pos-maxent.bin")
+    val path = getClass.getResource("/models/en-pos-maxent.bin")
     new POSModel(path)
   }
 
