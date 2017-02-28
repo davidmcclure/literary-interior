@@ -13,7 +13,8 @@ case class LintConfig(
 )
 
 case class GaleConfig(
-  corpusDir: String
+  corpusDir: String,
+  novelParquet: String
 )
 
 case class ChicagoConfig(

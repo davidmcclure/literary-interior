@@ -26,3 +26,4 @@ project/plugins/project/
 spark-warehouse/
 metastore_db/
 application.conf
+data/

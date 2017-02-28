@@ -4,9 +4,10 @@ import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
 import lint.gale.Loader
+import lint.config.Config
 
 
-object LoadGale {
+object LoadGale extends Config {
 
   val sc = new SparkContext(new SparkConf)
   val spark = SparkSession.builder.getOrCreate()
@@ -20,8 +21,9 @@ object LoadGale {
 
     val ds = spark.createDataset(novels)
 
-    // TODO: Config path.
-    ds.write.mode(SaveMode.Overwrite).parquet("gale.parquet")
+    ds.write.mode(SaveMode.Overwrite)
+      .parquet(config.gale.novelParquet)
+
     ds.show()
 
   }
