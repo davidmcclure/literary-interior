@@ -3,10 +3,11 @@
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
+import lint.config.Config
 import lint.chicago.AuthorCSV
 
 
-object LoadChicagoAuthors {
+object LoadChicagoAuthors extends Config {
 
   val sc = new SparkContext(new SparkConf)
   val spark = SparkSession.builder.getOrCreate()
@@ -17,8 +18,9 @@ object LoadChicagoAuthors {
     val authors = AuthorCSV.fromConfig.read
     val ds = spark.createDataset(authors)
 
-    // TODO: Config path.
-    ds.write.mode(SaveMode.Overwrite).parquet("chicago-authors.parquet")
+    ds.write.mode(SaveMode.Overwrite)
+      .parquet(config.chicago.authorParquet)
+
     ds.show()
 
   }

@@ -20,11 +20,12 @@ case class GaleConfig(
 case class ChicagoConfig(
   novelMetadataPath: String,
   authorMetadataPath: String,
-  textDir: String
+  textDir: String,
+  novelParquet: String,
+  authorParquet: String
 )
 
 
-// TODO: Inject with MacWire?
 trait Config {
   lazy val config = ConfigFactory.load.as[LintConfig]("lint")
 }

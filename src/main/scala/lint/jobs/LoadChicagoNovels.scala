@@ -3,10 +3,11 @@
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
+import lint.config.Config
 import lint.chicago.Loader
 
 
-object LoadChicagoNovels {
+object LoadChicagoNovels extends Config {
 
   val sc = new SparkContext(new SparkConf)
   val spark = SparkSession.builder.getOrCreate()
@@ -20,8 +21,9 @@ object LoadChicagoNovels {
 
     val ds = spark.createDataset(novels)
 
-    // TODO: Config path.
-    ds.write.mode(SaveMode.Overwrite).parquet("chicago-novels.parquet")
+    ds.write.mode(SaveMode.Overwrite)
+      .parquet(config.chicago.novelParquet)
+
     ds.show()
 
   }
