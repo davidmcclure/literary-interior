@@ -208,7 +208,7 @@ object TextDir extends Config {
   /* Bind config text path.
    */
   def fromConfig: TextDir = {
-    new TextDir(config.chicago.textDirectory)
+    new TextDir(config.chicago.textDir)
   }
 
 }

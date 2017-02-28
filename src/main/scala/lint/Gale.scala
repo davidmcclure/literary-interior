@@ -175,7 +175,7 @@ object Corpus extends Config {
   /* Read corpus root from config.
    */
   def fromConfig: Corpus = {
-    new Corpus(config.gale.directory)
+    new Corpus(config.gale.corpusDir)
   }
 
 }

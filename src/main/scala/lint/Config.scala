@@ -13,13 +13,13 @@ case class LintConfig(
 )
 
 case class GaleConfig(
-  directory: String
+  corpusDir: String
 )
 
 case class ChicagoConfig(
   novelMetadataPath: String,
   authorMetadataPath: String,
-  textDirectory: String
+  textDir: String
 )
 
 
