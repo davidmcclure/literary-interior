@@ -7,7 +7,7 @@ import scala.xml.{XML,Elem,Node}
 import scala.util.matching.Regex
 
 import lint.tokenizer.{Tokenizer,Token}
-import lint.corpus.Text
+import lint.text.Text
 import lint.fileSystem.FileSystem
 import lint.config.Config
 

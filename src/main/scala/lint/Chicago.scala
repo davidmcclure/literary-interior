@@ -9,7 +9,7 @@ import com.github.tototoshi.csv.CSVReader
 
 import lint.config.Config
 import lint.tokenizer.{Tokenizer,Token}
-import lint.corpus.Text
+import lint.text.Text
 
 
 case class NovelMetadata(

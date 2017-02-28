@@ -1,6 +1,6 @@
 
 
-package lint.corpus
+package lint.text
 
 import lint.tokenizer.Token
 
