@@ -25,6 +25,10 @@ case class Args(
 case class Match(
   corpus: String,
   identifier: String,
+  title: String,
+  authorFirst: Option[String],
+  authorLast: Option[String],
+  year: Int,
   offset: Double,
   snippet: String
 )
@@ -72,15 +76,20 @@ object KWIC extends Config {
         if (token.token == cliArgs.query)
       ) yield {
 
+        // TODO: Parametrize radius.
         val hit = novel.text.slice(token.start, token.end)
         val prefix = novel.text.slice(token.start-100, token.start)
         val suffix = novel.text.slice(token.end, token.end+100)
 
-        val snippet = prefix + s"**${hit}**" + suffix
+        val snippet = prefix + s"***${hit}***" + suffix
 
         Match(
           corpus=novel.corpus,
           identifier=novel.identifier,
+          title=novel.title,
+          authorFirst=novel.authorFirst,
+          authorLast=novel.authorLast,
+          year=novel.year,
           offset=token.offset,
           snippet=snippet
         )
