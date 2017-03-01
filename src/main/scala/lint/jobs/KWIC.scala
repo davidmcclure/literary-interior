@@ -8,7 +8,7 @@ import lint.config.Config
 import lint.corpus.Novel
 
 
-case class Args(
+case class Opts(
 
   query: String = null,
   outPath: String = null,
@@ -43,7 +43,7 @@ object KWIC extends Config {
   def main(args: Array[String]) {
 
     // Define argument rules.
-    val parser = new scopt.OptionParser[Args]("kwic") {
+    val parser = new scopt.OptionParser[Opts]("kwic") {
 
       arg[String]("query")
         .action((x, c) => c.copy(query = x))
@@ -68,7 +68,7 @@ object KWIC extends Config {
     }
 
     // Parse args.
-    val cliArgs = parser.parse(args, Args()) match {
+    val opts = parser.parse(args, Opts()) match {
       case Some(args) => args
       case None => throw new Exception("Invalid args.")
     }
@@ -83,9 +83,9 @@ object KWIC extends Config {
 
       for (
         token <- novel.tokens
-        if (token.token == cliArgs.query)
-        if (token.offset >= cliArgs.minOffset)
-        if (token.offset <= cliArgs.maxOffset)
+        if (token.token == opts.query)
+        if (token.offset >= opts.minOffset)
+        if (token.offset <= opts.maxOffset)
       ) yield {
 
         // TODO: Parametrize radius.
@@ -111,12 +111,12 @@ object KWIC extends Config {
     })
 
     // Sample results.
-    val sample = matches.sample(false, cliArgs.sampleFraction)
+    val sample = matches.sample(false, opts.sampleFraction)
 
     // Write single CSV.
     sample.coalesce(1).write
       .option("header", "true")
-      .csv(cliArgs.outPath)
+      .csv(opts.outPath)
 
   }
 
