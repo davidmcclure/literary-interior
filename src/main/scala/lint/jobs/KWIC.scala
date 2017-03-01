@@ -22,6 +22,13 @@ case class Args(
 )
 
 
+case class Match(
+  corpus: String,
+  identifier: String,
+  snippet: String
+)
+
+
 object KWIC extends Config {
 
   val sc = new SparkContext(new SparkConf)
@@ -49,25 +56,39 @@ object KWIC extends Config {
       case None => throw new Exception("Invalid args.")
     }
 
+    // Read novels.
     val novels = spark.read
       .parquet(config.novelParquet)
       .as[Novel]
 
+    // Probe for query matches.
     val matches = novels.flatMap(novel => {
+
+      // TODO: Move matching logic into Novel method.
 
       for (
         token <- novel.tokens
         if (token.token == cliArgs.query)
       ) yield {
 
-        pprintln(token)
-        token
+        val hit = novel.text.slice(token.start, token.end)
+        val prefix = novel.text.slice(token.start-200, token.start)
+        val suffix = novel.text.slice(token.end, token.end+200)
+
+        val snippet = prefix + s"**${hit}**" + suffix
+
+        Match(
+          corpus=novel.corpus,
+          identifier=novel.identifier,
+          snippet=snippet
+        )
 
       }
 
     })
 
-    matches.show
+    // Write single CSV.
+    matches.coalesce(1).write.csv(cliArgs.outPath)
 
   }
 
