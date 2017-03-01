@@ -10,9 +10,8 @@ import lint.corpus.Novel
 
 case class Args(
 
-  // TODO: Don't give defaults?
-  query: String = "query",
-  outPath: String = "query.csv",
+  query: String = null,
+  outPath: String = null,
 
   minOffset: Double = 0,
   maxOffset: Double = 100,
