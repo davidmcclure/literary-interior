@@ -14,11 +14,11 @@ case class Args(
   query: String = "query",
   outPath: String = "query.csv",
 
-  //minOffset: Double = 0,
-  //maxOffset: Double = 100,
+  minOffset: Double = 0,
+  maxOffset: Double = 100,
   //minYear: Double = 0,
   //maxYear: Double = 2000,
-  fraction: Double = 1
+  sampleFraction: Double = 1
 
 )
 
@@ -54,8 +54,16 @@ object KWIC extends Config {
         .action((x, c) => c.copy(outPath = x))
         .text("Output path")
 
-      opt[Double]("fraction")
-        .action((x, c) => c.copy(fraction = x))
+      opt[Double]("minOffset")
+        .action((x, c) => c.copy(minOffset = x))
+        .text("Minimum 0-1 offset.")
+
+      opt[Double]("maxOffset")
+        .action((x, c) => c.copy(maxOffset = x))
+        .text("Maximum 0-1 offset.")
+
+      opt[Double]("sampleFraction")
+        .action((x, c) => c.copy(sampleFraction = x))
         .text("Fraction of matches to sample.")
 
     }
@@ -74,11 +82,11 @@ object KWIC extends Config {
     // Probe for query matches.
     val matches = novels.flatMap(novel => {
 
-      // TODO: Move matching logic into Novel method.
-
       for (
         token <- novel.tokens
         if (token.token == cliArgs.query)
+        if (token.offset >= cliArgs.minOffset)
+        if (token.offset <= cliArgs.maxOffset)
       ) yield {
 
         // TODO: Parametrize radius.
@@ -104,7 +112,7 @@ object KWIC extends Config {
     })
 
     // Sample results.
-    val sample = matches.sample(false, cliArgs.fraction)
+    val sample = matches.sample(false, cliArgs.sampleFraction)
 
     // Write single CSV.
     sample.coalesce(1).write
