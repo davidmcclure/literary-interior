@@ -27,6 +27,9 @@ object Dependencies {
   lazy val openNLP =
     "org.apache.opennlp" % "opennlp-tools" % "1.7.1"
 
+  lazy val scopt =
+    "com.github.scopt" %% "scopt" % "3.5.0"
+
   lazy val scalaTest =
     "org.scalatest" %% "scalatest" % "3.0.1"
 
