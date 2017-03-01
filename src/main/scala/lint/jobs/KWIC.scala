@@ -25,6 +25,7 @@ case class Args(
 case class Match(
   corpus: String,
   identifier: String,
+  offset: Double,
   snippet: String
 )
 
@@ -72,14 +73,15 @@ object KWIC extends Config {
       ) yield {
 
         val hit = novel.text.slice(token.start, token.end)
-        val prefix = novel.text.slice(token.start-200, token.start)
-        val suffix = novel.text.slice(token.end, token.end+200)
+        val prefix = novel.text.slice(token.start-100, token.start)
+        val suffix = novel.text.slice(token.end, token.end+100)
 
         val snippet = prefix + s"**${hit}**" + suffix
 
         Match(
           corpus=novel.corpus,
           identifier=novel.identifier,
+          offset=token.offset,
           snippet=snippet
         )
 
@@ -88,7 +90,9 @@ object KWIC extends Config {
     })
 
     // Write single CSV.
-    matches.coalesce(1).write.csv(cliArgs.outPath)
+    matches.coalesce(1).write
+      .option("header", "true")
+      .csv(cliArgs.outPath)
 
   }
 
