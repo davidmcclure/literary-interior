@@ -23,6 +23,7 @@ project/plugins/project/
 
 # lint
 *.parquet
+*.csv
 spark-warehouse/
 metastore_db/
 application.conf
