@@ -14,10 +14,11 @@ case class Args(
   query: String = "query",
   outPath: String = "query.csv",
 
-  minOffset: Double = 0,
-  maxOffset: Double = 100,
-  minYear: Double = 0,
-  maxYear: Double = 2000
+  //minOffset: Double = 0,
+  //maxOffset: Double = 100,
+  //minYear: Double = 0,
+  //maxYear: Double = 2000,
+  fraction: Double = 1
 
 )
 
@@ -47,11 +48,15 @@ object KWIC extends Config {
 
       arg[String]("query")
         .action((x, c) => c.copy(query = x))
-        .text("Query token.")
+        .text("Query token")
 
       arg[String]("outPath")
         .action((x, c) => c.copy(outPath = x))
-        .text("Output path.")
+        .text("Output path")
+
+      opt[Double]("fraction")
+        .action((x, c) => c.copy(fraction = x))
+        .text("Fraction of matches to sample.")
 
     }
 
@@ -98,8 +103,11 @@ object KWIC extends Config {
 
     })
 
+    // Sample results.
+    val sample = matches.sample(false, cliArgs.fraction)
+
     // Write single CSV.
-    matches.coalesce(1).write
+    sample.coalesce(1).write
       .option("header", "true")
       .csv(cliArgs.outPath)
 
