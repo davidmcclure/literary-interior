@@ -9,7 +9,8 @@ import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 
 case class LintConfig(
   gale: GaleConfig,
-  chicago: ChicagoConfig
+  chicago: ChicagoConfig,
+  novelParquet: String
 )
 
 case class GaleConfig(

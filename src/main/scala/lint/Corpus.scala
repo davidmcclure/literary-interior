@@ -3,6 +3,7 @@
 package lint.corpus
 
 import lint.tokenizer.Token
+import lint.text.Text
 
 
 case class Novel(
@@ -14,7 +15,7 @@ case class Novel(
   year: Int,
   text: String,
   tokens: Seq[Token]
-)
+) extends Text
 
 
 object Novel {
