@@ -9,19 +9,14 @@ import lint.corpus.Novel
 
 
 case class Opts(
-
-  // Args
   query: String = null,
   outPath: String = null,
-
-  // Opts
   minOffset: Double = 0,
   maxOffset: Double = 100,
-  //minYear: Double = 0,
-  //maxYear: Double = 2000,
+  minYear: Double = 0,
+  maxYear: Double = 3000,
   sampleFraction: Double = 1,
   snippetRadius: Int = 100
-
 )
 
 
@@ -64,6 +59,14 @@ object KWIC extends Config {
         .action((x, c) => c.copy(maxOffset = x))
         .text("Maximum 0-1 offset.")
 
+      opt[Int]("minYear")
+        .action((x, c) => c.copy(minYear = x))
+        .text("Minimum year.")
+
+      opt[Int]("maxYear")
+        .action((x, c) => c.copy(maxYear = x))
+        .text("Maximum year.")
+
       opt[Double]("sampleFraction")
         .action((x, c) => c.copy(sampleFraction = x))
         .text("Fraction of matches to sample.")
@@ -80,6 +83,12 @@ object KWIC extends Config {
     val novels = spark.read
       .parquet(config.novelParquet)
       .as[Novel]
+
+      // Filter by year.
+      .filter(n => {
+        n.year >= opts.minYear &&
+        n.year <= opts.maxYear
+      })
 
     // Probe for query matches.
     val matches = novels.flatMap(novel => {
