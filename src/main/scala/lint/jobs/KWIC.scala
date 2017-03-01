@@ -10,14 +10,17 @@ import lint.corpus.Novel
 
 case class Opts(
 
+  // Args
   query: String = null,
   outPath: String = null,
 
+  // Opts
   minOffset: Double = 0,
   maxOffset: Double = 100,
   //minYear: Double = 0,
   //maxYear: Double = 2000,
-  sampleFraction: Double = 1
+  sampleFraction: Double = 1,
+  snippetRadius: Int = 100
 
 )
 
@@ -88,10 +91,14 @@ object KWIC extends Config {
         if (token.offset <= opts.maxOffset)
       ) yield {
 
-        // TODO: Parametrize radius.
-        val hit = novel.text.slice(token.start, token.end)
-        val prefix = novel.text.slice(token.start-100, token.start)
-        val suffix = novel.text.slice(token.end, token.end+100)
+        val c1 = token.start - opts.snippetRadius
+        val c2 = token.start
+        val c3 = token.end
+        val c4 = token.end + opts.snippetRadius
+
+        val prefix = novel.text.slice(c1, c2)
+        val hit = novel.text.slice(c2, c3)
+        val suffix = novel.text.slice(c3, c4)
 
         val snippet = prefix + s"***${hit}***" + suffix
 
