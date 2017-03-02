@@ -9,8 +9,8 @@ import lint.corpus.Novel
 
 
 case class Opts(
-  query: String = null,
-  outPath: String = null,
+  query: String = "",
+  outPath: String = "",
   minOffset: Double = 0,
   maxOffset: Double = 100,
   minYear: Double = 0,
