@@ -76,22 +76,20 @@ class NovelCSV(val path: String) {
 
     val reader = CSVReader.open(new File(path))
 
-    for (row <- reader.allWithHeaders) yield {
-      NovelMetadata(
-        bookId=row("BOOK_ID"),
-        filename=row("FILENAME"),
-        title=row("TITLE"),
-        authLast=row("AUTH_LAST"),
-        authFirst=row("AUTH_FIRST"),
-        authId=row("AUTH_ID"),
-        publCity=row("PUBL_CITY"),
-        publisher=row("PUBLISHER"),
-        publDate=row("PUBL_DATE").toInt,
-        source=row("SOURCE"),
-        nationality=row("NATIONALITY"),
-        genre=row("GENRE")
-      )
-    }
+    for (row <- reader.allWithHeaders) yield NovelMetadata(
+      bookId=row("BOOK_ID"),
+      filename=row("FILENAME"),
+      title=row("TITLE"),
+      authLast=row("AUTH_LAST"),
+      authFirst=row("AUTH_FIRST"),
+      authId=row("AUTH_ID"),
+      publCity=row("PUBL_CITY"),
+      publisher=row("PUBLISHER"),
+      publDate=row("PUBL_DATE").toInt,
+      source=row("SOURCE"),
+      nationality=row("NATIONALITY"),
+      genre=row("GENRE")
+    )
 
   }
 
@@ -117,28 +115,26 @@ class AuthorCSV(val path: String) {
 
     val reader = CSVReader.open(new File(path))
 
-    for (row <- reader.allWithHeaders) yield {
-      Author(
-        authId=row("AUTH_ID"),
-        authLast=row("AUTH_LAST"),
-        authFirst=row("AUTH_FIRST"),
-        altFirst=row("ALT_FIRST"),
-        dateB=AuthorCSV.parseYear(row("DATE_B")),
-        dateD=AuthorCSV.parseYear(row("DATE_D")),
-        nationality=row("NATIONALITY"),
-        gender=row("GENDER"),
-        raceEthnicity=row("RACE_ETHNICITY"),
-        hyphenatedIdentity=row("HYPHENATED_IDENTITY"),
-        sexualIdentity=row("SEXUAL_IDENTITY"),
-        education=row("EDUCATION"),
-        mfa=row("MFA"),
-        secondaryOccupation=row("SECONDARY_OCCUPATION"),
-        coterie=row("COTERIE"),
-        religion=row("RELIGION"),
-        ses=row("CLASS"),
-        geography=row("GEOGRAPHY")
-      )
-    }
+    for (row <- reader.allWithHeaders) yield Author(
+      authId=row("AUTH_ID"),
+      authLast=row("AUTH_LAST"),
+      authFirst=row("AUTH_FIRST"),
+      altFirst=row("ALT_FIRST"),
+      dateB=AuthorCSV.parseYear(row("DATE_B")),
+      dateD=AuthorCSV.parseYear(row("DATE_D")),
+      nationality=row("NATIONALITY"),
+      gender=row("GENDER"),
+      raceEthnicity=row("RACE_ETHNICITY"),
+      hyphenatedIdentity=row("HYPHENATED_IDENTITY"),
+      sexualIdentity=row("SEXUAL_IDENTITY"),
+      education=row("EDUCATION"),
+      mfa=row("MFA"),
+      secondaryOccupation=row("SECONDARY_OCCUPATION"),
+      coterie=row("COTERIE"),
+      religion=row("RELIGION"),
+      ses=row("CLASS"),
+      geography=row("GEOGRAPHY")
+    )
 
   }
 

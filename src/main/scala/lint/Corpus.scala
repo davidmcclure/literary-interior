@@ -22,32 +22,28 @@ object Novel {
 
   /* Map Gale novel.
    */
-  def fromGaleNovel(novel: lint.gale.Novel) = {
-    Novel(
-      corpus="gale",
-      identifier=novel.psmid,
-      title=novel.title,
-      authorFirst=novel.authorFirst,
-      authorLast=novel.authorLast,
-      year=novel.year,
-      text=novel.text,
-      tokens=novel.tokens
-    )
-  }
+  def fromGaleNovel(novel: lint.gale.Novel) = Novel(
+    corpus="gale",
+    identifier=novel.psmid,
+    title=novel.title,
+    authorFirst=novel.authorFirst,
+    authorLast=novel.authorLast,
+    year=novel.year,
+    text=novel.text,
+    tokens=novel.tokens
+  )
 
   /* Map Chicago novel.
    */
-  def fromChicagoNovel(novel: lint.chicago.Novel) = {
-    Novel(
-      corpus="chicago",
-      identifier=novel.bookId,
-      title=novel.title,
-      authorFirst=Some(novel.authFirst),
-      authorLast=Some(novel.authLast),
-      year=novel.publDate,
-      text=novel.text,
-      tokens=novel.tokens
-    )
-  }
+  def fromChicagoNovel(novel: lint.chicago.Novel) = Novel(
+    corpus="chicago",
+    identifier=novel.bookId,
+    title=novel.title,
+    authorFirst=Some(novel.authFirst),
+    authorLast=Some(novel.authLast),
+    year=novel.publDate,
+    text=novel.text,
+    tokens=novel.tokens
+  )
 
 }
