@@ -93,15 +93,13 @@ object KWIC extends Config {
       })
 
     // Probe for query matches.
-    val matches = novels.flatMap(novel => {
-      kwic(
-        novel,
-        opts.query,
-        opts.minOffset,
-        opts.maxOffset,
-        opts.snippetRadius
-      )
-    })
+    val matches = novels.flatMap(novel => kwic(
+      novel,
+      opts.query,
+      opts.minOffset,
+      opts.maxOffset,
+      opts.snippetRadius
+    ))
 
     // Sample results.
     val sample = matches.sample(false, opts.sampleFraction)
