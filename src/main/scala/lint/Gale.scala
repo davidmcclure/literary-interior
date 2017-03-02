@@ -12,6 +12,7 @@ import lint.fileSystem.FileSystem
 import lint.config.Config
 
 
+// TODO: Can we avoid the options?
 case class Novel(
   psmid: String,
   title: String,
@@ -186,7 +187,7 @@ object Loader {
   /* List XML paths.
    */
   def sources: List[File] = {
-    Corpus.fromConfig.listPaths.toList
+    Corpus.fromConfig.listPaths.toList.slice(0, 1000) // TODO|dev
   }
 
   /* XML -> Text.
