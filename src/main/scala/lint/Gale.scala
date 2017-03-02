@@ -187,7 +187,7 @@ object Loader {
   /* List XML paths.
    */
   def sources: List[File] = {
-    Corpus.fromConfig.listPaths.toList.slice(0, 10) // TODO|dev
+    Corpus.fromConfig.listPaths.toList.slice(0, 100) // TODO|dev
   }
 
   /* XML -> Text.
