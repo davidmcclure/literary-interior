@@ -38,6 +38,8 @@ object KWIC extends Config {
   val spark = SparkSession.builder.getOrCreate()
   import spark.implicits._
 
+  /* Probe for KWICs, dump results to CSV.
+   */
   def main(args: Array[String]) {
 
     // Define argument rules.
@@ -92,38 +94,13 @@ object KWIC extends Config {
 
     // Probe for query matches.
     val matches = novels.flatMap(novel => {
-
-      for (
-        token <- novel.tokens
-        if (token.token == opts.query)
-        if (token.offset >= opts.minOffset)
-        if (token.offset <= opts.maxOffset)
-      ) yield {
-
-        val c1 = token.start - opts.snippetRadius
-        val c2 = token.start
-        val c3 = token.end
-        val c4 = token.end + opts.snippetRadius
-
-        val prefix = novel.text.slice(c1, c2)
-        val hit = novel.text.slice(c2, c3)
-        val suffix = novel.text.slice(c3, c4)
-
-        val snippet = prefix + s"***${hit}***" + suffix
-
-        Match(
-          corpus=novel.corpus,
-          identifier=novel.identifier,
-          title=novel.title,
-          authorFirst=novel.authorFirst,
-          authorLast=novel.authorLast,
-          year=novel.year,
-          offset=token.offset,
-          snippet=snippet
-        )
-
-      }
-
+      kwic(
+        novel,
+        opts.query,
+        opts.minOffset,
+        opts.maxOffset,
+        opts.snippetRadius
+      )
     })
 
     // Sample results.
@@ -133,6 +110,50 @@ object KWIC extends Config {
     sample.coalesce(1).write
       .option("header", "true")
       .csv(opts.outPath)
+
+  }
+
+  /* Find keywords in context in a novel.
+   * TODO: Add to Novel via implicit class?
+   */
+  def kwic(
+    novel: Novel,
+    query: String,
+    minOffset: Double,
+    maxOffset: Double,
+    snippetRadius: Int
+  ): Seq[Match] = {
+
+    for (
+      token <- novel.tokens
+      if (token.token == query)
+      if (token.offset >= minOffset)
+      if (token.offset <= maxOffset)
+    ) yield {
+
+      val c1 = token.start - snippetRadius
+      val c2 = token.start
+      val c3 = token.end
+      val c4 = token.end + snippetRadius
+
+      val prefix = novel.text.slice(c1, c2)
+      val hit = novel.text.slice(c2, c3)
+      val suffix = novel.text.slice(c3, c4)
+
+      val snippet = prefix + s"***${hit}***" + suffix
+
+      Match(
+        corpus=novel.corpus,
+        identifier=novel.identifier,
+        title=novel.title,
+        authorFirst=novel.authorFirst,
+        authorLast=novel.authorLast,
+        year=novel.year,
+        offset=token.offset,
+        snippet=snippet
+      )
+
+    }
 
   }
 
