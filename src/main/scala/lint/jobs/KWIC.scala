@@ -104,10 +104,8 @@ object KWIC extends Config {
     // Sample results.
     val sample = matches.sample(false, opts.sampleFraction)
 
-    // Write single CSV.
-    sample.coalesce(1).write
-      .option("header", "true")
-      .csv(opts.outPath)
+    // Write single JSON.
+    sample.coalesce(1).write.json(opts.outPath)
 
   }
 
