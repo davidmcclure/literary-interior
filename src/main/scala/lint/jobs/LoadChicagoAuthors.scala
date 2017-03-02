@@ -21,7 +21,7 @@ object LoadChicagoAuthors extends Config {
     ds.write.mode(SaveMode.Overwrite)
       .parquet(config.chicago.authorParquet)
 
-    ds.show()
+    ds.show
 
   }
 

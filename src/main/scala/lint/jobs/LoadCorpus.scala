@@ -35,7 +35,7 @@ object LoadCorpus extends Config {
     ds.write.mode(SaveMode.Overwrite)
       .parquet(config.novelParquet)
 
-    ds.show()
+    ds.show
 
   }
 

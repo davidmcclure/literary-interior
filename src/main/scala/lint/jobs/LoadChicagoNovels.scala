@@ -24,7 +24,7 @@ object LoadChicagoNovels extends Config {
     ds.write.mode(SaveMode.Overwrite)
       .parquet(config.chicago.novelParquet)
 
-    ds.show()
+    ds.show
 
   }
 
