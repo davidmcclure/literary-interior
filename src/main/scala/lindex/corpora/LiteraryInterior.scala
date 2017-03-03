@@ -5,18 +5,6 @@ package lindex.corpora.literaryinterior
 import lindex.tokenizer.Token
 
 
-trait NovelSchema {
-  val corpus: String
-  val identifier: String
-  val title: String
-  val authorFirst: Option[String]
-  val authorLast: Option[String]
-  val year: Int
-  val text: String
-  val tokens: Seq[Token]
-}
-
-
 case class Novel(
   corpus: String,
   identifier: String,
@@ -26,7 +14,7 @@ case class Novel(
   year: Int,
   text: String,
   tokens: Seq[Token]
-) extends NovelSchema
+)
 
 
 object Novel {
