@@ -12,7 +12,20 @@ import lint.fileSystem.FileSystem
 import lint.config.Config
 
 
-// TODO: Can we avoid the options?
+trait NovelSchema {
+  val psmid: String
+  val title: String
+  val authorFirst: Option[String]
+  val authorLast: Option[String]
+  val language: String
+  val year: Int
+  val ocrPercentage: Double
+  val documentType: String
+  val text: String
+  val tokens: Seq[Token]
+}
+
+
 case class Novel(
   psmid: String,
   title: String,
@@ -24,7 +37,7 @@ case class Novel(
   documentType: String,
   text: String,
   tokens: Seq[Token]
-) extends Text
+) extends NovelSchema
 
 
 class NovelXML(val xml: Elem) {

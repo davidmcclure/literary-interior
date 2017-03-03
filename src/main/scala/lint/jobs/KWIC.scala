@@ -1,5 +1,7 @@
 
 
+package lint.jobs.kwic
+
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 import pprint.pprintln

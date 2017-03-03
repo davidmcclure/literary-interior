@@ -3,7 +3,6 @@
 package lint.corpus
 
 import lint.tokenizer.Token
-import lint.text.Text
 
 
 trait NovelSchema {
