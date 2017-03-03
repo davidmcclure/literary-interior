@@ -1,6 +1,6 @@
 
 
-package lint.gale
+package lint.corpora.gale
 
 import java.io.File
 import scala.xml.{XML,Elem,Node}

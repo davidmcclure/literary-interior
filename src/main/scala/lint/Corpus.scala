@@ -78,7 +78,7 @@ object Novel {
 
   /* Map Gale novel.
    */
-  def fromGaleNovel(novel: lint.gale.Novel) = Novel(
+  def fromGaleNovel(novel: lint.corpora.gale.Novel) = Novel(
     corpus="gale",
     identifier=novel.psmid,
     title=novel.title,
@@ -91,7 +91,7 @@ object Novel {
 
   /* Map Chicago novel.
    */
-  def fromChicagoNovel(novel: lint.chicago.Novel) = Novel(
+  def fromChicagoNovel(novel: lint.corpora.chicago.Novel) = Novel(
     corpus="chicago",
     identifier=novel.bookId,
     title=novel.title,

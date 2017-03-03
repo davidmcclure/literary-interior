@@ -19,11 +19,11 @@ object LoadCorpus extends Config {
 
     val gale = spark.read
       .parquet(config.gale.novelParquet)
-      .as[lint.gale.Novel]
+      .as[lint.corpora.gale.Novel]
 
     val chicago = spark.read
       .parquet(config.chicago.novelParquet)
-      .as[lint.chicago.Novel]
+      .as[lint.corpora.chicago.Novel]
 
     // Convert to normalized schema.
     val galeNovels = gale.map(Novel.fromGaleNovel)

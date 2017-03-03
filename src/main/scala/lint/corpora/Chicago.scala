@@ -1,6 +1,6 @@
 
 
-package lint.chicago
+package lint.corpora.chicago
 
 import java.io.File
 import java.nio.file.Paths

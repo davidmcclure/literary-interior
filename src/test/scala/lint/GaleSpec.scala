@@ -1,6 +1,6 @@
 
 
-package lint.gale
+package lint.corpora.gale
 
 import org.scalatest._
 import scala.xml.{XML,Elem,Node}

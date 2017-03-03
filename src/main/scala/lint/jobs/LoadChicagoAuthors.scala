@@ -4,7 +4,7 @@ import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
 import lint.config.Config
-import lint.chicago.AuthorCSV
+import lint.corpora.chicago.AuthorCSV
 
 
 object LoadChicagoAuthors extends Config {
