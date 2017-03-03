@@ -10,7 +10,6 @@ import lindex.corpora.gale.Loader
 
 object LoadGale extends Config {
 
-  // TODO: DRY this up?
   val sc = new SparkContext(new SparkConf)
   val spark = SparkSession.builder.getOrCreate()
   import spark.implicits._
