@@ -6,10 +6,9 @@ import java.io.File
 import scala.xml.{XML,Elem,Node}
 import scala.util.matching.Regex
 
-import lint.tokenizer.{Tokenizer,Token}
-import lint.text.Text
-import lint.fileSystem.FileSystem
 import lint.config.Config
+import lint.tokenizer.{Tokenizer,Token}
+import lint.fileSystem.FileSystem
 
 
 case class Novel(

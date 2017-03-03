@@ -9,7 +9,6 @@ import com.github.tototoshi.csv.CSVReader
 
 import lint.config.Config
 import lint.tokenizer.{Tokenizer,Token}
-import lint.text.Text
 
 
 case class Novel(
@@ -27,7 +26,7 @@ case class Novel(
   genre: String,
   text: String,
   tokens: Seq[Token]
-) extends Text
+)
 
 
 case class Author(
