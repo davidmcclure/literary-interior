@@ -10,7 +10,7 @@ import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 case class LindexConfig(
   gale: GaleConfig,
   chicago: ChicagoConfig,
-  novelParquet: String
+  literaryinterior: LiteraryInteriorConfig
 )
 
 case class GaleConfig(
@@ -24,6 +24,10 @@ case class ChicagoConfig(
   textDir: String,
   novelParquet: String,
   authorParquet: String
+)
+
+case class LiteraryInteriorConfig(
+  novelParquet: String
 )
 
 

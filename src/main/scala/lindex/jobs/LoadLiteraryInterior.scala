@@ -15,12 +15,12 @@ object LoadLiteraryInterior extends Config {
 
   def main(args: Array[String]) {
 
-    // Read raw Gale + Chicago novels.
-
+    // Read raw Gale novels.
     val gale = spark.read
       .parquet(config.gale.novelParquet)
       .as[lindex.corpora.gale.Novel]
 
+    // Read raw Chicago novels.
     val chicago = spark.read
       .parquet(config.chicago.novelParquet)
       .as[lindex.corpora.chicago.Novel]
@@ -33,7 +33,7 @@ object LoadLiteraryInterior extends Config {
     val ds = galeNovels.union(chicagoNovels)
 
     ds.write.mode(SaveMode.Overwrite)
-      .parquet(config.novelParquet)
+      .parquet(config.literaryinterior.novelParquet)
 
     ds.show
 

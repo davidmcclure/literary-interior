@@ -74,7 +74,7 @@ object KWIC extends Config {
 
     // Read novels.
     val novels = spark.read
-      .parquet(config.novelParquet)
+      .parquet(config.literaryinterior.novelParquet)
       .as[Novel]
 
       // Filter by year.
