@@ -17,8 +17,7 @@ case class Novel(
   tokens: Seq[Token]
 ) extends NovelSchema {
 
-  /* Given a query token, find all occurrences within an offset range and
-   * provide match instances.
+  /* Probe for KWIC matches.
    */
   def kwic(
     query: String,
@@ -27,6 +26,7 @@ case class Novel(
     radius: Int
   ): Seq[KWICMatch] = {
 
+    // Find matching tokens, inside offset range.
     for (
       token <- tokens
       if (token.token == query)
@@ -34,6 +34,7 @@ case class Novel(
       if (token.offset <= maxOffset)
     ) yield {
 
+      // Get snippet / match character offsets.
       val c1 = token.start - radius
       val c2 = token.start
       val c3 = token.end
