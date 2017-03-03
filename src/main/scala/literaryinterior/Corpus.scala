@@ -21,11 +21,7 @@ case class TokenMatch(
 )
 
 
-case class TokenPosPercentile(
-  token: String,
-  pos: String,
-  percentile: Int
-)
+case class TokenPosBin(token: String, pos: String, bin: Int)
 
 
 object implicits {
@@ -79,13 +75,13 @@ object implicits {
     /* Count the number of times that each (token, POS) pair appears in each
      * percentile of the text.
      */
-    def percentileCounts: Map[TokenPosPercentile, Int] = {
+    def binCounts(bins: Int = 100): Map[TokenPosBin, Int] = {
 
-      val counts = Map[TokenPosPercentile, Int]().withDefaultValue(0)
+      val counts = Map[TokenPosBin, Int]().withDefaultValue(0)
 
       for (token <- novel.tokens) {
-        val percentile = floor(token.offset * 100).toInt
-        val tpp = TokenPosPercentile(token.token, token.pos, percentile)
+        val bin = floor(token.offset * bins).toInt
+        val tpp = TokenPosBin(token.token, token.pos, bin)
         counts(tpp) += 1
       }
 
