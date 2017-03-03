@@ -12,22 +12,6 @@ import lint.tokenizer.{Tokenizer,Token}
 import lint.text.Text
 
 
-case class NovelMetadata(
-  bookId: String,
-  filename: String,
-  title: String,
-  authLast: String,
-  authFirst: String,
-  authId: String,
-  publCity: String,
-  publisher: String,
-  publDate: Int,
-  source: String,
-  nationality: String,
-  genre: String
-)
-
-
 case class Novel(
   bookId: String,
   filename: String,
@@ -65,6 +49,22 @@ case class Author(
   religion: String,
   ses: String,
   geography: String
+)
+
+
+case class NovelMetadata(
+  bookId: String,
+  filename: String,
+  title: String,
+  authLast: String,
+  authFirst: String,
+  authId: String,
+  publCity: String,
+  publisher: String,
+  publDate: Int,
+  source: String,
+  nationality: String,
+  genre: String
 )
 
 
