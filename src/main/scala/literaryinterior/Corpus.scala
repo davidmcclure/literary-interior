@@ -2,6 +2,9 @@
 
 package literaryinterior.corpus
 
+import scala.collection.mutable.Map
+import scala.math.floor
+
 import lindex.corpora.literaryinterior.{Novel => RawNovel}
 import lindex.tokenizer.Token
 
@@ -18,11 +21,11 @@ case class TokenMatch(
 )
 
 
-//case class TokenPosPercentile(
-  //token: String,
-  //pos: String,
-  //percentile: Int
-//)
+case class TokenPosPercentile(
+  token: String,
+  pos: String,
+  percentile: Int
+)
 
 
 object implicits {
@@ -70,6 +73,23 @@ object implicits {
         )
 
       }
+
+    }
+
+    /* Count the number of times that each (token, POS) pair appears in each
+     * percentile of the text.
+     */
+    def percentileCounts: Map[TokenPosPercentile, Int] = {
+
+      val counts = Map[TokenPosPercentile, Int]().withDefaultValue(0)
+
+      for (token <- novel.tokens) {
+        val percentile = floor(token.offset * 100).toInt
+        val tpp = TokenPosPercentile(token.token, token.pos, percentile)
+        counts(tpp) += 1
+      }
+
+      counts
 
     }
 
