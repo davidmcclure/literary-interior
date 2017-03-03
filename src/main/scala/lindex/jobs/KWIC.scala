@@ -1,13 +1,13 @@
 
 
-//package lint.jobs.kwic
+//package lindex.jobs.kwic
 
 //import org.apache.spark.{SparkContext,SparkConf}
 //import org.apache.spark.sql.{SparkSession,SaveMode}
 //import pprint.pprintln
 
-//import lint.config.Config
-//import lint.corpus.Novel
+//import lindex.config.Config
+//import lindex.corpus.Novel
 
 
 //case class Opts(

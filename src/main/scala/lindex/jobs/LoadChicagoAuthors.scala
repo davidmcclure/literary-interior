@@ -3,8 +3,8 @@
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
-import lint.config.Config
-import lint.corpora.chicago.AuthorCSV
+import lindex.config.Config
+import lindex.corpora.chicago.AuthorCSV
 
 
 object LoadChicagoAuthors extends Config {

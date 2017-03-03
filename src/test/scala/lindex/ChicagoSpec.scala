@@ -1,6 +1,6 @@
 
 
-package lint.corpora.chicago
+package lindex.corpora.chicago
 
 import org.scalatest._
 

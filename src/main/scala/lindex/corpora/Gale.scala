@@ -1,14 +1,14 @@
 
 
-package lint.corpora.gale
+package lindex.corpora.gale
 
 import java.io.File
 import scala.xml.{XML,Elem,Node}
 import scala.util.matching.Regex
 
-import lint.config.Config
-import lint.tokenizer.{Tokenizer,Token}
-import lint.fileSystem.FileSystem
+import lindex.config.Config
+import lindex.tokenizer.{Tokenizer,Token}
+import lindex.fileSystem.FileSystem
 
 
 case class Novel(

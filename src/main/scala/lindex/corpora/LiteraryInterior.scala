@@ -1,8 +1,8 @@
 
 
-package lint.corpora.literaryinterior
+package lindex.corpora.literaryinterior
 
-import lint.tokenizer.Token
+import lindex.tokenizer.Token
 
 
 case class Novel(
@@ -21,7 +21,7 @@ object Novel {
 
   /* Map Gale novel.
    */
-  def fromGaleNovel(novel: lint.corpora.gale.Novel) = Novel(
+  def fromGaleNovel(novel: lindex.corpora.gale.Novel) = Novel(
     corpus="gale",
     identifier=novel.psmid,
     title=novel.title,
@@ -34,7 +34,7 @@ object Novel {
 
   /* Map Chicago novel.
    */
-  def fromChicagoNovel(novel: lint.corpora.chicago.Novel) = Novel(
+  def fromChicagoNovel(novel: lindex.corpora.chicago.Novel) = Novel(
     corpus="chicago",
     identifier=novel.bookId,
     title=novel.title,

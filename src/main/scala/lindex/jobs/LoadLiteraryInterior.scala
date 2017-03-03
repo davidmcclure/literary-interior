@@ -3,8 +3,8 @@
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
-import lint.config.Config
-import lint.corpora.literaryinterior.Novel
+import lindex.config.Config
+import lindex.corpora.literaryinterior.Novel
 
 
 object LoadLiteraryInterior extends Config {
@@ -19,11 +19,11 @@ object LoadLiteraryInterior extends Config {
 
     val gale = spark.read
       .parquet(config.gale.novelParquet)
-      .as[lint.corpora.gale.Novel]
+      .as[lindex.corpora.gale.Novel]
 
     val chicago = spark.read
       .parquet(config.chicago.novelParquet)
-      .as[lint.corpora.chicago.Novel]
+      .as[lindex.corpora.chicago.Novel]
 
     // Convert to normalized schema.
     val galeNovels = gale.map(Novel.fromGaleNovel)

@@ -1,14 +1,14 @@
 
 
-package lint.corpora.chicago
+package lindex.corpora.chicago
 
 import java.io.File
 import java.nio.file.Paths
 import scala.io.Source
 import com.github.tototoshi.csv.CSVReader
 
-import lint.config.Config
-import lint.tokenizer.{Tokenizer,Token}
+import lindex.config.Config
+import lindex.tokenizer.{Tokenizer,Token}
 
 
 case class Novel(

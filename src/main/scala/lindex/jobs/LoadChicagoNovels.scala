@@ -3,8 +3,8 @@
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
-import lint.config.Config
-import lint.corpora.chicago.Loader
+import lindex.config.Config
+import lindex.corpora.chicago.Loader
 
 
 object LoadChicagoNovels extends Config {
