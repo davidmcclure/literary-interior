@@ -6,6 +6,18 @@ import lindex.corpora.literaryinterior.{Novel => RawNovel}
 import lindex.tokenizer.Token
 
 
+case class KWICMatch(
+  corpus: String,
+  identifier: String,
+  title: String,
+  authorFirst: Option[String],
+  authorLast: Option[String],
+  year: Int,
+  offset: Double,
+  snippet: String
+)
+
+
 object implicits {
 
   implicit class EnrichedNovel(val novel: RawNovel) {
@@ -57,15 +69,3 @@ object implicits {
   }
 
 }
-
-
-case class KWICMatch(
-  corpus: String,
-  identifier: String,
-  title: String,
-  authorFirst: Option[String],
-  authorLast: Option[String],
-  year: Int,
-  offset: Double,
-  snippet: String
-)
