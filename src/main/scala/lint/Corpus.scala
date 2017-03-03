@@ -5,16 +5,16 @@ package lint.corpus
 import lint.tokenizer.Token
 
 
-trait NovelSchema {
-  val corpus: String
-  val identifier: String
-  val title: String
-  val authorFirst: Option[String]
-  val authorLast: Option[String]
-  val year: Int
-  val text: String
-  val tokens: Seq[Token]
-}
+case class KWICMatch(
+  corpus: String,
+  identifier: String,
+  title: String,
+  authorFirst: Option[String],
+  authorLast: Option[String],
+  year: Int,
+  offset: Double,
+  snippet: String
+)
 
 
 case class Novel(
@@ -26,7 +26,52 @@ case class Novel(
   year: Int,
   text: String,
   tokens: Seq[Token]
-) extends NovelSchema
+) {
+
+  /* Given a query token, find all occurrences within an offset range and
+   * provide match instances.
+   */
+  def kwic(
+    query: String,
+    minOffset: Double,
+    maxOffset: Double,
+    radius: Int
+  ): Seq[KWICMatch] = {
+
+    for (
+      token <- tokens
+      if (token.token == query)
+      if (token.offset >= minOffset)
+      if (token.offset <= maxOffset)
+    ) yield {
+
+      val c1 = token.start - radius
+      val c2 = token.start
+      val c3 = token.end
+      val c4 = token.end + radius
+
+      val prefix = text.slice(c1, c2)
+      val hit = text.slice(c2, c3)
+      val suffix = text.slice(c3, c4)
+
+      val snippet = prefix + s"***${hit}***" + suffix
+
+      KWICMatch(
+        corpus=corpus,
+        identifier=identifier,
+        title=title,
+        authorFirst=authorFirst,
+        authorLast=authorLast,
+        year=year,
+        offset=token.offset,
+        snippet=snippet
+      )
+
+    }
+
+  }
+
+}
 
 
 object Novel {
