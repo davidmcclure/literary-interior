@@ -1,12 +1,12 @@
 
 
+package lindex.jobs
+
 import org.apache.spark.{SparkContext,SparkConf}
 import pprint.pprintln
 
 
-object Benchmark {
-
-  val sc = new SparkContext(new SparkConf)
+object Benchmark extends Job {
 
   def main(args: Array[String]) {
 

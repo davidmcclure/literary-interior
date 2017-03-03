@@ -1,5 +1,7 @@
 
 
+package lindex.jobs
+
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 import scala.util.{Try,Success,Failure}
@@ -8,11 +10,8 @@ import lindex.config.Config
 import lindex.corpora.gale.Loader
 
 
-object LoadGale extends Config {
+object LoadGale extends Job with Config {
 
-  // TODO: DRY this up?
-  val sc = new SparkContext(new SparkConf)
-  val spark = SparkSession.builder.getOrCreate()
   import spark.implicits._
 
   def main(args: Array[String]) {
