@@ -6,7 +6,7 @@ import lindex.corpora.literaryinterior.{Novel => RawNovel}
 import lindex.tokenizer.Token
 
 
-case class KWICMatch(
+case class TokenMatch(
   corpus: String,
   identifier: String,
   title: String,
@@ -16,6 +16,13 @@ case class KWICMatch(
   offset: Double,
   snippet: String
 )
+
+
+//case class TokenPosPercentile(
+  //token: String,
+  //pos: String,
+  //percentile: Int
+//)
 
 
 object implicits {
@@ -29,7 +36,7 @@ object implicits {
       minOffset: Double,
       maxOffset: Double,
       radius: Int
-    ): Seq[KWICMatch] = {
+    ): Seq[TokenMatch] = {
 
       // Find matching tokens, inside offset range.
       for (
@@ -51,7 +58,7 @@ object implicits {
 
         val snippet = prefix + s"***${hit}***" + suffix
 
-        KWICMatch(
+        TokenMatch(
           corpus=novel.corpus,
           identifier=novel.identifier,
           title=novel.title,
