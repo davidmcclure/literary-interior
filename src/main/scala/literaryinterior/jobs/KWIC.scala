@@ -7,7 +7,8 @@ import org.apache.spark.sql.{SparkSession,SaveMode}
 import pprint.pprintln
 
 import lindex.config.Config
-import literaryinterior.corpus.Novel
+import lindex.corpora.literaryinterior.Novel
+import literaryinterior.corpus.implicits._
 
 
 case class KWICOpts(
@@ -27,6 +28,7 @@ object KWIC extends Config {
 
   val sc = new SparkContext(new SparkConf)
   val spark = SparkSession.builder.getOrCreate()
+
   import spark.implicits._
 
   /* Probe for KWICs, dump results to CSV.
