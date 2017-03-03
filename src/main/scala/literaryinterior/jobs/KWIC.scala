@@ -1,6 +1,6 @@
 
 
-// TODO: Package?
+package literaryinterior.jobs
 
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
@@ -10,7 +10,7 @@ import lindex.config.Config
 import literaryinterior.corpus.Novel
 
 
-case class Opts(
+case class KWICOpts(
   query: String = "",
   outPath: String = "",
   minOffset: Double = 0,
@@ -34,7 +34,7 @@ object KWIC extends Config {
   def main(args: Array[String]) {
 
     // Define argument rules.
-    val parser = new scopt.OptionParser[Opts]("kwic") {
+    val parser = new scopt.OptionParser[KWICOpts]("kwic") {
 
       arg[String]("query")
         .action((x, c) => c.copy(query = x))
@@ -67,7 +67,7 @@ object KWIC extends Config {
     }
 
     // Parse args.
-    val opts = parser.parse(args, Opts()) match {
+    val opts = parser.parse(args, KWICOpts()) match {
       case Some(args) => args
       case None => throw new Exception("Invalid args.")
     }
