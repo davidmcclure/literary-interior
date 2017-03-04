@@ -17,9 +17,12 @@ object ExtBinCounts extends Config {
 
   def main(args: Array[String]) {
 
-    val counts = spark.read
+    val novels = spark.read
       .parquet(config.corpus.novelParquet)
       .as[Novel]
+
+    // TODO: test
+    val counts = novels
       .flatMap(_.binCounts().toSeq)
       .rdd
       .reduceByKey(_+_)
