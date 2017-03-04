@@ -42,9 +42,17 @@ case class Novel(
     val counts = Map[TokenPosBin, Int]().withDefaultValue(0)
 
     for (token <- tokens) {
-      val bin = floor(token.offset * bins).toInt
+
+      // If offset is 1 (last token), notch down into the bins-1, to avoid
+      // returning bins+1 bins.
+      val bin =
+        if (token.offset < 1) floor(token.offset * bins).toInt
+        else bins - 1
+
       val tpp = TokenPosBin(token.token, token.pos, bin)
+
       counts(tpp) += 1
+
     }
 
     counts
