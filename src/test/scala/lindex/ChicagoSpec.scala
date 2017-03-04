@@ -1,6 +1,6 @@
 
 
-package lindex.chicago
+package lint.chicago
 
 import org.scalatest._
 

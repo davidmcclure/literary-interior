@@ -1,6 +1,6 @@
 
 
-package lindex.fileSystem
+package lint.fileSystem
 
 import java.io.File
 

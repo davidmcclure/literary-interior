@@ -1,6 +1,6 @@
 
 
-package lindex.gale
+package lint.gale
 
 import org.scalatest._
 import scala.xml.{XML,Elem,Node}

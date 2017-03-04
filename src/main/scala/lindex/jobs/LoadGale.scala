@@ -4,8 +4,8 @@ import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 import scala.util.{Try,Success,Failure}
 
-import lindex.config.Config
-import lindex.gale.Loader
+import lint.config.Config
+import lint.gale.Loader
 
 
 object LoadGale extends Config {

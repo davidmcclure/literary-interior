@@ -1,6 +1,6 @@
 
 
-package lindex.tokenizer
+package lint.tokenizer
 
 import org.scalatest._
 import pprint._

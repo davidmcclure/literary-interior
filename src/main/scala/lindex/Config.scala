@@ -1,16 +1,16 @@
 
 
-package lindex.config
+package lint.config
 
 import com.typesafe.config.ConfigFactory
 import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 
 
-case class LindexConfig(
+case class LintConfig(
   gale: GaleConfig,
   chicago: ChicagoConfig,
-  literaryinterior: LiteraryInteriorConfig
+  novelParquet: String
 )
 
 case class GaleConfig(
@@ -26,11 +26,7 @@ case class ChicagoConfig(
   authorParquet: String
 )
 
-case class LiteraryInteriorConfig(
-  novelParquet: String
-)
-
 
 trait Config {
-  lazy val config = ConfigFactory.load.as[LindexConfig]("lindex")
+  lazy val config = ConfigFactory.load.as[LintConfig]("lint")
 }
