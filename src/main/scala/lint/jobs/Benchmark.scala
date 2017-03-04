@@ -1,5 +1,7 @@
 
 
+package lint.jobs
+
 import org.apache.spark.{SparkContext,SparkConf}
 import pprint.pprintln
 
