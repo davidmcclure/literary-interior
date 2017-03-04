@@ -9,8 +9,8 @@ case class Novel(
   corpus: String,
   identifier: String,
   title: String,
-  authorFirst: Option[String],
-  authorLast: Option[String],
+  authorFirst: String,
+  authorLast: String,
   year: Int,
   text: String,
   tokens: Seq[Token]
@@ -38,8 +38,8 @@ object Novel {
     corpus="chicago",
     identifier=novel.bookId,
     title=novel.title,
-    authorFirst=Some(novel.authFirst),
-    authorLast=Some(novel.authLast),
+    authorFirst=novel.authFirst,
+    authorLast=novel.authLast,
     year=novel.publDate,
     text=novel.text,
     tokens=novel.tokens

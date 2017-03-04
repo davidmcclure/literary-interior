@@ -14,8 +14,8 @@ import lint.fileSystem.FileSystem
 case class Novel(
   psmid: String,
   title: String,
-  authorFirst: Option[String],
-  authorLast: Option[String],
+  authorFirst: String,
+  authorLast: String,
   language: String,
   year: Int,
   ocrPercentage: Double,
@@ -101,8 +101,8 @@ class NovelXML(val xml: Elem) {
     Novel(
       psmid=psmid,
       title=title,
-      authorFirst=authorFirst,
-      authorLast=authorLast,
+      authorFirst=authorFirst.getOrElse(null),
+      authorLast=authorLast.getOrElse(null),
       language=language,
       year=year,
       ocrPercentage=ocrPercentage,
