@@ -2,7 +2,13 @@
 
 package lint.corpus
 
+import scala.collection.mutable.Map
+import scala.math.floor
+
 import lint.tokenizer.Token
+
+
+case class TokenPosBin(token: String, pos: String, bin: Int)
 
 
 case class TokenMatch(
@@ -27,6 +33,23 @@ case class Novel(
   text: String,
   tokens: Seq[Token]
 ) {
+
+  /* Count the number of times that each (token, POS) pair appears in each
+   * percentile of the text.
+   */
+  def binCounts(bins: Int = 100): Map[TokenPosBin, Int] = {
+
+    val counts = Map[TokenPosBin, Int]().withDefaultValue(0)
+
+    for (token <- tokens) {
+      val bin = floor(token.offset * bins).toInt
+      val tpp = TokenPosBin(token.token, token.pos, bin)
+      counts(tpp) += 1
+    }
+
+    counts
+
+  }
 
   /* Probe for KWIC matches.
    */
