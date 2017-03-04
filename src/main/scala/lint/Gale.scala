@@ -98,6 +98,7 @@ class NovelXML(val xml: Elem) {
     val text = plainText
     val tokens = Tokenizer.tokenize(text)
 
+    // TODO: Pass forward the options?
     Novel(
       psmid=psmid,
       title=title,
