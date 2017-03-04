@@ -4,7 +4,7 @@ import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
 import lindex.config.Config
-import lindex.corpora.chicago.Loader
+import lindex.chicago.Loader
 
 
 object LoadChicagoNovels extends Config {

@@ -1,6 +1,6 @@
 
 
-package lindex.corpora.literaryinterior
+package lindex.corpus
 
 import lindex.tokenizer.Token
 
@@ -21,7 +21,7 @@ object Novel {
 
   /* Map Gale novel.
    */
-  def fromGaleNovel(novel: lindex.corpora.gale.Novel) = Novel(
+  def fromGaleNovel(novel: lindex.gale.Novel) = Novel(
     corpus="gale",
     identifier=novel.psmid,
     title=novel.title,
@@ -34,7 +34,7 @@ object Novel {
 
   /* Map Chicago novel.
    */
-  def fromChicagoNovel(novel: lindex.corpora.chicago.Novel) = Novel(
+  def fromChicagoNovel(novel: lindex.chicago.Novel) = Novel(
     corpus="chicago",
     identifier=novel.bookId,
     title=novel.title,

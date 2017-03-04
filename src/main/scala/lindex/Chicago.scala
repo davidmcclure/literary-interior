@@ -1,6 +1,6 @@
 
 
-package lindex.corpora.chicago
+package lindex.chicago
 
 import java.io.File
 import java.nio.file.Paths

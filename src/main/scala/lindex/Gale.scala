@@ -1,6 +1,6 @@
 
 
-package lindex.corpora.gale
+package lindex.gale
 
 import java.io.File
 import scala.xml.{XML,Elem,Node}

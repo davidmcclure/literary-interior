@@ -4,10 +4,10 @@ import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
 import lindex.config.Config
-import lindex.corpora.literaryinterior.Novel
+import lindex.corpus.Novel
 
 
-object LoadLiteraryInterior extends Config {
+object MergeCorpus extends Config {
 
   val sc = new SparkContext(new SparkConf)
   val spark = SparkSession.builder.getOrCreate()
@@ -18,12 +18,12 @@ object LoadLiteraryInterior extends Config {
     // Read raw Gale novels.
     val gale = spark.read
       .parquet(config.gale.novelParquet)
-      .as[lindex.corpora.gale.Novel]
+      .as[lindex.gale.Novel]
 
     // Read raw Chicago novels.
     val chicago = spark.read
       .parquet(config.chicago.novelParquet)
-      .as[lindex.corpora.chicago.Novel]
+      .as[lindex.chicago.Novel]
 
     // Convert to normalized schema.
     val galeNovels = gale.map(Novel.fromGaleNovel)

@@ -5,7 +5,7 @@ import org.apache.spark.sql.{SparkSession,SaveMode}
 import scala.util.{Try,Success,Failure}
 
 import lindex.config.Config
-import lindex.corpora.gale.Loader
+import lindex.gale.Loader
 
 
 object LoadGale extends Config {
