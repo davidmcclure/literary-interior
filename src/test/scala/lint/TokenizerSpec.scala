@@ -3,7 +3,6 @@
 package lint.tokenizer
 
 import org.scalatest._
-import pprint._
 
 
 class TokenizerSpec extends FlatSpec with Matchers {
