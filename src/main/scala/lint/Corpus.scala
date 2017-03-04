@@ -43,7 +43,7 @@ case class Novel(
 
     for (token <- tokens) {
 
-      // If offset is 1 (last token), notch down into the bins-1, to avoid
+      // If offset is 1 (last token), notch down into the bins-1 bin, to avoid
       // returning bins+1 bins.
       val bin =
         if (token.offset < 1) floor(token.offset * bins).toInt
