@@ -33,7 +33,7 @@ object MergeCorpus extends Config {
     val ds = galeNovels.union(chicagoNovels)
 
     ds.write.mode(SaveMode.Overwrite)
-      .parquet(config.novelParquet)
+      .parquet(config.corpus.novelParquet)
 
     ds.show
 

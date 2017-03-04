@@ -10,11 +10,15 @@ import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 case class LintConfig(
   gale: GaleConfig,
   chicago: ChicagoConfig,
-  novelParquet: String
+  corpus: CorpusConfig
 )
 
 case class GaleConfig(
   corpusDir: String,
+  novelParquet: String
+)
+
+case class CorpusConfig(
   novelParquet: String
 )
 
