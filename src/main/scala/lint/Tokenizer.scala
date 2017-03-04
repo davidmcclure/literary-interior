@@ -9,7 +9,7 @@ import opennlp.tools.postag._
 import opennlp.tools.tokenize._
 
 
-final case class Token(
+case class Token(
   token: String,
   pos: String,
   start: Int,
