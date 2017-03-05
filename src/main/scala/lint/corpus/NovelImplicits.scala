@@ -21,7 +21,7 @@ case class KWICMatch(
 )
 
 
-object implicits {
+object NovelImplicits {
 
   implicit class RichNovel(n: Novel) {
 

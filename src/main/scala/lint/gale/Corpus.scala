@@ -4,7 +4,7 @@ package lint.gale
 
 import java.io.File
 
-import lint.fileSystem.FileSystem
+import lint.utils.FileSystem
 import lint.config.Config
 
 

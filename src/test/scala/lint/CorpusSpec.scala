@@ -5,7 +5,7 @@ package lint.corpus
 import org.scalatest._
 
 import lint.tokenizer.Tokenizer
-import lint.corpus.implicits._
+import lint.corpus.NovelImplicits._
 
 
 class NovelBinCountsSpec extends FlatSpec with Matchers {

@@ -7,7 +7,7 @@ import org.apache.spark.sql.{SparkSession,SaveMode}
 
 import lint.config.Config
 import lint.corpus.Novel
-import lint.corpus.implicits._
+import lint.corpus.NovelImplicits._
 
 
 object ExtBinCounts extends Config {
