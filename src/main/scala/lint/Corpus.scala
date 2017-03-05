@@ -8,20 +8,7 @@ import scala.math.floor
 import lint.tokenizer.Token
 
 
-case class TokenPosBin(token: String, pos: String, bin: Int)
-
-
-case class TokenMatch(
-  corpus: String,
-  identifier: String,
-  title: String,
-  authorFirst: String,
-  authorLast: String,
-  year: Int,
-  offset: Double,
-  snippet: String
-)
-
+// TODO: Move to lindex.
 
 case class Novel(
   corpus: String,
@@ -64,6 +51,25 @@ object Novel {
   )
 
 }
+
+
+case class TokenPosBin(
+  token: String,
+  pos: String,
+  bin: Int
+)
+
+
+case class TokenMatch(
+  corpus: String,
+  identifier: String,
+  title: String,
+  authorFirst: String,
+  authorLast: String,
+  year: Int,
+  offset: Double,
+  snippet: String
+)
 
 
 object implicits {
