@@ -18,16 +18,16 @@ case class GaleConfig(
   novelParquet: String
 )
 
-case class CorpusConfig(
-  novelParquet: String
-)
-
 case class ChicagoConfig(
   novelMetadataPath: String,
   authorMetadataPath: String,
   textDir: String,
   novelParquet: String,
   authorParquet: String
+)
+
+case class CorpusConfig(
+  novelParquet: String
 )
 
 
