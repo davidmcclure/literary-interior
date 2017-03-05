@@ -3,26 +3,10 @@
 package lint.gale
 
 import java.io.File
+import javax.xml.parsers.SAXParserFactory
 import scala.xml.{XML,Elem,Node}
-import scala.util.matching.Regex
 
-import lint.config.Config
 import lint.tokenizer.{Tokenizer,Token}
-import lint.fileSystem.FileSystem
-
-
-case class Novel(
-  psmid: String,
-  title: String,
-  authorFirst: String,
-  authorLast: String,
-  language: String,
-  year: Int,
-  ocrPercentage: Double,
-  documentType: String,
-  text: String,
-  tokens: Seq[Token]
-)
 
 
 class NovelXML(val xml: Elem) {
@@ -123,7 +107,7 @@ object NovelXML {
    */
   def loader = {
 
-    val factory = javax.xml.parsers.SAXParserFactory.newInstance()
+    val factory = SAXParserFactory.newInstance()
 
     factory.setFeature(
       "http://apache.org/xml/features/nonvalidating/load-external-dtd",
@@ -152,47 +136,6 @@ object NovelXML {
    */
   def fromPath(path: String): NovelXML = {
     fromFile(new File(path))
-  }
-
-}
-
-
-class Corpus(private val path: String) {
-
-  val root = new File(path)
-
-  /* Recursively list XML sources.
-   */
-  def listPaths = {
-    FileSystem.walkTree(root).filter(_.toString.endsWith(".xml"))
-  }
-
-}
-
-
-object Corpus extends Config {
-
-  /* Read corpus root from config.
-   */
-  def fromConfig: Corpus = {
-    new Corpus(config.gale.corpusDir)
-  }
-
-}
-
-
-object Loader {
-
-  /* List XML paths.
-   */
-  def sources: List[File] = {
-    Corpus.fromConfig.listPaths.toList.slice(0, 100) // TODO|dev
-  }
-
-  /* XML -> Text.
-   */
-  def parse(source: File): Novel = {
-    NovelXML.fromFile(source).mkNovel
   }
 
 }
