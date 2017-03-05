@@ -33,17 +33,17 @@ class NovelBinCountsSpec extends FlatSpec with Matchers {
 
     val counts = novel.binCounts(4)
 
-    counts(TokenPosBin("one",   "CD", 0)) shouldEqual 1
-    counts(TokenPosBin("two",   "CD", 0)) shouldEqual 1
+    counts(TokenBin("one",   "CD", 0)) shouldEqual 1
+    counts(TokenBin("two",   "CD", 0)) shouldEqual 1
 
-    counts(TokenPosBin("three", "CD", 1)) shouldEqual 1
-    counts(TokenPosBin("four",  "CD", 1)) shouldEqual 1
+    counts(TokenBin("three", "CD", 1)) shouldEqual 1
+    counts(TokenBin("four",  "CD", 1)) shouldEqual 1
 
-    counts(TokenPosBin("five",  "CD", 2)) shouldEqual 1
-    counts(TokenPosBin("six",   "CD", 2)) shouldEqual 1
+    counts(TokenBin("five",  "CD", 2)) shouldEqual 1
+    counts(TokenBin("six",   "CD", 2)) shouldEqual 1
 
-    counts(TokenPosBin("seven", "CD", 3)) shouldEqual 1
-    counts(TokenPosBin("eight", "CD", 3)) shouldEqual 1
+    counts(TokenBin("seven", "CD", 3)) shouldEqual 1
+    counts(TokenBin("eight", "CD", 3)) shouldEqual 1
 
   }
 
@@ -54,10 +54,10 @@ class NovelBinCountsSpec extends FlatSpec with Matchers {
 
     val counts = novel.binCounts(4)
 
-    counts(TokenPosBin("one",   "CD", 0)) shouldEqual 2
-    counts(TokenPosBin("two",   "CD", 1)) shouldEqual 2
-    counts(TokenPosBin("three", "CD", 2)) shouldEqual 2
-    counts(TokenPosBin("four",  "CD", 3)) shouldEqual 2
+    counts(TokenBin("one",   "CD", 0)) shouldEqual 2
+    counts(TokenBin("two",   "CD", 1)) shouldEqual 2
+    counts(TokenBin("three", "CD", 2)) shouldEqual 2
+    counts(TokenBin("four",  "CD", 3)) shouldEqual 2
 
   }
 

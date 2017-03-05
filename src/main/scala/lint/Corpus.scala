@@ -53,14 +53,14 @@ object Novel {
 }
 
 
-case class TokenPosBin(
+case class TokenBin(
   token: String,
   pos: String,
   bin: Int
 )
 
 
-case class TokenMatch(
+case class KWICMatch(
   corpus: String,
   identifier: String,
   title: String,
@@ -79,9 +79,9 @@ object implicits {
     /* Count the number of times that each (token, POS) pair appears in each
      * percentile of the text.
      */
-    def binCounts(bins: Int = 100): Map[TokenPosBin, Int] = {
+    def binCounts(bins: Int = 100): Map[TokenBin, Int] = {
 
-      val counts = Map[TokenPosBin, Int]().withDefaultValue(0)
+      val counts = Map[TokenBin, Int]().withDefaultValue(0)
 
       for (token <- n.tokens) {
 
@@ -91,7 +91,7 @@ object implicits {
           if (token.offset < 1) floor(token.offset * bins).toInt
           else bins - 1
 
-        val tpp = TokenPosBin(token.token, token.pos, bin)
+        val tpp = TokenBin(token.token, token.pos, bin)
 
         counts(tpp) += 1
 
@@ -108,7 +108,7 @@ object implicits {
       minOffset: Double,
       maxOffset: Double,
       radius: Int
-    ): Seq[TokenMatch] = {
+    ): Seq[KWICMatch] = {
 
       // Find matching tokens, inside offset range.
       for (
@@ -132,7 +132,7 @@ object implicits {
         // Format the snippet.
         val snippet = prefix + s"***${hit}***" + suffix
 
-        TokenMatch(
+        KWICMatch(
           corpus=n.corpus,
           identifier=n.identifier,
           title=n.title,
