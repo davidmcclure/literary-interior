@@ -10,8 +10,9 @@ import lint.corpus.{Novel,TokenBin}
 import lint.corpus.NovelImplicits._
 
 
-// TODO: corpus, year
 case class BinCountRow(
+  corpus: String,
+  year: Int,
   token: String,
   pos: String,
   bin: Int,
@@ -42,8 +43,14 @@ object ExtBinCounts extends Config {
 
       // Merge into database rows.
       .map {
-        case (tb: TokenBin, count: Int) =>
-        BinCountRow(tb.token, tb.pos, tb.bin, count)
+        case (tb: TokenBin, count: Int) => BinCountRow(
+          tb.corpus,
+          tb.year,
+          tb.token,
+          tb.pos,
+          tb.bin,
+          count
+        )
       }
 
       // Convert back to datafarme.

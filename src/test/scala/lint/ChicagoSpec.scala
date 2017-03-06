@@ -5,6 +5,7 @@ package lint.chicago
 import org.scalatest._
 
 
+// TODO: Spot-check rows.
 class NovelCSVSpec extends FreeSpec with Matchers {
 
   val url = getClass().getResource("/fixtures/chicago/NOVELS_METADATA.csv")
