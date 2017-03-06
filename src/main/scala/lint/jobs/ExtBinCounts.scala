@@ -10,7 +10,7 @@ import lint.corpus.{Novel,TokenBin}
 import lint.corpus.NovelImplicits._
 
 
-// TODO|dev
+// TODO: corpus, year
 case class BinCountRow(
   token: String,
   pos: String,
@@ -52,7 +52,7 @@ object ExtBinCounts extends Config {
     counts.coalesce(1).write
       .mode(SaveMode.Overwrite)
       .option("header", "true")
-      .csv("counts.csv")
+      .csv(config.corpus.binCountCSV)
 
     counts.show(100)
 
