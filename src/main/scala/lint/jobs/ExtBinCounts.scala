@@ -3,7 +3,7 @@
 package lint.jobs
 
 import org.apache.spark.{SparkContext,SparkConf}
-import org.apache.spark.sql.{SparkSession,SaveMode}
+import org.apache.spark.sql.{SparkSession,SaveMode,Dataset}
 
 import lint.config.Config
 import lint.corpus.{Novel,TokenBin}
@@ -32,8 +32,23 @@ object ExtBinCounts extends Config {
       .parquet(config.corpus.novelParquet)
       .as[Novel]
 
-    // TODO: test
-    val counts = novels
+    val counts = ExtBinCounts.mergeCounts(novels)
+
+    counts.coalesce(1).write
+      .mode(SaveMode.Overwrite)
+      .option("header", "true")
+      .csv(config.corpus.binCountCSV)
+
+    counts.show(100)
+
+  }
+
+  /* Merge together token / bin counts for novels.
+   * TODO: test
+   */
+  def mergeCounts(novels: Dataset[Novel]): Dataset[BinCountRow] = {
+
+    novels
 
       // Get list of (TokenBin, count)
       .flatMap(_.binCounts().toSeq)
@@ -53,15 +68,8 @@ object ExtBinCounts extends Config {
         )
       }
 
-      // Convert back to dataset.
+      // Cast back to dataset.
       .toDS
-
-    counts.coalesce(1).write
-      .mode(SaveMode.Overwrite)
-      .option("header", "true")
-      .csv(config.corpus.binCountCSV)
-
-    counts.show(100)
 
   }
 
