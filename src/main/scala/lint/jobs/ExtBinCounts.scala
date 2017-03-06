@@ -53,8 +53,8 @@ object ExtBinCounts extends Config {
         )
       }
 
-      // Convert back to datafarme.
-      .toDF
+      // Convert back to dataset.
+      .toDS
 
     counts.coalesce(1).write
       .mode(SaveMode.Overwrite)
