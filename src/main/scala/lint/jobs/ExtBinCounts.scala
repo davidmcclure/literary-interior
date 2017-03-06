@@ -11,7 +11,7 @@ import lint.corpus.NovelImplicits._
 
 
 // TODO|dev
-case class Row(
+case class BinCountRow(
   token: String,
   pos: String,
   bin: Int,
@@ -43,10 +43,18 @@ object ExtBinCounts extends Config {
       // Merge into database rows.
       .map {
         case (tb: TokenBin, count: Int) =>
-        Row(tb.token, tb.pos, tb.bin, count)
+        BinCountRow(tb.token, tb.pos, tb.bin, count)
       }
 
-    counts.toDF.show(100)
+      // Convert back to datafarme.
+      .toDF
+
+    counts.coalesce(1).write
+      .mode(SaveMode.Overwrite)
+      .option("header", "true")
+      .csv("counts.csv")
+
+    counts.show(100)
 
   }
 
