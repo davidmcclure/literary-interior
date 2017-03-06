@@ -46,9 +46,9 @@ object NovelImplicits {
           if (token.offset < 1) floor(token.offset * bins).toInt
           else bins - 1
 
-        val tpp = TokenBin(n.corpus, n.year, token.token, token.pos, bin)
+        val key = TokenBin(n.corpus, n.year, token.token, token.pos, bin)
 
-        counts(tpp) += 1
+        counts(key) += 1
 
       }
 
