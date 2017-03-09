@@ -3,25 +3,30 @@
 package lint.tokenizer
 
 import org.scalatest._
+import org.scalatest.prop.TableDrivenPropertyChecks
+import org.scalatest.prop.TableDrivenPropertyChecks._
 
 
-class TokenizerSpec extends FlatSpec with Matchers {
+class TokenizerSpec extends FlatSpec
+  with Matchers with TableDrivenPropertyChecks {
 
   "Tokenizer.tokenize()" should "POS-tag tokens" in {
 
     val tokens = Tokenizer.tokenize("My name is David.")
 
-    tokens(0).token shouldEqual "my"
-    tokens(0).pos shouldEqual "PRP$"
+    forAll(Table(
 
-    tokens(1).token shouldEqual "name"
-    tokens(1).pos shouldEqual "NN"
+      ("index", "token", "pos"),
 
-    tokens(2).token shouldEqual "is"
-    tokens(2).pos shouldEqual "VBZ"
+      (0, "my", "PRP$"),
+      (1, "name", "NN"),
+      (2, "is", "VBZ"),
+      (3, "david", "NNP")
 
-    tokens(3).token shouldEqual "david"
-    tokens(3).pos shouldEqual "NNP"
+    )) { (index: Int, token: String, pos: String) =>
+      tokens(index).token shouldEqual token
+      tokens(index).pos shouldEqual pos
+    }
 
   }
 
@@ -29,17 +34,19 @@ class TokenizerSpec extends FlatSpec with Matchers {
 
     val tokens = Tokenizer.tokenize("12 34 56")
 
-    tokens(0).token shouldEqual "12"
-    tokens(0).start shouldEqual 0
-    tokens(0).end shouldEqual 2
+    forAll(Table(
 
-    tokens(1).token shouldEqual "34"
-    tokens(1).start shouldEqual 3
-    tokens(1).end shouldEqual 5
+      ("index", "token", "start", "end"),
 
-    tokens(2).token shouldEqual "56"
-    tokens(2).start shouldEqual 6
-    tokens(2).end shouldEqual 8
+      (0, "12", 0, 2),
+      (1, "34", 3, 5),
+      (2, "56", 6, 8)
+
+    )) { (index: Int, token: String, start: Int, end: Int) =>
+      tokens(index).token shouldEqual token
+      tokens(index).start shouldEqual start
+      tokens(index).end shouldEqual end
+    }
 
   }
 
@@ -47,41 +54,25 @@ class TokenizerSpec extends FlatSpec with Matchers {
 
     val tokens = Tokenizer.tokenize("I walk. She runs. He strolls.")
 
-    tokens(0).token shouldEqual "i"
-    tokens(0).start shouldEqual 0
-    tokens(0).end shouldEqual 1
+    forAll(Table(
 
-    tokens(1).token shouldEqual "walk"
-    tokens(1).start shouldEqual 2
-    tokens(1).end shouldEqual 6
+      ("index", "token", "start", "end"),
 
-    tokens(2).token shouldEqual "."
-    tokens(2).start shouldEqual 6
-    tokens(2).end shouldEqual 7
+      (0, "i", 0, 1),
+      (1, "walk", 2, 6),
+      (2, ".", 6, 7),
+      (3, "she", 8, 11),
+      (4, "runs", 12, 16),
+      (5, ".", 16, 17),
+      (6, "he", 18, 20),
+      (7, "strolls", 21, 28),
+      (8, ".", 28, 29)
 
-    tokens(3).token shouldEqual "she"
-    tokens(3).start shouldEqual 8
-    tokens(3).end shouldEqual 11
-
-    tokens(4).token shouldEqual "runs"
-    tokens(4).start shouldEqual 12
-    tokens(4).end shouldEqual 16
-
-    tokens(5).token shouldEqual "."
-    tokens(5).start shouldEqual 16
-    tokens(5).end shouldEqual 17
-
-    tokens(6).token shouldEqual "he"
-    tokens(6).start shouldEqual 18
-    tokens(6).end shouldEqual 20
-
-    tokens(7).token shouldEqual "strolls"
-    tokens(7).start shouldEqual 21
-    tokens(7).end shouldEqual 28
-
-    tokens(8).token shouldEqual "."
-    tokens(8).start shouldEqual 28
-    tokens(8).end shouldEqual 29
+    )) { (index: Int, token: String, start: Int, end: Int) =>
+      tokens(index).token shouldEqual token
+      tokens(index).start shouldEqual start
+      tokens(index).end shouldEqual end
+    }
 
   }
 
@@ -89,20 +80,20 @@ class TokenizerSpec extends FlatSpec with Matchers {
 
     val tokens = Tokenizer.tokenize("1 2 3 4 5")
 
-    tokens(0).token shouldEqual "1"
-    tokens(0).offset shouldEqual 0
+    forAll(Table(
 
-    tokens(1).token shouldEqual "2"
-    tokens(1).offset shouldEqual 0.25
+      ("index", "token", "offset"),
 
-    tokens(2).token shouldEqual "3"
-    tokens(2).offset shouldEqual 0.5
+      (0, "1", 0.0),
+      (1, "2", 0.25),
+      (2, "3", 0.5),
+      (3, "4", 0.75),
+      (4, "5", 1.0)
 
-    tokens(3).token shouldEqual "4"
-    tokens(3).offset shouldEqual 0.75
-
-    tokens(4).token shouldEqual "5"
-    tokens(4).offset shouldEqual 1
+    )) { (index: Int, token: String, offset: Double) =>
+      tokens(index).token shouldEqual token
+      tokens(index).offset shouldEqual offset
+    }
 
   }
 
@@ -110,32 +101,24 @@ class TokenizerSpec extends FlatSpec with Matchers {
 
     val tokens = Tokenizer.tokenize("I walk. She runs. He strolls.")
 
-    tokens(0).token shouldEqual "i"
-    tokens(0).offset shouldEqual 0
+    forAll(Table(
 
-    tokens(1).token shouldEqual "walk"
-    tokens(1).offset shouldEqual 0.125
+      ("index", "token", "offset"),
 
-    tokens(2).token shouldEqual "."
-    tokens(2).offset shouldEqual 0.25
+      (0, "i", 0.0),
+      (1, "walk", 0.125),
+      (2, ".", 0.25),
+      (3, "she", 0.375),
+      (4, "runs", 0.5),
+      (5, ".", 0.625),
+      (6, "he", 0.75),
+      (7, "strolls", 0.875),
+      (8, ".", 1.0)
 
-    tokens(3).token shouldEqual "she"
-    tokens(3).offset shouldEqual 0.375
-
-    tokens(4).token shouldEqual "runs"
-    tokens(4).offset shouldEqual 0.5
-
-    tokens(5).token shouldEqual "."
-    tokens(5).offset shouldEqual 0.625
-
-    tokens(6).token shouldEqual "he"
-    tokens(6).offset shouldEqual 0.75
-
-    tokens(7).token shouldEqual "strolls"
-    tokens(7).offset shouldEqual 0.875
-
-    tokens(8).token shouldEqual "."
-    tokens(8).offset shouldEqual 1
+    )) { (index: Int, token: String, offset: Double) =>
+      tokens(index).token shouldEqual token
+      tokens(index).offset shouldEqual offset
+    }
 
   }
 
@@ -143,10 +126,18 @@ class TokenizerSpec extends FlatSpec with Matchers {
 
     val tokens = Tokenizer.tokenize("My Name Is David.")
 
-    tokens(0).token shouldEqual "my"
-    tokens(1).token shouldEqual "name"
-    tokens(2).token shouldEqual "is"
-    tokens(3).token shouldEqual "david"
+    forAll(Table(
+
+      ("index", "token"),
+
+      (0, "my"),
+      (1, "name"),
+      (2, "is"),
+      (3, "david")
+
+    )) { (index: Int, token: String) =>
+      tokens(index).token shouldEqual token
+    }
 
   }
 
