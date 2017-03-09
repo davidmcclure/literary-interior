@@ -14,7 +14,7 @@ import lint.test.helpers.SparkTestSession
 class ExtBinCountsMergeCountsSpec extends FlatSpec
   with Matchers with SparkTestSession with TableDrivenPropertyChecks {
 
-  // TODO: Scala equivalent of FactoryBoy?
+  // TODO: FactoryBoy?
   def getNovel(corpus: String, year: Int, text: String): Novel = {
 
     val tokens = Tokenizer.tokenize(text)
