@@ -11,7 +11,6 @@ import lint.tokenizer.Tokenizer
 import lint.corpus.Novel
 
 
-@Ignore
 class ExtBinCountsMergeCountsSpec extends FlatSpec
   with Matchers with BeforeAndAfter {
 
@@ -51,7 +50,7 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
 
   }
 
-  "ExtBinCounts.mergeCounts" should "index TokenBin -> count" in {
+  "ExtBinCounts.mergeCounts" should "index TokenBin -> count" ignore {
 
     val spark = _spark
     import spark.implicits._

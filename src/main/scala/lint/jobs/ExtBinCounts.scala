@@ -52,7 +52,7 @@ object ExtBinCounts extends Config {
     novels
 
       // Get list of (TokenBin, count)
-      .flatMap(_.binCounts().toSeq)
+      .flatMap(_.binCounts(yearInterval=10).toSeq)
 
       // Sum the counts for each key across all texts.
       .rdd.reduceByKey(_+_)

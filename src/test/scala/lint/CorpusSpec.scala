@@ -10,7 +10,7 @@ import lint.corpus.NovelImplicits._
 
 class NovelBinCountsSpec extends FlatSpec with Matchers {
 
-  def getNovel(text: String): Novel = {
+  def getNovel(text: String, year: Int = 2000): Novel = {
 
     val tokens = Tokenizer.tokenize(text)
 
@@ -34,6 +34,7 @@ class NovelBinCountsSpec extends FlatSpec with Matchers {
 
     val counts = novel.binCounts(4)
 
+    // TODO: Weird?
     val (c, y) = (novel.corpus, novel.year)
 
     counts(TokenBin(c, y, "one",    "CD", 0)) shouldEqual 1
@@ -65,5 +66,7 @@ class NovelBinCountsSpec extends FlatSpec with Matchers {
     counts(TokenBin(c, y, "four",   "CD", 3)) shouldEqual 2
 
   }
+
+  // TODO: Test year rounding.
 
 }

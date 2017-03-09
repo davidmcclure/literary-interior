@@ -34,11 +34,16 @@ object NovelImplicits {
     /* Count the number of times that each (token, POS) pair appears in each
      * percentile of the text.
      */
-    def binCounts(bins: Int = 100): Map[TokenBin, Int] = {
+    def binCounts(
+      bins: Int = 100,
+      yearInterval: Int = 1
+    ): Map[TokenBin, Int] = {
 
       val counts = Map[TokenBin, Int]().withDefaultValue(0)
 
       for (token <- n.tokens) {
+
+        val year = RichNovel.roundYear(n.year, yearInterval)
 
         // If offset is 1 (last token), notch down into the bins-1 bin, to
         // avoid returning bins+1 bins.
@@ -46,7 +51,7 @@ object NovelImplicits {
           if (token.offset < 1) floor(token.offset * bins).toInt
           else bins - 1
 
-        val key = TokenBin(n.corpus, n.year, token.token, token.pos, bin)
+        val key = TokenBin(n.corpus, year, token.token, token.pos, bin)
 
         counts(key) += 1
 
@@ -100,6 +105,16 @@ object NovelImplicits {
 
       }
 
+    }
+
+  }
+
+  implicit object RichNovel {
+
+    /* Round a year to the nearest N years.
+     */
+    def roundYear(year: Int, interval: Int = 10) = {
+      (Math.round(year.toDouble / interval) * interval).toInt
     }
 
   }
