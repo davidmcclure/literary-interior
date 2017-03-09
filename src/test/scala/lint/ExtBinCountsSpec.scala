@@ -56,13 +56,19 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
     val spark = _spark
     import spark.implicits._
 
-    val novels = (0 until 10).flatMap(i => Seq(
-      getNovel("corpus1", 1910, "one two three"),
-      getNovel("corpus2", 1920, "four five six"),
-      getNovel("corpus3", 1930, "seven eight nine")
-    ))
+    val d1 = for (_ <- (0 until 10).toList) yield {
+      getNovel("corpus1", 1910, "one two three")
+    }
 
-    val ds = spark.createDataset(novels)
+    val d2 = for (_ <- (0 until 20).toList) yield {
+      getNovel("corpus2", 1920, "four five six")
+    }
+
+    val d3 = for (_ <- (0 until 30).toList) yield {
+      getNovel("corpus3", 1930, "seven eight nine")
+    }
+
+    val ds = spark.createDataset(d1 ++ d2 ++ d3)
 
     val rows = ExtBinCounts.mergeCounts(ds)
 
@@ -72,13 +78,13 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
       BinCountRow("corpus1", 1910, "two", "CD", 50, 10),
       BinCountRow("corpus1", 1910, "three", "CD", 99, 10),
 
-      BinCountRow("corpus2", 1920, "four", "CD", 0, 10),
-      BinCountRow("corpus2", 1920, "five", "CD", 50, 10),
-      BinCountRow("corpus2", 1920, "six", "CD", 99, 10),
+      BinCountRow("corpus2", 1920, "four", "CD", 0, 20),
+      BinCountRow("corpus2", 1920, "five", "CD", 50, 20),
+      BinCountRow("corpus2", 1920, "six", "CD", 99, 20),
 
-      BinCountRow("corpus3", 1930, "seven", "CD", 0, 10),
-      BinCountRow("corpus3", 1930, "eight", "CD", 50, 10),
-      BinCountRow("corpus3", 1930, "nine", "CD", 99, 10)
+      BinCountRow("corpus3", 1930, "seven", "CD", 0, 30),
+      BinCountRow("corpus3", 1930, "eight", "CD", 50, 30),
+      BinCountRow("corpus3", 1930, "nine", "CD", 99, 30)
 
     )
 
