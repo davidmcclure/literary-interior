@@ -37,7 +37,7 @@ class NovelBinCountsSpec extends FlatSpec
 
     val counts = novel.binCounts(4)
 
-    val keys = Table(
+    forAll(Table(
 
       ("token", "pos", "bin", "count"),
 
@@ -53,9 +53,7 @@ class NovelBinCountsSpec extends FlatSpec
       ("seven", "CD", 3, 1),
       ("eight", "CD", 3, 1)
 
-    )
-
-    forAll(keys) { (token: String, pos: String, bin: Int, count: Int) =>
+    )) { (token: String, pos: String, bin: Int, count: Int) =>
       val key = TokenBin(novel.corpus, novel.year, token, pos, bin)
       counts(key) shouldEqual count
     }
@@ -69,15 +67,15 @@ class NovelBinCountsSpec extends FlatSpec
 
     val counts = novel.binCounts(4)
 
-    val keys = Table(
+    forAll(Table(
+
       ("token", "pos", "bin", "count"),
       ("one",   "CD", 0, 2),
       ("two",   "CD", 1, 2),
       ("three", "CD", 2, 2),
       ("four",  "CD", 3, 2)
-    )
 
-    forAll(keys) { (token: String, pos: String, bin: Int, count: Int) =>
+    )) { (token: String, pos: String, bin: Int, count: Int) =>
       val key = TokenBin(novel.corpus, novel.year, token, pos, bin)
       counts(key) shouldEqual count
     }
@@ -91,14 +89,14 @@ class NovelBinCountsSpec extends FlatSpec
 
   it should "round years when an interval is provided" in {
 
-    val years = Table(
+    forAll(Table(
+
       ("year", "interval", "result"),
       (1904, 5, 1905),
       (1904, 10, 1900),
       (1905, 10, 1910)
-    )
 
-    forAll(years) { (year: Int, interval: Int, result: Int) =>
+    )) { (year: Int, interval: Int, result: Int) =>
 
       val novel = getNovel(year=year)
       val counts = novel.binCounts(yearInterval=interval)

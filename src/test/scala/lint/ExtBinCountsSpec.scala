@@ -3,6 +3,8 @@
 package lint.jobs
 
 import org.scalatest._
+import org.scalatest.prop.TableDrivenPropertyChecks
+import org.scalatest.prop.TableDrivenPropertyChecks._
 
 import lint.tokenizer.Tokenizer
 import lint.corpus.Novel
@@ -10,7 +12,7 @@ import lint.test.helpers.SparkTestSession
 
 
 class ExtBinCountsMergeCountsSpec extends FlatSpec
-  with Matchers with SparkTestSession {
+  with Matchers with SparkTestSession with TableDrivenPropertyChecks {
 
   // TODO: Scala equivalent of FactoryBoy?
   def getNovel(corpus: String, year: Int, text: String): Novel = {
