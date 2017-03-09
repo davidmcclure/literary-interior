@@ -66,8 +66,25 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
 
     val rows = ExtBinCounts.mergeCounts(ds)
 
-    rows.count shouldEqual 9
-    rows.show
+    val expected = Seq(
+
+      BinCountRow("corpus1", 1910, "one", "CD", 0, 10),
+      BinCountRow("corpus1", 1910, "two", "CD", 50, 10),
+      BinCountRow("corpus1", 1910, "three", "CD", 99, 10),
+
+      BinCountRow("corpus2", 1920, "four", "CD", 0, 10),
+      BinCountRow("corpus2", 1920, "five", "CD", 50, 10),
+      BinCountRow("corpus2", 1920, "six", "CD", 99, 10),
+
+      BinCountRow("corpus3", 1930, "seven", "CD", 0, 10),
+      BinCountRow("corpus3", 1930, "eight", "CD", 50, 10),
+      BinCountRow("corpus3", 1930, "nine", "CD", 99, 10)
+
+    )
+
+    for (row <- expected) {
+      rows.filter(_ == row).count shouldEqual 1
+    }
 
   }
 
