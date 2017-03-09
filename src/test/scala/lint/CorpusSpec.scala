@@ -3,12 +3,15 @@
 package lint.corpus
 
 import org.scalatest._
+import org.scalatest.prop.TableDrivenPropertyChecks
+import org.scalatest.prop.TableDrivenPropertyChecks._
 
 import lint.tokenizer.Tokenizer
 import lint.corpus.NovelImplicits._
 
 
-class NovelBinCountsSpec extends FlatSpec with Matchers {
+class NovelBinCountsSpec extends FlatSpec
+  with Matchers with TableDrivenPropertyChecks {
 
   def getNovel(text: String = "text", year: Int = 2000): Novel = {
 
@@ -73,8 +76,23 @@ class NovelBinCountsSpec extends FlatSpec with Matchers {
   }
 
   it should "round years when an interval is provided" in {
-    val novel = getNovel(year=1904)
-    novel.binCounts(yearInterval=10).keys.head.year shouldEqual 1900
+
+    val years = Table(
+      ("year", "interval", "result"),
+      (1904, 5, 1905),
+      (1904, 10, 1900),
+      (1905, 10, 1910)
+    )
+
+    forAll(years) { (year: Int, interval: Int, result: Int) =>
+
+      val novel = getNovel(year=year)
+      val counts = novel.binCounts(yearInterval=interval)
+
+      counts.keys.head.year shouldEqual result
+
+    }
+
   }
 
 }
