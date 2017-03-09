@@ -59,8 +59,7 @@ object ExtBinCounts extends Config {
 
       // Merge bins and counts.
       .map { case (tb: TokenBin, count: Int) => {
-        val year = roundToDecade(tb.year)
-        BinCountRow(tb.corpus, year, tb.token, tb.pos, tb.bin, count)
+        BinCountRow(tb.corpus, tb.year, tb.token, tb.pos, tb.bin, count)
       }}
 
       // Cast back to dataset.

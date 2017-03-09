@@ -11,6 +11,7 @@ import lint.tokenizer.Tokenizer
 import lint.corpus.Novel
 
 
+@Ignore
 class ExtBinCountsMergeCountsSpec extends FlatSpec
   with Matchers with BeforeAndAfter {
 
@@ -50,44 +51,44 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
 
   }
 
-  //"ExtBinCounts.mergeCounts" should "index TokenBin -> count" in {
+  "ExtBinCounts.mergeCounts" should "index TokenBin -> count" in {
 
-    //val spark = _spark
-    //import spark.implicits._
+    val spark = _spark
+    import spark.implicits._
 
-    //val d1 = for (_ <- (0 until 10).toList) yield {
-      //getNovel("corpus1", 1910, "one two three")
-    //}
+    val d1 = for (_ <- (0 until 10).toList) yield {
+      getNovel("corpus1", 1910, "one two three")
+    }
 
-    //val d2 = for (_ <- (0 until 20).toList) yield {
-      //getNovel("corpus2", 1920, "four five six")
-    //}
+    val d2 = for (_ <- (0 until 20).toList) yield {
+      getNovel("corpus2", 1920, "four five six")
+    }
 
-    //val d3 = for (_ <- (0 until 30).toList) yield {
-      //getNovel("corpus3", 1930, "seven eight nine")
-    //}
+    val d3 = for (_ <- (0 until 30).toList) yield {
+      getNovel("corpus3", 1930, "seven eight nine")
+    }
 
-    //val ds = spark.createDataset(d1 ++ d2 ++ d3)
+    val ds = spark.createDataset(d1 ++ d2 ++ d3)
 
-    //val rows = ExtBinCounts.mergeCounts(ds)
+    val rows = ExtBinCounts.mergeCounts(ds)
 
-    //for (row <- Seq(
-      //BinCountRow("corpus1", 1910, "one",   "CD", 0,  10),
-      //BinCountRow("corpus1", 1910, "two",   "CD", 50, 10),
-      //BinCountRow("corpus1", 1910, "three", "CD", 99, 10),
-      //BinCountRow("corpus2", 1920, "four",  "CD", 0,  20),
-      //BinCountRow("corpus2", 1920, "five",  "CD", 50, 20),
-      //BinCountRow("corpus2", 1920, "six",   "CD", 99, 20),
-      //BinCountRow("corpus3", 1930, "seven", "CD", 0,  30),
-      //BinCountRow("corpus3", 1930, "eight", "CD", 50, 30),
-      //BinCountRow("corpus3", 1930, "nine",  "CD", 99, 30)
-    //)) {
-      //rows.filter(_ == row).count shouldEqual 1
-    //}
+    for (row <- Seq(
+      BinCountRow("corpus1", 1910, "one",   "CD", 0,  10),
+      BinCountRow("corpus1", 1910, "two",   "CD", 50, 10),
+      BinCountRow("corpus1", 1910, "three", "CD", 99, 10),
+      BinCountRow("corpus2", 1920, "four",  "CD", 0,  20),
+      BinCountRow("corpus2", 1920, "five",  "CD", 50, 20),
+      BinCountRow("corpus2", 1920, "six",   "CD", 99, 20),
+      BinCountRow("corpus3", 1930, "seven", "CD", 0,  30),
+      BinCountRow("corpus3", 1930, "eight", "CD", 50, 30),
+      BinCountRow("corpus3", 1930, "nine",  "CD", 99, 30)
+    )) {
+      rows.filter(_ == row).count shouldEqual 1
+    }
 
-  //}
+  }
 
-  "test" should "round years to the nearest decade" in {
+  it should "round years to the nearest decade" in {
 
     val spark = _spark
     import spark.implicits._
