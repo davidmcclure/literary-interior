@@ -27,4 +27,6 @@ lazy val root = (project in file("."))
 
     assemblyJarName in assembly := "lint.jar"
 
+    //parallelExecution in Test := false
+
   )

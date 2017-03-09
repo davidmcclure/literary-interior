@@ -5,6 +5,7 @@ package lint.jobs
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.SparkSession
 import org.scalatest._
+import pprint.pprintln
 
 import lint.tokenizer.Tokenizer
 import lint.corpus.Novel
@@ -13,7 +14,7 @@ import lint.corpus.Novel
 class ExtBinCountsMergeCountsSpec extends FlatSpec
   with Matchers with BeforeAndAfter {
 
-  var spark: SparkSession = _
+  var _spark: SparkSession = _
 
   before {
 
@@ -21,14 +22,14 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
       .setMaster("local[*]")
       .setAppName("test")
 
-    spark = SparkSession.builder
+    _spark = SparkSession.builder
       .config(conf)
       .getOrCreate()
 
   }
 
   after {
-    spark.stop
+    _spark.stop
   }
 
   // TODO: Scala equivalent of FactoryBoy?
@@ -51,17 +52,22 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
 
   "ExtBinCounts.mergeCounts" should "index TokenBin -> count" in {
 
-    // TODO: Do this once?
-    val spark_ = spark
-    import spark_.implicits._
+    // TODO: Any way to just do this once?
+    val spark = _spark
+    import spark.implicits._
 
-    val novels = for (i <- 0 until 10) yield {
-      getNovel("corpus1", 1910, "one two three")
-    }
+    val novels = (0 until 10).flatMap(i => Seq(
+      getNovel("corpus1", 1910, "one two three"),
+      getNovel("corpus2", 1920, "four five six"),
+      getNovel("corpus3", 1930, "seven eight nine")
+    ))
 
     val ds = spark.createDataset(novels)
 
-    ds.count shouldEqual 10
+    val rows = ExtBinCounts.mergeCounts(ds)
+
+    rows.count shouldEqual 9
+    rows.show
 
   }
 
