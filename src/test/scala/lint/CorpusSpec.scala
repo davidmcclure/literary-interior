@@ -37,20 +37,28 @@ class NovelBinCountsSpec extends FlatSpec
 
     val counts = novel.binCounts(4)
 
-    // TODO: Weird?
-    val (c, y) = (novel.corpus, novel.year)
+    val keys = Table(
 
-    counts(TokenBin(c, y, "one",    "CD", 0)) shouldEqual 1
-    counts(TokenBin(c, y, "two",    "CD", 0)) shouldEqual 1
+      ("token", "pos", "bin", "count"),
 
-    counts(TokenBin(c, y, "three",  "CD", 1)) shouldEqual 1
-    counts(TokenBin(c, y, "four",   "CD", 1)) shouldEqual 1
+      ("one",   "CD", 0, 1),
+      ("two",   "CD", 0, 1),
 
-    counts(TokenBin(c, y, "five",   "CD", 2)) shouldEqual 1
-    counts(TokenBin(c, y, "six",    "CD", 2)) shouldEqual 1
+      ("three", "CD", 1, 1),
+      ("four",  "CD", 1, 1),
 
-    counts(TokenBin(c, y, "seven",  "CD", 3)) shouldEqual 1
-    counts(TokenBin(c, y, "eight",  "CD", 3)) shouldEqual 1
+      ("five",  "CD", 2, 1),
+      ("six",   "CD", 2, 1),
+
+      ("seven", "CD", 3, 1),
+      ("eight", "CD", 3, 1)
+
+    )
+
+    forAll(keys) { (token: String, pos: String, bin: Int, count: Int) =>
+      val key = TokenBin(novel.corpus, novel.year, token, pos, bin)
+      counts(key) shouldEqual count
+    }
 
   }
 
