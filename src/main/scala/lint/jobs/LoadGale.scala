@@ -12,15 +12,15 @@ import lint.gale.Loader
 
 object LoadGale extends Config {
 
-  lazy val sc = new SparkContext(new SparkConf)
   lazy val spark = SparkSession.builder.getOrCreate()
   import spark.implicits._
 
   def main(args: Array[String]) {
 
-    val novels = sc
+    val novels = spark
 
       // Parse sources.
+      .sparkContext
       .parallelize(Loader.sources)
       .map(s => Try(Loader.parse(s)))
 
