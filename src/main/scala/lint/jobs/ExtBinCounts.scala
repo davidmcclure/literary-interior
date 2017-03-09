@@ -2,6 +2,8 @@
 
 package lint.jobs
 
+import java.lang.Math
+
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode,Dataset}
 
@@ -44,7 +46,6 @@ object ExtBinCounts extends Config {
   }
 
   /* Merge together token / bin counts for novels.
-   * TODO: test
    */
   def mergeCounts(novels: Dataset[Novel]): Dataset[BinCountRow] = {
 
@@ -56,17 +57,11 @@ object ExtBinCounts extends Config {
       // Sum the counts for each key across all texts.
       .rdd.reduceByKey(_+_)
 
-      // Merge into database rows.
-      .map {
-        case (tb: TokenBin, count: Int) => BinCountRow(
-          tb.corpus,
-          tb.year,
-          tb.token,
-          tb.pos,
-          tb.bin,
-          count
-        )
-      }
+      // Merge bins and counts.
+      .map { case (tb: TokenBin, count: Int) => {
+        val year = roundToDecade(tb.year)
+        BinCountRow(tb.corpus, year, tb.token, tb.pos, tb.bin, count)
+      }}
 
       // Cast back to dataset.
       .toDS
