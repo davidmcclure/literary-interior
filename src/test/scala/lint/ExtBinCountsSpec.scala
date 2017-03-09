@@ -2,37 +2,15 @@
 
 package lint.jobs
 
-import org.apache.spark.{SparkContext,SparkConf}
-import org.apache.spark.sql.SparkSession
 import org.scalatest._
-import pprint.pprintln
 
 import lint.tokenizer.Tokenizer
 import lint.corpus.Novel
+import lint.test.helpers.SparkTestSession
 
 
 class ExtBinCountsMergeCountsSpec extends FlatSpec
-  with Matchers with BeforeAndAfterAll {
-
-  // TODO: Break into trait.
-
-  var _spark: SparkSession = _
-
-  override def beforeAll {
-
-    val conf = new SparkConf()
-      .setMaster("local[*]")
-      .setAppName("test")
-
-    _spark = SparkSession.builder
-      .config(conf)
-      .getOrCreate()
-
-  }
-
-  override def afterAll {
-    _spark.stop
-  }
+  with Matchers with SparkTestSession {
 
   // TODO: Scala equivalent of FactoryBoy?
   def getNovel(corpus: String, year: Int, text: String): Novel = {
@@ -101,7 +79,6 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
     ))
 
     val rows = ExtBinCounts.mergeCounts(ds)
-    rows.show
 
     for (row <- Seq(
       BinCountRow("corpus", 1900, "one",   "CD", 0,  1),
