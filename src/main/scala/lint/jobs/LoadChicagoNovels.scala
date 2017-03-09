@@ -11,8 +11,8 @@ import lint.chicago.Loader
 
 object LoadChicagoNovels extends Config {
 
-  val sc = new SparkContext(new SparkConf)
-  val spark = SparkSession.builder.getOrCreate()
+  lazy val sc = new SparkContext(new SparkConf)
+  lazy val spark = SparkSession.builder.getOrCreate()
   import spark.implicits._
 
   def main(args: Array[String]) {

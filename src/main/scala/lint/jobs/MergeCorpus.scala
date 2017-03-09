@@ -11,8 +11,7 @@ import lint.corpus.Novel
 
 object MergeCorpus extends Config {
 
-  val sc = new SparkContext(new SparkConf)
-  val spark = SparkSession.builder.getOrCreate()
+  lazy val spark = SparkSession.builder.getOrCreate()
   import spark.implicits._
 
   def main(args: Array[String]) {

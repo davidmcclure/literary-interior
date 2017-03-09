@@ -8,7 +8,7 @@ import pprint.pprintln
 
 object Benchmark {
 
-  val sc = new SparkContext(new SparkConf)
+  lazy val sc = new SparkContext(new SparkConf)
 
   def main(args: Array[String]) {
 

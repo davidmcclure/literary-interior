@@ -24,7 +24,6 @@ case class BinCountRow(
 
 object ExtBinCounts extends Config {
 
-  lazy val sc = new SparkContext(new SparkConf)
   lazy val spark = SparkSession.builder.getOrCreate()
   import spark.implicits._
 

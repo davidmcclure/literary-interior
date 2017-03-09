@@ -24,8 +24,7 @@ case class KWICOpts(
 
 object KWIC extends Config {
 
-  val sc = new SparkContext(new SparkConf)
-  val spark = SparkSession.builder.getOrCreate()
+  lazy val spark = SparkSession.builder.getOrCreate()
   import spark.implicits._
 
   /* Probe for KWICs, dump results to CSV.
