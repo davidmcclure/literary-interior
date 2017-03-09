@@ -7,6 +7,7 @@ import scala.xml.{XML,Elem,Node}
 import scala.io.Source
 
 
+// TODO: Use tables?
 class NovelXMLSpec extends FreeSpec with Matchers {
 
   def getNovel(segment: String, psmid: String): NovelXML = {
