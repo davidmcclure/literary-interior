@@ -12,11 +12,13 @@ import lint.corpus.Novel
 
 
 class ExtBinCountsMergeCountsSpec extends FlatSpec
-  with Matchers with BeforeAndAfter {
+  with Matchers with BeforeAndAfterAll {
+
+  // TODO: Break into trait.
 
   var _spark: SparkSession = _
 
-  before {
+  override def beforeAll {
 
     val conf = new SparkConf()
       .setMaster("local[*]")
@@ -28,7 +30,7 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
 
   }
 
-  after {
+  override def afterAll {
     _spark.stop
   }
 
@@ -50,7 +52,7 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
 
   }
 
-  "ExtBinCounts.mergeCounts" should "index TokenBin -> count" ignore {
+  "ExtBinCounts.mergeCounts" should "index TokenBin -> count" in {
 
     val spark = _spark
     import spark.implicits._
