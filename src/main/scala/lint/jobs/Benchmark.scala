@@ -12,7 +12,7 @@ object Benchmark {
 
   def main(args: Array[String]) {
 
-    val data = sc.parallelize(0 until 480)
+    val data = sc.parallelize(0 until 320)
 
     val res = data
       .map(i => {
