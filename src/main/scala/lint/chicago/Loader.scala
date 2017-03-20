@@ -8,7 +8,7 @@ object Loader {
   /* List novel metadata rows.
    */
   def sources: List[NovelMetadata] = {
-    NovelCSV.fromConfig.read.slice(0, 100) // TODO|dev
+    NovelCSV.fromConfig.read
   }
 
   /* Load novel text.
