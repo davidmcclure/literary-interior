@@ -10,7 +10,7 @@ import lint.config.Config
 
 object TestConfig extends Config {
 
-  val sc = new SparkContext(new SparkConf)
+  lazy val sc = new SparkContext(new SparkConf)
 
   def main(args: Array[String]) {
 
