@@ -17,10 +17,7 @@ object TestConfig extends Config {
     val data = sc.parallelize(0 until 100)
 
     val res = data
-      .map(i => {
-        pprintln(config)
-        i+1
-      })
+      .map(i => config.chicago.textDir)
       .collect()
 
     pprintln(res)
