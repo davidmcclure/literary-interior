@@ -36,8 +36,6 @@ object MergeCorpus extends Config {
     ds.write.mode(SaveMode.Overwrite)
       .parquet(config.corpus.novelParquet)
 
-    ds.show
-
   }
 
 }

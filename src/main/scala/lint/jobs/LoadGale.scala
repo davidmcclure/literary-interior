@@ -38,8 +38,6 @@ object LoadGale extends Config {
     ds.write.mode(SaveMode.Overwrite)
       .parquet(config.gale.novelParquet)
 
-    ds.show
-
   }
 
 }
