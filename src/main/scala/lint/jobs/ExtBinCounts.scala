@@ -33,7 +33,8 @@ object ExtBinCounts extends Config {
       .parquet(config.corpus.novelParquet)
       .as[Novel]
 
-    val counts = ExtBinCounts.mergeCounts(novels)
+    // TODO|dev
+    val counts = ExtBinCounts.mergeCounts(novels.take(1000))
 
     counts.coalesce(1).write
       .mode(SaveMode.Overwrite)
