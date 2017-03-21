@@ -47,7 +47,7 @@ object AuthorCSV extends Config {
   /* Bind config novels CSV path.
    */
   def fromConfig: AuthorCSV = {
-    new AuthorCSV(config.chicago.authorMetadataPath)
+    new AuthorCSV(config.chicago.authorCSVPath)
   }
 
   /* Clean a year string, case to integer.

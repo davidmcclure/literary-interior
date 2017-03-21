@@ -19,8 +19,8 @@ case class GaleConfig(
 )
 
 case class ChicagoConfig(
-  novelMetadataPath: String,
-  authorMetadataPath: String,
+  novelCSVPath: String,
+  authorCSVPath: String,
   textDir: String,
   novelParquet: String,
   authorParquet: String

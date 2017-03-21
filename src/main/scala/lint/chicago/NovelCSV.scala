@@ -41,7 +41,7 @@ object NovelCSV extends Config {
   /* Bind config novels CSV path.
    */
   def fromConfig: NovelCSV = {
-    new NovelCSV(config.chicago.novelMetadataPath)
+    new NovelCSV(config.chicago.novelCSVPath)
   }
 
 }
