@@ -32,7 +32,6 @@ object ExtBinCounts extends Config {
     val novels = spark.read
       .parquet(config.corpus.novelParquet)
       .as[Novel]
-      .limit(5000) // TODO|dev
 
     val counts = ExtBinCounts.mergeCounts(novels)
 
