@@ -35,10 +35,8 @@ object ExtBinCounts extends Config {
 
     val counts = ExtBinCounts.mergeCounts(novels)
 
-    counts.write
-      .mode(SaveMode.Overwrite)
-      .option("header", "true")
-      .csv(config.corpus.binCountCSV)
+    counts.write.mode(SaveMode.Overwrite)
+      .json(config.corpus.binCountJSON)
 
   }
 
