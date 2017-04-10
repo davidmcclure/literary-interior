@@ -30,3 +30,13 @@ class AuthorCSVSpec extends FreeSpec with Matchers {
   }
 
 }
+
+
+class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers {
+
+  "TextDir.stripGutenbergParatext()" should "return the entire text, when no Gutenberg header / footer"
+  it should "strip out the header"
+  it should "strip out the footer"
+  it should "strip out the header + footer"
+
+}
