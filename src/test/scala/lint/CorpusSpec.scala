@@ -6,7 +6,7 @@ import org.scalatest._
 import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
-import lint.Tokenize
+import lint.utils.Tokenize
 import lint.corpus.NovelImplicits._
 
 

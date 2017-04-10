@@ -1,6 +1,6 @@
 
 
-package lint
+package lint.utils
 
 import java.io.FileInputStream
 import scala.io.Source

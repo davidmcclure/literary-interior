@@ -5,7 +5,7 @@ package lint.chicago
 import java.nio.file.Paths
 import scala.io.Source
 
-import lint.Tokenize
+import lint.utils.Tokenize
 import lint.Config
 
 

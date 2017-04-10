@@ -1,6 +1,6 @@
 
 
-package lint
+package lint.utils
 
 import org.scalatest._
 import org.scalatest.prop.TableDrivenPropertyChecks
