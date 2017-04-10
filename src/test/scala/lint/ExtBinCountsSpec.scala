@@ -7,42 +7,12 @@ import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
 import lint.tokenizer.Tokenizer
-import lint.corpus.Novel
+import lint.corpus.NovelFactory
 import lint.test.helpers.SparkTestSession
 
 
-object NovelFactory {
-
-  def apply(
-    corpus: String = "corpus",
-    identifier: String = "1",
-    title: String = "title",
-    authorFirst: String = "first",
-    authorLast: String = "last",
-    year: Int = 2000,
-    text: String = "text"
-  ): Novel = {
-
-    val tokens = Tokenizer.tokenize(text)
-
-    Novel(
-      corpus=corpus,
-      identifier=identifier,
-      title=title,
-      authorFirst=authorFirst,
-      authorLast=authorLast,
-      year=year,
-      text=text,
-      tokens=tokens
-    )
-
-  }
-
-}
-
-
-class ExtBinCountsMergeCountsSpec extends FlatSpec
-  with Matchers with SparkTestSession with TableDrivenPropertyChecks {
+class ExtBinCountsMergeCountsSpec extends FlatSpec with Matchers
+  with SparkTestSession with TableDrivenPropertyChecks {
 
   "ExtBinCounts.mergeCounts" should "index TokenBin -> count" in {
 

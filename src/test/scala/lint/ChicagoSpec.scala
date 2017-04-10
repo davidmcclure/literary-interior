@@ -37,8 +37,8 @@ class AuthorCSVSpec extends FreeSpec with Matchers {
 }
 
 
-class TextDirStripGutenbergParatextSpec extends FlatSpec
-  with Matchers with TableDrivenPropertyChecks {
+class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers
+  with TableDrivenPropertyChecks {
 
   val headers = Table("header",
     "*** START OF THIS PROJECT GUTENBERG EBOOK ***",

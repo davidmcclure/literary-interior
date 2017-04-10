@@ -7,8 +7,8 @@ import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
 
-class TokenizerSpec extends FlatSpec
-  with Matchers with TableDrivenPropertyChecks {
+class TokenizerSpec extends FlatSpec with Matchers
+  with TableDrivenPropertyChecks {
 
   "Tokenizer.tokenize()" should "POS-tag tokens" in {
 

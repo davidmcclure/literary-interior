@@ -10,19 +10,26 @@ import lint.tokenizer.Tokenizer
 import lint.corpus.NovelImplicits._
 
 
-class NovelBinCountsSpec extends FlatSpec
-  with Matchers with TableDrivenPropertyChecks {
+object NovelFactory {
 
-  def getNovel(text: String = "text", year: Int = 2000): Novel = {
+  def apply(
+    corpus: String = "corpus",
+    identifier: String = "1",
+    title: String = "title",
+    authorFirst: String = "first",
+    authorLast: String = "last",
+    year: Int = 2000,
+    text: String = "text"
+  ): Novel = {
 
     val tokens = Tokenizer.tokenize(text)
 
     Novel(
-      corpus="corpus",
-      identifier="1",
-      title="title",
-      authorFirst="first",
-      authorLast="last",
+      corpus=corpus,
+      identifier=identifier,
+      title=title,
+      authorFirst=authorFirst,
+      authorLast=authorLast,
       year=year,
       text=text,
       tokens=tokens
@@ -30,10 +37,16 @@ class NovelBinCountsSpec extends FlatSpec
 
   }
 
+}
+
+
+class NovelBinCountsSpec extends FlatSpec with Matchers
+  with TableDrivenPropertyChecks {
+
   "Novel#binCounts" should "count tokens in each bin" in {
 
     // Two tokens in each bin.
-    val novel = getNovel("one two three four five six seven eight")
+    val novel = NovelFactory(text="one two three four five six seven eight")
 
     val counts = novel.binCounts(4)
 
@@ -63,7 +76,7 @@ class NovelBinCountsSpec extends FlatSpec
   it should "accumulate token counts in each bin" in {
 
     // Two of each token in each bin.
-    val novel = getNovel("one one two two three three four four")
+    val novel = NovelFactory(text="one one two two three three four four")
 
     val counts = novel.binCounts(4)
 
@@ -83,7 +96,7 @@ class NovelBinCountsSpec extends FlatSpec
   }
 
   it should "not round years by default" in {
-    val novel = getNovel(year=1904)
+    val novel = NovelFactory(year=1904)
     novel.binCounts().keys.head.year shouldEqual 1904
   }
 
@@ -98,7 +111,7 @@ class NovelBinCountsSpec extends FlatSpec
 
     )) { (year: Int, interval: Int, result: Int) =>
 
-      val novel = getNovel(year=year)
+      val novel = NovelFactory(year=year)
       val counts = novel.binCounts(yearInterval=interval)
 
       counts.keys.head.year shouldEqual result
