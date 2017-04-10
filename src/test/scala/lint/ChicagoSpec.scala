@@ -3,6 +3,8 @@
 package lint.chicago
 
 import org.scalatest._
+import org.scalatest.prop.TableDrivenPropertyChecks
+import org.scalatest.prop.TableDrivenPropertyChecks._
 
 
 // TODO: Spot-check rows.
@@ -32,7 +34,18 @@ class AuthorCSVSpec extends FreeSpec with Matchers {
 }
 
 
-class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers {
+class TextDirStripGutenbergParatextSpec extends FlatSpec
+  with Matchers with TableDrivenPropertyChecks {
+
+  val headers = Table("header",
+    "*** START OF THIS PROJECT GUTENBERG EBOOK ***",
+    "***START OF THIS PROJECT GUTENBERG EBOOK***"
+  )
+
+  val footers = Table("footer",
+    "*** END OF THIS PROJECT GUTENBERG EBOOK ***",
+    "***END OF THIS PROJECT GUTENBERG EBOOK***"
+  )
 
   "TextDir.stripGutenbergParatext()" should "return the entire text, when no Gutenberg header / footer" in {
 
@@ -46,10 +59,82 @@ class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers {
 
   }
 
-  it should "strip out the header"
+  it should "strip out the header" in {
 
-  it should "strip out the footer"
+    forAll(headers) { header =>
 
-  it should "strip out the header + footer"
+      val text = List(
+        "line1",
+        "line2",
+        "line3",
+        header,
+        "line4",
+        "line5",
+        "line6"
+      ).mkString("\n")
+
+      TextDir.stripGutenbergParatext(text) shouldEqual List(
+        "line4",
+        "line5",
+        "line6"
+      ).mkString("\n")
+
+    }
+
+  }
+
+  it should "strip out the footer" in {
+
+    forAll(footers) { footer =>
+
+      val text = List(
+        "line1",
+        "line2",
+        "line3",
+        footer,
+        "line4",
+        "line5",
+        "line6"
+      ).mkString("\n")
+
+      TextDir.stripGutenbergParatext(text) shouldEqual List(
+        "line1",
+        "line2",
+        "line3"
+      ).mkString("\n")
+
+    }
+
+  }
+
+  it should "strip out the header + footer" in {
+
+    forAll(headers) { header =>
+      forAll(footers) { footer =>
+
+        val text = List(
+          "line1",
+          "line2",
+          "line3",
+          header,
+          "line4",
+          "line5",
+          "line6",
+          footer,
+          "line7",
+          "line8",
+          "line9"
+        ).mkString("\n")
+
+        TextDir.stripGutenbergParatext(text) shouldEqual List(
+          "line4",
+          "line5",
+          "line6"
+        ).mkString("\n")
+
+      }
+    }
+
+  }
 
 }
