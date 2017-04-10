@@ -7,7 +7,6 @@ import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
 
-// TODO: Spot-check rows.
 class NovelCSVSpec extends FreeSpec with Matchers {
 
   val url = getClass().getResource("/fixtures/chicago/NOVELS_METADATA.csv")
@@ -17,6 +16,8 @@ class NovelCSVSpec extends FreeSpec with Matchers {
     val rows = reader.read
     rows.size should be > 0
   }
+
+  // TODO: Spot-check rows.
 
 }
 
@@ -30,6 +31,8 @@ class AuthorCSVSpec extends FreeSpec with Matchers {
     val rows = reader.read
     rows.size should be > 0
   }
+
+  // TODO: Spot-check rows.
 
 }
 
@@ -47,7 +50,7 @@ class TextDirStripGutenbergParatextSpec extends FlatSpec
     "***END OF THIS PROJECT GUTENBERG EBOOK***"
   )
 
-  "TextDir.stripGutenbergParatext()" should "return the entire text, when no Gutenberg header / footer" in {
+  "TextDir.stripGutenbergParatext" should "return the entire text, when no Gutenberg header / footer" in {
 
     val text = List(
       "line1",

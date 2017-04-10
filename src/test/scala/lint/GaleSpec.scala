@@ -11,8 +11,8 @@ import scala.io.Source
 class NovelXMLSpec extends FreeSpec with Matchers {
 
   def getNovel(segment: String, psmid: String): NovelXML = {
-    val url = getClass().getResource(s"/fixtures/gale/${segment}/Monographs/${psmid}.xml")
-    NovelXML.fromPath(url.getFile)
+    val path = s"/fixtures/gale/${segment}/Monographs/${psmid}.xml"
+    NovelXML.fromPath(getClass().getResource(path).getFile)
   }
 
   "AMFCF0002-C00000-B0000400" - {
