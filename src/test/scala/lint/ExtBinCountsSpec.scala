@@ -11,20 +11,26 @@ import lint.corpus.Novel
 import lint.test.helpers.SparkTestSession
 
 
-class ExtBinCountsMergeCountsSpec extends FlatSpec
-  with Matchers with SparkTestSession with TableDrivenPropertyChecks {
+object NovelFactory {
 
-  // TODO: FactoryBoy?
-  def getNovel(corpus: String, year: Int, text: String): Novel = {
+  def apply(
+    corpus: String = "corpus",
+    identifier: String = "1",
+    title: String = "title",
+    authorFirst: String = "first",
+    authorLast: String = "last",
+    year: Int = 2000,
+    text: String = "text"
+  ): Novel = {
 
     val tokens = Tokenizer.tokenize(text)
 
     Novel(
       corpus=corpus,
-      identifier="1",
-      title="title",
-      authorFirst="first",
-      authorLast="last",
+      identifier=identifier,
+      title=title,
+      authorFirst=authorFirst,
+      authorLast=authorLast,
       year=year,
       text=text,
       tokens=tokens
@@ -32,21 +38,27 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
 
   }
 
+}
+
+
+class ExtBinCountsMergeCountsSpec extends FlatSpec
+  with Matchers with SparkTestSession with TableDrivenPropertyChecks {
+
   "ExtBinCounts.mergeCounts" should "index TokenBin -> count" in {
 
     val spark = _spark
     import spark.implicits._
 
     val d1 = for (_ <- (0 until 10).toList) yield {
-      getNovel("corpus1", 1910, "one two three")
+      NovelFactory(corpus="corpus1", year=1910, text="one two three")
     }
 
     val d2 = for (_ <- (0 until 20).toList) yield {
-      getNovel("corpus2", 1920, "four five six")
+      NovelFactory(corpus="corpus2", year=1920, text="four five six")
     }
 
     val d3 = for (_ <- (0 until 30).toList) yield {
-      getNovel("corpus3", 1930, "seven eight nine")
+      NovelFactory(corpus="corpus3", year=1930, text="seven eight nine")
     }
 
     val ds = spark.createDataset(d1 ++ d2 ++ d3)
@@ -94,9 +106,9 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec
     import spark.implicits._
 
     val ds = spark.createDataset(Seq(
-      getNovel("corpus", 1904, "one two three"),
-      getNovel("corpus", 1905, "one two three"),
-      getNovel("corpus", 1906, "one two three")
+      NovelFactory(corpus="corpus", year=1904, text="one two three"),
+      NovelFactory(corpus="corpus", year=1905, text="one two three"),
+      NovelFactory(corpus="corpus", year=1906, text="one two three")
     ))
 
     val rows = ExtBinCounts.mergeCounts(ds)

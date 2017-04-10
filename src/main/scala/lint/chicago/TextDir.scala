@@ -73,8 +73,8 @@ object TextDir extends Config {
 
     // Probe for header / footer lines.
     for ((line, i) <- lines.zipWithIndex) {
-      if (headerTokens.map(line.contains(_)) == Set(true)) i1 = i+1
-      if (footerTokens.map(line.contains(_)) == Set(true)) i2 = i
+      if (headerTokens.map(line.contains) == Set(true)) i1 = i+1
+      if (footerTokens.map(line.contains) == Set(true)) i2 = i
     }
 
     // Slice off header / footer.
