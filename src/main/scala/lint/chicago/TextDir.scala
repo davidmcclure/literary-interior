@@ -63,25 +63,22 @@ object TextDir extends Config {
 
     val lines = text.split("\n")
 
+    // By default, take all lines.
     var i1 = 0
     var i2 = lines.size
 
-    val markers = Set("***", "PROJECT", "GUTENBERG")
-    val headerMarkers = markers + "START"
-    val footerMarkers = markers + "END"
+    val tokens = Set("***", "PROJECT", "GUTENBERG")
 
+    val headerTokens = tokens + "START"
+    val footerTokens = tokens + "END"
+
+    // Probe for header / footer lines.
     for ((line, i) <- lines.zipWithIndex) {
-
-      if (headerMarkers.map(line.contains(_)) == Set(true)) {
-        i1 = i+1
-      }
-
-      if (footerMarkers.map(line.contains(_)) == Set(true)) {
-        i2 = i
-      }
-
+      if (headerTokens.map(line.contains(_)) == Set(true)) i1 = i+1
+      if (footerTokens.map(line.contains(_)) == Set(true)) i2 = i
     }
 
+    // Slice off header / footer.
     lines.slice(i1, i2).mkString("\n")
 
   }
