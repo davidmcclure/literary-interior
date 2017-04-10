@@ -18,7 +18,7 @@ case class Token(
 )
 
 
-object Tokenizer {
+object Tokenize {
 
   // Sentences
 
@@ -58,7 +58,7 @@ object Tokenizer {
 
   /* Convert a string into a stream of Tokens.
    */
-  def tokenize(text: String): Seq[Token] = {
+  def apply(text: String): Seq[Token] = {
 
     // Get sentence boundaries.
     val sentPos = getSentPos(text)

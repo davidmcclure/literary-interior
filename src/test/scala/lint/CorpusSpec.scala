@@ -6,7 +6,7 @@ import org.scalatest._
 import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
-import lint.tokenizer.Tokenizer
+import lint.tokenizer.Tokenize
 import lint.corpus.NovelImplicits._
 
 
@@ -22,7 +22,7 @@ object NovelFactory {
     text: String = "text"
   ): Novel = {
 
-    val tokens = Tokenizer.tokenize(text)
+    val tokens = Tokenize(text)
 
     Novel(
       corpus=corpus,

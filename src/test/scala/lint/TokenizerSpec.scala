@@ -10,9 +10,9 @@ import org.scalatest.prop.TableDrivenPropertyChecks._
 class TokenizerSpec extends FlatSpec with Matchers
   with TableDrivenPropertyChecks {
 
-  "Tokenizer.tokenize()" should "POS-tag tokens" in {
+  "Tokenize()" should "POS-tag tokens" in {
 
-    val tokens = Tokenizer.tokenize("My name is David.")
+    val tokens = Tokenize("My name is David.")
 
     forAll(Table(
 
@@ -32,7 +32,7 @@ class TokenizerSpec extends FlatSpec with Matchers
 
   it should "store character offsets" in {
 
-    val tokens = Tokenizer.tokenize("12 34 56")
+    val tokens = Tokenize("12 34 56")
 
     forAll(Table(
 
@@ -52,7 +52,7 @@ class TokenizerSpec extends FlatSpec with Matchers
 
   it should "track character offsets across sentences" in {
 
-    val tokens = Tokenizer.tokenize("I walk. She runs. He strolls.")
+    val tokens = Tokenize("I walk. She runs. He strolls.")
 
     forAll(Table(
 
@@ -78,7 +78,7 @@ class TokenizerSpec extends FlatSpec with Matchers
 
   it should "store 0-1 ratio offsets" in {
 
-    val tokens = Tokenizer.tokenize("1 2 3 4 5")
+    val tokens = Tokenize("1 2 3 4 5")
 
     forAll(Table(
 
@@ -99,7 +99,7 @@ class TokenizerSpec extends FlatSpec with Matchers
 
   it should "track 0-1 ratio offsets across sentences" in {
 
-    val tokens = Tokenizer.tokenize("I walk. She runs. He strolls.")
+    val tokens = Tokenize("I walk. She runs. He strolls.")
 
     forAll(Table(
 
@@ -124,7 +124,7 @@ class TokenizerSpec extends FlatSpec with Matchers
 
   it should "downcase tokens" in {
 
-    val tokens = Tokenizer.tokenize("My Name Is David.")
+    val tokens = Tokenize("My Name Is David.")
 
     forAll(Table(
 

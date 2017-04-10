@@ -5,7 +5,7 @@ package lint.chicago
 import java.nio.file.Paths
 import scala.io.Source
 
-import lint.tokenizer.Tokenizer
+import lint.tokenizer.Tokenize
 import lint.config.Config
 
 
@@ -24,7 +24,7 @@ class TextDir(val path: String) {
 
     val text = TextDir.stripGutenbergParatext(read(row.filename))
 
-    val tokens = Tokenizer.tokenize(text)
+    val tokens = Tokenize(text)
 
     Novel(
       bookId=row.bookId,

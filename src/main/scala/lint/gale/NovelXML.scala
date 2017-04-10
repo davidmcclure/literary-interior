@@ -6,7 +6,7 @@ import java.io.File
 import javax.xml.parsers.SAXParserFactory
 import scala.xml.{XML,Elem,Node}
 
-import lint.tokenizer.{Tokenizer,Token}
+import lint.tokenizer.Tokenize
 
 
 class NovelXML(val xml: Elem) {
@@ -80,7 +80,7 @@ class NovelXML(val xml: Elem) {
   def mkNovel: Novel = {
 
     val text = plainText
-    val tokens = Tokenizer.tokenize(text)
+    val tokens = Tokenize(text)
 
     // TODO: Pass forward the options?
     Novel(

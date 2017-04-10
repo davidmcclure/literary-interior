@@ -6,7 +6,7 @@ import org.scalatest._
 import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
-import lint.tokenizer.Tokenizer
+import lint.tokenizer.Tokenize
 import lint.corpus.NovelFactory
 import lint.test.helpers.SparkTestSession
 
@@ -19,14 +19,17 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec with Matchers
     val spark = _spark
     import spark.implicits._
 
+    // 10 in 1910
     val d1 = for (_ <- (0 until 10).toList) yield {
       NovelFactory(corpus="corpus1", year=1910, text="one two three")
     }
 
+    // 20 in 1920
     val d2 = for (_ <- (0 until 20).toList) yield {
       NovelFactory(corpus="corpus2", year=1920, text="four five six")
     }
 
+    // 30 in 1930
     val d3 = for (_ <- (0 until 30).toList) yield {
       NovelFactory(corpus="corpus3", year=1930, text="seven eight nine")
     }
