@@ -34,9 +34,22 @@ class AuthorCSVSpec extends FreeSpec with Matchers {
 
 class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers {
 
-  "TextDir.stripGutenbergParatext()" should "return the entire text, when no Gutenberg header / footer"
+  "TextDir.stripGutenbergParatext()" should "return the entire text, when no Gutenberg header / footer" in {
+
+    val text = List(
+      "line1",
+      "line2",
+      "line3"
+    ).mkString("\n")
+
+    TextDir.stripGutenbergParatext(text) shouldEqual text
+
+  }
+
   it should "strip out the header"
+
   it should "strip out the footer"
+
   it should "strip out the header + footer"
 
 }

@@ -59,12 +59,12 @@ object TextDir extends Config {
 
   /* Strip out Project Gutenberg header / footer.
    */
-  def stripGuterbergParatext(text: String): String = {
+  def stripGutenbergParatext(text: String): String = {
 
     val lines = text.split("\n")
 
     var i1 = 0
-    var i2 = lines.size - 1
+    var i2 = lines.size
 
     val markers = Set("***", "PROJECT", "GUTENBERG")
     val headerMarkers = markers + "START"
@@ -82,7 +82,7 @@ object TextDir extends Config {
 
     }
 
-    lines.slice(i1, i2).mkString
+    lines.slice(i1, i2).mkString("\n")
 
   }
 
