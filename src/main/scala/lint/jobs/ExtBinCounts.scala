@@ -7,7 +7,7 @@ import java.lang.Math
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode,Dataset}
 
-import lint.config.Config
+import lint.Config
 import lint.corpus.{Novel,TokenBin}
 import lint.corpus.NovelImplicits._
 

@@ -1,6 +1,6 @@
 
 
-package lint.config
+package lint
 
 import com.typesafe.config.ConfigFactory
 import net.ceedubs.ficus.Ficus._

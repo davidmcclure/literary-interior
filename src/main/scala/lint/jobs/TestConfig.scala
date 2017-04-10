@@ -5,7 +5,7 @@ package lint.jobs
 import org.apache.spark.{SparkContext,SparkConf}
 import pprint.pprintln
 
-import lint.config.Config
+import lint.Config
 
 
 object TestConfig extends Config {

@@ -5,7 +5,7 @@ package lint.gale
 import java.io.File
 
 import lint.utils.FileSystem
-import lint.config.Config
+import lint.Config
 
 
 class Corpus(private val path: String) {

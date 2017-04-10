@@ -5,8 +5,8 @@ package lint.chicago
 import java.nio.file.Paths
 import scala.io.Source
 
-import lint.tokenizer.Tokenize
-import lint.config.Config
+import lint.Tokenize
+import lint.Config
 
 
 class TextDir(val path: String) {

@@ -6,7 +6,7 @@ import java.io.File
 import javax.xml.parsers.SAXParserFactory
 import scala.xml.{XML,Elem,Node}
 
-import lint.tokenizer.Tokenize
+import lint.Tokenize
 
 
 class NovelXML(val xml: Elem) {

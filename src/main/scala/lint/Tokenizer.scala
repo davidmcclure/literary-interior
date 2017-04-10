@@ -1,6 +1,6 @@
 
 
-package lint.tokenizer
+package lint
 
 import java.io.FileInputStream
 import scala.io.Source

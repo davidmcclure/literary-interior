@@ -2,7 +2,7 @@
 
 package lint.chicago
 
-import lint.tokenizer.Token
+import lint.Token
 
 
 case class Novel(

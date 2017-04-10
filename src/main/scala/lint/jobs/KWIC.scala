@@ -5,7 +5,7 @@ package lint.jobs
 import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.SparkSession
 
-import lint.config.Config
+import lint.Config
 import lint.corpus.Novel
 import lint.corpus.NovelImplicits._
 

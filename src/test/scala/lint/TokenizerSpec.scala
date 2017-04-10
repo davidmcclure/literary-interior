@@ -1,6 +1,6 @@
 
 
-package lint.tokenizer
+package lint
 
 import org.scalatest._
 import org.scalatest.prop.TableDrivenPropertyChecks

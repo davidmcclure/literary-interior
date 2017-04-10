@@ -5,7 +5,7 @@ package lint.chicago
 import java.io.File
 import com.github.tototoshi.csv.CSVReader
 
-import lint.config.Config
+import lint.Config
 
 
 class AuthorCSV(val path: String) {
