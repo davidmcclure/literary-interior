@@ -22,9 +22,8 @@ class TextDir(val path: String) {
    */
   def mkNovel(row: NovelMetadata): Novel = {
 
-    // TODO: Strip Gutenberg header / footer.
+    val text = TextDir.stripGutenbergParatext(read(row.filename))
 
-    val text = read(row.filename)
     val tokens = Tokenizer.tokenize(text)
 
     Novel(
