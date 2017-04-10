@@ -57,4 +57,33 @@ object TextDir extends Config {
     new TextDir(config.chicago.textDir)
   }
 
+  /* Strip out Project Gutenberg header / footer.
+   */
+  def stripGuterbergParatext(text: String): String = {
+
+    val lines = text.split("\n")
+
+    var i1 = 0
+    var i2 = lines.size - 1
+
+    val markers = Set("***", "PROJECT", "GUTENBERG")
+    val headerMarkers = markers + "START"
+    val footerMarkers = markers + "END"
+
+    for ((line, i) <- lines.zipWithIndex) {
+
+      if (headerMarkers.map(line.contains(_)) == Set(true)) {
+        i1 = i+1
+      }
+
+      if (footerMarkers.map(line.contains(_)) == Set(true)) {
+        i2 = i
+      }
+
+    }
+
+    lines.slice(i1, i2).mkString
+
+  }
+
 }
