@@ -7,41 +7,10 @@ import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
 
-class NovelCSVSpec extends FreeSpec with Matchers {
-
-  val url = getClass().getResource("/fixtures/chicago/NOVELS_METADATA.csv")
-  val reader = new NovelCSV(url.getFile)
-
-  "CSV should parse without errors" in {
-    val rows = reader.read
-    rows.size should be > 0
-  }
-
-  // TODO: Spot-check rows.
-
-}
-
-
-class AuthorCSVSpec extends FreeSpec with Matchers {
-
-  val url = getClass().getResource("/fixtures/chicago/AUTHORS_METADATA.csv")
-  val reader = new AuthorCSV(url.getFile)
-
-  "CSV should parse without errors" in {
-    val rows = reader.read
-    rows.size should be > 0
-  }
-
-  // TODO: Spot-check rows.
-
-}
-
-
 class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers
   with TableDrivenPropertyChecks {
 
-  // TODO: Handle:
-  // "End of Project Gutenberg's The Grandissimes"
+  // TODO: "End of Project Gutenberg's The Grandissimes"
 
   val headers = Table("header",
     "*** START OF THIS PROJECT GUTENBERG EBOOK ***",
@@ -143,44 +112,6 @@ class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers
     }
 
   }
-
-}
-
-
-// TODO: Where to put this?
-object NovelMetadataFactory {
-
-  def apply(
-
-    bookId: String = "1",
-    filename: String = "1.txt",
-    title: String = "title",
-    authFirst: String = "first",
-    authLast: String = "last",
-    authId: String = "1",
-    publCity: String = "city",
-    publisher: String = "publisher",
-    publDate: Int = 2000,
-    source: String = "source",
-    nationality: String = "nationality",
-    genre: String = "genre"
-
-  ) = NovelMetadata(
-
-    bookId=bookId,
-    filename=filename,
-    title=title,
-    authFirst=authFirst,
-    authLast=authLast,
-    authId=authId,
-    publCity=publCity,
-    publisher=publisher,
-    publDate=publDate,
-    source=source,
-    nationality=nationality,
-    genre=genre
-
-  )
 
 }
 
