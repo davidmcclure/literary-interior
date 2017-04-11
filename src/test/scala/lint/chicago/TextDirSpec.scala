@@ -136,17 +136,21 @@ class TextDirMkNovelSpec extends FreeSpec with Matchers {
     novel.text should include ("The village lies in a trance like death.")
   }
 
-  "00000013" in {
+  "00000013" - {
 
     val novel = getNovel("00000013.txt")
 
-    novel.text should include ("Olivia Ferrol leaned back in her chair, her hands folded upon her lap.")
+    "text" in {
+      novel.text should include ("Olivia Ferrol leaned back in her chair, her hands folded upon her lap.")
+    }
 
-    // Scrub header.
-    novel.text.trim.startsWith("Produced by Al Haines") should be (true)
+    "scrub header" in {
+      novel.text.trim.startsWith("Produced by Al Haines") should be (true)
+    }
 
-    // Scrub footer.
-    novel.text.trim.endsWith("by Frances Hodgson Burnett") should be (true)
+    "scrub footer" in {
+      novel.text.trim.endsWith("by Frances Hodgson Burnett") should be (true)
+    }
 
   }
 
