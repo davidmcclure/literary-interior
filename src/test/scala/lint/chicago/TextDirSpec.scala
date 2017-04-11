@@ -143,10 +143,10 @@ class TextDirMkNovelSpec extends FreeSpec with Matchers {
     novel.text should include ("Olivia Ferrol leaned back in her chair, her hands folded upon her lap.")
 
     // Scrub header.
-    novel.text should not include ("Character set encoding: ISO-8859-1")
+    novel.text.trim.startsWith("Produced by Al Haines") should be (true)
 
     // Scrub footer.
-    novel.text should not include ("This file should be named 35300-8.txt or 35300-8.zip")
+    novel.text.trim.endsWith("by Frances Hodgson Burnett") should be (true)
 
   }
 
