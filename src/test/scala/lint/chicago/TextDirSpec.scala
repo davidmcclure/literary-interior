@@ -121,22 +121,24 @@ class TextDirMkNovelSpec extends FreeSpec with Matchers {
   val path = getClass().getResource("/fixtures/chicago/Texts").getFile
   val textDir = new TextDir(path)
 
+  def getNovel(filename: String): Novel = {
+    val source = NovelMetadataFactory(filename=filename)
+    textDir.mkNovel(source)
+  }
+
   "00000001" in {
-    val source = NovelMetadataFactory(filename="00000001.txt")
-    val novel = textDir.mkNovel(source)
+    val novel = getNovel("00000001.txt")
     novel.text should include ("After talking of Herbert Spencer for an entire evening")
   }
 
   "00000003" in {
-    val source = NovelMetadataFactory(filename="00000003.txt")
-    val novel = textDir.mkNovel(source)
+    val novel = getNovel("00000003.txt")
     novel.text should include ("The village lies in a trance like death.")
   }
 
   "00000013" in {
 
-    val source = NovelMetadataFactory(filename="00000013.txt")
-    val novel = textDir.mkNovel(source)
+    val novel = getNovel("00000013.txt")
 
     novel.text should include ("Olivia Ferrol leaned back in her chair, her hands folded upon her lap.")
 
@@ -149,14 +151,12 @@ class TextDirMkNovelSpec extends FreeSpec with Matchers {
   }
 
   "00000015" in {
-    val source = NovelMetadataFactory(filename="00000015.txt")
-    val novel = textDir.mkNovel(source)
+    val novel = getNovel("00000015.txt")
     novel.text should include ("They paused a little within the obscurity of the corridor")
   }
 
   "00000021" in {
-    val source = NovelMetadataFactory(filename="00000021.txt")
-    val novel = textDir.mkNovel(source)
+    val novel = getNovel("00000021.txt")
     novel.text should include ("THERE is Fred again with his arm around Jack Darcy's neck.")
   }
 
