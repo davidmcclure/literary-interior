@@ -13,16 +13,16 @@ class TextDir(val path: String) {
 
   /* Given a book ID, hydrate the text.
    */
-  def read(filename: String): String = {
+  def readLines(filename: String): List[String] = {
     val textPath = Paths.get(path, filename).toString
-    Source.fromFile(textPath).getLines.mkString
+    Source.fromFile(textPath).getLines.toList
   }
 
   /* Given a metadata row, build a text.
    */
   def mkNovel(row: NovelMetadata): Novel = {
 
-    val text = TextDir.stripGutenbergParatext(read(row.filename))
+    val text = TextDir.stripGutenbergParatext(readLines(row.filename))
 
     val tokens = Tokenize(text)
 
@@ -58,9 +58,7 @@ object TextDir extends Config {
 
   /* Strip out Project Gutenberg header / footer.
    */
-  def stripGutenbergParatext(text: String): String = {
-
-    val lines = text.split("\n")
+  def stripGutenbergParatext(lines: List[String]): String = {
 
     // By default, take all lines.
     var i1 = 0

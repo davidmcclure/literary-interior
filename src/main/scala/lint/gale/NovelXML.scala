@@ -118,13 +118,6 @@ object NovelXML {
 
   }
 
-  /* Make novel from XML string.
-   */
-  def fromString(markup: String): NovelXML = {
-    val tree = loader.loadString(markup)
-    new NovelXML(tree)
-  }
-
   /* Make novel from a file.
    */
   def fromFile(file: File): NovelXML = {
