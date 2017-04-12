@@ -22,7 +22,11 @@ class TextDir(val path: String) {
    */
   def mkNovel(row: NovelMetadata): Novel = {
 
-    val text = TextDir.stripGutenbergParatext(readLines(row.filename))
+    val lines = readLines(row.filename)
+
+    val cleanLines = TextDir.stripGutenbergParatext(lines)
+
+    val text = cleanLines.mkString("\n")
 
     val tokens = Tokenize(text)
 
@@ -58,7 +62,7 @@ object TextDir extends Config {
 
   /* Strip out Project Gutenberg header / footer.
    */
-  def stripGutenbergParatext(lines: List[String]): String = {
+  def stripGutenbergParatext(lines: List[String]): List[String] = {
 
     // By default, take all lines.
     var i1 = 0
@@ -76,7 +80,7 @@ object TextDir extends Config {
     }
 
     // Slice off header / footer.
-    lines.slice(i1, i2).mkString("\n")
+    lines.slice(i1, i2)
 
   }
 

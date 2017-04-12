@@ -31,7 +31,7 @@ class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers
       "line3"
     )
 
-    TextDir.stripGutenbergParatext(text) shouldEqual text.mkString("\n")
+    TextDir.stripGutenbergParatext(text) shouldEqual text
 
   }
 
@@ -53,7 +53,7 @@ class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers
         "line4",
         "line5",
         "line6"
-      ).mkString("\n")
+      )
 
     }
 
@@ -77,7 +77,7 @@ class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers
         "line1",
         "line2",
         "line3"
-      ).mkString("\n")
+      )
 
     }
 
@@ -106,7 +106,7 @@ class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers
           "line4",
           "line5",
           "line6"
-        ).mkString("\n")
+        )
 
       }
     }
