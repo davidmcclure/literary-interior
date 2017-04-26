@@ -2,7 +2,6 @@
 
 package lint.jobs
 
-import org.apache.spark.{SparkContext,SparkConf}
 import org.apache.spark.sql.{SparkSession,SaveMode}
 
 import lint.Config
