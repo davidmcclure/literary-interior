@@ -107,6 +107,12 @@ object NovelImplicits {
 
     }
 
+    /* Pluck out offsets for a query token.
+     */
+    def tokenOffsets(query: String): Seq[Double] = {
+      for (token <- n.tokens if token.token == query) yield token.offset
+    }
+
   }
 
   implicit object RichNovel {

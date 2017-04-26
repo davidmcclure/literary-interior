@@ -50,9 +50,9 @@ object ExtBinCounts extends Config {
       .rdd.reduceByKey(_+_)
 
       // Merge bins and counts.
-      .map { case (tb: TokenBin, count: Int) => {
+      .map { case (tb: TokenBin, count: Int) =>
         BinCountRow(tb.corpus, tb.year, tb.token, tb.pos, tb.bin, count)
-      }}
+      }
 
       // Cast back to dataset.
       .toDS
