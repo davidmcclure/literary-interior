@@ -6,8 +6,7 @@ import org.scalatest._
 import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
-import lint.utils.Tokenize
-import lint.corpus.NovelFactory
+import lint.corpus.{Novel,NovelFactory}
 import lint.test.helpers.SparkTestSession
 
 
@@ -19,12 +18,14 @@ class ExtTokenOffsetsMergeOffsetsSpec extends FlatSpec with Matchers
     val spark = _spark
     import spark.implicits._
 
-    val novels = spark.createDataset(Seq(
+    val novels = Seq(
 
       NovelFactory(
         corpus="corpus1",
         identifier="1",
         title="title1",
+        authorFirst="first1",
+        authorLast="last1",
         year=1901,
         text="a b b"
       ),
@@ -33,6 +34,8 @@ class ExtTokenOffsetsMergeOffsetsSpec extends FlatSpec with Matchers
         corpus="corpus2",
         identifier="2",
         title="title2",
+        authorFirst="first2",
+        authorLast="last2",
         year=1902,
         text="a a b"
       ),
@@ -41,28 +44,38 @@ class ExtTokenOffsetsMergeOffsetsSpec extends FlatSpec with Matchers
         corpus="corpus3",
         identifier="3",
         title="title3",
+        authorFirst="first3",
+        authorLast="last3",
         year=1903,
         text="a a a"
       )
 
-    ))
+    )
 
-    val rows = ExtTokenOffsets.mergeOffsets(novels, "a")
+    val ds = spark.createDataset(novels)
+
+    val rows = ExtTokenOffsets.mergeOffsets(ds, "a")
 
     forAll(Table(
-      ("corpus", "identifier", "title", "year", "offsets"),
-      ("corpus1", "1", "title1", 1901, Seq(0.0)),
-      ("corpus2", "2", "title2", 1902, Seq(0.0, 0.5)),
-      ("corpus3", "3", "title3", 1903, Seq(0.0, 0.5, 1.0))
+      ("novel", "offsets"),
+      (novels(0), Seq(0.0)),
+      (novels(1), Seq(0.0, 0.5)),
+      (novels(2), Seq(0.0, 0.5, 1.0))
     )) { (
-      corpus: String,
-      identifier: String,
-      title: String,
-      year: Int,
+      novel: Novel,
       offsets: Seq[Double]
     ) =>
 
-      val row = TokenOffsetsRow(corpus, identifier, title, year, offsets)
+      val row = TokenOffsetsRow(
+        corpus=novel.corpus,
+        identifier=novel.identifier,
+        title=novel.title,
+        authorFirst=novel.authorFirst,
+        authorLast=novel.authorLast,
+        year=novel.year,
+        offsets=offsets
+      )
+
       rows.filter(_ == row).count shouldEqual 1
 
     }

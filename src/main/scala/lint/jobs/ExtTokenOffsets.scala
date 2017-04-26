@@ -19,6 +19,8 @@ case class TokenOffsetsRow(
   corpus: String,
   identifier: String,
   title: String,
+  authorFirst: String,
+  authorLast: String,
   year: Int,
   offsets: Seq[Double]
 )
@@ -65,8 +67,19 @@ object ExtTokenOffsets extends Config {
   ): Dataset[TokenOffsetsRow] = {
 
     novels.map { case n: Novel =>
+
       val offsets = n.tokenOffsets(query)
-      TokenOffsetsRow(n.corpus, n.identifier, n.title, n.year, offsets)
+
+      TokenOffsetsRow(
+        corpus=n.corpus,
+        identifier=n.identifier,
+        title=n.title,
+        authorFirst=n.authorFirst,
+        authorLast=n.authorLast,
+        year=n.year,
+        offsets=offsets
+      )
+
     }
 
   }
