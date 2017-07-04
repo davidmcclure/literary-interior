@@ -4,6 +4,7 @@ package lint.corpus
 
 import scala.math.floor
 import scala.collection.mutable.Map
+import scala.util.Random
 
 import lint.utils.Token
 
@@ -45,12 +46,15 @@ case class Novel(
    */
   def binCounts(
     bins: Int = 100,
-    yearInterval: Int = 1
+    yearInterval: Int = 1,
+    shuffle: Boolean = false
   ): Map[TokenBin, Int] = {
 
     val counts = Map[TokenBin, Int]().withDefaultValue(0)
 
-    for (token <- tokens) {
+    val stream = if (shuffle) Random.shuffle(tokens) else tokens
+
+    for (token <- stream) {
 
       val roundedYear = Novel.roundYear(year, yearInterval)
 
