@@ -38,12 +38,15 @@ object ExtBinCounts extends Config {
 
   /* Merge together token / bin counts for novels.
    */
-  def mergeCounts(novels: Dataset[Novel]): Dataset[BinCountRow] = {
+  def mergeCounts(
+    novels: Dataset[Novel],
+    shuffle: Boolean = false
+  ): Dataset[BinCountRow] = {
 
     novels
 
       // Get list of (TokenBin, count)
-      .flatMap(_.binCounts(yearInterval=10).toSeq)
+      .flatMap(_.binCounts(yearInterval=10, shuffle=shuffle).toSeq)
 
       // Sum the counts for each key across all texts.
       .rdd.reduceByKey(_+_)
@@ -55,6 +58,27 @@ object ExtBinCounts extends Config {
 
       // Cast back to dataset.
       .toDS
+
+  }
+
+}
+
+
+object ExtShuffledBinCounts extends Config {
+
+  lazy val spark = SparkSession.builder.getOrCreate()
+  import spark.implicits._
+
+  def main(args: Array[String]) {
+
+    val novels = spark.read
+      .parquet(config.corpus.novelParquet)
+      .as[Novel]
+
+    val counts = ExtBinCounts.mergeCounts(novels, true)
+
+    counts.write.mode(SaveMode.Overwrite)
+      .json(config.corpus.shuffledBinCountJSON)
 
   }
 
