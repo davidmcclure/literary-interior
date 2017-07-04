@@ -7,7 +7,6 @@ import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
 import lint.utils.Tokenize
-import lint.corpus.NovelImplicits._
 
 
 class NovelBinCountsSpec extends FlatSpec with Matchers

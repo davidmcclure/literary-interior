@@ -6,7 +6,6 @@ import org.apache.spark.sql.{SparkSession,SaveMode,Dataset}
 
 import lint.Config
 import lint.corpus.{Novel,TokenBin}
-import lint.corpus.NovelImplicits._
 
 
 case class BinCountRow(

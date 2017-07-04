@@ -6,7 +6,6 @@ import org.apache.spark.sql.SparkSession
 
 import lint.Config
 import lint.corpus.Novel
-import lint.corpus.NovelImplicits._
 
 
 case class KWICOpts(
