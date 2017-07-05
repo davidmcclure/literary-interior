@@ -4,9 +4,8 @@ package lint.corpus
 
 import scala.math.floor
 import scala.collection.mutable.Map
-import scala.util.Random
 
-import lint.utils.Token
+import lint.utils.{Token,Tokenize}
 
 
 case class TokenBin(
@@ -52,7 +51,7 @@ case class Novel(
 
     val counts = Map[TokenBin, Int]().withDefaultValue(0)
 
-    val stream = if (shuffle) Random.shuffle(tokens) else tokens
+    val stream = if (shuffle) Tokenize(text, true) else tokens
 
     for (token <- stream) {
 

@@ -4,6 +4,7 @@ package lint.utils
 
 import java.io.FileInputStream
 import scala.io.Source
+import scala.util.Random
 import opennlp.tools.sentdetect._
 import opennlp.tools.postag._
 import opennlp.tools.tokenize._
@@ -58,7 +59,7 @@ object Tokenize {
 
   /* Convert a string into a stream of Tokens.
    */
-  def apply(text: String): Seq[Token] = {
+  def apply(text: String, shuffle: Boolean = false): Seq[Token] = {
 
     // Get sentence boundaries.
     val sentPos = getSentPos(text)
@@ -80,10 +81,7 @@ object Tokenize {
       val tags = getPosTags(tokens)
 
       // Zip together (token, POS, start, end).
-      for (
-         (token, tag, span) <-
-         (tokens, tags, tokenPos).zipped.toList
-      ) yield {
+      for ((token, tag, span) <- (tokens, tags, tokenPos).zipped) yield {
 
         val start = sentSpan.getStart + span.getStart
         val end = sentSpan.getStart + span.getEnd
@@ -92,12 +90,14 @@ object Tokenize {
 
       }
 
-    })
+    }).toSeq
 
     val length = tokens.length
 
+    val stream = if (shuffle) Random.shuffle(tokens) else tokens
+
     // Thread in the 0-1 offset.
-    for (((token, tag, start, end), i) <- tokens.zipWithIndex) yield {
+    for (((token, tag, start, end), i) <- stream.zipWithIndex) yield {
       new Token(token, tag, start, end, i.toDouble / (length-1))
     }
 
