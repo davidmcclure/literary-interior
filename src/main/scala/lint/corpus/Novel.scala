@@ -29,6 +29,18 @@ case class KWICMatch(
 )
 
 
+case class TokenOffsets(
+  corpus: String,
+  identifier: String,
+  title: String,
+  authorFirst: String,
+  authorLast: String,
+  year: Int,
+  offsets: Seq[Double],
+  tokenCount: Int
+)
+
+
 case class Novel(
   corpus: String,
   identifier: String,
@@ -121,8 +133,21 @@ case class Novel(
 
   /* Pluck out offsets for a query token.
    */
-  def tokenOffsets(query: String): Seq[Double] = {
-    for (token <- tokens if token.token == query) yield token.offset
+  def tokenOffsets(query: String): TokenOffsets = {
+
+    val offsets = for (t <- tokens if t.token == query) yield t.offset
+
+    TokenOffsets(
+      corpus=corpus,
+      identifier=identifier,
+      title=title,
+      authorFirst=authorFirst,
+      authorLast=authorLast,
+      year=year,
+      offsets=offsets,
+      tokenCount=tokens.length
+    )
+
   }
 
 }

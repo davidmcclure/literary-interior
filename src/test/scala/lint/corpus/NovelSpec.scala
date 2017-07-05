@@ -95,8 +95,13 @@ class NovelBinCountsSpec extends FlatSpec with Matchers
 class NovelTokenOffsetsSpec extends FlatSpec with Matchers {
 
   "Novel#tokenOffsets" should "pluck out offsets for token" in {
-    val novel = NovelFactory(text="a b a b a")
-    novel.tokenOffsets("a") shouldEqual Seq(0, 0.5, 1)
+    val row = NovelFactory(text="a b a b a").tokenOffsets("a")
+    row.offsets shouldEqual Seq(0, 0.5, 1)
+  }
+
+  "Novel#tokenOffsets" should "provide token count" in {
+    val row = NovelFactory(text="a b a b a").tokenOffsets("a")
+    row.tokenCount shouldEqual 5
   }
 
 }

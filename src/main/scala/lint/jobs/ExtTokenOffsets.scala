@@ -14,17 +14,6 @@ case class TokenOffsetsOpts(
 )
 
 
-case class TokenOffsetsRow(
-  corpus: String,
-  identifier: String,
-  title: String,
-  authorFirst: String,
-  authorLast: String,
-  year: Int,
-  offsets: Seq[Double]
-)
-
-
 object ExtTokenOffsets extends Config {
 
   lazy val spark = SparkSession.builder.getOrCreate()
@@ -52,34 +41,9 @@ object ExtTokenOffsets extends Config {
       .as[Novel]
 
     // Query offset sequences.
-    val offsets = ExtTokenOffsets.mergeOffsets(novels, opts.query)
+    val offsets = novels.map(_.tokenOffsets(opts.query))
 
     offsets.write.json(opts.outPath)
-
-  }
-
-  /* Merge together token / bin counts for novels.
-   */
-  def mergeOffsets(
-    novels: Dataset[Novel],
-    query: String
-  ): Dataset[TokenOffsetsRow] = {
-
-    novels.map { case n: Novel =>
-
-      val offsets = n.tokenOffsets(query)
-
-      TokenOffsetsRow(
-        corpus=n.corpus,
-        identifier=n.identifier,
-        title=n.title,
-        authorFirst=n.authorFirst,
-        authorLast=n.authorLast,
-        year=n.year,
-        offsets=offsets
-      )
-
-    }
 
   }
 
