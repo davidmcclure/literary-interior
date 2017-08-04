@@ -90,15 +90,12 @@ case class Novel(
    */
   def binCounts(
     bins: Int = 100,
-    yearInterval: Int = 1,
-    shuffle: Boolean = false
+    yearInterval: Int = 1
   ): Map[TokenBin, Int] = {
 
     val counts = Map[TokenBin, Int]().withDefaultValue(0)
 
-    val stream = if (shuffle) Tokenize(text, true) else tokens
-
-    for (token <- stream) {
+    for (token <- tokens) {
 
       val roundedYear = Novel.roundYear(year, yearInterval)
 

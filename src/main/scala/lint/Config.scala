@@ -28,8 +28,7 @@ case class ChicagoConfig(
 
 case class CorpusConfig(
   novelParquet: String,
-  binCountJSON: String,
-  shuffledBinCountJSON: String
+  binCountJSON: String
 )
 
 

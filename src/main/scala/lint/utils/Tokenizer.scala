@@ -59,7 +59,7 @@ object Tokenize {
 
   /* Convert a string into a stream of Tokens.
    */
-  def apply(text: String, shuffle: Boolean = false): Seq[Token] = {
+  def apply(text: String): Seq[Token] = {
 
     // Get sentence boundaries.
     val sentPos = getSentPos(text)
@@ -94,10 +94,8 @@ object Tokenize {
 
     val length = tokens.length
 
-    val stream = if (shuffle) Random.shuffle(tokens) else tokens
-
     // Thread in the 0-1 offset.
-    for (((token, tag, start, end), i) <- stream.zipWithIndex) yield {
+    for (((token, tag, start, end), i) <- tokens.zipWithIndex) yield {
       new Token(token, tag, start, end, i.toDouble / (length-1))
     }
 
