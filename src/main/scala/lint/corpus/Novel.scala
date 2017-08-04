@@ -8,6 +8,39 @@ import scala.collection.mutable.Map
 import lint.utils.{Token,Tokenize}
 
 
+case class Ngram1(
+  corpus: String,
+  year: Int,
+  bin: Int,
+  token: String,
+  pos: String
+)
+
+
+case class Ngram2(
+  corpus: String,
+  year: Int,
+  bin: Int,
+  token1: String,
+  pos1: String,
+  token2: String,
+  pos2: String
+)
+
+
+case class Ngram3(
+  corpus: String,
+  year: Int,
+  bin: Int,
+  token1: String,
+  pos1: String,
+  token2: String,
+  pos2: String,
+  token3: String,
+  pos3: String
+)
+
+
 case class TokenBin(
   corpus: String,
   year: Int,
