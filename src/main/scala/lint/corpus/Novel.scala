@@ -41,15 +41,6 @@ case class Ngram3(
 )
 
 
-case class TokenBin(
-  corpus: String,
-  year: Int,
-  token: String,
-  pos: String,
-  bin: Int
-)
-
-
 case class KWICMatch(
   corpus: String,
   identifier: String,
@@ -85,15 +76,14 @@ case class Novel(
   tokens: Seq[Token]
 ) {
 
-  /* Count the number of times that each (token, POS) pair appears in each
-   * percentile of the text.
+  /* Accumulate Ngram1 -> count totals.
    */
-  def binCounts(
+  def ngram1BinCounts(
     bins: Int = 100,
     yearInterval: Int = 1
-  ): Map[TokenBin, Int] = {
+  ): Map[Ngram1, Int] = {
 
-    val counts = Map[TokenBin, Int]().withDefaultValue(0)
+    val counts = Map[Ngram1, Int]().withDefaultValue(0)
 
     for (token <- tokens) {
 
@@ -105,7 +95,7 @@ case class Novel(
         if (token.offset < 1) floor(token.offset * bins).toInt
         else bins - 1
 
-      val key = TokenBin(corpus, roundedYear, token.token, token.pos, bin)
+      val key = Ngram1(corpus, roundedYear, bin, token.token, token.pos)
 
       counts(key) += 1
 

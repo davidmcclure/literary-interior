@@ -14,7 +14,7 @@ import lint.test.helpers.SparkTestSession
 class ExtBinCountsMergeCountsSpec extends FlatSpec with Matchers
   with SparkTestSession with TableDrivenPropertyChecks {
 
-  "ExtBinCounts.mergeCounts" should "index TokenBin -> count" in {
+  "ExtBinCounts.mergeCounts" should "index Ngram1 -> count" in {
 
     val spark = _spark
     import spark.implicits._
@@ -40,33 +40,33 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec with Matchers
 
     forAll(Table(
 
-      ("corpus", "year", "token", "pos", "bin", "count"),
+      ("corpus", "year", "bin", "token", "pos", "count"),
 
       // 10 in 1910
-      ("corpus1",  1910, "one",   "CD", 0,  10),
-      ("corpus1",  1910, "two",   "CD", 50, 10),
-      ("corpus1",  1910, "three", "CD", 99, 10),
+      ("corpus1", 1910, 0,  "one",    "CD", 10),
+      ("corpus1", 1910, 50, "two",    "CD", 10),
+      ("corpus1", 1910, 99, "three",  "CD", 10),
 
       // 20 in 1920
-      ("corpus2",  1920, "four",  "CD", 0,  20),
-      ("corpus2",  1920, "five",  "CD", 50, 20),
-      ("corpus2",  1920, "six",   "CD", 99, 20),
+      ("corpus2", 1920, 0,  "four",   "CD", 20),
+      ("corpus2", 1920, 50, "five",   "CD", 20),
+      ("corpus2", 1920, 99, "six",    "CD", 20),
 
       // 30 in 1930
-      ("corpus3",  1930, "seven", "CD", 0,  30),
-      ("corpus3",  1930, "eight", "CD", 50, 30),
-      ("corpus3",  1930, "nine",  "CD", 99, 30)
+      ("corpus3", 1930, 0,  "seven",  "CD", 30),
+      ("corpus3", 1930, 50, "eight",  "CD", 30),
+      ("corpus3", 1930, 99, "nine",   "CD", 30)
 
     )) { (
       corpus: String,
       year: Int,
+      bin: Int,
       token: String,
       pos: String,
-      bin: Int,
       count: Int
     ) =>
 
-      val row = BinCountRow(corpus, year, token, pos, bin, count)
+      val row = Ngram1Row(corpus, year, bin, token, pos, count)
       rows.filter(_ == row).count shouldEqual 1
 
     }
@@ -91,25 +91,25 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec with Matchers
       ("corpus", "year", "token", "pos", "bin", "count"),
 
       // 1904 -> 1900
-      ("corpus", 1900, "one",   "CD", 0,  1),
-      ("corpus", 1900, "two",   "CD", 50, 1),
-      ("corpus", 1900, "three", "CD", 99, 1),
+      ("corpus", 1900, 0,   "one",    "CD", 1),
+      ("corpus", 1900, 50,  "two",    "CD", 1),
+      ("corpus", 1900, 99,  "three",  "CD", 1),
 
       // 1905 + 1906 -> 1910
-      ("corpus", 1910, "one",   "CD", 0,  2),
-      ("corpus", 1910, "two",   "CD", 50, 2),
-      ("corpus", 1910, "three", "CD", 99, 2)
+      ("corpus", 1910, 0,   "one",    "CD", 2),
+      ("corpus", 1910, 50,  "two",    "CD", 2),
+      ("corpus", 1910, 99,  "three",  "CD", 2)
 
     )) { (
       corpus: String,
       year: Int,
+      bin: Int,
       token: String,
       pos: String,
-      bin: Int,
       count: Int
     ) =>
 
-      val row = BinCountRow(corpus, year, token, pos, bin, count)
+      val row = Ngram1Row(corpus, year, bin, token, pos, count)
       rows.filter(_ == row).count shouldEqual 1
 
     }
