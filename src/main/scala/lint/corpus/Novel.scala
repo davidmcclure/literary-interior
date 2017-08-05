@@ -8,39 +8,6 @@ import scala.collection.mutable.Map
 import lint.utils.{Token,Tokenize}
 
 
-case class Ngram1(
-  corpus: String,
-  year: Int,
-  bin: Int,
-  token: String,
-  pos: String
-)
-
-
-case class Ngram2(
-  corpus: String,
-  year: Int,
-  bin: Int,
-  token1: String,
-  pos1: String,
-  token2: String,
-  pos2: String
-)
-
-
-case class Ngram3(
-  corpus: String,
-  year: Int,
-  bin: Int,
-  token1: String,
-  pos1: String,
-  token2: String,
-  pos2: String,
-  token3: String,
-  pos3: String
-)
-
-
 case class KWICMatch(
   corpus: String,
   identifier: String,
@@ -125,42 +92,6 @@ case class Novel(
         ngram(0).pos,
         ngram(1).token,
         ngram(1).pos
-      )
-
-      counts(key) += 1
-
-    }
-
-    counts
-
-  }
-
-  /* Accumulate Ngram3 -> count totals.
-   */
-  def ngram3BinCounts(
-    binCount: Int = 100,
-    yearInterval: Int = 1
-  ): Map[Ngram3, Int] = {
-
-    val counts = Map[Ngram3, Int]().withDefaultValue(0)
-
-    for (ngram <- tokens.iterator.sliding(3)) {
-
-      val roundedYear = Novel.roundYear(year, yearInterval)
-
-      // Use first token for offset.
-      val bin = Novel.makeBin(ngram(0).offset, binCount)
-
-      val key = Ngram3(
-        corpus,
-        roundedYear,
-        bin,
-        ngram(0).token,
-        ngram(0).pos,
-        ngram(1).token,
-        ngram(1).pos,
-        ngram(2).token,
-        ngram(2).pos
       )
 
       counts(key) += 1
