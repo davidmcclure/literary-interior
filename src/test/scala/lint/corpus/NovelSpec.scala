@@ -9,13 +9,13 @@ import org.scalatest.prop.TableDrivenPropertyChecks._
 import lint.utils.Tokenize
 
 
-class NovelBinCountsSpec extends FlatSpec with Matchers
+class NovelNgram1BinCountsSpec extends FlatSpec with Matchers
   with TableDrivenPropertyChecks {
 
   "Novel#ngram1BinCounts" should "count tokens in each bin" in {
 
     // Two tokens in each bin.
-    val novel = NovelFactory(text="one two three four five six seven eight")
+    val novel = NovelFactory(text="1 2 3 4 5 6 7 8")
 
     val counts = novel.ngram1BinCounts(4)
 
@@ -23,17 +23,17 @@ class NovelBinCountsSpec extends FlatSpec with Matchers
 
       ("bin", "token", "pos", "count"),
 
-      (0, "one",    "CD", 1),
-      (0, "two",    "CD", 1),
+      (0, "1", "CD", 1),
+      (0, "2", "CD", 1),
 
-      (1, "three",  "CD", 1),
-      (1, "four",   "CD", 1),
+      (1, "3", "CD", 1),
+      (1, "4", "CD", 1),
 
-      (2, "five",   "CD", 1),
-      (2, "six",    "CD", 1),
+      (2, "5", "CD", 1),
+      (2, "6", "CD", 1),
 
-      (3, "seven",  "CD", 1),
-      (3, "eight",  "CD", 1)
+      (3, "7", "CD", 1),
+      (3, "8", "CD", 1)
 
     )) { (bin: Int, token: String, pos: String, count: Int) =>
       val key = Ngram1(novel.corpus, novel.year, bin, token, pos)
@@ -45,7 +45,7 @@ class NovelBinCountsSpec extends FlatSpec with Matchers
   it should "accumulate token counts in each bin" in {
 
     // Two of each token in each bin.
-    val novel = NovelFactory(text="one one two two three three four four")
+    val novel = NovelFactory(text="1 1 2 2 3 3 4 4")
 
     val counts = novel.ngram1BinCounts(4)
 
@@ -53,10 +53,10 @@ class NovelBinCountsSpec extends FlatSpec with Matchers
 
       ("bin", "token", "pos", "count"),
 
-      (0, "one",    "CD", 2),
-      (1, "two",    "CD", 2),
-      (2, "three",  "CD", 2),
-      (3, "four",   "CD", 2)
+      (0, "1", "CD", 2),
+      (1, "2", "CD", 2),
+      (2, "3", "CD", 2),
+      (3, "4", "CD", 2)
 
     )) { (bin: Int, token: String, pos: String, count: Int) =>
       val key = Ngram1(novel.corpus, novel.year, bin, token, pos)
