@@ -28,7 +28,8 @@ case class ChicagoConfig(
 
 case class CorpusConfig(
   novelParquet: String,
-  ngram1BinCountJSON: String
+  ngram1BinCountJSON: String,
+  ngram2BinCountJSON: String
 )
 
 
