@@ -90,6 +90,7 @@ object ExtNgram2BinCounts extends Config {
     val novels = spark.read
       .parquet(config.corpus.novelParquet)
       .as[Novel]
+      .repartition(1000)
 
     val counts = ExtNgram2BinCounts.mergeCounts(novels)
 
