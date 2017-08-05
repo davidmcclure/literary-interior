@@ -89,11 +89,7 @@ case class Novel(
 
       val roundedYear = Novel.roundYear(year, yearInterval)
 
-      // If offset is 1 (last token), notch down into the bins-1 bin, to
-      // avoid returning bins+1 bins.
-      val bin =
-        if (token.offset < 1) floor(token.offset * bins).toInt
-        else bins - 1
+      val bin = Novel.makeBin(token.offset, bins)
 
       val key = Ngram1(corpus, roundedYear, bin, token.token, token.pos)
 
@@ -119,13 +115,7 @@ case class Novel(
       val roundedYear = Novel.roundYear(year, yearInterval)
 
       // Use first token for offset.
-      val token = ngram(0)
-
-      // If offset is 1 (last token), notch down into the bins-1 bin, to
-      // avoid returning bins+1 bins.
-      val bin =
-        if (token.offset < 1) floor(token.offset * bins).toInt
-        else bins - 1
+      val bin = Novel.makeBin(ngram(0).offset, bins)
 
       val key = Ngram2(
         corpus,
@@ -245,6 +235,16 @@ object Novel {
    */
   def roundYear(year: Int, interval: Int = 10) = {
     (Math.round(year.toDouble / interval) * interval).toInt
+  }
+
+  /* Flatten an offset into a bin count, given a total number of bins.
+   *
+   * If the offset is 1 (last token), notch down into the bins-1 bin, to avoid
+   * returning bins+1 bins.
+   */
+  def makeBin(offset: Double, binCount: Int) = {
+    if (offset < 1) floor(offset * binCount).toInt
+    else binCount - 1
   }
 
 }
