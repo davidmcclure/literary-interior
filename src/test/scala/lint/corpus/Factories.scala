@@ -14,7 +14,7 @@ object NovelFactory {
     authorFirst: String = "first",
     authorLast: String = "last",
     year: Int = 2000,
-    text: String = "text"
+    text: String = "1 2 3"
   ): Novel = {
 
     val tokens = Tokenize(text)

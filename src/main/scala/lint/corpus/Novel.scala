@@ -43,6 +43,8 @@ case class Novel(
   tokens: Seq[Token]
 ) {
 
+  // TODO: DRY up ngram1/2.
+
   /* Accumulate Ngram1 -> count totals.
    */
   def ngram1BinCounts(
@@ -77,7 +79,7 @@ case class Novel(
 
     val counts = Map[Ngram2, Int]().withDefaultValue(0)
 
-    for (ngram <- tokens.iterator.sliding(2)) {
+    for (ngram <- tokens.iterator.sliding(2); if ngram.size == 2) {
 
       val roundedYear = Novel.roundYear(year, yearInterval)
 
