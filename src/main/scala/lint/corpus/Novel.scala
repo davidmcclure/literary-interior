@@ -105,6 +105,46 @@ case class Novel(
 
   }
 
+  /* Accumulate Ngram2 -> count totals.
+   */
+  def ngram2BinCounts(
+    bins: Int = 100,
+    yearInterval: Int = 1
+  ): Map[Ngram2, Int] = {
+
+    val counts = Map[Ngram2, Int]().withDefaultValue(0)
+
+    for (ngram <- tokens.iterator.sliding(2)) {
+
+      val roundedYear = Novel.roundYear(year, yearInterval)
+
+      // Use first token for offset.
+      val token = ngram(0)
+
+      // If offset is 1 (last token), notch down into the bins-1 bin, to
+      // avoid returning bins+1 bins.
+      val bin =
+        if (token.offset < 1) floor(token.offset * bins).toInt
+        else bins - 1
+
+      val key = Ngram2(
+        corpus,
+        roundedYear,
+        bin,
+        ngram(0).token,
+        ngram(0).pos,
+        ngram(1).token,
+        ngram(1).pos
+      )
+
+      counts(key) += 1
+
+    }
+
+    counts
+
+  }
+
   /* Probe for KWIC matches.
    */
   def kwic(
