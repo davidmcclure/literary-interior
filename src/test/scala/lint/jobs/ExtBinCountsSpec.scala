@@ -11,10 +11,10 @@ import lint.corpus.NovelFactory
 import lint.test.helpers.SparkTestSession
 
 
-class ExtBinCountsMergeCountsSpec extends FlatSpec with Matchers
+class ExtNgram1BinCountsMergeCountsSpec extends FlatSpec with Matchers
   with SparkTestSession with TableDrivenPropertyChecks {
 
-  "ExtBinCounts.mergeCounts" should "index Ngram1 -> count" in {
+  "ExtNgram1BinCounts.mergeCounts" should "index Ngram1 -> count" in {
 
     val spark = _spark
     import spark.implicits._
@@ -36,7 +36,7 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec with Matchers
 
     val ds = spark.createDataset(d1 ++ d2 ++ d3)
 
-    val rows = ExtBinCounts.mergeCounts(ds)
+    val rows = ExtNgram1BinCounts.mergeCounts(ds)
 
     forAll(Table(
 
@@ -84,7 +84,7 @@ class ExtBinCountsMergeCountsSpec extends FlatSpec with Matchers
       NovelFactory(corpus="corpus", year=1906, text="1 2 3")
     ))
 
-    val rows = ExtBinCounts.mergeCounts(ds)
+    val rows = ExtNgram1BinCounts.mergeCounts(ds)
 
     forAll(Table(
 

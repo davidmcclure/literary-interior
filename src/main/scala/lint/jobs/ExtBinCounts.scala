@@ -18,7 +18,7 @@ case class Ngram1Row(
 )
 
 
-object ExtBinCounts extends Config {
+object ExtNgram1BinCounts extends Config {
 
   lazy val spark = SparkSession.builder.getOrCreate()
   import spark.implicits._
@@ -29,10 +29,10 @@ object ExtBinCounts extends Config {
       .parquet(config.corpus.novelParquet)
       .as[Novel]
 
-    val counts = ExtBinCounts.mergeCounts(novels)
+    val counts = ExtNgram1BinCounts.mergeCounts(novels)
 
     counts.write.mode(SaveMode.Overwrite)
-      .json(config.corpus.binCountJSON)
+      .json(config.corpus.ngram1BinCountJSON)
 
   }
 
