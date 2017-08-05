@@ -79,7 +79,7 @@ case class Novel(
   /* Accumulate Ngram1 -> count totals.
    */
   def ngram1BinCounts(
-    bins: Int = 100,
+    binCount: Int = 100,
     yearInterval: Int = 1
   ): Map[Ngram1, Int] = {
 
@@ -89,7 +89,7 @@ case class Novel(
 
       val roundedYear = Novel.roundYear(year, yearInterval)
 
-      val bin = Novel.makeBin(token.offset, bins)
+      val bin = Novel.makeBin(token.offset, binCount)
 
       val key = Ngram1(corpus, roundedYear, bin, token.token, token.pos)
 
@@ -104,7 +104,7 @@ case class Novel(
   /* Accumulate Ngram2 -> count totals.
    */
   def ngram2BinCounts(
-    bins: Int = 100,
+    binCount: Int = 100,
     yearInterval: Int = 1
   ): Map[Ngram2, Int] = {
 
@@ -115,7 +115,7 @@ case class Novel(
       val roundedYear = Novel.roundYear(year, yearInterval)
 
       // Use first token for offset.
-      val bin = Novel.makeBin(ngram(0).offset, bins)
+      val bin = Novel.makeBin(ngram(0).offset, binCount)
 
       val key = Ngram2(
         corpus,
