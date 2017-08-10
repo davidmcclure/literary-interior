@@ -9,15 +9,15 @@ import org.scalatest.prop.TableDrivenPropertyChecks._
 import lint.utils.Tokenize
 
 
-class NovelNgram1BinCountsSpec extends FlatSpec with Matchers
+class NovelUnigramBinCountsSpec extends FlatSpec with Matchers
   with TableDrivenPropertyChecks {
 
-  "Novel#ngram1BinCounts" should "count tokens in each bin" in {
+  "Novel#unigramBinCounts" should "count tokens in each bin" in {
 
     // Two tokens in each bin.
     val novel = NovelFactory(text="1 2 3 4 5 6 7 8")
 
-    val counts = novel.ngram1BinCounts(4)
+    val counts = novel.unigramBinCounts(4)
 
     forAll(Table(
 
@@ -36,7 +36,7 @@ class NovelNgram1BinCountsSpec extends FlatSpec with Matchers
       (3, "8", "CD", 1)
 
     )) { (bin: Int, token: String, pos: String, count: Int) =>
-      val key = Ngram1(novel.corpus, novel.year, bin, token, pos)
+      val key = Unigram(novel.corpus, novel.year, bin, token, pos)
       counts(key) shouldEqual count
     }
 
@@ -47,7 +47,7 @@ class NovelNgram1BinCountsSpec extends FlatSpec with Matchers
     // Two of each token in each bin.
     val novel = NovelFactory(text="1 1 2 2 3 3 4 4")
 
-    val counts = novel.ngram1BinCounts(4)
+    val counts = novel.unigramBinCounts(4)
 
     forAll(Table(
 
@@ -59,7 +59,7 @@ class NovelNgram1BinCountsSpec extends FlatSpec with Matchers
       (3, "4", "CD", 2)
 
     )) { (bin: Int, token: String, pos: String, count: Int) =>
-      val key = Ngram1(novel.corpus, novel.year, bin, token, pos)
+      val key = Unigram(novel.corpus, novel.year, bin, token, pos)
       counts(key) shouldEqual count
     }
 
@@ -67,7 +67,7 @@ class NovelNgram1BinCountsSpec extends FlatSpec with Matchers
 
   it should "not round years by default" in {
     val novel = NovelFactory(year=1904)
-    novel.ngram1BinCounts().keys.head.year shouldEqual 1904
+    novel.unigramBinCounts().keys.head.year shouldEqual 1904
   }
 
   it should "round years when an interval is provided" in {
@@ -82,7 +82,7 @@ class NovelNgram1BinCountsSpec extends FlatSpec with Matchers
     )) { (year: Int, interval: Int, result: Int) =>
 
       val novel = NovelFactory(year=year)
-      val counts = novel.ngram1BinCounts(yearInterval=interval)
+      val counts = novel.unigramBinCounts(yearInterval=interval)
 
       counts.keys.head.year shouldEqual result
 

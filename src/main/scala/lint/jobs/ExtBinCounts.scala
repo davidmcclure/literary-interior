@@ -5,10 +5,10 @@ package lint.jobs
 import org.apache.spark.sql.{SparkSession,SaveMode,Dataset}
 
 import lint.Config
-import lint.corpus.{Novel,Ngram1}
+import lint.corpus.{Novel,Unigram}
 
 
-case class Ngram1Row(
+case class UnigramRow(
   corpus: String,
   year: Int,
   bin: Int,
@@ -18,7 +18,7 @@ case class Ngram1Row(
 )
 
 
-object ExtNgram1BinCounts extends Config {
+object ExtUnigramBinCounts extends Config {
 
   lazy val spark = SparkSession.builder.getOrCreate()
   import spark.implicits._
@@ -29,28 +29,28 @@ object ExtNgram1BinCounts extends Config {
       .parquet(config.corpus.novelParquet)
       .as[Novel]
 
-    val counts = ExtNgram1BinCounts.mergeCounts(novels)
+    val counts = ExtUnigramBinCounts.mergeCounts(novels)
 
     counts.write.mode(SaveMode.Overwrite)
-      .json(config.corpus.ngram1BinCountJSON)
+      .json(config.corpus.unigramBinCountJSON)
 
   }
 
   /* Merge together token / bin counts for novels.
    */
-  def mergeCounts(novels: Dataset[Novel]): Dataset[Ngram1Row] = {
+  def mergeCounts(novels: Dataset[Novel]): Dataset[UnigramRow] = {
 
     novels
 
-      // Get list of (Ngram1, count)
-      .flatMap(_.ngram1BinCounts(yearInterval=10).toSeq)
+      // Get list of (Unigram, count)
+      .flatMap(_.unigramBinCounts(yearInterval=10).toSeq)
 
       // Sum the counts for each key across all texts.
       .rdd.reduceByKey(_+_)
 
       // Merge bins and counts.
-      .map { case (ng: Ngram1, count: Int) =>
-        Ngram1Row(
+      .map { case (ng: Unigram, count: Int) =>
+        UnigramRow(
           ng.corpus,
           ng.year,
           ng.bin,

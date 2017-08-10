@@ -5,7 +5,7 @@ package lint.corpus
 import lint.utils.Token
 
 
-case class Ngram1(
+case class Unigram(
   corpus: String,
   year: Int,
   bin: Int,

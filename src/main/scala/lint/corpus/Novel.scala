@@ -43,16 +43,14 @@ case class Novel(
   tokens: Seq[Token]
 ) {
 
-  // TODO: DRY up ngram1/2.
-
-  /* Accumulate Ngram1 -> count totals.
+  /* Accumulate Unigram -> count totals.
    */
-  def ngram1BinCounts(
+  def unigramBinCounts(
     binCount: Int = 100,
     yearInterval: Int = 1
-  ): Map[Ngram1, Int] = {
+  ): Map[Unigram, Int] = {
 
-    val counts = Map[Ngram1, Int]().withDefaultValue(0)
+    val counts = Map[Unigram, Int]().withDefaultValue(0)
 
     for (token <- tokens) {
 
@@ -60,7 +58,7 @@ case class Novel(
 
       val bin = Novel.makeBin(token.offset, binCount)
 
-      val key = Ngram1(corpus, roundedYear, bin, token.token, token.pos)
+      val key = Unigram(corpus, roundedYear, bin, token.token, token.pos)
 
       counts(key) += 1
 

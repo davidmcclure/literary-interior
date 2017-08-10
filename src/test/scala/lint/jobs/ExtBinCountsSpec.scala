@@ -11,10 +11,10 @@ import lint.corpus.NovelFactory
 import lint.test.helpers.SparkTestSession
 
 
-class ExtNgram1BinCountsMergeCountsSpec extends FlatSpec with Matchers
+class ExtUnigramBinCountsMergeCountsSpec extends FlatSpec with Matchers
   with SparkTestSession with TableDrivenPropertyChecks {
 
-  "ExtNgram1BinCounts.mergeCounts" should "index Ngram1 -> count" in {
+  "ExtUnigramBinCounts.mergeCounts" should "index Unigram -> count" in {
 
     val spark = _spark
     import spark.implicits._
@@ -36,7 +36,7 @@ class ExtNgram1BinCountsMergeCountsSpec extends FlatSpec with Matchers
 
     val ds = spark.createDataset(d1 ++ d2 ++ d3)
 
-    val rows = ExtNgram1BinCounts.mergeCounts(ds)
+    val rows = ExtUnigramBinCounts.mergeCounts(ds)
 
     forAll(Table(
 
@@ -66,7 +66,7 @@ class ExtNgram1BinCountsMergeCountsSpec extends FlatSpec with Matchers
       count: Int
     ) =>
 
-      val row = Ngram1Row(corpus, year, bin, token, pos, count)
+      val row = UnigramRow(corpus, year, bin, token, pos, count)
       rows.filter(_ == row).count shouldEqual 1
 
     }
@@ -84,7 +84,7 @@ class ExtNgram1BinCountsMergeCountsSpec extends FlatSpec with Matchers
       NovelFactory(corpus="corpus", year=1906, text="1 2 3")
     ))
 
-    val rows = ExtNgram1BinCounts.mergeCounts(ds)
+    val rows = ExtUnigramBinCounts.mergeCounts(ds)
 
     forAll(Table(
 
@@ -109,7 +109,7 @@ class ExtNgram1BinCountsMergeCountsSpec extends FlatSpec with Matchers
       count: Int
     ) =>
 
-      val row = Ngram1Row(corpus, year, bin, token, pos, count)
+      val row = UnigramRow(corpus, year, bin, token, pos, count)
       rows.filter(_ == row).count shouldEqual 1
 
     }
