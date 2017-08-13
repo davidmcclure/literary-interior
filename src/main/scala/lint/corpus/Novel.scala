@@ -3,7 +3,7 @@
 package lint.corpus
 
 import scala.math.floor
-import scala.collection.mutable.Map
+import scala.collection.mutable
 
 import lint.utils.{Token,Tokenize}
 
@@ -48,9 +48,9 @@ case class Novel(
   def unigramBinCounts(
     binCount: Int = 100,
     yearInterval: Int = 1
-  ): Map[Unigram, Int] = {
+  ): mutable.Map[Unigram, Int] = {
 
-    val counts = Map[Unigram, Int]().withDefaultValue(0)
+    val counts = mutable.Map[Unigram, Int]().withDefaultValue(0)
 
     for (token <- tokens) {
 
