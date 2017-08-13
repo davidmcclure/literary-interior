@@ -118,7 +118,7 @@ class TextDirStripGutenbergParatextSpec extends FlatSpec with Matchers
 
 class TextDirMkNovelSpec extends FreeSpec with Matchers {
 
-  val path = getClass().getResource("/fixtures/chicago/Texts").getFile
+  val path = getClass().getResource("/fixtures/chicago/CHICAGO_NOVEL_CORPUS").getFile
   val textDir = new TextDir(path)
 
   def getNovel(filename: String): Novel = {

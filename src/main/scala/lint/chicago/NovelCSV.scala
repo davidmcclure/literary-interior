@@ -29,7 +29,7 @@ class NovelCSV(val path: String) {
       source=row("SOURCE"),
       nationality=row("NATIONALITY"),
       genre=row("GENRE"),
-      clean=row("CLEAN") == "c"
+      clean=row("CLEAN?") == "c"
     )
 
   }

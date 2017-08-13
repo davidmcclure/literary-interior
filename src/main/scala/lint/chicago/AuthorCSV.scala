@@ -25,7 +25,7 @@ class AuthorCSV(val path: String) {
       dateD=AuthorCSV.parseYear(row("DATE_D")),
       nationality=row("NATIONALITY"),
       gender=row("GENDER"),
-      raceEthnicity=row("RACE_ETHNICITY"),
+      race=row("RACE"),
       hyphenatedIdentity=row("HYPHENATED_IDENTITY"),
       sexualIdentity=row("SEXUAL_IDENTITY"),
       education=row("EDUCATION"),

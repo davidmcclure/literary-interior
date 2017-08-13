@@ -7,7 +7,7 @@ import org.scalatest._
 
 class AuthorCSVSpec extends FreeSpec with Matchers {
 
-  val url = getClass().getResource("/fixtures/chicago/AUTHORS_METADATA.csv")
+  val url = getClass().getResource("/fixtures/chicago/CHICAGO_NOVEL_CORPUS_METADATA/CHICAGO_CORPUS_AUTHORS.csv")
   val reader = new AuthorCSV(url.getFile)
 
   "CSV should parse without errors" in {

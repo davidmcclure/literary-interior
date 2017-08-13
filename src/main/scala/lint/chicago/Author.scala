@@ -12,7 +12,7 @@ case class Author(
   dateD: Option[Int],
   nationality: String,
   gender: String,
-  raceEthnicity: String,
+  race: String,
   hyphenatedIdentity: String,
   sexualIdentity: String,
   education: String,
