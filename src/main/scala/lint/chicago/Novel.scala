@@ -18,6 +18,7 @@ case class Novel(
   source: String,
   nationality: String,
   genre: String,
+  clean: Boolean,
   text: String,
   tokens: Seq[Token]
 )

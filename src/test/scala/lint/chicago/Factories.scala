@@ -18,7 +18,8 @@ object NovelMetadataFactory {
     publDate: Int = 2000,
     source: String = "source",
     nationality: String = "nationality",
-    genre: String = "genre"
+    genre: String = "genre",
+    clean: Boolean = true
 
   ) = NovelMetadata(
 
@@ -33,7 +34,8 @@ object NovelMetadataFactory {
     publDate=publDate,
     source=source,
     nationality=nationality,
-    genre=genre
+    genre=genre,
+    clean=clean
 
   )
 

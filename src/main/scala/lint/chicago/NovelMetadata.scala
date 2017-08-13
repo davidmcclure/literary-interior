@@ -15,5 +15,6 @@ case class NovelMetadata(
   publDate: Int,
   source: String,
   nationality: String,
-  genre: String
+  genre: String,
+  clean: Boolean
 )

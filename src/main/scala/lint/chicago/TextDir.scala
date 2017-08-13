@@ -43,6 +43,7 @@ class TextDir(val path: String) {
       source=row.source,
       nationality=row.nationality,
       genre=row.genre,
+      clean=row.clean,
       text=text,
       tokens=tokens
     )

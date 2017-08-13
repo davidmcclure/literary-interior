@@ -28,7 +28,8 @@ class NovelCSV(val path: String) {
       publDate=row("PUBL_DATE").toInt,
       source=row("SOURCE"),
       nationality=row("NATIONALITY"),
-      genre=row("GENRE")
+      genre=row("GENRE"),
+      clean=row("CLEAN") == "c"
     )
 
   }
