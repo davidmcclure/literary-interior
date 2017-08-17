@@ -15,15 +15,17 @@ object MergeCorpus extends Config {
 
   def main(args: Array[String]) {
 
-    // Read raw Gale novels.
+    // Read Gale novels.
     val gale = spark.read
       .parquet(config.gale.novelParquet)
       .as[lint.gale.Novel]
 
-    // Read raw Chicago novels.
+    // Read Chicago novels.
     val chicago = spark.read
       .parquet(config.chicago.novelParquet)
       .as[lint.chicago.Novel]
+      // Get rid of paratext?
+      .filter(_.clean)
 
     // Convert to normalized schema.
     val galeNovels = gale.map(Novel.fromGaleNovel)
