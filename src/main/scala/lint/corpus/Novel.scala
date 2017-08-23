@@ -5,7 +5,7 @@ package lint.corpus
 import scala.math.floor
 import scala.collection.mutable
 
-import lint.utils.{Token,Tokenize}
+import lint.utils.Token
 
 
 case class Novel(
