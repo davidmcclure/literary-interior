@@ -8,30 +8,6 @@ import scala.collection.mutable
 import lint.utils.{Token,Tokenize}
 
 
-case class KWICMatch(
-  corpus: String,
-  identifier: String,
-  title: String,
-  authorFirst: String,
-  authorLast: String,
-  year: Int,
-  offset: Double,
-  snippet: String
-)
-
-
-case class TokenOffsets(
-  corpus: String,
-  identifier: String,
-  title: String,
-  authorFirst: String,
-  authorLast: String,
-  year: Int,
-  offsets: Seq[Double],
-  tokenCount: Int
-)
-
-
 case class Novel(
   corpus: String,
   identifier: String,
