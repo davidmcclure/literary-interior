@@ -21,22 +21,22 @@ class NovelUnigramBinCountsSpec extends FlatSpec with Matchers
 
     forAll(Table(
 
-      ("bin", "token", "pos", "count"),
+      ("bin", "token", "count"),
 
-      (0, "1", "CD", 1),
-      (0, "2", "CD", 1),
+      (0, "1", 1),
+      (0, "2", 1),
 
-      (1, "3", "CD", 1),
-      (1, "4", "CD", 1),
+      (1, "3", 1),
+      (1, "4", 1),
 
-      (2, "5", "CD", 1),
-      (2, "6", "CD", 1),
+      (2, "5", 1),
+      (2, "6", 1),
 
-      (3, "7", "CD", 1),
-      (3, "8", "CD", 1)
+      (3, "7", 1),
+      (3, "8", 1)
 
-    )) { (bin: Int, token: String, pos: String, count: Int) =>
-      val key = Unigram(novel.corpus, novel.year, bin, token, pos)
+    )) { (bin: Int, token: String, count: Int) =>
+      val key = Unigram(novel.corpus, novel.year, bin, token, "CD")
       counts(key) shouldEqual count
     }
 
@@ -51,15 +51,15 @@ class NovelUnigramBinCountsSpec extends FlatSpec with Matchers
 
     forAll(Table(
 
-      ("bin", "token", "pos", "count"),
+      ("bin", "token", "count"),
 
-      (0, "1", "CD", 2),
-      (1, "2", "CD", 2),
-      (2, "3", "CD", 2),
-      (3, "4", "CD", 2)
+      (0, "1", 2),
+      (1, "2", 2),
+      (2, "3", 2),
+      (3, "4", 2)
 
-    )) { (bin: Int, token: String, pos: String, count: Int) =>
-      val key = Unigram(novel.corpus, novel.year, bin, token, pos)
+    )) { (bin: Int, token: String, count: Int) =>
+      val key = Unigram(novel.corpus, novel.year, bin, token, "CD")
       counts(key) shouldEqual count
     }
 
