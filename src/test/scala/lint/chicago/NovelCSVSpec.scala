@@ -7,7 +7,13 @@ import org.scalatest._
 
 class NovelCSVReadSpec extends FreeSpec with Matchers {
 
-  val url = getClass().getResource("/fixtures/chicago/CHICAGO_NOVEL_CORPUS_METADATA/CHICAGO_CORPUS_NOVELS.csv")
+  val file = new java.io.File(
+    "/fixtures/chicago/CHICAGO_NOVEL_CORPUS_METADATA",
+    "CHICAGO_CORPUS_NOVELS.csv"
+  )
+
+  val url = getClass().getResource(file.toString)
+
   val reader = new NovelCSV(url.getFile)
 
   "CSV should parse without errors" in {
