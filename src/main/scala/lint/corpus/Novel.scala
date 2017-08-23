@@ -24,7 +24,7 @@ case class Novel(
   def unigramBinCounts(
     binCount: Int = 100,
     yearInterval: Int = 1
-  ): mutable.Map[Unigram, Int] = {
+  ): Map[Unigram, Int] = {
 
     val counts = mutable.Map[Unigram, Int]().withDefaultValue(0)
 
@@ -40,7 +40,7 @@ case class Novel(
 
     }
 
-    counts
+    counts.toMap
 
   }
 
@@ -49,7 +49,7 @@ case class Novel(
   def ngramBinCounts(
     order: Int,
     binCount: Int = 100
-  ): mutable.Map[Ngram, Int] = {
+  ): Map[Ngram, Int] = {
 
     val counts = mutable.Map[Ngram, Int]().withDefaultValue(0)
 
@@ -65,7 +65,7 @@ case class Novel(
 
     }
 
-    counts
+    counts.toMap
 
   }
 
