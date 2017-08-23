@@ -96,10 +96,46 @@ class NovelUnigramBinCountsSpec extends FlatSpec with Matchers
 class NovelNgramBinCountsSpec extends FlatSpec with Matchers
   with TableDrivenPropertyChecks {
 
-  "Novel#ngramBinCounts" should "count tokens in each bin" in {
+  "Novel#ngramBinCounts" should "count 1-grams" in {
 
-    // 3 tokens in each bin.
-    val novel = NovelFactory(text="1 1 1 2 2 2 3 3 3 4 4 4")
+    val novel = NovelFactory(text="""
+      1 1
+      2 2
+      3 3
+      4 4
+    """)
+
+    val counts = novel.ngramBinCounts(1, 4)
+
+    forAll(Table(
+
+      ("bin", "token", "count"),
+
+      (0, "1", 2),
+      (1, "2", 2),
+      (2, "3", 2),
+      (3, "4", 2)
+
+    )) { (bin: Int, token: String, count: Int) =>
+
+      val tokens = Seq(NgramToken(token, "CD"))
+
+      val key = Ngram(4, bin, tokens)
+
+      counts(key) shouldEqual count
+
+    }
+
+  }
+
+  it should "count 2-grams" in {
+
+    val novel = NovelFactory(text="""
+      1 1 1
+      2 2 2
+      3 3 3
+      4 4 4
+    """)
 
     val counts = novel.ngramBinCounts(2, 4)
 
@@ -123,6 +159,54 @@ class NovelNgramBinCountsSpec extends FlatSpec with Matchers
       val tokens = Seq(
         NgramToken(token1, "CD"),
         NgramToken(token2, "CD")
+      )
+
+      val key = Ngram(4, bin, tokens)
+
+      counts(key) shouldEqual count
+
+    }
+
+  }
+
+  it should "count 3-grams" in {
+
+    val novel = NovelFactory(text="""
+      1 1 1 1
+      2 2 2 2
+      3 3 3 3
+      4 4 4 4
+    """)
+
+    val counts = novel.ngramBinCounts(3, 4)
+
+    forAll(Table(
+
+      ("bin", "token1", "token2", "token3", "count"),
+
+      (0, "1", "1", "1", 2),
+      (0, "1", "1", "2", 1),
+
+      (1, "2", "2", "2", 2),
+      (1, "2", "2", "3", 1),
+
+      (2, "3", "3", "3", 2),
+      (2, "3", "3", "4", 1),
+
+      (3, "4", "4", "4", 2)
+
+    )) { (
+      bin: Int,
+      token1: String,
+      token2: String,
+      token3: String,
+      count: Int
+    ) =>
+
+      val tokens = Seq(
+        NgramToken(token1, "CD"),
+        NgramToken(token2, "CD"),
+        NgramToken(token3, "CD")
       )
 
       val key = Ngram(4, bin, tokens)
