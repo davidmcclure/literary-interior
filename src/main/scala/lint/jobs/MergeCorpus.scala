@@ -24,7 +24,6 @@ object MergeCorpus extends Config {
     val chicago = spark.read
       .parquet(config.chicago.novelParquet)
       .as[lint.chicago.Novel]
-      // Get rid of paratext?
       .filter(_.clean)
 
     // Convert to normalized schema.

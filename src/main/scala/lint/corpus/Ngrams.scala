@@ -12,3 +12,25 @@ case class Unigram(
   token: String,
   pos: String
 )
+
+
+case class NgramToken(
+  token: String,
+  pos: String
+)
+
+
+object NgramToken {
+
+  def fromToken(token: Token): NgramToken = {
+    NgramToken(token.token, token.pos)
+  }
+
+}
+
+
+case class Ngram(
+  binCount: Int,
+  bin: Int,
+  tokens: Seq[NgramToken]
+)

@@ -68,6 +68,31 @@ case class Novel(
 
   }
 
+  /* Accumulate Ngram -> count totals.
+   */
+  def ngramBinCounts(
+    order: Int,
+    binCount: Int = 100
+  ): mutable.Map[Ngram, Int] = {
+
+    val counts = mutable.Map[Ngram, Int]().withDefaultValue(0)
+
+    for (window <- tokens.sliding(order)) {
+
+      val bin = Novel.makeBin(window(0).offset, binCount)
+
+      val tokens = window.map(NgramToken.fromToken).toSeq
+
+      val key = Ngram(binCount, bin, tokens)
+
+      counts(key) += 1
+
+    }
+
+    counts
+
+  }
+
   /* Probe for KWIC matches.
    */
   def kwic(
