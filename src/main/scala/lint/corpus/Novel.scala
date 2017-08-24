@@ -48,7 +48,7 @@ case class Novel(
    */
   def ngramBinCounts(
     order: Int,
-    binCount: Int = 100
+    binCount: Int = 10
   ): Map[Ngram, Int] = {
 
     val counts = mutable.Map[Ngram, Int]().withDefaultValue(0)
