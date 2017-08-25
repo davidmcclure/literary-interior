@@ -10,15 +10,6 @@ import opennlp.tools.postag._
 import opennlp.tools.tokenize._
 
 
-case class Token(
-  token: String,
-  pos: String,
-  start: Int,
-  end: Int,
-  offset: Double
-)
-
-
 object Tokenize {
 
   // Sentences
