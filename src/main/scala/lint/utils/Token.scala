@@ -9,4 +9,10 @@ case class Token(
   start: Int,
   end: Int,
   offset: Double
-)
+) {
+
+  def freqRankBelow(rank: Int): Boolean = {
+    true
+  }
+
+}

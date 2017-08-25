@@ -48,12 +48,17 @@ case class Novel(
    */
   def ngramBinCounts(
     order: Int,
-    binCount: Int = 10
+    binCount: Int = 10,
+    minRank: Int = 10000
   ): Map[Ngram, Int] = {
 
     val counts = mutable.Map[Ngram, Int]().withDefaultValue(0)
 
-    for (window <- tokens.sliding(order)) {
+    // Just take ngrams where all tokens are below a given rank.
+    for (
+      window <- tokens.sliding(order)
+      if window.map(_.freqRankBelow(minRank)).forall(x => x == true)
+    ) {
 
       val bin = Novel.makeBin(window(0).offset, binCount)
 
