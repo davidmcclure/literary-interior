@@ -55,10 +55,7 @@ case class Novel(
     val counts = mutable.Map[Ngram, Int]().withDefaultValue(0)
 
     // Just take ngrams where all tokens are below a given rank.
-    for (
-      window <- tokens.sliding(order)
-      if window.map(_.freqRankBelow(minRank)).forall(x => x == true)
-    ) {
+    for (window <- tokens.sliding(order)) {
 
       val bin = Novel.makeBin(window(0).offset, binCount)
 
