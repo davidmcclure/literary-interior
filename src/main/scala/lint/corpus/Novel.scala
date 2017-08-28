@@ -120,6 +120,17 @@ case class Novel(
 
   }
 
+  /* Run multiple KWIC queries.
+   */
+  def kwics(queries: Seq[KWICQuery]): Seq[KWICMatch] = {
+    queries.flatMap(q => kwic(
+      q.token,
+      q.minOffset,
+      q.maxOffset,
+      q.radius
+    ))
+  }
+
   /* Pluck out offsets for a query token.
    */
   def tokenOffsets(query: String): TokenOffsets = {
