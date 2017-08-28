@@ -21,7 +21,7 @@ case class Ngram(
 object Ngram {
 
   val tokens10k: Set[String] = {
-    val stream = getClass.getResourceAsStream("/tokens10k.txt")
+    val stream = getClass.getResourceAsStream("/tokens/freq-gt-10k.txt")
     Source.fromInputStream(stream).getLines.toSet
   }
 
