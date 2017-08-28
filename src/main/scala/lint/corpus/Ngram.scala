@@ -7,4 +7,10 @@ case class Ngram(
   binCount: Int,
   bin: Int,
   tokens: Seq[NgramToken]
-)
+) {
+
+  def allFrequent: Boolean = {
+    true
+  }
+
+}

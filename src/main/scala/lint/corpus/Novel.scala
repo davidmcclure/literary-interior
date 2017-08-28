@@ -63,7 +63,7 @@ case class Novel(
 
       val key = Ngram(binCount, bin, tokens)
 
-      counts(key) += 1
+      if (key.allFrequent) counts(key) += 1
 
     }
 
