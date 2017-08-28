@@ -103,6 +103,9 @@ case class Novel(
       val snippet = prefix + s"***${hit}***" + suffix
 
       KWICMatch(
+        token=query,
+        minOffset=minOffset,
+        maxOffset=maxOffset,
         corpus=corpus,
         identifier=identifier,
         title=title,

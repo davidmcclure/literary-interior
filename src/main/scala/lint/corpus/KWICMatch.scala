@@ -4,6 +4,9 @@ package lint.corpus
 
 
 case class KWICMatch(
+  token: String,
+  minOffset: Double,
+  maxOffset: Double,
   corpus: String,
   identifier: String,
   title: String,
