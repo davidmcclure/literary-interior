@@ -3,6 +3,7 @@
 package lint.corpus
 
 
+// TODO: prefix, suffix, pos
 case class KWICMatch(
   token: String,
   minOffset: Double,
