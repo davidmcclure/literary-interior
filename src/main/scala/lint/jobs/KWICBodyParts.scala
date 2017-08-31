@@ -52,7 +52,6 @@ object KWICBodyParts extends Config {
 
     // Write single JSON.
     matches
-      .coalesce(1)
       .write
       .mode(SaveMode.Overwrite)
       .json(config.corpus.kwicBodyPartsJSON)
