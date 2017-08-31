@@ -99,21 +99,19 @@ case class Novel(
       val hit = text.slice(c2, c3)
       val suffix = text.slice(c3, c4)
 
-      // Format the snippet.
-      val snippet = prefix + s"***${hit}***" + suffix
-
       KWICMatch(
-        token=query,
-        minOffset=minOffset,
-        maxOffset=maxOffset,
         corpus=corpus,
         identifier=identifier,
         title=title,
         authorFirst=authorFirst,
         authorLast=authorLast,
         year=year,
+        token=token.token,
+        pos=token.pos,
         offset=token.offset,
-        snippet=snippet
+        prefix=prefix,
+        hit=hit,
+        suffix=suffix
       )
 
     }

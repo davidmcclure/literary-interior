@@ -3,17 +3,17 @@
 package lint.corpus
 
 
-// TODO: prefix, suffix, pos
 case class KWICMatch(
-  token: String,
-  minOffset: Double,
-  maxOffset: Double,
   corpus: String,
   identifier: String,
   title: String,
   authorFirst: String,
   authorLast: String,
   year: Int,
+  token: String,
+  pos: String,
   offset: Double,
-  snippet: String
+  prefix: String,
+  hit: String,
+  suffix: String
 )
