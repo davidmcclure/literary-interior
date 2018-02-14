@@ -6,6 +6,8 @@ import spacy
 from pyspark.sql import SparkSession, types as T
 from collections import namedtuple
 
+from .sources import GaleNovelXML
+
 
 nlp = spacy.load('en')
 
@@ -89,13 +91,13 @@ class GaleNovel(Model):
 
     schema = T.StructType([
         T.StructField('psmid', T.StringType()),
-        T.StructField('title', T.StringType()),
+        T.StructField('full_title', T.StringType()),
         T.StructField('author_first', T.StringType()),
+        T.StructField('author_middle', T.StringType()),
         T.StructField('author_last', T.StringType()),
         T.StructField('language', T.StringType()),
-        T.StructField('year', T.IntegerType()),
-        T.StructField('ocr_percentage', T.FloatType()),
-        T.StructField('document_type', T.StringType()),
+        T.StructField('pub_date_start', T.IntegerType()),
+        T.StructField('ocr', T.FloatType()),
         T.StructField('text', T.StringType()),
         T.StructField('tokens', T.ArrayType(Token.schema)),
     ])

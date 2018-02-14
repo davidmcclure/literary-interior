@@ -3,3 +3,8 @@ ipython
 findspark
 spacy
 pytest
+attr
+lxml
+scandir
+tqdm
+boto3
