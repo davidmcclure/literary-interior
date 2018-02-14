@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
   htop \
   git \
   make \
+  vim \
   curl \
   wget \
   tmux \
@@ -53,6 +54,8 @@ RUN curl -sL --retry 3 \
 
 COPY build/spark-env.sh $SPARK_HOME/conf
 COPY build/spark-defaults.conf $SPARK_HOME/conf
+
+# TODO: Install org.apache.hadoop:hadoop-aws:2.7.3
 
 # Code
 
