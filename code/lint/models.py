@@ -1,0 +1,85 @@
+
+
+import re
+import spacy
+
+from pyspark.sql import SparkSession, types as T
+from collections import namedtuple
+
+
+nlp = spacy.load('en')
+
+
+class ModelMeta(type):
+
+    def __new__(meta, name, bases, dct):
+        """Generate a namedtuple from the `schema` class attribute.
+        """
+        if isinstance(dct.get('schema'), T.StructType):
+
+            Row = namedtuple(name, dct['schema'].names)
+
+            # By default, default all fields to None.
+            Row.__new__.__defaults__ = (None,) * len(Row._fields)
+
+            bases = (Row,) + bases
+
+        return super().__new__(meta, name, bases, dct)
+
+
+class Model(metaclass=ModelMeta):
+
+    @classmethod
+    def from_rdd(cls, row):
+        """Wrap a raw `Row` instance from an RDD as a model instance.
+
+        Args:
+            row (pyspark.sql.Row)
+
+        Returns: Model
+        """
+        return cls(**row.asDict())
+
+
+class Token(Model):
+
+    schema = T.StructType([
+
+        # Token
+        T.StructField('text', T.StringType()),
+        T.StructField('lemma', T.StringType()),
+        T.StructField('pos', T.StringType()),
+        T.StructField('tag', T.StringType()),
+        T.StructField('dep', T.StringType()),
+
+        # Position
+        T.StructField('word_i', T.IntegerType()),
+        T.StructField('char_i', T.IntegerType()),
+        T.StructField('offset', T.FloatType()),
+
+    ])
+
+    @classmethod
+    def parse(cls, text):
+        """Parse a raw text string.
+
+        Args:
+            text (str)
+
+        Returns: list[Token]
+        """
+        doc = nlp(text)
+
+        return [
+            cls(
+                text=t.text,
+                lemma=t.lemma_,
+                pos=t.pos_,
+                tag=t.tag_,
+                dep=t.dep_,
+                word_i=t.i,
+                char_i=t.idx,
+                offset=(t.i / (len(doc)-1))
+            )
+            for t in doc
+        ]
