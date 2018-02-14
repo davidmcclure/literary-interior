@@ -1,2 +1,2 @@
 
-How words distribute inside of texts?
+How words distribute inside of novels?

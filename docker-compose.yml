@@ -1,0 +1,15 @@
+
+version: '3'
+
+services:
+
+  local:
+    build: .
+    image: dclure/lint
+    env_file:
+      - build/dev.env
+    volumes:
+      - ./code:/code
+      - ./data:/data
+    ports:
+      - '8888:8888'
