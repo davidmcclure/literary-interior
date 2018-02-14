@@ -39,7 +39,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # Spark
 
-ENV SPARK_VERSION 2.2.1
+ENV SPARK_VERSION 2.2.0
 ENV SPARK_PACKAGE spark-${SPARK_VERSION}-bin-hadoop2.7
 ENV SPARK_HOME /opt/spark-${SPARK_VERSION}
 ENV PATH $PATH:${SPARK_HOME}/bin
