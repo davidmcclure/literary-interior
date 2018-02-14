@@ -1,3 +1,5 @@
 
 ipython
+findspark
 spacy
+pytest

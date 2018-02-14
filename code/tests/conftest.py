@@ -1,0 +1,6 @@
+
+
+import findspark
+
+
+findspark.init()
