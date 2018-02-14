@@ -83,3 +83,19 @@ class Token(Model):
             )
             for t in doc
         ]
+
+
+class GaleNovel(Model):
+
+    schema = T.StructType([
+        T.StructField('psmid', T.StringType()),
+        T.StructField('title', T.StringType()),
+        T.StructField('author_first', T.StringType()),
+        T.StructField('author_last', T.StringType()),
+        T.StructField('language', T.StringType()),
+        T.StructField('year', T.IntegerType()),
+        T.StructField('ocr_percentage', T.FloatType()),
+        T.StructField('document_type', T.StringType()),
+        T.StructField('text', T.StringType()),
+        T.StructField('tokens', T.ArrayType(Token.schema)),
+    ])
