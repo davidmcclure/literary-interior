@@ -105,6 +105,7 @@ class ChicagoNovel(Model):
 
     schema = T.StructType([
         T.StructField('book_id', T.StringType()),
+        T.StructField('libraries', T.IntegerType()),
         T.StructField('filename', T.StringType()),
         T.StructField('title', T.StringType()),
         T.StructField('auth_last', T.StringType()),
