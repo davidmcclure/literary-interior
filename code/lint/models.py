@@ -102,6 +102,22 @@ class GaleNovel(Model):
         T.StructField('tokens', T.ArrayType(Token.schema)),
     ])
 
+    @classmethod
+    def from_xml(cls, path):
+        """Make a row from raw Gnip JSON.
+        """
+        xml = GaleNovelXML.read(path)
+
+        fields = {
+            name: getattr(xml, name)()
+            for name in cls.schema.names
+            if hasattr(xml, name)
+        }
+
+        fields['tokens'] = Token.parse(fields['text'])
+
+        return cls(**fields)
+
 
 class ChicagoNovel(Model):
 

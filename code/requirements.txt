@@ -1,7 +1,7 @@
 
 ipython
 findspark
-spacy
+spacy==1.10.0
 pytest
 attr
 lxml
