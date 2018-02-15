@@ -104,7 +104,7 @@ class GaleNovel(Model):
 
     @classmethod
     def from_xml(cls, path):
-        """Make a row from raw Gnip JSON.
+        """Make row from XML source.
         """
         xml = GaleNovelXML.read(path)
 
