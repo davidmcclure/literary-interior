@@ -99,19 +99,3 @@ class GaleNovel(Model):
         T.StructField('text', T.StringType()),
         T.StructField('tokens', T.ArrayType(Token.schema)),
     ])
-
-    @classmethod
-    def from_xml(cls, path):
-        """Make row from XML source.
-        """
-        xml = GaleNovelXML.read(path)
-
-        fields = {
-            name: getattr(xml, name)()
-            for name in cls.schema.names
-            if hasattr(xml, name)
-        }
-
-        fields['tokens'] = Token.parse(fields['text'])
-
-        return cls(**fields)
