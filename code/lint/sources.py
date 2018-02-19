@@ -1,20 +1,18 @@
 
 
-import attr
-
 from lxml import etree
 
 from . import fs
 
 
-@attr.s
 class GaleNovelXML:
-
-    tree = attr.ib()
 
     @classmethod
     def read(cls, path):
         return cls(etree.parse(fs.read(path)))
+
+    def __init__(self, tree):
+        self.tree = tree
 
     def psmid(self):
         return self.tree.xpath('//PSMID/text()')[0]
@@ -40,9 +38,6 @@ class GaleNovelXML:
 
     def ocr(self):
         return float(self.tree.xpath('//ocr/text()')[0])
-
-    def document_type(self):
-        return self.tree.xpath('//documentType/text()')[0]
 
     def text(self):
         tokens = self.tree.xpath('//page[@type="bodyPage"]//wd/text()')
