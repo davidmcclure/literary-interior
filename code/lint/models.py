@@ -117,39 +117,3 @@ class GaleNovel(Model):
         fields['tokens'] = Token.parse(fields['text'])
 
         return cls(**fields)
-
-
-class ChicagoNovel(Model):
-
-    schema = T.StructType([
-        T.StructField('book_id', T.StringType()),
-        T.StructField('filename', T.StringType()),
-        T.StructField('libraries', T.IntegerType()),
-        T.StructField('title', T.StringType()),
-        T.StructField('auth_last', T.StringType()),
-        T.StructField('auth_first', T.StringType()),
-        T.StructField('auth_id', T.StringType()),
-        T.StructField('publ_city', T.StringType()),
-        T.StructField('publisher', T.StringType()),
-        T.StructField('publ_date', T.IntegerType()),
-        T.StructField('source', T.StringType()),
-        T.StructField('nationality', T.StringType()),
-        T.StructField('genre', T.StringType()),
-        T.StructField('clean', T.BooleanType()),
-        T.StructField('text', T.StringType()),
-        T.StructField('tokens', T.ArrayType(Token.schema)),
-    ])
-
-
-class Novel(Model):
-
-    schema = T.StructType([
-        T.StructField('corpus', T.StringType()),
-        T.StructField('identifier', T.StringType()),
-        T.StructField('title', T.StringType()),
-        T.StructField('author_first', T.StringType()),
-        T.StructField('author_last', T.StringType()),
-        T.StructField('year', T.IntegerType()),
-        T.StructField('text', T.StringType()),
-        T.StructField('tokens', T.ArrayType(Token.schema)),
-    ])
