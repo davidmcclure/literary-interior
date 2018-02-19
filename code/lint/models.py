@@ -7,7 +7,7 @@ from pyspark.sql import SparkSession, types as T
 from collections import namedtuple
 
 
-nlp = spacy.load('en')
+# nlp = spacy.load('en')
 
 
 class ModelMeta(type):

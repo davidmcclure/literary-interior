@@ -18,45 +18,46 @@ class GaleNovelXML:
 
     @safe_cached_property
     def psmid(self):
-        return self.tree.xpath('//PSMID/text()')[0]
+        return self.tree.find('//PSMID').text
 
     @safe_cached_property
     def full_title(self):
-        return self.tree.xpath('//fullTitle/text()')[0]
+        return self.tree.xpath('//fullTitle').text
 
     @safe_cached_property
     def author_first(self):
-        return self.tree.xpath('//author/first/text()')[0]
+        return self.tree.xpath('//author/first').text
 
     @safe_cached_property
     def author_middle(self):
-        return self.tree.xpath('//author/middle/text()')[0]
+        return self.tree.xpath('//author/middle').text
 
     @safe_cached_property
     def author_last(self):
-        return self.tree.xpath('//author/last/text()')[0]
+        return self.tree.xpath('//author/last').text
 
     @safe_cached_property
     def language(self):
-        return self.tree.xpath('//language/text()')[0]
+        return self.tree.xpath('//language').text
 
     @safe_cached_property
     def pub_date_start(self):
-        raw = self.tree.xpath('//pubDate/pubDateStart/text()')[0]
+        raw = self.tree.xpath('//pubDate/pubDateStart').text
         return int(raw[:4])
 
     @safe_cached_property
     def ocr(self):
-        return float(self.tree.xpath('//ocr/text()')[0])
+        return float(self.tree.xpath('//ocr').text)
 
     @safe_cached_property
     def text(self):
-        tokens = self.tree.xpath('//page[@type="bodyPage"]//wd/text()')
-        return ' '.join(tokens)
+        tokens = self.tree.findall('//page[@type="bodyPage"]//wd')
+        return ' '.join([t.text for t in tokens])
 
     @safe_cached_property
     def tokens(self):
-        return Token.parse(self.text)
+        # return Token.parse(self.text)
+        return None
 
     def row(self):
         """Assemble a DF row.
