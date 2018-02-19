@@ -7,4 +7,5 @@ attr
 lxml
 scandir
 tqdm
+cached_property
 boto3
