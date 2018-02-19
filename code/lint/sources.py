@@ -3,6 +3,7 @@
 from lxml import etree
 
 from . import fs
+from .models import Token, GaleNovel
 
 
 class GaleNovelXML:
@@ -42,3 +43,21 @@ class GaleNovelXML:
     def text(self):
         tokens = self.tree.xpath('//page[@type="bodyPage"]//wd/text()')
         return ' '.join(tokens)
+
+    def row(self):
+        """Assemble a DF row.
+
+        Returns: GaleNovel
+        """
+        text = self.text()
+        tokens = Token.parse(text)
+
+        fields = dict(text=text, tokens=tokens)
+
+        fields = {**fields, **{
+            key: getattr(self, key)()
+            for key in GaleNovel.schema.names
+            if key not in fields
+        }}
+
+        return GaleNovel(**fields)
