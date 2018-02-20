@@ -1,18 +1,41 @@
 
 
+import spacy
+
 from cached_property import cached_property
 
 
-def try_or_none(f):
-    """Wrap a method call in a try block. If an error is raised, return None.
-    """
-    def wrapper(*args, **kwargs):
+class LazySpacy:
+
+    _nlp = None
+
+    def __call__(self, *args, **kwargs):
+        """Lazy-initialize Spacy, parse.
+        """
+        if not self._nlp:
+            self._nlp = spacy.load('en')
+
+        return self._nlp(*args, **kwargs)
+
+
+class safe_cached_property:
+
+    def __init__(self, func):
+        self.__doc__ = getattr(func, '__doc__')
+        self.func = func
+
+    def __get__(self, obj, cls):
+        """Call function and swallow errors. Cache result as attribute.
+        https://github.com/pydanny/cached-property
+        """
+        if obj is None:
+            return self
+
         try:
-            return f(*args, **kwargs)
+            value = self.func(obj)
         except Exception as e:
-            return None
-    return wrapper
+            # TODO: Log failure?
+            value = None
 
-
-def safe_cached_property(f):
-    return cached_property(try_or_none(f))
+        obj.__dict__[self.func.__name__] = value
+        return value

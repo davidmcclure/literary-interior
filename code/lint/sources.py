@@ -22,32 +22,32 @@ class GaleNovelXML:
 
     @safe_cached_property
     def full_title(self):
-        return self.tree.xpath('//fullTitle').text
+        return self.tree.find('//fullTitle').text
 
     @safe_cached_property
     def author_first(self):
-        return self.tree.xpath('//author/first').text
+        return self.tree.find('//author/first').text
 
     @safe_cached_property
     def author_middle(self):
-        return self.tree.xpath('//author/middle').text
+        return self.tree.find('//author/middle').text
 
     @safe_cached_property
     def author_last(self):
-        return self.tree.xpath('//author/last').text
+        return self.tree.find('//author/last').text
 
     @safe_cached_property
     def language(self):
-        return self.tree.xpath('//language').text
+        return self.tree.find('//language').text
 
     @safe_cached_property
     def pub_date_start(self):
-        raw = self.tree.xpath('//pubDate/pubDateStart').text
+        raw = self.tree.find('//pubDate/pubDateStart').text
         return int(raw[:4])
 
     @safe_cached_property
     def ocr(self):
-        return float(self.tree.xpath('//ocr').text)
+        return float(self.tree.find('//ocr').text)
 
     @safe_cached_property
     def text(self):
@@ -56,8 +56,7 @@ class GaleNovelXML:
 
     @safe_cached_property
     def tokens(self):
-        # return Token.parse(self.text)
-        return None
+        return Token.parse(self.text)
 
     def row(self):
         """Assemble a DF row.
