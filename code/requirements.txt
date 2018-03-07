@@ -1,7 +1,7 @@
 
 ipython
 findspark
-spacy==1.10.0
+spacy
 pytest
 attr
 lxml
@@ -10,3 +10,4 @@ tqdm
 cached_property
 boto3
 click
+jupyter
