@@ -45,16 +45,16 @@ class Token(Model):
     schema = T.StructType([
 
         # Token
-        T.StructField('text', T.StringType()),
-        T.StructField('lemma', T.StringType()),
-        T.StructField('pos', T.StringType()),
-        T.StructField('tag', T.StringType()),
-        T.StructField('dep', T.StringType()),
+        T.StructField('text', T.StringType(), nullable=False),
+        T.StructField('lemma', T.StringType(), nullable=False),
+        T.StructField('pos', T.StringType(), nullable=False),
+        T.StructField('tag', T.StringType(), nullable=False),
+        T.StructField('dep', T.StringType(), nullable=False),
 
         # Position
-        T.StructField('sent_i', T.IntegerType()),
-        T.StructField('word_i', T.IntegerType()),
-        T.StructField('char_i', T.IntegerType()),
+        T.StructField('sent_i', T.IntegerType(), nullable=False),
+        T.StructField('word_i', T.IntegerType(), nullable=False),
+        T.StructField('char_i', T.IntegerType(), nullable=False),
 
     ])
 
@@ -62,8 +62,8 @@ class Token(Model):
 class Text(Model):
 
     schema = T.StructType([
-        T.StructField('raw', T.StringType()),
-        T.StructField('tokens', T.ArrayType(Token.schema)),
+        T.StructField('raw', T.StringType(), nullable=False),
+        T.StructField('tokens', T.ArrayType(Token.schema), nullable=False),
     ])
 
     @classmethod
@@ -98,7 +98,7 @@ class Text(Model):
 class GaleNovel(Model):
 
     schema = T.StructType([
-        T.StructField('psmid', T.StringType()),
+        T.StructField('psmid', T.StringType(), nullable=False),
         T.StructField('full_title', T.StringType()),
         T.StructField('author_first', T.StringType()),
         T.StructField('author_middle', T.StringType()),
@@ -106,5 +106,5 @@ class GaleNovel(Model):
         T.StructField('language', T.StringType()),
         T.StructField('pub_date_start', T.IntegerType()),
         T.StructField('ocr', T.FloatType()),
-        T.StructField('text', Text.schema),
+        T.StructField('text', Text.schema, nullable=False),
     ])
