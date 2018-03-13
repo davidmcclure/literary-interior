@@ -108,3 +108,24 @@ class GaleNovel(Model):
         T.StructField('ocr', T.FloatType()),
         T.StructField('text', Text.schema, nullable=False),
     ])
+
+
+class ChicagoNovel(Model):
+
+    schema = T.StructType([
+        T.StructField('book_id', T.IntegerType(), nullable=False),
+        T.StructField('filename', T.StringType()),
+        T.StructField('libraries', T.IntegerType()),
+        T.StructField('title', T.StringType()),
+        T.StructField('auth_last', T.StringType()),
+        T.StructField('auth_first', T.StringType()),
+        T.StructField('auth_id', T.StringType()),
+        T.StructField('publ_city', T.StringType()),
+        T.StructField('publisher', T.StringType()),
+        T.StructField('publ_date', T.IntegerType()),
+        T.StructField('source', T.StringType()),
+        T.StructField('nationality', T.StringType()),
+        T.StructField('genre', T.StringType()),
+        T.StructField('clean', T.BooleanType()),
+        T.StructField('text', Text.schema, nullable=False),
+    ])
