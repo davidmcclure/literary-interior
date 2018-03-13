@@ -52,7 +52,7 @@ class GaleNovelXML:
     @safe_cached_property
     def raw_text(self):
         tokens = self.tree.findall('//page[@type="bodyPage"]//wd')
-        return ' '.join([t.text for t in tokens])
+        return ' '.join([t.text for t in tokens if t.text])
 
     @safe_cached_property
     def text(self):
