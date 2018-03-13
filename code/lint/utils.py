@@ -1,23 +1,5 @@
 
 
-import spacy
-
-from cached_property import cached_property
-
-
-class LazySpacy:
-
-    _nlp = None
-
-    def __call__(self, *args, **kwargs):
-        """Lazy-initialize Spacy, parse.
-        """
-        if not self._nlp:
-            self._nlp = spacy.load('en')
-
-        return self._nlp(*args, **kwargs)
-
-
 class safe_cached_property:
 
     def __init__(self, func):
