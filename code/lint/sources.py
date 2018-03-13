@@ -67,3 +67,9 @@ class GaleNovelXML:
             name: getattr(self, name)
             for name in GaleNovel.schema.names
         })
+
+
+class ChicagoNovelMetadata:
+
+    def __init__(self, row, text_root):
+        pass

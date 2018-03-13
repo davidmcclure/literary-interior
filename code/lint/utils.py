@@ -1,5 +1,10 @@
 
 
+import csv
+
+from . import fs
+
+
 class safe_cached_property:
 
     def __init__(self, func):
@@ -33,3 +38,11 @@ class cached_class_property:
         value = self.func(cls)
         setattr(cls, self.func.__name__, value)
         return value
+
+
+def read_csv(path):
+    """Read a CSV from local / S3, generate lines.
+    """
+    fh = fs.read(path)
+    lines = fh.read().decode().splitlines()
+    yield from csv.DictReader(lines)
