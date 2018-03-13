@@ -1,8 +1,28 @@
 
 
+import logging
 import csv
 
-from . import fs, log
+from functools import wraps
+
+from . import fs
+
+
+def try_or_none(func):
+    """Call function in a try block. On error, return None.
+    """
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+
+        log = logging.getLogger('lint')
+
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            log.exception(e)
+            return None
+
+    return wrapper
 
 
 class safe_cached_property:
@@ -18,7 +38,7 @@ class safe_cached_property:
         try:
             value = self.func(obj)
         except Exception as e:
-            log.error(e)
+            log.exception(e)
             value = None
 
         obj.__dict__[self.func.__name__] = value

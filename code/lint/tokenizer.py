@@ -5,6 +5,7 @@ import spacy
 from .utils import cached_class_property
 
 
+# TODO: Strip whitespace in raw.
 class Tokenizer:
 
     @classmethod
@@ -43,6 +44,9 @@ class Tokenizer:
             parsed_sent = self.nlp(sent.text_with_ws)
 
             for token in parsed_sent:
+
+                # Global character offset.
                 char_i = sent.start_char + token.idx
+
                 yield token, sent_i, word_i, char_i
                 word_i += 1
