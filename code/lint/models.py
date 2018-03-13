@@ -6,7 +6,7 @@ import spacy
 from pyspark.sql import SparkSession, types as T
 from collections import namedtuple
 
-from .conn import nlp
+from .tokenizer import Tokenizer
 
 
 class ModelMeta(type):
@@ -52,36 +52,46 @@ class Token(Model):
         T.StructField('dep', T.StringType()),
 
         # Position
+        T.StructField('sent_i', T.IntegerType()),
         T.StructField('word_i', T.IntegerType()),
         T.StructField('char_i', T.IntegerType()),
-        T.StructField('offset', T.FloatType()),
 
     ])
 
+
+class Text(Model):
+
+    schema = T.StructType([
+        T.StructField('raw', T.StringType()),
+        T.StructField('tokens', T.ArrayType(Token.schema)),
+    ])
+
     @classmethod
-    def parse(cls, text):
+    def parse(cls, raw):
         """Parse a raw text string.
 
         Args:
-            text (str)
+            raw (str)
 
         Returns: list[Token]
         """
-        doc = nlp(text)
+        tokens_iter = Tokenizer(raw)
 
-        return [
-            cls(
+        tokens = [
+            Token(
                 text=t.text,
                 lemma=t.lemma_,
                 pos=t.pos_,
                 tag=t.tag_,
                 dep=t.dep_,
-                word_i=t.i,
-                char_i=t.idx,
-                offset=(t.i / (len(doc)-1))
+                sent_i=sent_i,
+                word_i=word_i,
+                char_i=char_i,
             )
-            for t in doc
+            for t, sent_i, word_i, char_i in text.tokens()
         ]
+
+        return cls(raw=raw, tokens=tokens)
 
 
 class GaleNovel(Model):
@@ -95,6 +105,5 @@ class GaleNovel(Model):
         T.StructField('language', T.StringType()),
         T.StructField('pub_date_start', T.IntegerType()),
         T.StructField('ocr', T.FloatType()),
-        T.StructField('text', T.StringType()),
-        T.StructField('tokens', T.ArrayType(Token.schema)),
+        T.StructField('text', Text.schema),
     ])
