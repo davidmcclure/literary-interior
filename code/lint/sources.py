@@ -4,7 +4,7 @@ from lxml import etree
 
 from . import fs
 from .utils import safe_cached_property
-from .models import Token, GaleNovel
+from .models import Text, GaleNovel
 
 
 class GaleNovelXML:
@@ -50,13 +50,13 @@ class GaleNovelXML:
         return float(self.tree.find('//ocr').text)
 
     @safe_cached_property
-    def text(self):
+    def raw_text(self):
         tokens = self.tree.findall('//page[@type="bodyPage"]//wd')
         return ' '.join([t.text for t in tokens])
 
     @safe_cached_property
-    def tokens(self):
-        return Token.parse(self.text)
+    def text(self):
+        return Text.parse(self.raw_text)
 
     def row(self):
         """Assemble a DF row.

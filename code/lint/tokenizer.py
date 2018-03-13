@@ -2,7 +2,7 @@
 
 import spacy
 
-from .utils import cached_class_property, safe_cached_property
+from .utils import cached_class_property
 
 
 class Tokenizer:

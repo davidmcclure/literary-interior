@@ -88,7 +88,7 @@ class Text(Model):
                 word_i=word_i,
                 char_i=char_i,
             )
-            for t, sent_i, word_i, char_i in text.tokens()
+            for t, sent_i, word_i, char_i in tokens_iter
         ]
 
         return cls(raw=raw, tokens=tokens)
