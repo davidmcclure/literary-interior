@@ -71,5 +71,6 @@ class GaleNovelXML:
 
 class ChicagoNovelMetadata:
 
-    def __init__(self, row, text_root):
-        pass
+    def __init__(self, row, text_dir):
+        self.row = row
+        self.text_dir = text_dir

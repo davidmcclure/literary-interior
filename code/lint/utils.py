@@ -41,7 +41,7 @@ class cached_class_property:
 
 
 def read_csv(path):
-    """Read a CSV from local / S3, generate lines.
+    """Generate row dicts from CSV.
     """
     fh = fs.read(path)
     lines = fh.read().decode().splitlines()
