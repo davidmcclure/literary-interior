@@ -77,6 +77,7 @@ class Text(Model):
         """
         tokens_iter = Tokenizer(raw)
 
+        # TODO: Save parse head pointers.
         tokens = [
             Token(
                 text=t.text,

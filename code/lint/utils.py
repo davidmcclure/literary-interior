@@ -2,7 +2,7 @@
 
 import csv
 
-from . import fs
+from . import fs, log
 
 
 class safe_cached_property:
@@ -18,7 +18,7 @@ class safe_cached_property:
         try:
             value = self.func(obj)
         except Exception as e:
-            # TODO: Log failure?
+            log.error(e)
             value = None
 
         obj.__dict__[self.func.__name__] = value
