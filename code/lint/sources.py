@@ -120,7 +120,7 @@ class ChicagoNovelMetadata:
         return self.fields['CLEAN?'] == 'c'
 
     def raw_text(self):
-        fh = fs.read(os.path.join(self.text_dir, self.filename))
+        fh = fs.read(os.path.join(self.text_dir, self.filename()))
         return fh.read().decode()
 
     def text(self):

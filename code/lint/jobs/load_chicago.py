@@ -25,6 +25,7 @@ def main(csv_path, text_dir, dest):
 
     df = (rows
         .map(lambda r: parse_row(r, text_dir))
+        .filter(bool)
         .toDF(ChicagoNovel.schema))
 
     df.write.mode('overwrite').parquet(dest)
