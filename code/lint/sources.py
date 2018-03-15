@@ -6,7 +6,6 @@ from lxml import etree
 
 from . import fs
 from .models import Text, GaleNovel, ChicagoNovel
-from .utils import safe_cached_property
 
 
 class GaleNovelXML:
