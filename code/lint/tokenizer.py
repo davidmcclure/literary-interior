@@ -26,7 +26,7 @@ class Tokenizer:
 
     @cached_class_property
     def nlp(self):
-        return spacy.load('en')
+        return spacy.load('en', disable=['ner', 'textcat'])
 
     def sents(self):
         """Tokenize sentences.
