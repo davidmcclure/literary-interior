@@ -70,7 +70,6 @@ def _scan_s3(path, pattern=None):
             yield os.path.join('s3://', bucket.name, obj.key)
 
 
-# TODO: Rename to open, since we're returning a file-like object.
 def read(path):
     """Read a file to BytesIO.
 

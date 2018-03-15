@@ -61,10 +61,6 @@ class GaleNovelXML:
         return Text.parse(self.raw_text)
 
     def row(self):
-        """Assemble a DF row.
-
-        Returns: GaleNovel
-        """
         return GaleNovel(**{
             name: getattr(self, name)
             for name in GaleNovel.schema.names
@@ -127,10 +123,6 @@ class ChicagoNovelMetadata:
         return Text.parse(self.raw_text())
 
     def row(self):
-        """Assemble a DF row.
-
-        Returns: ChicagoNovel
-        """
         return ChicagoNovel(**{
             name: getattr(self, name)()
             for name in ChicagoNovel.schema.names
