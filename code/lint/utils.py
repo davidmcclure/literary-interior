@@ -63,6 +63,5 @@ class cached_class_property:
 def read_csv(path):
     """Generate row dicts from CSV.
     """
-    fh = fs.read(path)
-    lines = fh.read().decode().splitlines()
+    lines = fs.read(path).read().decode().splitlines()
     yield from csv.DictReader(lines)

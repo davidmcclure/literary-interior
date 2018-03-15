@@ -2,7 +2,6 @@
 
 import click
 
-from lint import fs
 from lint.utils import read_csv, try_or_none
 from lint.conn import spark, sc
 from lint.sources import ChicagoNovelMetadata
