@@ -132,3 +132,16 @@ class ChicagoNovel(Model):
         T.StructField('clean', T.BooleanType()),
         T.StructField('text', Text.schema, nullable=False),
     ])
+
+
+class Novel(Model):
+
+    schema = T.StructType([
+        T.StructField('corpus', T.StringType(), nullable=False),
+        T.StructField('identifier', T.StringType(), nullable=False),
+        T.StructField('title', T.StringType()),
+        T.StructField('author_last', T.StringType()),
+        T.StructField('author_first', T.StringType()),
+        T.StructField('pub_year', T.IntegerType()),
+        T.StructField('text', Text.schema, nullable=False),
+    ])
