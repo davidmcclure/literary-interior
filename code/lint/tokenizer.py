@@ -7,7 +7,6 @@ from tqdm import tqdm
 from .utils import cached_class_property
 
 
-# TODO: Strip whitespace in raw.
 class Tokenizer:
 
     @classmethod

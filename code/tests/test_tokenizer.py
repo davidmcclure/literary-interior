@@ -133,3 +133,17 @@ def test_store_sent_index():
         ('4', 1),
         ('.', 1),
     ]
+
+
+def test_strip_linebreaks():
+
+    text = Text.parse('1\n2\r3\t4')
+
+    assert text.raw == '1 2 3 4'
+
+    assert [(t.text, t.word_i) for t in text.tokens] == [
+        ('1', 0),
+        ('2', 1),
+        ('3', 2),
+        ('4', 3),
+    ]

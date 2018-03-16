@@ -6,6 +6,7 @@ import spacy
 from pyspark.sql import SparkSession, types as T
 from collections import namedtuple
 
+from .utils import clean_text
 from .tokenizer import Tokenizer
 
 
@@ -75,7 +76,9 @@ class Text(Model):
 
         Returns: list[Token]
         """
-        tokens_iter = Tokenizer(raw)
+        clean = clean_text(raw)
+
+        tokens_iter = Tokenizer(clean)
 
         # TODO: Save parse head pointers.
         tokens = [
@@ -92,7 +95,7 @@ class Text(Model):
             for t, sent_i, word_i, char_i in tokens_iter
         ]
 
-        return cls(raw=raw, tokens=tokens)
+        return cls(raw=clean, tokens=tokens)
 
 
 class GaleNovel(Model):

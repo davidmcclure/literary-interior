@@ -9,7 +9,7 @@ from tests import FIXTURES_ROOT
 from tests.utils import read_yaml
 
 
-cases = read_yaml(__file__, 'gale.yml')
+cases = read_yaml(__file__, 'cases.yml')
 
 
 SRC = os.path.join(FIXTURES_ROOT, 'gale')
@@ -27,7 +27,7 @@ def test_load_chicago(df, psmid, fields):
 
     row = df.filter(df.psmid == psmid).head()
 
-    assert fields['text'] in row.text.raw
-
     for key, val in fields['metadata'].items():
         assert getattr(row, key) == val
+
+    assert fields['text'] in row.text.raw

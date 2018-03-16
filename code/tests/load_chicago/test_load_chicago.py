@@ -9,7 +9,7 @@ from tests import FIXTURES_ROOT
 from tests.utils import read_yaml
 
 
-cases = read_yaml(__file__, 'chicago.yml')
+cases = read_yaml(__file__, 'cases.yml')
 
 
 CSV_PATH = os.path.join(FIXTURES_ROOT, 'chicago/CHICAGO_NOVEL_CORPUS_METADATA/CHICAGO_CORPUS_NOVELS.csv')
@@ -19,8 +19,6 @@ DEST = '/tmp/chicago.parquet'
 
 @pytest.fixture(scope='module')
 def df():
-    """Run jobs, provide result.
-    """
     main.callback(CSV_PATH, TEXT_DIR, DEST)
     return spark.read.parquet(DEST)
 
@@ -30,7 +28,7 @@ def test_load_chicago(df, book_id, fields):
 
     row = df.filter(df.book_id == book_id).head()
 
-    assert fields['text'] in row.text.raw
-
     for key, val in fields['metadata'].items():
         assert getattr(row, key) == val
+
+    assert fields['text'] in row.text.raw

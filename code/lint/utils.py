@@ -1,5 +1,6 @@
 
 
+import re
 import logging
 import csv
 
@@ -45,3 +46,9 @@ def read_csv(path):
     """
     lines = fs.read(path).read().decode().splitlines()
     yield from csv.DictReader(lines)
+
+
+def clean_text(text):
+    """Clean a raw text string.
+    """
+    return re.sub('\s+', ' ', text.strip())
