@@ -40,14 +40,14 @@ class GaleNovelXML:
         return int(raw[:4])
 
     def ocr(self):
-        return float(self.tree.findtext('//ocr'))
+        return round(float(self.tree.findtext('//ocr')))
 
     def raw_text(self):
         tokens = self.tree.findall('//page[@type="bodyPage"]//wd')
         return ' '.join([t.text for t in tokens if t.text])
 
     def text(self):
-        return Text.parse(self.raw_text)
+        return Text.parse(self.raw_text())
 
     def row(self):
         return GaleNovel(**{

@@ -3,8 +3,8 @@
 import os
 import pytest
 
-from lint.jobs.load_chicago import main
 from lint.conn import spark
+from lint.jobs.load_chicago import main
 from tests import FIXTURES_ROOT
 from tests.utils import read_yaml
 

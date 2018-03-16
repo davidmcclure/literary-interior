@@ -2,6 +2,8 @@
 
 import spacy
 
+from tqdm import tqdm
+
 from .utils import cached_class_property
 
 
@@ -39,7 +41,7 @@ class Tokenizer:
         Yields: token, sent idx, word idx, char idx.
         """
         word_i = 0
-        for sent_i, sent in enumerate(self.sents()):
+        for sent_i, sent in enumerate(tqdm(self.sents())):
 
             parsed_sent = self.nlp(sent.text_with_ws)
 

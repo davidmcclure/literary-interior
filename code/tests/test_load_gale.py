@@ -3,34 +3,31 @@
 import os
 import pytest
 
-from lint.jobs.load_gale import main
 from lint.conn import spark
-from tests.utils import read_yaml
+from lint.jobs.load_gale import main
 from tests import FIXTURES_ROOT
+from tests.utils import read_yaml
 
 
-# cases = read_yaml(__file__, 'test_load_gale.yml')
+cases = read_yaml(__file__, 'gale.yml')
 
 
-# SRC = os.path.join(FIXTURES_ROOT, 'chicago/gale')
-# DEST = '/tmp/gale.parquet'
+SRC = os.path.join(FIXTURES_ROOT, 'gale')
+DEST = '/tmp/gale.parquet'
 
 
-# @pytest.fixture(scope='module')
-# def df():
-    # """Run jobs, provide result.
-    # """
-    # main.callback(SRC, DEST)
-    # return spark.read.parquet(DEST)
+@pytest.fixture(scope='module')
+def df():
+    main.callback(SRC, DEST)
+    return spark.read.parquet(DEST)
 
 
-# @pytest.mark.parametrize('psmid,fields', cases.items())
-# def test_load_chicago(df, psmid, fields):
+@pytest.mark.parametrize('psmid,fields', cases.items())
+def test_load_chicago(df, psmid, fields):
 
-    # row = df.filter(df.psmid == psmid).head()
+    row = df.filter(df.psmid == psmid).head()
 
-    # text = fields.pop('text')
-    # assert text in row.text.raw
+    assert fields['text'] in row.text.raw
 
-    # for key, val in fields.items():
-        # assert getattr(row, key) == val
+    for key, val in fields['metadata'].items():
+        assert getattr(row, key) == val

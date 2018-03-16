@@ -105,7 +105,7 @@ class GaleNovel(Model):
         T.StructField('author_last', T.StringType()),
         T.StructField('language', T.StringType()),
         T.StructField('pub_date_start', T.IntegerType()),
-        T.StructField('ocr', T.FloatType()),
+        T.StructField('ocr', T.IntegerType()),
         T.StructField('text', Text.schema, nullable=False),
     ])
 
