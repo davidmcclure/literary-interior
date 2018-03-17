@@ -7,7 +7,7 @@ import os
 import pytest
 
 from lint.conn import spark
-from lint.jobs import load_gale, load_chicago
+from lint.jobs import load_gale, load_chicago, merge_novels
 from . import paths
 
 
@@ -31,3 +31,16 @@ def chicago_novels():
     )
 
     return spark.read.parquet(paths.CHICAGO_DEST)
+
+
+@pytest.fixture(scope='module')
+def novels(gale_novels, chicago_novels):
+    """Merge novels.
+    """
+    merge_novels.main.callback(
+        paths.GALE_DEST,
+        paths.CHICAGO_DEST,
+        paths.NOVELS_DEST,
+    )
+
+    return spark.read.parquet(paths.NOVELS_DEST)
