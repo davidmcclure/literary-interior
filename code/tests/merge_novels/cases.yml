@@ -1,0 +1,19 @@
+---
+
+- corpus: chicago
+  identifier: 1
+  metadata:
+    title: Democracy
+    author_last: Adams
+    author_first: Henry
+    pub_year: 1880
+  text: After talking of Herbert Spencer for an entire evening with a very
+
+- corpus: gale
+  identifier: AMFCF0002-C00000-B0000400
+  metadata:
+    title: 'Illustrated Lives and Adventures of the Desperadoes of the New World: Containing an Account of the Different Modes of Lynching, the Cane Hill Murders, the Victims, the Execution, the Justicifation, Etc., Etc: As Well as the Lives of the Principal Duellist'
+    author_last: Arrington
+    author_first: Alfred
+    pub_year: 1849
+  text: The court of the lynchers has been migratory.
