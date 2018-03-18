@@ -143,5 +143,7 @@ class Novel(Model):
         T.StructField('author_last', T.StringType()),
         T.StructField('author_first', T.StringType()),
         T.StructField('pub_year', T.IntegerType()),
+        T.StructField('chicago_libraries', T.IntegerType()),
+        T.StructField('chicago_clean', T.BooleanType()),
         T.StructField('text', Text.schema, nullable=False),
     ])

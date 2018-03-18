@@ -35,6 +35,8 @@ def main(gale_src, chicago_src, dest):
         chicago.auth_last.alias('author_last'),
         chicago.auth_first.alias('author_first'),
         chicago.publ_date.alias('pub_year'),
+        chicago.libraries.alias('chicago_libraries'),
+        chicago.clean.alias('chicago_clean'),
         chicago.text,
     )
 

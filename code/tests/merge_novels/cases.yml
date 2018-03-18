@@ -7,6 +7,8 @@
     author_last: Adams
     author_first: Henry
     pub_year: 1880
+    chicago_libraries: 152
+    chicago_clean: true
   text: After talking of Herbert Spencer for an entire evening with a very
 
 - corpus: gale
@@ -16,4 +18,6 @@
     author_last: Arrington
     author_first: Alfred
     pub_year: 1849
+    chicago_libraries: null
+    chicago_clean: null
   text: The court of the lynchers has been migratory.
