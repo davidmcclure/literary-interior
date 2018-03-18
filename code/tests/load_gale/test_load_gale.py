@@ -9,9 +9,9 @@ cases = read_yaml(__file__, 'cases.yml')
 
 
 @pytest.mark.parametrize('psmid,fields', cases.items())
-def test_load_chicago(gale_novels, psmid, fields):
+def test_load_gale(gale_df, psmid, fields):
 
-    row = gale_novels.filter(gale_novels.psmid == psmid).head()
+    row = gale_df.filter(gale_df.psmid == psmid).head()
 
     for key, val in fields['metadata'].items():
         assert getattr(row, key) == val

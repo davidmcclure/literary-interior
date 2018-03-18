@@ -12,7 +12,7 @@ from . import paths
 
 
 @pytest.fixture(scope='module')
-def gale_novels():
+def gale_df():
     """Load Gale novels.
     """
     load_gale.main.callback(paths.GALE_SRC, paths.GALE_DEST)
@@ -21,7 +21,7 @@ def gale_novels():
 
 
 @pytest.fixture(scope='module')
-def chicago_novels():
+def chicago_df():
     """Load Chicago novels.
     """
     load_chicago.main.callback(
@@ -34,7 +34,7 @@ def chicago_novels():
 
 
 @pytest.fixture(scope='module')
-def novels(gale_novels, chicago_novels):
+def novels_df(gale_df, chicago_df):
     """Merge novels.
     """
     merge_novels.main.callback(
