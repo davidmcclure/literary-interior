@@ -1,0 +1,14 @@
+---
+
+- name: Start container
+  docker_container:
+    image: '{{ docker_image }}'
+    name: '{{ docker_name }}'
+    command: '{{ command }}'
+    state: started
+    network_mode: host
+    pull: true
+    restart: true
+    volumes:
+      - /etc/spark:/opt/spark-2.2.0/conf
+      - /mnt:/mnt

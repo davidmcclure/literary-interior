@@ -1,0 +1,7 @@
+---
+
+- name: Provision a cluster
+  hosts: localhost
+  roles:
+    - ec2-instance/roles/master
+    - ec2-instance/roles/worker

@@ -1,0 +1,9 @@
+---
+
+- name: Deploy master
+  become: yes
+  hosts:
+    - tag_lint_spark_master
+    - tag_lint_spark_worker
+  roles:
+    - spark

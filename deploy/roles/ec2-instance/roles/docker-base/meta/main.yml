@@ -1,0 +1,11 @@
+---
+
+dependencies:
+
+  - role: ec2-instance
+    # Ubuntu 14
+    ec2_image: ami-9eaa1cf6
+    ec2_name: docker-base
+    ec2_tag: docker-base
+    ec2_instance_type: m3.medium
+    ec2_group: spark

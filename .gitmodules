@@ -1,3 +1,6 @@
 [submodule "code/tests/fixtures"]
 	path = code/tests/fixtures
 	url = https://github.com/davidmcclure/lint-fixtures.git
+[submodule "deploy/roles/docker"]
+	path = deploy/roles/docker
+	url = https://github.com/angstwad/docker.ubuntu.git

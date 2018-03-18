@@ -1,0 +1,36 @@
+---
+
+docker_image: dclure/lint
+docker_name: lint
+
+# spark-defaults.conf
+# -------------------
+
+spark_master_port: 7077
+spark_master_url: spark://{{ spark_master_host }}:{{ spark_master_port }}
+
+spark_tasks_per_core: 3
+
+spark_default_parallelism: '{{
+  spark_worker_count|int *
+  spark_worker_vcpus|int *
+  spark_tasks_per_core
+}}'
+
+spark_packages:
+  - org.apache.hadoop:hadoop-aws:2.7.3
+
+spark_executor_memory: 50g
+spark_driver_memory: 2g
+spark_task_max_failures: 20
+spark_local_dir: /mnt/spark
+
+# spark-env.sh
+# ------------
+
+# Use EC2 public DNS.
+spark_public_dns: >
+  `wget -q -O - http://169.254.169.254/latest/meta-data/public-hostname ||
+   wget -q -O - http://169.254.169.254/latest/meta-data/local-ipv4`
+
+spark_max_files: 100000

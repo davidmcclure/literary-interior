@@ -1,0 +1,25 @@
+---
+
+- name: Start the instances
+  register: servers
+  ec2:
+
+    region: '{{ ec2_region }}'
+    image: '{{ ec2_image }}'
+    keypair: '{{ ec2_keypair }}'
+    group: '{{ ec2_group }}'
+
+    instance_type: '{{ ec2_instance_type }}'
+    vpc_subnet_id: '{{ ec2_subnet }}'
+
+    assign_public_ip: yes
+    wait: yes
+
+    exact_count: '{{ ec2_instance_count }}'
+
+    instance_tags:
+      Name: '{{ ec2_name }}'
+      mit: '{{ ec2_tag }}'
+
+    count_tag:
+      mit: '{{ ec2_tag }}'

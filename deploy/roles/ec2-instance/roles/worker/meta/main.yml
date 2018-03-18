@@ -1,0 +1,10 @@
+---
+
+dependencies:
+
+  - role: ec2-instance
+    ec2_name: spark-worker
+    ec2_tag: spark-worker
+    ec2_instance_type: c3.8xlarge
+    ec2_instance_count: 2
+    ec2_group: spark
