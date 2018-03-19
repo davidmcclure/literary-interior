@@ -4,14 +4,15 @@ import click
 
 from pyspark.sql.functions import lit
 
+from lint import paths
 from lint.conn import spark, sc
 from lint.models import Novel
 
 
 @click.command()
-@click.argument('gale_src', type=click.Path())
-@click.argument('chicago_src', type=click.Path())
-@click.argument('dest', type=click.Path())
+@click.option('--gale_src', default=paths.GALE_DEST)
+@click.option('--chicago_src', default=paths.CHICAGO_DEST)
+@click.option('--dest', default=paths.NOVELS_DEST)
 def main(gale_src, chicago_src, dest):
     """Ingest Gale.
     """

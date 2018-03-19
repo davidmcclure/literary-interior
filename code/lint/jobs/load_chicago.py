@@ -2,6 +2,7 @@
 
 import click
 
+from lint import paths
 from lint.utils import read_csv, try_or_none
 from lint.conn import spark, sc
 from lint.sources import ChicagoNovelMetadata
@@ -14,9 +15,9 @@ def parse_row(row, text_dir):
 
 
 @click.command()
-@click.argument('csv_path', type=click.Path())
-@click.argument('text_dir', type=click.Path())
-@click.argument('dest', type=click.Path())
+@click.option('--csv_path', default=paths.CHICAGO_CSV_PATH)
+@click.option('--text_dir', default=paths.CHICAGO_TEXT_DIR)
+@click.option('--dest', default=paths.CHICAGO_DEST)
 def main(csv_path, text_dir, dest):
     """Ingest Chicago novels.
     """

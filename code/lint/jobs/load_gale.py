@@ -2,7 +2,7 @@
 
 import click
 
-from lint import fs
+from lint import fs, paths
 from lint.utils import try_or_none
 from lint.conn import spark, sc
 from lint.sources import GaleNovelXML
@@ -15,8 +15,8 @@ def parse_xml(path):
 
 
 @click.command()
-@click.argument('src', type=click.Path())
-@click.argument('dest', type=click.Path())
+@click.option('--src', default=paths.GALE_SRC)
+@click.option('--dest', default=paths.GALE_DEST)
 def main(src, dest):
     """Ingest Gale.
     """
