@@ -2,6 +2,6 @@
 
 - name: Deploy image
   become: yes
-  hosts: tag_lint_docker_base
+  hosts: tag_role_docker_base
   roles:
     - docker

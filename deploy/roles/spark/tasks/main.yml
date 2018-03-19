@@ -15,7 +15,7 @@
     region: '{{ ec2_region }}'
     filters:
       instance-state-name: running
-      'tag:mit': spark-master
+      'tag:role': spark-master
 
 - name: Set master host
   set_fact:
@@ -25,12 +25,12 @@
 - name: Set worker count
   set_fact:
     spark_worker_count:
-      '{{ groups["tag_mit_spark_worker"] | length }}'
+      '{{ groups["tag_role_spark_worker"] | length }}'
 
 - name: Set worker CPU count
   set_fact:
     spark_worker_vcpus:
-      '{{ hostvars[groups["tag_mit_spark_worker"][0]]
+      '{{ hostvars[groups["tag_role_spark_worker"][0]]
       ["ansible_processor_vcpus"] }}'
 
 - name: Create config directory
@@ -48,13 +48,13 @@
 
 - name: Start master
   include_tasks: start.yml
-  when: '"tag_mit_spark_master" in group_names'
+  when: '"tag_role_spark_master" in group_names'
   vars:
     command: spark-class org.apache.spark.deploy.master.Master
 
 - name: Start workers
   include_tasks: start.yml
-  when: '"tag_mit_spark_worker" in group_names'
+  when: '"tag_role_spark_worker" in group_names'
   vars:
     command:
       'spark-class org.apache.spark.deploy.worker.Worker

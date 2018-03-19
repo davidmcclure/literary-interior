@@ -19,7 +19,7 @@
 
     instance_tags:
       Name: '{{ ec2_name }}'
-      mit: '{{ ec2_tag }}'
+      role: '{{ ec2_tag }}'
 
     count_tag:
-      mit: '{{ ec2_tag }}'
+      role: '{{ ec2_tag }}'
