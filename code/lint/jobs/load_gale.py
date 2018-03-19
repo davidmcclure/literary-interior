@@ -24,7 +24,7 @@ def main(src, dest):
 
     paths = sc.parallelize(paths, len(paths))
 
-    df = paths.map(parse_xml).toDF(GaleNovel.schema)
+    df = paths.map(parse_xml).filter(bool).toDF(GaleNovel.schema)
 
     df.write.mode('overwrite').parquet(dest)
 
