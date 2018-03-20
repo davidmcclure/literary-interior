@@ -7,6 +7,12 @@ from tqdm import tqdm
 from .utils import cached_class_property
 
 
+nlp_sents = spacy.blank('en')
+nlp_sents.add_pipe(nlp_sents.create_pipe('sentencizer'))
+
+nlp = spacy.load('en', disable=['ner', 'textcat'])
+
+
 class Tokenizer:
 
     @classmethod
@@ -19,20 +25,20 @@ class Tokenizer:
     def __init__(self, raw):
         self.raw = raw
 
-    @cached_class_property
-    def nlp_sents(self):
-        nlp = spacy.blank('en')
-        nlp.add_pipe(nlp.create_pipe('sentencizer'))
-        return nlp
+    # @cached_class_property
+    # def nlp_sents(self):
+        # nlp = spacy.blank('en')
+        # nlp.add_pipe(nlp.create_pipe('sentencizer'))
+        # return nlp
 
-    @cached_class_property
-    def nlp(self):
-        return spacy.load('en', disable=['ner', 'textcat'])
+    # @cached_class_property
+    # def nlp(self):
+        # return spacy.load('en', disable=['ner', 'textcat'])
 
     def sents(self):
         """Tokenize sentences.
         """
-        return list(self.nlp_sents(self.raw).sents)
+        return list(nlp_sents(self.raw).sents)
 
     def __iter__(self):
         """Generate tokens.
@@ -42,7 +48,7 @@ class Tokenizer:
         word_i = 0
         for sent_i, sent in enumerate(tqdm(self.sents())):
 
-            parsed_sent = self.nlp(sent.text_with_ws)
+            parsed_sent = nlp(sent.text_with_ws)
 
             for token in parsed_sent:
 
