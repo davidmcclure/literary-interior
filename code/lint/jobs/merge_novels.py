@@ -9,9 +9,9 @@ from lint.models import Novel
 
 
 @click.command()
-@click.option('--gale_src', type=click.Path())
-@click.option('--chicago_src', type=click.Path())
-@click.option('--dest', type=click.Path())
+@click.argument('gale_src', type=click.Path())
+@click.argument('chicago_src', type=click.Path())
+@click.argument('dest', type=click.Path())
 def main(gale_src, chicago_src, dest):
     """Ingest Gale.
     """

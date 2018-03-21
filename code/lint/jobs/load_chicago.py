@@ -13,9 +13,9 @@ def parse_row(row, text_dir):
 
 
 @click.command()
-@click.option('--csv_path', type=click.Path())
-@click.option('--text_dir', type=click.Path())
-@click.option('--dest', type=click.Path())
+@click.argument('csv_path', type=click.Path())
+@click.argument('text_dir', type=click.Path())
+@click.argument('dest', type=click.Path())
 def main(csv_path, text_dir, dest):
     """Ingest Chicago novels.
     """

@@ -14,8 +14,8 @@ def parse_xml(path):
 
 
 @click.command()
-@click.option('--src', type=click.Path())
-@click.option('--dest', type=click.Path())
+@click.argument('src', type=click.Path())
+@click.argument('dest', type=click.Path())
 def main(src, dest):
     """Ingest Gale.
     """
