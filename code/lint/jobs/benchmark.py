@@ -2,12 +2,12 @@
 
 import time
 
-from lint.conn import spark, sc
-from lint.models import Text
+from lint.conn import sc
 
 
 def work(i):
-    return Text.parse('Does this work?')
+    time.sleep(1)
+    return i+1
 
 
 def main():
