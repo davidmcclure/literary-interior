@@ -2,9 +2,8 @@
 
 import click
 
-from lint import fs, paths
-from lint.utils import try_or_none
-from lint.conn import spark, sc
+from lint import fs
+from lint.utils import try_or_none, get_spark
 from lint.sources import GaleNovelXML
 from lint.models import GaleNovel
 
@@ -15,16 +14,21 @@ def parse_xml(path):
 
 
 @click.command()
-@click.option('--src', default=paths.GALE_SRC)
-@click.option('--dest', default=paths.GALE_DEST)
+@click.option('--src', type=click.Path())
+@click.option('--dest', type=click.Path())
 def main(src, dest):
     """Ingest Gale.
     """
+    sc, _ = get_spark()
+
     paths = list(fs.scan(src, '\.xml'))
 
     paths = sc.parallelize(paths, len(paths))
 
-    df = paths.map(parse_xml).filter(bool).toDF(GaleNovel.schema)
+    df = (paths
+        .map(parse_xml)
+        .filter(bool)
+        .toDF(GaleNovel.schema))
 
     df.write.mode('overwrite').parquet(dest)
 

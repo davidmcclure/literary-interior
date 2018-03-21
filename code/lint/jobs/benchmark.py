@@ -2,7 +2,7 @@
 
 import time
 
-from lint.conn import sc
+from lint.utils import get_spark
 
 
 def work(i):
@@ -11,6 +11,7 @@ def work(i):
 
 
 def main():
+    sc, _ = get_spark()
     data = sc.parallelize(range(100))
     result = data.map(work).collect()
     print(result)

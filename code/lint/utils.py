@@ -4,9 +4,21 @@ import re
 import logging
 import csv
 
+from pyspark import SparkContext
+from pyspark.sql import SparkSession
+
 from functools import wraps
 
 from . import fs
+
+
+def get_spark():
+    """Get spark connections.
+    """
+    sc = SparkContext.getOrCreate()
+    spark = SparkSession(sc).builder.getOrCreate()
+
+    return sc, spark
 
 
 def try_or_none(func):

@@ -6,9 +6,13 @@ findspark.init()
 import os
 import pytest
 
-from lint.conn import spark
 from lint.jobs import load_gale, load_chicago, merge_novels
+from lint.utils import get_spark
+
 from . import paths
+
+
+_, spark = get_spark()
 
 
 @pytest.fixture(scope='module')

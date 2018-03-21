@@ -4,13 +4,14 @@ import os
 import re
 import scandir
 import io
+import boto3
 
 from urllib.parse import urlparse
 
-from .conn import s3
-
 
 # TODO: Break into separate package, test.
+
+s3 = boto3.resource('s3')
 
 
 def is_s3(path):

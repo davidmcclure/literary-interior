@@ -2,11 +2,9 @@
 
 import click
 
-from lint import paths
-from lint.utils import read_csv, try_or_none
-from lint.conn import spark, sc
 from lint.sources import ChicagoNovelMetadata
 from lint.models import ChicagoNovel
+from lint.utils import read_csv, try_or_none, get_spark
 
 
 @try_or_none
@@ -15,12 +13,14 @@ def parse_row(row, text_dir):
 
 
 @click.command()
-@click.option('--csv_path', default=paths.CHICAGO_CSV_PATH)
-@click.option('--text_dir', default=paths.CHICAGO_TEXT_DIR)
-@click.option('--dest', default=paths.CHICAGO_DEST)
+@click.option('--csv_path', type=click.Path())
+@click.option('--text_dir', type=click.Path())
+@click.option('--dest', type=click.Path())
 def main(csv_path, text_dir, dest):
     """Ingest Chicago novels.
     """
+    sc, _ = get_spark()
+
     rows = sc.parallelize(read_csv(csv_path))
 
     df = (rows
