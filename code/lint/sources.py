@@ -47,7 +47,8 @@ class GaleNovelXML:
         return ' '.join([t.text for t in tokens if t.text])
 
     def text(self):
-        return Text.parse(self.raw_text())
+        # return Text.parse(self.raw_text())
+        return None
 
     def row(self):
         return GaleNovel(**{
