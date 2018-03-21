@@ -23,7 +23,10 @@ spark_packages:
 spark_executor_memory: 50g
 spark_driver_memory: 2g
 spark_task_max_failures: 20
+
 spark_local_dir: /mnt/spark
+spark_derby_dir: /mnt/derby
+spark_warehouse_dir: /mnt/spark-warehouse
 
 # spark-env.sh
 # ------------

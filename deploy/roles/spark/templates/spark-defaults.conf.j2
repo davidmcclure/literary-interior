@@ -9,8 +9,6 @@ spark.driver.memory {{ spark_driver_memory }}
 
 spark.executor.memory {{ spark_executor_memory }}
 
-spark.local.dir {{ spark_local_dir }}
-
 spark.task.maxFailures {{ spark_task_max_failures }}
 
 # Don't write data to _temporary.
@@ -18,3 +16,9 @@ spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version 2
 
 # Avoid memory errors when reading large dfs.
 spark.sql.parquet.enableVectorizedReader false
+
+spark.local.dir {{ spark_local_dir }}
+
+spark.driver.extraJavaOptions -Dderby.system.home={{ spark_derby_dir }}
+
+spark.sql.warehouse.dir {{ spark_warehouse_dir }}
