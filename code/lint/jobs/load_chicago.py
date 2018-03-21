@@ -21,7 +21,9 @@ def main(csv_path, text_dir, dest):
     """
     sc, _ = get_spark()
 
-    rows = sc.parallelize(read_csv(csv_path))
+    rows = list(read_csv(csv_path))
+
+    rows = sc.parallelize(rows, len(rows))
 
     df = (rows
         .map(lambda r: parse_row(r, text_dir))
