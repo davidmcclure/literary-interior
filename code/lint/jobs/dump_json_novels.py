@@ -18,9 +18,20 @@ def main(src, dest, fraction, seed, partitions):
 
     novels = spark.read.parquet(src)
 
-    novels = novels.sample(False, fraction, seed).coalesce(partitions)
+    metadata = [n for n in novels.schema.names if n != 'text']
 
-    novels.write.mode('overwrite').json(dest)
+    novels = novels.select(
+        *metadata,
+        novels.text.tokens.text.alias('token'),
+        novels.text.tokens.tag.alias('tag'),
+    )
+
+    novels.printSchema()
+
+    novels = novels.sample(False, fraction, seed)
+    novels = novels.coalesce(partitions)
+
+    novels.write.option('compression', 'bzip2').mode('overwrite').json(dest)
 
 
 if __name__ == '__main__':
