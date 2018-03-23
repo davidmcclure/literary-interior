@@ -10,7 +10,7 @@ from lint.utils import get_spark
 @click.argument('dest', type=click.Path())
 @click.option('--fraction', type=float, default=0.1)
 @click.option('--seed', type=int, default=1)
-@click.option('--partitions', type=int, default=100)
+@click.option('--partitions', type=int, default=500)
 def main(src, dest, fraction, seed, partitions):
     """Sample novels, dump JSON.
     """
