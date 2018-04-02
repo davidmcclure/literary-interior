@@ -3,6 +3,7 @@
 import re
 import logging
 import csv
+import math
 
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
@@ -64,3 +65,20 @@ def clean_text(text):
     """Clean a raw text string.
     """
     return re.sub('\s+', ' ', text.strip())
+
+
+def zip_offset(seq):
+    """Yield (item, 0-1 offset).
+    """
+    size = len(seq)
+    for i, item in enumerate(seq):
+        offset = i / (size - 1) if (size - 1) else 0
+        yield item, offset
+
+
+def zip_bin(seq, bin_count):
+    """Yield (item, bin)
+    """
+    for item, offset in zip_offset(seq):
+        bin = math.floor(offset * bin_count) if offset < 1 else bin_count - 1
+        yield item, bin
