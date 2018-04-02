@@ -20,7 +20,7 @@ spark_default_parallelism: '{{
 spark_packages:
   - org.apache.hadoop:hadoop-aws:2.7.3
 
-spark_executor_memory: 50g
+spark_executor_memory: 40g
 spark_driver_memory: 2g
 spark_task_max_failures: 20
 

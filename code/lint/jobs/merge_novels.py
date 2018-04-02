@@ -12,7 +12,6 @@ from lint.models import Novel
 @click.argument('gale_src', type=click.Path())
 @click.argument('chicago_src', type=click.Path())
 @click.argument('dest', type=click.Path())
-@click.option('--partitions', type=int, default=1000)
 def main(gale_src, chicago_src, dest, partitions):
     """Ingest Gale.
     """
@@ -44,10 +43,6 @@ def main(gale_src, chicago_src, dest, partitions):
     )
 
     rdd = sc.union([gale_unified.rdd, chicago_unified.rdd])
-
-    # Force repartition.
-    rdd = rdd.repartition(partitions)
-    rdd.first()
 
     rdd = rdd.map(Novel.from_rdd)
 
