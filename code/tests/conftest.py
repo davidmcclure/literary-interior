@@ -45,6 +45,7 @@ def novels_df(gale_df, chicago_df):
         paths.GALE_DEST,
         paths.CHICAGO_DEST,
         paths.NOVELS_DEST,
+        partitions=10,
     )
 
     return spark.read.parquet(paths.NOVELS_DEST)
