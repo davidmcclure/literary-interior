@@ -12,7 +12,7 @@ from lint.models import Novel
 @click.argument('gale_src', type=click.Path())
 @click.argument('chicago_src', type=click.Path())
 @click.argument('dest', type=click.Path())
-def main(gale_src, chicago_src, dest, partitions):
+def main(gale_src, chicago_src, dest):
     """Ingest Gale.
     """
     sc, spark = get_spark()
