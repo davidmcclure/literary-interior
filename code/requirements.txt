@@ -12,3 +12,4 @@ boto3
 click
 jupyter
 PyYAML
+numpy
