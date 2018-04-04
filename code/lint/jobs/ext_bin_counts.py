@@ -44,7 +44,7 @@ def _ext_bin_counts(vocab, bin_count=20):
 @click.argument('src', type=click.Path())
 @click.argument('dest', type=click.Path())
 @click.argument('vocab', nargs=-1)
-@click.option('--partitions', type=int, default=100)
+@click.option('--partitions', type=int, default=10)
 def main(src, dest, vocab, partitions):
     """Extract per-text bin counts.
     """
@@ -73,7 +73,7 @@ def main(src, dest, vocab, partitions):
         counts,
     )
 
-    novels = novels.coalesce(partitions)
+    novels = novels.repartition(partitions)
 
     writer = (novels.write
         .option('compression', 'bzip2')

@@ -31,6 +31,7 @@ def main(src, dest):
         novels.author_last,
         novels.author_first,
         novels.pub_year,
+        novels.chicago_clean,
         avg_len(novels.text.tokens.text).alias('avg_word_len'),
         size(novels.text.tokens.text).alias('word_count')
     )
