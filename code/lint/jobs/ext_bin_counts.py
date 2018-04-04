@@ -9,7 +9,6 @@ from pyspark.sql import types as T
 from lint.utils import get_spark, zip_bin
 
 
-# token -> bin counts
 COUNT_SCHEMA = T.MapType(
     T.StringType(),
     T.ArrayType(T.IntegerType()),
