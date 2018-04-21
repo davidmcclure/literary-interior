@@ -8,7 +8,7 @@ from collections import OrderedDict
 
 from . import fs
 from .models import Text, GaleNovel, ChicagoNovel, ChicagoAuthor
-from .utils import read_csv
+from .utils import read_csv, try_or_none
 
 
 class GaleNovelXML:
@@ -140,9 +140,11 @@ class ChicagoAuthorMetadata(OrderedDict):
     def canon(self):
         return self['CANON'] == 'C'
 
+    @try_or_none
     def date_b(self):
         return int(self['DATE_B'])
 
+    @try_or_none
     def date_d(self):
         return int(self['DATE_D'])
 
@@ -158,6 +160,7 @@ class ChicagoAuthorMetadata(OrderedDict):
     def hyphenated_identity(self):
         return self['HYPHENATED_IDENTITY']
 
+    @try_or_none
     def immigrant(self):
         return int(self['IMMIGRANT'])
 
@@ -173,7 +176,7 @@ class ChicagoAuthorMetadata(OrderedDict):
     def secondary_occupation(self):
         return self['SECONDARY_OCCUPATION']
 
-    def coteria(self):
+    def coterie(self):
         return self['COTERIE']
 
     def religion(self):
