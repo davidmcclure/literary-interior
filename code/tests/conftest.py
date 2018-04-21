@@ -29,12 +29,12 @@ def chicago_novels_df():
     """Load Chicago novels.
     """
     load_chicago_novels.main.callback(
-        paths.CHICAGO_CSV_PATH,
+        paths.CHICAGO_NOVELS_CSV_PATH,
         paths.CHICAGO_TEXT_DIR,
-        paths.CHICAGO_DEST,
+        paths.CHICAGO_NOVELS_DEST,
     )
 
-    return spark.read.parquet(paths.CHICAGO_DEST)
+    return spark.read.parquet(paths.CHICAGO_NOVELS_DEST)
 
 
 @pytest.fixture(scope='module')
@@ -43,7 +43,7 @@ def novels_df(gale_df, chicago_novels_df):
     """
     merge_novels.main.callback(
         paths.GALE_DEST,
-        paths.CHICAGO_DEST,
+        paths.CHICAGO_NOVELS_DEST,
         paths.NOVELS_DEST,
     )
 
