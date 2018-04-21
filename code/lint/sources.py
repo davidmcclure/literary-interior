@@ -4,8 +4,11 @@ import os
 
 from lxml import etree
 
+from collections import OrderedDict
+
 from . import fs
-from .models import Text, GaleNovel, ChicagoNovel
+from .models import Text, GaleNovel, ChicagoNovel, ChicagoAuthor
+from .utils import read_csv
 
 
 class GaleNovelXML:
@@ -115,4 +118,75 @@ class ChicagoNovelMetadata:
         return ChicagoNovel(**{
             name: getattr(self, name)()
             for name in ChicagoNovel.schema.names
+        })
+
+
+class ChicagoAuthorMetadata(OrderedDict):
+
+    @classmethod
+    def read_csv(cls, path):
+        for fields in read_csv(path):
+            yield cls(fields).row()
+
+    def auth_id(self):
+        return self['AUTH_ID']
+
+    def auth_last(self):
+        return self['AUTH_LAST']
+
+    def auth_first(self):
+        return self['AUTH_FIRST']
+
+    def canon(self):
+        return self['CANON'] == 'C'
+
+    def date_b(self):
+        return int(self['DATE_B'])
+
+    def date_d(self):
+        return int(self['DATE_D'])
+
+    def nationality(self):
+        return self['NATIONALITY']
+
+    def gender(self):
+        return self['GENDER']
+
+    def race(self):
+        return self['RACE']
+
+    def hyphenated_identity(self):
+        return self['HYPHENATED_IDENTITY']
+
+    def immigrant(self):
+        return int(self['IMMIGRANT'])
+
+    def sexual_identity(self):
+        return self['SEXUAL_IDENTITY']
+
+    def education(self):
+        return self['EDUCATION']
+
+    def mfa(self):
+        return self['MFA']
+
+    def secondary_occupation(self):
+        return self['SECONDARY_OCCUPATION']
+
+    def coteria(self):
+        return self['COTERIE']
+
+    def religion(self):
+        return self['RELIGION']
+
+    def ses(self):
+        return self['CLASS']
+
+    def geography(self):
+        return self['GEOGRAPHY']
+
+    def row(self):
+        return ChicagoAuthor(**{
+            name: getattr(self, name)()
+            for name in ChicagoAuthor.schema.names
         })

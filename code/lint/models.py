@@ -154,7 +154,7 @@ class ChicagoAuthor(Model):
         T.StructField('secondary_occupation', T.StringType()),
         T.StructField('coterie', T.StringType()),
         T.StructField('religion', T.StringType()),
-        T.StructField('class', T.StringType()),
+        T.StructField('ses', T.StringType()),
         T.StructField('geography', T.StringType()),
     ])
 
