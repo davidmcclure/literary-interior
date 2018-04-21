@@ -44,8 +44,9 @@ def _ext_bin_counts(vocab, bin_count=20):
 @click.argument('src', type=click.Path())
 @click.argument('dest', type=click.Path())
 @click.argument('vocab', nargs=-1)
+@click.option('--bin_count', type=int, default=20)
 @click.option('--partitions', type=int, default=10)
-def main(src, dest, vocab, partitions):
+def main(src, dest, vocab, bin_count, partitions):
     """Extract per-text bin counts.
     """
     sc, spark = get_spark()
@@ -58,7 +59,7 @@ def main(src, dest, vocab, partitions):
         novels.chicago_clean.isNull()
     )
 
-    ext_bin_counts = _ext_bin_counts(vocab)
+    ext_bin_counts = _ext_bin_counts(vocab, bin_count)
 
     counts = ext_bin_counts(novels.text.tokens.text).alias('counts')
 
