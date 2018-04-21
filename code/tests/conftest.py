@@ -6,7 +6,7 @@ findspark.init()
 import os
 import pytest
 
-from lint.jobs import load_gale, load_chicago, merge_novels
+from lint.jobs import load_gale, load_chicago_novels, merge_novels
 from lint.utils import get_spark
 
 from . import paths
@@ -25,10 +25,10 @@ def gale_df():
 
 
 @pytest.fixture(scope='module')
-def chicago_df():
+def chicago_novels_df():
     """Load Chicago novels.
     """
-    load_chicago.main.callback(
+    load_chicago_novels.main.callback(
         paths.CHICAGO_CSV_PATH,
         paths.CHICAGO_TEXT_DIR,
         paths.CHICAGO_DEST,
@@ -38,7 +38,7 @@ def chicago_df():
 
 
 @pytest.fixture(scope='module')
-def novels_df(gale_df, chicago_df):
+def novels_df(gale_df, chicago_novels_df):
     """Merge novels.
     """
     merge_novels.main.callback(
