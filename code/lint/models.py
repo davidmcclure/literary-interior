@@ -134,6 +134,31 @@ class ChicagoNovel(Model):
     ])
 
 
+class ChicagoAuthor(Model):
+
+    schema = T.StructType([
+        T.StructField('auth_id', T.StringType(), nullable=False),
+        T.StructField('auth_last', T.StringType()),
+        T.StructField('auth_first', T.StringType()),
+        T.StructField('canon', T.BooleanType()),
+        T.StructField('date_b', T.IntegerType()),
+        T.StructField('date_d', T.IntegerType()),
+        T.StructField('nationality', T.StringType()),
+        T.StructField('gender', T.StringType()),
+        T.StructField('race', T.StringType()),
+        T.StructField('hyphenated_identity', T.StringType()),
+        T.StructField('immigrant', T.IntegerType()),
+        T.StructField('sexual_identity', T.StringType()),
+        T.StructField('education', T.StringType()),
+        T.StructField('mfa', T.StringType()),
+        T.StructField('secondary_occupation', T.StringType()),
+        T.StructField('coterie', T.StringType()),
+        T.StructField('religion', T.StringType()),
+        T.StructField('class', T.StringType()),
+        T.StructField('geography', T.StringType()),
+    ])
+
+
 class Novel(Model):
 
     schema = T.StructType([
