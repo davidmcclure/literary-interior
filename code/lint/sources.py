@@ -126,67 +126,68 @@ class ChicagoAuthorMetadata(OrderedDict):
     @classmethod
     def read_csv(cls, path):
         for fields in read_csv(path):
+            fields = [(k, v) for k, v in fields.items() if v]
             yield cls(fields).row()
 
     def auth_id(self):
-        return self['AUTH_ID']
+        return self.get('AUTH_ID')
 
     def auth_last(self):
-        return self['AUTH_LAST']
+        return self.get('AUTH_LAST')
 
     def auth_first(self):
-        return self['AUTH_FIRST']
+        return self.get('AUTH_FIRST')
 
     def canon(self):
-        return self['CANON'] == 'C'
+        return self.get('CANON') == 'C'
 
     @try_or_none
     def date_b(self):
-        return int(self['DATE_B'])
+        return int(self.get('DATE_B'))
 
     @try_or_none
     def date_d(self):
-        return int(self['DATE_D'])
+        return int(self.get('DATE_D'))
 
     def nationality(self):
-        return self['NATIONALITY']
+        return self.get('NATIONALITY')
 
     def gender(self):
-        return self['GENDER']
+        return self.get('GENDER')
 
     def race(self):
-        return self['RACE']
+        return self.get('RACE')
 
     def hyphenated_identity(self):
-        return self['HYPHENATED_IDENTITY']
+        return self.get('HYPHENATED_IDENTITY')
 
     @try_or_none
     def immigrant(self):
-        return int(self['IMMIGRANT'])
+        return int(self.get('IMMIGRANT'))
 
     def sexual_identity(self):
-        return self['SEXUAL_IDENTITY']
+        return self.get('SEXUAL_IDENTITY')
 
     def education(self):
-        return self['EDUCATION']
+        return self.get('EDUCATION')
 
     def mfa(self):
-        return self['MFA']
+        return self.get('MFA')
 
     def secondary_occupation(self):
-        return self['SECONDARY_OCCUPATION']
+        return self.get('SECONDARY_OCCUPATION')
 
     def coterie(self):
-        return self['COTERIE']
+        return self.get('COTERIE')
 
     def religion(self):
-        return self['RELIGION']
+        return self.get('RELIGION')
 
     def ses(self):
-        return self['CLASS']
+        return self.get('CLASS')
 
     def geography(self):
-        return self['GEOGRAPHY']
+        return self.get('GEOGRAPHY')
 
     def row(self):
         return ChicagoAuthor(**{
