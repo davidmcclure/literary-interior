@@ -125,69 +125,74 @@ class ChicagoAuthorMetadata(OrderedDict):
 
     @classmethod
     def read_csv(cls, path):
-        for fields in read_csv(path):
-            fields = [(k, v) for k, v in fields.items() if v]
+        for fields in read_csv(path):\
             yield cls(fields).row()
 
+    def __getitem__(self, key):
+        """Cast empty CSV values '' -> None.
+        """
+        val = super().__getitem__(key)
+        return val if val != '' else None
+
     def auth_id(self):
-        return self.get('AUTH_ID')
+        return self['AUTH_ID']
 
     def auth_last(self):
-        return self.get('AUTH_LAST')
+        return self['AUTH_LAST']
 
     def auth_first(self):
-        return self.get('AUTH_FIRST')
+        return self['AUTH_FIRST']
 
     def canon(self):
-        return self.get('CANON') == 'C'
+        return self['CANON'] == 'C'
 
     @try_or_none
     def date_b(self):
-        return int(self.get('DATE_B'))
+        return int(self['DATE_B'])
 
     @try_or_none
     def date_d(self):
-        return int(self.get('DATE_D'))
+        return int(self['DATE_D'])
 
     def nationality(self):
-        return self.get('NATIONALITY')
+        return self['NATIONALITY']
 
     def gender(self):
-        return self.get('GENDER')
+        return self['GENDER']
 
     def race(self):
-        return self.get('RACE')
+        return self['RACE']
 
     def hyphenated_identity(self):
-        return self.get('HYPHENATED_IDENTITY')
+        return self['HYPHENATED_IDENTITY']
 
     @try_or_none
     def immigrant(self):
-        return int(self.get('IMMIGRANT'))
+        return int(self['IMMIGRANT'])
 
     def sexual_identity(self):
-        return self.get('SEXUAL_IDENTITY')
+        return self['SEXUAL_IDENTITY']
 
     def education(self):
-        return self.get('EDUCATION')
+        return self['EDUCATION']
 
     def mfa(self):
-        return self.get('MFA')
+        return self['MFA']
 
     def secondary_occupation(self):
-        return self.get('SECONDARY_OCCUPATION')
+        return self['SECONDARY_OCCUPATION']
 
     def coterie(self):
-        return self.get('COTERIE')
+        return self['COTERIE']
 
     def religion(self):
-        return self.get('RELIGION')
+        return self['RELIGION']
 
     def ses(self):
-        return self.get('CLASS')
+        return self['CLASS']
 
     def geography(self):
-        return self.get('GEOGRAPHY')
+        return self['GEOGRAPHY']
 
     def row(self):
         return ChicagoAuthor(**{
