@@ -8,8 +8,8 @@ from lint.utils import read_csv, try_or_none, get_spark
 
 
 @try_or_none
-def parse_row(row, text_dir):
-    return ChicagoNovelMetadata(row, text_dir).row()
+def parse_row(fields, text_dir):
+    return ChicagoNovelMetadata(fields, text_dir).row()
 
 
 @click.command()
