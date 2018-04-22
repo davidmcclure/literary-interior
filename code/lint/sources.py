@@ -59,6 +59,15 @@ class GaleNovelXML:
         })
 
 
+class CSVRow(OrderedDict):
+
+    def __getitem__(self, key):
+        """Cast empty CSV values '' -> None.
+        """
+        val = super().__getitem__(key)
+        return val if val != '' else None
+
+
 class ChicagoNovelMetadata:
 
     def __init__(self, fields, text_dir):
@@ -121,18 +130,12 @@ class ChicagoNovelMetadata:
         })
 
 
-class ChicagoAuthorMetadata(OrderedDict):
+class ChicagoAuthorMetadata(CSVRow):
 
     @classmethod
     def read_csv(cls, path):
-        for fields in read_csv(path):\
+        for fields in read_csv(path):
             yield cls(fields).row()
-
-    def __getitem__(self, key):
-        """Cast empty CSV values '' -> None.
-        """
-        val = super().__getitem__(key)
-        return val if val != '' else None
 
     def auth_id(self):
         return self['AUTH_ID']
