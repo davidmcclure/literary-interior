@@ -3,7 +3,7 @@
 import click
 
 from lint.utils import get_spark
-from lint.sources import ChicagoAuthorMetadata
+from lint.sources import ChicagoAuthorCSVRow
 from lint.models import ChicagoAuthor
 
 
@@ -15,7 +15,7 @@ def main(src, dest):
     """
     _, spark = get_spark()
 
-    rows = list(ChicagoAuthorMetadata.read_csv(src))
+    rows = list(ChicagoAuthorCSVRow.read_csv(src))
 
     df = spark.createDataFrame(rows, ChicagoAuthor.schema)
 

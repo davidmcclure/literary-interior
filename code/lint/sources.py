@@ -68,7 +68,7 @@ class CSVRow(OrderedDict):
         return val if val != '' else None
 
 
-class ChicagoNovelMetadata(CSVRow):
+class ChicagoNovelCSVRow(CSVRow):
 
     def __init__(self, fields, text_dir):
         super().__init__(fields)
@@ -130,7 +130,7 @@ class ChicagoNovelMetadata(CSVRow):
         })
 
 
-class ChicagoAuthorMetadata(CSVRow):
+class ChicagoAuthorCSVRow(CSVRow):
 
     @classmethod
     def read_csv(cls, path):
