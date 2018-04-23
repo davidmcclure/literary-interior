@@ -3,22 +3,24 @@
 import numpy as np
 import click
 
-from lint.utils import get_spark
+from lint.utils import get_spark, read_vocab_file
 from lint.udf import _ext_bin_counts
 
 
 @click.command()
-@click.argument('src', type=click.Path())
+@click.argument('novels_src', type=click.Path())
+@click.argument('vocab_path', type=click.Path())
 @click.argument('dest', type=click.Path())
-@click.argument('vocab', nargs=-1)
 @click.option('--bin_count', type=int, default=20)
 @click.option('--partitions', type=int, default=10)
-def main(src, dest, vocab, bin_count, partitions):
+def main(novels_src, vocab_path, dest, bin_count, partitions):
     """Extract per-text bin counts.
     """
     sc, spark = get_spark()
 
-    novels = spark.read.parquet(src)
+    novels = spark.read.parquet(novels_src)
+
+    vocab = read_vocab_file(vocab_path)
 
     # Remove un-cleaned Chicago texts.
     novels = novels.filter(
@@ -34,8 +36,6 @@ def main(src, dest, vocab, bin_count, partitions):
     novels = novels.withColumn('counts', counts).drop(novels.text)
 
     novels = novels.repartition(partitions)
-
-    novels.printSchema()
 
     writer = (novels.write
         .option('compression', 'bzip2')

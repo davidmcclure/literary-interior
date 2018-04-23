@@ -82,3 +82,10 @@ def zip_bin(seq, bin_count):
     for item, offset in zip_offset(seq):
         bin = math.floor(offset * bin_count) if offset < 1 else bin_count - 1
         yield item, bin
+
+
+def read_vocab_file(path):
+    """One word per line.
+    """
+    with open(path) as fh:
+        return fh.read().splitlines()
