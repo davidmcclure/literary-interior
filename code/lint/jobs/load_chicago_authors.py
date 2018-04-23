@@ -19,7 +19,7 @@ def main(src, dest):
 
     df = spark.createDataFrame(rows, ChicagoAuthor.schema)
 
-    df.write.mode('overwrite').parquet(dest)
+    df.coalesce(1).write.mode('overwrite').parquet(dest)
 
 
 if __name__ == '__main__':
