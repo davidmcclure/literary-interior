@@ -28,20 +28,14 @@ def main(src, dest, vocab, bin_count, partitions):
 
     ext_bin_counts = _ext_bin_counts(vocab, bin_count)
 
-    counts = ext_bin_counts(novels.text.tokens.text).alias('counts')
+    counts = ext_bin_counts(novels.text.tokens.text)
 
-    # Metadata + tokens.
-    novels = novels.select(
-        novels.corpus,
-        novels.identifier,
-        novels.title,
-        novels.author_last,
-        novels.author_first,
-        novels.pub_year,
-        counts,
-    )
+    # Select counts, drop text.
+    novels = novels.withColumn('counts', counts).drop(novels.text)
 
     novels = novels.repartition(partitions)
+
+    novels.printSchema()
 
     writer = (novels.write
         .option('compression', 'bzip2')
