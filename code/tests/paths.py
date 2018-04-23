@@ -12,7 +12,4 @@ CHICAGO_NOVELS_CSV_PATH = os.path.join(FIXTURES_ROOT, 'chicago/CHICAGO_NOVEL_COR
 CHICAGO_TEXT_DIR = os.path.join(FIXTURES_ROOT, 'chicago/CHICAGO_NOVEL_CORPUS')
 CHICAGO_NOVELS_DEST = '/tmp/chicago-novels.parquet'
 
-CHICAGO_AUTHORS_CSV_PATH = os.path.join(FIXTURES_ROOT, 'chicago/CHICAGO_NOVEL_CORPUS_METADATA/CHICAGO_CORPUS_AUTHORS.csv')
-CHICAGO_AUTHORS_DEST = '/tmp/chicago-authors.parquet'
-
 NOVELS_DEST = '/tmp/novels.parquet'

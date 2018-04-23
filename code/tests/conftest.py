@@ -6,13 +6,7 @@ findspark.init()
 import os
 import pytest
 
-from lint.jobs import (
-    load_gale,
-    load_chicago_novels,
-    load_chicago_authors,
-    merge_novels,
-)
-
+from lint.jobs import load_gale, load_chicago_novels, merge_novels
 from lint.utils import get_spark
 
 from . import paths
@@ -44,25 +38,12 @@ def chicago_novels_df():
 
 
 @pytest.fixture(scope='module')
-def chicago_authors_df():
-    """Load Chicago authors.
-    """
-    load_chicago_authors.main.callback(
-        paths.CHICAGO_AUTHORS_CSV_PATH,
-        paths.CHICAGO_AUTHORS_DEST,
-    )
-
-    return spark.read.parquet(paths.CHICAGO_AUTHORS_DEST)
-
-
-@pytest.fixture(scope='module')
-def novels_df(gale_df, chicago_novels_df, chicago_authors_df):
+def novels_df(gale_df, chicago_novels_df):
     """Merge novels.
     """
     merge_novels.main.callback(
         paths.GALE_DEST,
         paths.CHICAGO_NOVELS_DEST,
-        paths.CHICAGO_AUTHORS_DEST,
         paths.NOVELS_DEST,
     )
 
