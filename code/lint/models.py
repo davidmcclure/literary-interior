@@ -162,13 +162,43 @@ class ChicagoAuthor(Model):
 class Novel(Model):
 
     schema = T.StructType([
+
         T.StructField('corpus', T.StringType(), nullable=False),
         T.StructField('identifier', T.StringType(), nullable=False),
         T.StructField('title', T.StringType()),
         T.StructField('author_last', T.StringType()),
         T.StructField('author_first', T.StringType()),
         T.StructField('pub_year', T.IntegerType()),
+
+        T.StructField('gale_language', T.StringType()),
+        T.StructField('gale_ocr', T.IntegerType()),
+
         T.StructField('chicago_libraries', T.IntegerType()),
+        T.StructField('chicago_publ_city', T.StringType()),
+        T.StructField('chicago_publisher', T.StringType()),
+        T.StructField('chicago_source', T.StringType()),
+        T.StructField('chicago_nationality', T.StringType()),
+        T.StructField('chicago_genre', T.StringType()),
         T.StructField('chicago_clean', T.BooleanType()),
+
+        T.StructField('chicago_auth_id', T.StringType()),
+        T.StructField('chicago_auth_canon', T.BooleanType()),
+        T.StructField('chicago_auth_date_b', T.IntegerType()),
+        T.StructField('chicago_auth_date_d', T.IntegerType()),
+        T.StructField('chicago_auth_nationality', T.StringType()),
+        T.StructField('chicago_auth_gender', T.StringType()),
+        T.StructField('chicago_auth_race', T.StringType()),
+        T.StructField('chicago_auth_hyphenated_identity', T.StringType()),
+        T.StructField('chicago_auth_immigrant', T.IntegerType()),
+        T.StructField('chicago_auth_sexual_identity', T.StringType()),
+        T.StructField('chicago_auth_education', T.StringType()),
+        T.StructField('chicago_auth_mfa', T.StringType()),
+        T.StructField('chicago_auth_secondary_occupation', T.StringType()),
+        T.StructField('chicago_auth_coterie', T.StringType()),
+        T.StructField('chicago_auth_religion', T.StringType()),
+        T.StructField('chicago_auth_ses', T.StringType()),
+        T.StructField('chicago_auth_geography', T.StringType()),
+
         T.StructField('text', Text.schema, nullable=False),
+
     ])
