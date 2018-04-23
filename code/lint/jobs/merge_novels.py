@@ -23,13 +23,14 @@ def main(gale_src, chicago_novels_src, chicago_authors_src, dest):
     chicago_novels = spark.read.parquet(chicago_novels_src)
     chicago_authors = spark.read.parquet(chicago_authors_src)
 
+    # Columns in authors but not novels.
     diff_cols = set.difference(
         set(chicago_authors.columns),
         set(chicago_novels.columns),
     )
 
+    # Join authors onto novels.
     chicago_authors = chicago_authors.select('auth_id', *diff_cols)
-
     chicago = chicago_novels.join(chicago_authors, 'auth_id')
 
     gale_unified = gale.select(
