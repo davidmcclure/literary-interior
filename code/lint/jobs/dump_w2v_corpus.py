@@ -27,7 +27,7 @@ def w2v_sents(tokens, offset1, offset2):
 @click.argument('dest', type=click.Path())
 @click.argument('offset1', type=float)
 @click.argument('offset2', type=float)
-@click.option('--partitions', type=int)
+@click.option('--partitions', type=int, default=10)
 def main(src, dest, offset1, offset2, partitions):
     """Dump list of N most frequent words.
     """
