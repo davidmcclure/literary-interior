@@ -41,7 +41,7 @@ def main(src, dest, offset1, offset2, partitions):
         .flatMap(lambda t: w2v_sents(t.tokens, offset1, offset2))
         .toDF())
 
-    sents.coalesce(partitions).write.mode('overwrite').text(dest)
+    sents.repartition(partitions).write.mode('overwrite').text(dest)
 
 
 if __name__ == '__main__':
