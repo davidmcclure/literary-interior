@@ -25,7 +25,10 @@ def w2v_sents(tokens, offset1, offset2):
 @click.command()
 @click.argument('src', type=click.Path())
 @click.argument('dest', type=click.Path())
-def main(src, dest):
+@click.argument('offset1', type=float)
+@click.argument('offset2', type=float)
+@click.option('--partitions', type=int)
+def main(src, dest, offset1, offset2, partitions):
     """Dump list of N most frequent words.
     """
     sc, spark = get_spark()
@@ -35,10 +38,10 @@ def main(src, dest):
     tokens = novels.select(novels.text.tokens.alias('tokens'))
 
     sents = (tokens.rdd
-        .flatMap(lambda t: w2v_sents(t.tokens, 0.95, 1))
+        .flatMap(lambda t: w2v_sents(t.tokens, offset1, offset2))
         .toDF())
 
-    sents.coalesce(10).write.mode('overwrite').text(dest)
+    sents.coalesce(partitions).write.mode('overwrite').text(dest)
 
 
 if __name__ == '__main__':
