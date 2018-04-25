@@ -6,18 +6,17 @@ from pyspark.sql.functions import udf
 from lint.utils import get_spark, zip_bin
 
 
-COUNT_SCHEMA = T.MapType(
+BIN_COUNT_SCHEMA = T.MapType(
     T.StringType(),
     T.ArrayType(T.IntegerType()),
 )
-
 
 def _ext_bin_counts(vocab, bin_count=20):
     """Count binned tokens.
     """
     vocab = set(vocab)
 
-    @udf(COUNT_SCHEMA)
+    @udf(BIN_COUNT_SCHEMA)
     def worker(tokens):
 
         # Downcase tokens.
