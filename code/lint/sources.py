@@ -1,14 +1,19 @@
 
 
 import os
+import ujson
+import bz2
+import random
 
 from lxml import etree
 
 from collections import OrderedDict
 
 from . import fs
-from .models import Text, GaleNovel, ChicagoNovel, ChicagoAuthor
 from .utils import read_csv, try_or_none
+
+from .models import Text, GaleNovel, ChicagoNovel, ChicagoAuthor, \
+    HathiToken, HathiVolume
 
 
 class GaleNovelXML:
@@ -202,3 +207,65 @@ class ChicagoAuthorCSVRow(CSVRow):
             name: getattr(self, name)()
             for name in ChicagoAuthor.schema.names
         })
+
+
+class HathiVolumeJSON:
+
+    @classmethod
+    def read(cls, genre_row, vol_root):
+        """Read JSON, patch in genre metadata.
+        """
+        path = os.path.join(vol_root, f'{genre_row.htid}.json.bz2')
+        data = ujson.load(bz2.open(fs.read(path)))
+        return cls(data, genre_row.genre, genre_row.p1, genre_row.p2)
+
+    def __init__(self, data, genre_pred, p1, p2):
+        self.data = data
+        self.genre_pred = genre_pred
+        self.p1 = p1
+        self.p2 = p2
+
+    def id(self):
+        return self.data['id']
+
+    def title(self):
+        return self.data['metadata']['title']
+
+    def names(self):
+        return self.data['metadata']['names']
+
+    def pub_date(self):
+        return int(self.data['metadata']['pubDate'])
+
+    def genre(self):
+        return self.data['metadata']['genre']
+
+    def language(self):
+        return self.data['metadata']['language']
+
+    def tokens(self):
+        """Randomly splat page tokens to linear order.
+        """
+        tokens = []
+        for page in self.data['features']['pages'][self.p1:self.p2+1]:
+
+            page_tokens = []
+            for token, pos_count in page['body']['tokenPosCount'].items():
+                for pos, count in pos_count.items():
+                    page_tokens += [HathiToken(token, pos)] * count
+
+            random.shuffle(page_tokens)
+            tokens += page_tokens
+
+        return tokens
+
+    def row(self):
+        return HathiVolume(
+            id=self.id(),
+            title=self.title(),
+            names=self.names(),
+            pub_date=self.pub_date(),
+            language=self.language(),
+            genre_pred=self.genre_pred,
+            tokens=self.tokens()
+        )

@@ -6,11 +6,18 @@ import  pandas as pd
 
 from lint.utils import try_or_none, get_spark
 from lint.models import HathiVolume
+from lint.sources import HathiVolumeJSON
 
 
 @try_or_none
 def parse_vol(genre_row, vol_root):
-    pass
+
+    try:
+        json = HathiVolumeJSON.read(genre_row, vol_root)
+        return json.row()
+
+    except FileNotFoundError:
+        pass
 
 
 @click.command()
@@ -30,8 +37,6 @@ def main(genre_src, vol_root, dest):
         .toDF(HathiVolume.schema))
 
     df.write.mode('overwrite').parquet(dest)
-
-    print(genres.collect())
 
 
 if __name__ == '__main__':

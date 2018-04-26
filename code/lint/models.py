@@ -215,12 +215,13 @@ class HathiToken(Model):
 class HathiVolume(Model):
 
     schema = T.StructType([
-        T.StructField('htid', T.StringType(), nullable=False),
+        T.StructField('id', T.StringType(), nullable=False),
         T.StructField('title', T.StringType()),
-        T.StructField('names', T.ArrayType(T.StringType)),
+        T.StructField('names', T.ArrayType(T.StringType())),
         T.StructField('pub_date', T.IntegerType()),
-        T.StructField('genre', T.ArrayType(T.StringType)),
+        T.StructField('genre', T.ArrayType(T.StringType())),
         T.StructField('language', T.StringType()),
         T.StructField('genre_pred', T.StringType()),
-        T.StructField('tokens', T.ArrayType(HathiToken.schema), nullable=False),
+        T.StructField('tokens', T.ArrayType(HathiToken.schema),
+            nullable=False),
     ])
