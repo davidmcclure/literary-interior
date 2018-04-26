@@ -13,4 +13,3 @@ click
 jupyter
 PyYAML
 numpy
-pandas
