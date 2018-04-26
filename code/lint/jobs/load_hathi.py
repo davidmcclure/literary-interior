@@ -2,8 +2,6 @@
 
 import click
 
-import  pandas as pd
-
 from lint.utils import try_or_none, get_spark
 from lint.models import HathiVolume
 from lint.sources import HathiVolumeJSON
@@ -32,6 +30,7 @@ def main(genre_src, vol_root, dest):
     genres = spark.read.json(genre_src)
 
     df = (genres.rdd
+        .repartition(1000)
         .map(lambda row: parse_vol(row, vol_root))
         .filter(bool)
         .toDF(HathiVolume.schema))
