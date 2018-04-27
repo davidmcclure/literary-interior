@@ -18,7 +18,7 @@ def main(vols_src, vocab_path, dest, bin_count, partitions):
     """
     sc, spark = get_spark()
 
-    vols = spark.read.parquet(vols_src).repartition(1000)
+    vols = spark.read.parquet(vols_src)
 
     vocab = read_vocab_file(vocab_path)
 
