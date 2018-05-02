@@ -3,6 +3,8 @@
 import numpy as np
 import click
 
+from pyspark.sql.functions import size
+
 from lint.utils import get_spark, read_vocab_file
 from lint.udf import _ext_bin_counts
 
@@ -32,8 +34,10 @@ def main(novels_src, vocab_path, dest, bin_count, partitions):
 
     counts = ext_bin_counts(novels.text.tokens.text)
 
-    # Select counts, drop text.
-    novels = novels.withColumn('counts', counts).drop(novels.text)
+    novels = (novels
+        .withColumn('counts', counts)
+        .withColumn('word_count', size(novels.text.tokens))
+        .drop(novels.text))
 
     novels = novels.repartition(partitions)
 
