@@ -29,8 +29,10 @@ ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
 RUN git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
 
-RUN pyenv install 3.6.1
-RUN pyenv global 3.6.1
+RUN pyenv install 3.6.5
+RUN pyenv global 3.6.5
+
+RUN pip install --upgrade pip
 
 # Java
 
