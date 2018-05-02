@@ -29,11 +29,17 @@ def w2v_sents(tokens, offset1, offset2):
 @click.argument('offset2', type=float)
 @click.option('--partitions', type=int, default=100)
 def main(src, dest, offset1, offset2, partitions):
-    """Dump list of N most frequent words.
+    """Dump space-delimited sentences for word2vec.
     """
     sc, spark = get_spark()
 
     novels = spark.read.parquet(src)
+
+    # Remove un-cleaned Chicago texts.
+    novels = novels.filter(
+        (novels.chicago_clean == True) |
+        novels.chicago_clean.isNull()
+    )
 
     tokens = novels.select(novels.text.tokens.alias('tokens'))
 
