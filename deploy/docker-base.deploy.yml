@@ -1,7 +1,0 @@
----
-
-- name: Deploy image
-  become: yes
-  hosts: tag_role_docker_base
-  roles:
-    - docker

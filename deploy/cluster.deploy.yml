@@ -1,9 +1,0 @@
----
-
-- name: Deploy master
-  become: yes
-  hosts:
-    - tag_role_spark_master
-    - tag_role_spark_worker
-  roles:
-    - spark
