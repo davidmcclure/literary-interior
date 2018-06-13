@@ -2,21 +2,27 @@
 
 import click
 
-from collections import defaultdict
-
 from pyspark.sql import Row
+from pyspark.sql.functions import rand
 
 from lint.utils import get_spark, zip_offset
 
 
-def w2v_sents(tokens, offset1, offset2):
+def w2v_sents(tokens):
     """Generate space-delimited sentences within an interval.
     """
-    sents = defaultdict(list)
+    sents = {}
 
     for token, offset in zip_offset(tokens):
-        if offset >= offset1 and offset <= offset2:
-            sents[token.sent_i].append(token.text.lower())
+
+        offset_str = '%.4f' % offset
+
+        # Offset before first token.
+        if token.sent_i not in sents:
+            sents[token.sent_i] = [offset_str, token.text]
+
+        else:
+            sents[token.sent_i].append(token.text)
 
     for sent_i in sorted(sents.keys()):
         yield Row(sent=' '.join(sents[sent_i]))
@@ -25,27 +31,25 @@ def w2v_sents(tokens, offset1, offset2):
 @click.command()
 @click.argument('src', type=click.Path())
 @click.argument('dest', type=click.Path())
-@click.argument('offset1', type=float)
-@click.argument('offset2', type=float)
 @click.option('--partitions', type=int, default=100)
-def main(src, dest, offset1, offset2, partitions):
+def main(src, dest, partitions):
     """Dump space-delimited sentences for word2vec.
     """
     sc, spark = get_spark()
 
     novels = spark.read.parquet(src)
 
-    # Remove un-cleaned Chicago texts.
-    novels = novels.filter(
-        (novels.chicago_clean == True) |
-        novels.chicago_clean.isNull()
-    )
+    # Just clean Chicago, for now.
+    novels = novels.filter(novels.chicago_clean==True)
 
     tokens = novels.select(novels.text.tokens.alias('tokens'))
 
     sents = (tokens.rdd
-        .flatMap(lambda t: w2v_sents(t.tokens, offset1, offset2))
+        .flatMap(lambda t: w2v_sents(t.tokens))
         .toDF())
+
+    # Random shuffle.
+    sents = sents.orderBy(rand())
 
     sents.repartition(partitions).write.mode('overwrite').text(dest)
 
