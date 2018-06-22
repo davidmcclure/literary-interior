@@ -13,14 +13,18 @@ from lint.udf import _ext_bin_counts
 @click.argument('novels_src', type=click.Path())
 @click.argument('vocab_path', type=click.Path())
 @click.argument('dest', type=click.Path())
-@click.option('--bin_count', type=int, default=20)
-@click.option('--partitions', type=int, default=10)
-def main(novels_src, vocab_path, dest, bin_count, partitions):
+@click.option('--bin_count', type=int, default=4)
+@click.option('--novel_partitions', type=int, default=10000)
+@click.option('--out_partitions', type=int, default=100)
+def main(novels_src, vocab_path, dest, bin_count,
+    novel_partitions, out_partitions):
     """Extract per-text bin counts.
     """
     sc, spark = get_spark()
 
     novels = spark.read.parquet(novels_src)
+
+    novels.repartition(novel_partitions)
 
     vocab = read_vocab_file(vocab_path)
 
@@ -40,7 +44,7 @@ def main(novels_src, vocab_path, dest, bin_count, partitions):
         .withColumn('tags', novels.text.tokens.tag)
         .drop(novels.text))
 
-    novels = novels.repartition(partitions)
+    novels = novels.repartition(out_partitions)
 
     writer = (novels.write
         .option('compression', 'bzip2')
