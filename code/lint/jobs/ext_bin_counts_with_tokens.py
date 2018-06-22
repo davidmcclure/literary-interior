@@ -13,10 +13,11 @@ from lint.udf import _ext_bin_counts
 @click.argument('novels_src', type=click.Path())
 @click.argument('vocab_path', type=click.Path())
 @click.argument('dest', type=click.Path())
+@click.option('--min_words', type=int, default=50000)
 @click.option('--bin_count', type=int, default=4)
 @click.option('--novel_partitions', type=int, default=10000)
-@click.option('--out_partitions', type=int, default=100)
-def main(novels_src, vocab_path, dest, bin_count,
+@click.option('--out_partitions', type=int, default=500)
+def main(novels_src, vocab_path, dest, min_words, bin_count,
     novel_partitions, out_partitions):
     """Extract per-text bin counts.
     """
@@ -28,11 +29,10 @@ def main(novels_src, vocab_path, dest, bin_count,
 
     vocab = read_vocab_file(vocab_path)
 
-    # Remove un-cleaned Chicago texts.
-    novels = novels.filter(
-        (novels.chicago_clean == True) |
-        novels.chicago_clean.isNull()
-    )
+    # Just (not short) Chicago novels.
+    novels = (novels
+        .filter(novels.chicago_clean == True)
+        .filter(size(novels.text.tokens) > min_words))
 
     ext_bin_counts = _ext_bin_counts(vocab, bin_count)
 
