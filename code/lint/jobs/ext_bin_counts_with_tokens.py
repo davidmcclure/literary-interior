@@ -24,7 +24,7 @@ def main(novels_src, vocab_path, dest, bin_count,
 
     novels = spark.read.parquet(novels_src)
 
-    novels.repartition(novel_partitions)
+    novels = novels.repartition(novel_partitions)
 
     vocab = read_vocab_file(vocab_path)
 
